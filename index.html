@@ -1,871 +1,2468 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Immobilienbewertung Wien – Wie viel ist deine Immobilie wirklich wert?</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-/* ═══════════════════════════════════════════════
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Immobilienbewertung Wien – Wie viel ist deine Immobilie wirklich wert?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════
    TOKENS
 ═══════════════════════════════════════════════ */
-:root {
-  --white:    #ffffff;
-  --off:      #f7f8fc;
-  --b900:     #0a1628;
-  --b800:     #0d2045;
-  --b600:     #1a4fd6;
-  --b500:     #2563eb;
-  --b400:     #3b82f6;
-  --b300:     #93c5fd;
-  --b100:     #dbeafe;
-  --b50:      #eff6ff;
-  --g900:     #111827;
-  --g700:     #374151;
-  --g500:     #6b7280;
-  --g400:     #9ca3af;
-  --g300:     #d1d5db;
-  --g200:     #e5e7eb;
-  --g100:     #f3f4f6;
-  --green:    #10b981;
-  --red:      #ef4444;
-  --amber:    #f59e0b;
-  --sh-sm:    0 1px 3px rgba(0,0,0,0.06);
-  --sh-md:    0 4px 24px rgba(0,0,0,0.08);
-  --sh-lg:    0 20px 60px rgba(0,0,0,0.11);
-  --sh-blue:  0 8px 32px rgba(37,99,235,0.2);
-}
+    :root {
+      --white: #ffffff;
+      --off: #f7f8fc;
+      --b900: #0a1628;
+      --b800: #0d2045;
+      --b600: #1a4fd6;
+      --b500: #2563eb;
+      --b400: #3b82f6;
+      --b300: #93c5fd;
+      --b100: #dbeafe;
+      --b50: #eff6ff;
+      --g900: #111827;
+      --g700: #374151;
+      --g500: #6b7280;
+      --g400: #9ca3af;
+      --g300: #d1d5db;
+      --g200: #e5e7eb;
+      --g100: #f3f4f6;
+      --green: #10b981;
+      --red: #ef4444;
+      --amber: #f59e0b;
+      --sh-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+      --sh-md: 0 4px 24px rgba(0, 0, 0, 0.08);
+      --sh-lg: 0 20px 60px rgba(0, 0, 0, 0.11);
+      --sh-blue: 0 8px 32px rgba(37, 99, 235, 0.2);
+    }
 
-/* ═══════════════════════════════════════════════
+    /* ═══════════════════════════════════════════════
    RESET & BASE
 ═══════════════════════════════════════════════ */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Inter',sans-serif;background:var(--white);color:var(--g900);line-height:1.6;overflow-x:hidden;}
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* ═══════════════════════════════════════════════
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--g900);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════════════
    NAV
 ═══════════════════════════════════════════════ */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  background:rgba(255,255,255,0.92);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(0,0,0,0.06);
-  padding:0 5%;height:64px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.nav-logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--b600);}
-.nav-logo span{color:var(--g900);}
-.nav-pill{
-  background:var(--b500);color:white;border:none;
-  padding:10px 22px;border-radius:100px;
-  font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:500;
-  cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;
-}
-.nav-pill:hover{background:var(--b600);transform:translateY(-1px);box-shadow:var(--sh-blue);}
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      padding: 0 5%;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-/* ═══════════════════════════════════════════════
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--b600);
+    }
+
+    .nav-logo span {
+      color: var(--g900);
+    }
+
+    .nav-pill {
+      background: var(--b500);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 100px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .nav-pill:hover {
+      background: var(--b600);
+      transform: translateY(-1px);
+      box-shadow: var(--sh-blue);
+    }
+
+    /* ═══════════════════════════════════════════════
    HERO
 ═══════════════════════════════════════════════ */
-.hero{
-  padding:140px 5% 100px;
-  max-width:1200px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
-}
-.eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--b50);border:1px solid var(--b100);
-  color:var(--b600);padding:6px 14px;border-radius:100px;
-  font-size:0.8rem;font-weight:500;margin-bottom:28px;
-  opacity:0;animation:fadeUp .6s .1s forwards;
-}
-.eyebrow .dot{width:6px;height:6px;background:var(--b500);border-radius:50%;animation:pulse 2s infinite;}
+    .hero {
+      padding: 140px 5% 100px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
 
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.2rem,4vw,3.4rem);
-  font-weight:800;line-height:1.15;letter-spacing:-.01em;
-  color:var(--g900);margin-bottom:22px;
-  opacity:0;animation:fadeUp .6s .2s forwards;
-}
-.hero h1 .hl{color:var(--b500);}
-.hero-sub{
-  font-size:1.05rem;color:var(--g500);line-height:1.75;
-  margin-bottom:40px;
-  opacity:0;animation:fadeUp .6s .3s forwards;
-}
-.hero-actions{display:flex;flex-direction:column;gap:12px;opacity:0;animation:fadeUp .6s .4s forwards;}
-.btn-primary{
-  background:var(--b500);color:white;border:none;
-  padding:18px 36px;border-radius:14px;
-  font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:500;
-  cursor:pointer;transition:all .25s;
-  display:inline-flex;align-items:center;gap:10px;
-  text-decoration:none;width:fit-content;
-}
-.btn-primary:hover{background:var(--b600);transform:translateY(-2px);box-shadow:var(--sh-blue);}
-.btn-primary .arr{
-  width:22px;height:22px;background:rgba(255,255,255,.25);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;font-size:.75rem;
-  transition:transform .2s;
-}
-.btn-primary:hover .arr{transform:translateX(3px);}
-.meta{font-size:.82rem;color:var(--g500);display:flex;align-items:center;gap:6px;}
-.meta svg{width:14px;height:14px;opacity:.6;}
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--b50);
+      border: 1px solid var(--b100);
+      color: var(--b600);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp .6s .1s forwards;
+    }
 
-/* hero visual */
-.hero-vis{opacity:0;animation:fadeIn .8s .5s forwards;position:relative;padding:20px 0;}
-.price-card{
-  background:white;border:1px solid var(--g100);border-radius:24px;
-  padding:32px;box-shadow:var(--sh-lg);position:relative;overflow:hidden;
-}
-.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--b400),var(--b600));}
-.pc-lbl{font-size:.74rem;font-weight:500;letter-spacing:.08em;color:var(--g500);text-transform:uppercase;margin-bottom:8px;}
-.pc-addr{font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:var(--g900);margin-bottom:24px;}
-.mini-chart{display:flex;align-items:flex-end;gap:5px;height:40px;margin-bottom:14px;}
-.b{flex:1;border-radius:4px 4px 0 0;background:var(--b100);animation:barUp .6s ease-out both;}
-.b:last-child{background:var(--b500);}
-.b:nth-child(1){height:35%;animation-delay:.7s}.b:nth-child(2){height:55%;animation-delay:.8s}
-.b:nth-child(3){height:45%;animation-delay:.9s}.b:nth-child(4){height:70%;animation-delay:1s}
-.b:nth-child(5){height:65%;animation-delay:1.1s}.b:nth-child(6){height:80%;animation-delay:1.2s}
-.b:nth-child(7){height:100%;animation-delay:1.3s}
-.chart-months{display:flex;justify-content:space-between;font-size:.72rem;color:var(--g500);margin-bottom:20px;}
-.price-nums{display:flex;justify-content:space-between;align-items:center;background:var(--b50);border-radius:12px;padding:16px 20px;margin-bottom:16px;}
-.pv-num{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--g900);}
-.pv-num.hi{color:var(--b500);}
-.pv-label{font-size:.72rem;color:var(--g500);font-weight:500;}
-.pv-div{color:var(--g300);font-size:1.2rem;}
-.price-badge{display:inline-flex;align-items:center;gap:6px;background:#ecfdf5;color:var(--green);border:1px solid #a7f3d0;padding:8px 14px;border-radius:100px;font-size:.82rem;font-weight:500;margin-bottom:20px;}
-.price-trend{display:flex;align-items:center;gap:10px;padding-top:20px;border-top:1px solid var(--g100);}
-.trend-dot{width:8px;height:8px;background:var(--green);border-radius:50%;flex-shrink:0;}
-.trend-txt{font-size:.82rem;color:var(--g500);line-height:1.4;}
-.float1{
-  position:absolute;top:-18px;right:20px;
-  background:white;border:1px solid var(--g100);border-radius:12px;
-  padding:10px 16px;box-shadow:var(--sh-md);
-  font-size:.78rem;display:flex;align-items:center;gap:8px;white-space:nowrap;
-  animation:fadeUp .5s 1.4s both;
-}
-.float2{
-  position:absolute;bottom:-18px;left:20px;
-  background:var(--b600);color:white;border-radius:12px;
-  padding:10px 16px;box-shadow:0 8px 24px rgba(37,99,235,.3);
-  font-size:.78rem;display:flex;align-items:center;gap:8px;white-space:nowrap;
-  animation:fadeUp .5s 1.6s both;
-}
+    .eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--b500);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
 
-/* ═══════════════════════════════════════════════
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -.01em;
+      color: var(--g900);
+      margin-bottom: 22px;
+      opacity: 0;
+      animation: fadeUp .6s .2s forwards;
+    }
+
+    .hero h1 .hl {
+      color: var(--b500);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--g500);
+      line-height: 1.75;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp .6s .3s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      opacity: 0;
+      animation: fadeUp .6s .4s forwards;
+    }
+
+    .btn-primary {
+      background: var(--b500);
+      color: white;
+      border: none;
+      padding: 18px 36px;
+      border-radius: 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .btn-primary:hover {
+      background: var(--b600);
+      transform: translateY(-2px);
+      box-shadow: var(--sh-blue);
+    }
+
+    .btn-primary .arr {
+      width: 22px;
+      height: 22px;
+      background: rgba(255, 255, 255, .25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      transition: transform .2s;
+    }
+
+    .btn-primary:hover .arr {
+      transform: translateX(3px);
+    }
+
+    .meta {
+      font-size: .82rem;
+      color: var(--g500);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta svg {
+      width: 14px;
+      height: 14px;
+      opacity: .6;
+    }
+
+    /* hero visual */
+    .hero-vis {
+      opacity: 0;
+      animation: fadeIn .8s .5s forwards;
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .price-card {
+      background: white;
+      border: 1px solid var(--g100);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--sh-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--b400), var(--b600));
+    }
+
+    .pc-lbl {
+      font-size: .74rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      color: var(--g500);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .pc-addr {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--g900);
+      margin-bottom: 24px;
+    }
+
+    .mini-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      height: 40px;
+      margin-bottom: 14px;
+    }
+
+    .b {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      background: var(--b100);
+      animation: barUp .6s ease-out both;
+    }
+
+    .b:last-child {
+      background: var(--b500);
+    }
+
+    .b:nth-child(1) {
+      height: 35%;
+      animation-delay: .7s
+    }
+
+    .b:nth-child(2) {
+      height: 55%;
+      animation-delay: .8s
+    }
+
+    .b:nth-child(3) {
+      height: 45%;
+      animation-delay: .9s
+    }
+
+    .b:nth-child(4) {
+      height: 70%;
+      animation-delay: 1s
+    }
+
+    .b:nth-child(5) {
+      height: 65%;
+      animation-delay: 1.1s
+    }
+
+    .b:nth-child(6) {
+      height: 80%;
+      animation-delay: 1.2s
+    }
+
+    .b:nth-child(7) {
+      height: 100%;
+      animation-delay: 1.3s
+    }
+
+    .chart-months {
+      display: flex;
+      justify-content: space-between;
+      font-size: .72rem;
+      color: var(--g500);
+      margin-bottom: 20px;
+    }
+
+    .price-nums {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--b50);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+
+    .pv-num {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--g900);
+    }
+
+    .pv-num.hi {
+      color: var(--b500);
+    }
+
+    .pv-label {
+      font-size: .72rem;
+      color: var(--g500);
+      font-weight: 500;
+    }
+
+    .pv-div {
+      color: var(--g300);
+      font-size: 1.2rem;
+    }
+
+    .price-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ecfdf5;
+      color: var(--green);
+      border: 1px solid #a7f3d0;
+      padding: 8px 14px;
+      border-radius: 100px;
+      font-size: .82rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .price-trend {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 20px;
+      border-top: 1px solid var(--g100);
+    }
+
+    .trend-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .trend-txt {
+      font-size: .82rem;
+      color: var(--g500);
+      line-height: 1.4;
+    }
+
+    .float1 {
+      position: absolute;
+      top: -18px;
+      right: 20px;
+      background: white;
+      border: 1px solid var(--g100);
+      border-radius: 12px;
+      padding: 10px 16px;
+      box-shadow: var(--sh-md);
+      font-size: .78rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      animation: fadeUp .5s 1.4s both;
+    }
+
+    .float2 {
+      position: absolute;
+      bottom: -18px;
+      left: 20px;
+      background: var(--b600);
+      color: white;
+      border-radius: 12px;
+      padding: 10px 16px;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, .3);
+      font-size: .78rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      animation: fadeUp .5s 1.6s both;
+    }
+
+    /* ═══════════════════════════════════════════════
    TRUST STRIP
 ═══════════════════════════════════════════════ */
-.trust-strip{background:var(--off);border-top:1px solid var(--g100);border-bottom:1px solid var(--g100);padding:28px 5%;}
-.trust-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;flex-wrap:wrap;justify-content:center;}
-.t-item{display:flex;align-items:center;gap:10px;padding:0 32px;border-right:1px solid var(--g300);font-size:.88rem;color:var(--g700);}
-.t-item:last-child{border-right:none;}
-.t-icon{width:36px;height:36px;background:var(--b50);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+    .trust-strip {
+      background: var(--off);
+      border-top: 1px solid var(--g100);
+      border-bottom: 1px solid var(--g100);
+      padding: 28px 5%;
+    }
 
-/* ═══════════════════════════════════════════════
+    .trust-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .t-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 32px;
+      border-right: 1px solid var(--g300);
+      font-size: .88rem;
+      color: var(--g700);
+    }
+
+    .t-item:last-child {
+      border-right: none;
+    }
+
+    .t-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--b50);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════════
    TOOL EMBED SECTION
 ═══════════════════════════════════════════════ */
-#tool-section{
-  padding:100px 5%;
-  background:linear-gradient(180deg,var(--off) 0%,white 100%);
-}
-.tool-section-inner{max-width:1200px;margin:0 auto;}
-.tool-header{text-align:center;margin-bottom:52px;}
+    #tool-section {
+      padding: 100px 5%;
+      background: linear-gradient(180deg, var(--off) 0%, white 100%);
+    }
 
-.s-tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--b500);margin-bottom:14px;}
-.s-h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;letter-spacing:-.01em;line-height:1.15;color:var(--g900);margin-bottom:16px;}
-.s-p{font-size:1rem;color:var(--g500);line-height:1.75;max-width:560px;margin:0 auto;}
+    .tool-section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-/* the tool card */
-.tool-card{
-  background:white;border-radius:24px;
-  box-shadow:var(--sh-lg);border:1px solid rgba(0,0,0,.05);
-  overflow:hidden;max-width:700px;margin:0 auto;
-}
+    .tool-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
 
-/* progress header inside tool */
-.tool-progress{
-  background:var(--off);border-bottom:1px solid var(--g100);
-  padding:18px 40px;
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
-}
-.tool-progress-left{display:flex;flex-direction:column;gap:6px;flex:1;}
-.tp-meta{display:flex;justify-content:space-between;}
-.tp-label{font-size:.75rem;font-weight:500;color:var(--g500);}
-.tp-title{font-size:.75rem;font-weight:600;color:var(--b500);}
-.tp-track{height:4px;background:var(--g200);border-radius:100px;overflow:hidden;}
-.tp-fill{height:100%;background:linear-gradient(90deg,var(--b400),var(--b500));border-radius:100px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+    .s-tag {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--b500);
+      margin-bottom: 14px;
+    }
 
-/* tool body */
-.tool-body{padding:40px;}
-@keyframes stepIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
-@keyframes stepOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-20px)}}
-.step-wrap{animation:stepIn .3s cubic-bezier(.4,0,.2,1);}
-.step-wrap.out{animation:stepOut .25s cubic-bezier(.4,0,.2,1) forwards;}
+    .s-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1.15;
+      color: var(--g900);
+      margin-bottom: 16px;
+    }
 
-.step-eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--b500);margin-bottom:8px;}
-.step-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;line-height:1.2;color:var(--g900);margin-bottom:6px;}
-.step-sub{font-size:.88rem;color:var(--g500);line-height:1.6;margin-bottom:28px;}
+    .s-p {
+      font-size: 1rem;
+      color: var(--g500);
+      line-height: 1.75;
+      max-width: 560px;
+      margin: 0 auto;
+    }
 
-/* options */
-.opt-grid{display:grid;gap:10px;}
-.opt-grid.c2{grid-template-columns:1fr 1fr;}
-.opt-grid.c3{grid-template-columns:repeat(3,1fr);}
-.opt-btn{
-  background:var(--off);border:1.5px solid var(--g200);border-radius:12px;
-  padding:15px 16px;text-align:left;cursor:pointer;
-  transition:all .18s;display:flex;align-items:center;gap:12px;
-  font-family:'Inter',sans-serif;
-}
-.opt-btn:hover{border-color:var(--b300);background:var(--b50);}
-.opt-btn.sel{border-color:var(--b500);background:var(--b50);box-shadow:0 0 0 3px rgba(37,99,235,.08);}
-.opt-icon-box{width:38px;height:38px;background:white;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:var(--sh-sm);flex-shrink:0;}
-.opt-txt{flex:1;}
-.opt-lbl{font-size:.9rem;font-weight:500;color:var(--g900);display:block;}
-.opt-desc{font-size:.75rem;color:var(--g500);display:block;margin-top:2px;}
-.opt-check{width:18px;height:18px;border:1.5px solid var(--g300);border-radius:50%;flex-shrink:0;transition:all .18s;}
-.opt-btn.sel .opt-check{
-  background:var(--b500);border-color:var(--b500);
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l3 3 5-6' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-size:10px;background-position:center;background-repeat:no-repeat;
-}
-/* simple (zimmer) */
-.opt-simple{
-  background:var(--off);border:1.5px solid var(--g200);border-radius:12px;
-  padding:18px 10px;text-align:center;cursor:pointer;
-  transition:all .18s;font-family:'Inter',sans-serif;
-  display:flex;flex-direction:column;align-items:center;gap:4px;
-}
-.opt-simple:hover{border-color:var(--b300);background:var(--b50);}
-.opt-simple.sel{border-color:var(--b500);background:var(--b50);box-shadow:0 0 0 3px rgba(37,99,235,.08);}
-.opt-simple .opt-lbl{font-size:.95rem;}
+    /* the tool card */
+    .tool-card {
+      background: white;
+      border-radius: 24px;
+      box-shadow: var(--sh-lg);
+      border: 1px solid rgba(0, 0, 0, .05);
+      overflow: hidden;
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-/* bezirk */
-.bzk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-height:260px;overflow-y:auto;padding-right:4px;}
-.bzk-grid::-webkit-scrollbar{width:4px;}
-.bzk-grid::-webkit-scrollbar-thumb{background:var(--g300);border-radius:100px;}
-.bzk-btn{background:var(--off);border:1.5px solid var(--g200);border-radius:10px;padding:10px 8px;text-align:center;cursor:pointer;transition:all .18s;font-family:'Inter',sans-serif;}
-.bzk-btn:hover{border-color:var(--b300);background:var(--b50);}
-.bzk-btn.sel{border-color:var(--b500);background:var(--b50);box-shadow:0 0 0 3px rgba(37,99,235,.08);}
-.bzk-num{font-size:.88rem;font-weight:600;color:var(--g900);display:block;}
-.bzk-name{font-size:.62rem;color:var(--g500);display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    /* progress header inside tool */
+    .tool-progress {
+      background: var(--off);
+      border-bottom: 1px solid var(--g100);
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-/* slider */
-.slider-wrap{margin-top:4px;}
-.slider-val-display{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--g900);margin-bottom:16px;display:flex;align-items:baseline;gap:6px;}
-.slider-val-display .unit{font-family:'Inter',sans-serif;font-size:1rem;font-weight:500;color:var(--g500);}
-input[type=range]{-webkit-appearance:none;width:100%;height:6px;background:var(--g200);border-radius:100px;outline:none;cursor:pointer;}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;background:var(--b500);border-radius:50%;box-shadow:0 2px 8px rgba(37,99,235,.3);cursor:pointer;transition:transform .15s;}
-input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15);}
-input[type=range]::-moz-range-thumb{width:22px;height:22px;background:var(--b500);border-radius:50%;border:none;box-shadow:0 2px 8px rgba(37,99,235,.3);cursor:pointer;}
-.slider-labels{display:flex;justify-content:space-between;font-size:.74rem;color:var(--g400);margin-top:8px;}
+    .tool-progress-left {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
 
-/* footer nav */
-.step-footer{display:flex;align-items:center;justify-content:space-between;margin-top:32px;padding-top:24px;border-top:1px solid var(--g100);}
-.btn-back{background:none;border:1.5px solid var(--g200);border-radius:10px;padding:12px 20px;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:500;color:var(--g500);cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:6px;}
-.btn-back:hover{border-color:var(--g400);color:var(--g700);}
-.btn-next{background:var(--b500);border:none;border-radius:10px;padding:14px 28px;font-family:'Inter',sans-serif;font-size:.92rem;font-weight:500;color:white;cursor:pointer;transition:all .22s;display:flex;align-items:center;gap:8px;margin-left:auto;}
-.btn-next:hover{background:var(--b600);transform:translateY(-1px);box-shadow:var(--sh-blue);}
-.btn-next:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none;}
+    .tp-meta {
+      display: flex;
+      justify-content: space-between;
+    }
 
-/* ═══════════════════════════════════════════════
+    .tp-label {
+      font-size: .75rem;
+      font-weight: 500;
+      color: var(--g500);
+    }
+
+    .tp-title {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--b500);
+    }
+
+    .tp-track {
+      height: 4px;
+      background: var(--g200);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .tp-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--b400), var(--b500));
+      border-radius: 100px;
+      transition: width .5s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    /* tool body */
+    .tool-body {
+      padding: 40px;
+    }
+
+    @keyframes stepIn {
+      from {
+        opacity: 0;
+        transform: translateX(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0)
+      }
+    }
+
+    @keyframes stepOut {
+      from {
+        opacity: 1;
+        transform: translateX(0)
+      }
+
+      to {
+        opacity: 0;
+        transform: translateX(-20px)
+      }
+    }
+
+    .step-wrap {
+      animation: stepIn .3s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .step-wrap.out {
+      animation: stepOut .25s cubic-bezier(.4, 0, .2, 1) forwards;
+    }
+
+    .step-eyebrow {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--b500);
+      margin-bottom: 8px;
+    }
+
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--g900);
+      margin-bottom: 6px;
+    }
+
+    .step-sub {
+      font-size: .88rem;
+      color: var(--g500);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    /* options */
+    .opt-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .opt-grid.c2 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .opt-grid.c3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .opt-btn {
+      background: var(--off);
+      border: 1.5px solid var(--g200);
+      border-radius: 12px;
+      padding: 15px 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: all .18s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .opt-btn:hover {
+      border-color: var(--b300);
+      background: var(--b50);
+    }
+
+    .opt-btn.sel {
+      border-color: var(--b500);
+      background: var(--b50);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, .08);
+    }
+
+    .opt-icon-box {
+      width: 38px;
+      height: 38px;
+      background: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: var(--sh-sm);
+      flex-shrink: 0;
+    }
+
+    .opt-txt {
+      flex: 1;
+    }
+
+    .opt-lbl {
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--g900);
+      display: block;
+    }
+
+    .opt-desc {
+      font-size: .75rem;
+      color: var(--g500);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .opt-check {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--g300);
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: all .18s;
+    }
+
+    .opt-btn.sel .opt-check {
+      background: var(--b500);
+      border-color: var(--b500);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l3 3 5-6' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: 10px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* simple (zimmer) */
+    .opt-simple {
+      background: var(--off);
+      border: 1.5px solid var(--g200);
+      border-radius: 12px;
+      padding: 18px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .18s;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .opt-simple:hover {
+      border-color: var(--b300);
+      background: var(--b50);
+    }
+
+    .opt-simple.sel {
+      border-color: var(--b500);
+      background: var(--b50);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, .08);
+    }
+
+    .opt-simple .opt-lbl {
+      font-size: .95rem;
+    }
+
+    /* bezirk */
+    .bzk-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      max-height: 260px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .bzk-grid::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .bzk-grid::-webkit-scrollbar-thumb {
+      background: var(--g300);
+      border-radius: 100px;
+    }
+
+    .bzk-btn {
+      background: var(--off);
+      border: 1.5px solid var(--g200);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .18s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .bzk-btn:hover {
+      border-color: var(--b300);
+      background: var(--b50);
+    }
+
+    .bzk-btn.sel {
+      border-color: var(--b500);
+      background: var(--b50);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, .08);
+    }
+
+    .bzk-num {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--g900);
+      display: block;
+    }
+
+    .bzk-name {
+      font-size: .62rem;
+      color: var(--g500);
+      display: block;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* slider */
+    .slider-wrap {
+      margin-top: 4px;
+    }
+
+    .slider-val-display {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--g900);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .slider-val-display .unit {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--g500);
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      background: var(--g200);
+      border-radius: 100px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      background: var(--b500);
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, .3);
+      cursor: pointer;
+      transition: transform .15s;
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    input[type=range]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      background: var(--b500);
+      border-radius: 50%;
+      border: none;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, .3);
+      cursor: pointer;
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: .74rem;
+      color: var(--g400);
+      margin-top: 8px;
+    }
+
+    /* footer nav */
+    .step-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--g100);
+    }
+
+    .btn-back {
+      background: none;
+      border: 1.5px solid var(--g200);
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: .88rem;
+      font-weight: 500;
+      color: var(--g500);
+      cursor: pointer;
+      transition: all .18s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-back:hover {
+      border-color: var(--g400);
+      color: var(--g700);
+    }
+
+    .btn-next {
+      background: var(--b500);
+      border: none;
+      border-radius: 10px;
+      padding: 14px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: .92rem;
+      font-weight: 500;
+      color: white;
+      cursor: pointer;
+      transition: all .22s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .btn-next:hover {
+      background: var(--b600);
+      transform: translateY(-1px);
+      box-shadow: var(--sh-blue);
+    }
+
+    .btn-next:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ═══════════════════════════════════════════════
    RESULT SCREEN (inside tool card)
 ═══════════════════════════════════════════════ */
-.result-header{background:linear-gradient(135deg,var(--b600),var(--b500));padding:36px 40px;color:white;}
-.r-eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.65;margin-bottom:8px;}
-.r-address{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:28px;opacity:.95;}
-.r-range-lbl{font-size:.78rem;font-weight:500;opacity:.65;margin-bottom:6px;}
-.r-range{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:800;letter-spacing:-.01em;line-height:1;margin-bottom:4px;}
-.r-range-bar{height:5px;background:rgba(255,255,255,.2);border-radius:100px;margin-top:16px;overflow:hidden;}
-.r-range-fill{height:100%;background:rgba(255,255,255,.65);border-radius:100px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1) .3s;}
-.r-stats{display:flex;border-bottom:1px solid var(--g100);}
-.r-stat{flex:1;padding:20px 24px;border-right:1px solid var(--g100);text-align:center;}
-.r-stat:last-child{border-right:none;}
-.r-stat-val{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--g900);display:block;}
-.r-stat-val.green{color:var(--green);}
-.r-stat-val.blue{color:var(--b500);}
-.r-stat-lbl{font-size:.7rem;font-weight:500;color:var(--g500);display:block;margin-top:4px;text-transform:uppercase;letter-spacing:.06em;}
+    .result-header {
+      background: linear-gradient(135deg, var(--b600), var(--b500));
+      padding: 36px 40px;
+      color: white;
+    }
 
-/* potential box – the money shot */
-.potential-box{
-  margin:28px 40px;
-  background:linear-gradient(135deg,#fef3c7,#fef9ee);
-  border:1.5px solid #fcd34d;border-radius:16px;
-  padding:24px 28px;display:flex;align-items:flex-start;gap:18px;
-}
-.pot-icon{font-size:1.8rem;flex-shrink:0;margin-top:2px;}
-.pot-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:#92400e;margin-bottom:4px;}
-.pot-amount{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:800;color:#b45309;line-height:1;margin-bottom:6px;}
-.pot-sub{font-size:.82rem;color:#92400e;opacity:.8;line-height:1.5;}
+    .r-eyebrow {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .65;
+      margin-bottom: 8px;
+    }
 
-/* CTA 2 */
-.result-cta-block{padding:0 40px 36px;}
-.cta2{
-  width:100%;background:var(--g900);color:white;border:none;
-  border-radius:14px;padding:20px 24px;
-  font-family:'Inter',sans-serif;font-size:1rem;font-weight:600;
-  cursor:pointer;transition:all .25s;
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-}
-.cta2:hover{background:var(--b600);transform:translateY(-2px);box-shadow:0 12px 36px rgba(37,99,235,.28);}
-.cta2-txt{text-align:left;flex:1;}
-.cta2-title{display:block;font-size:1rem;font-weight:600;}
-.cta2-sub{display:block;font-size:.74rem;opacity:.6;margin-top:2px;font-weight:400;}
-.cta2-arr{width:36px;height:36px;background:rgba(255,255,255,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:transform .2s;}
-.cta2:hover .cta2-arr{transform:translateX(4px);}
-.r-disclaimer{font-size:.72rem;color:var(--g500);text-align:center;margin-top:12px;line-height:1.5;}
+    .r-address {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      opacity: .95;
+    }
 
-/* ═══════════════════════════════════════════════
+    .r-range-lbl {
+      font-size: .78rem;
+      font-weight: 500;
+      opacity: .65;
+      margin-bottom: 6px;
+    }
+
+    .r-range {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .r-range-bar {
+      height: 5px;
+      background: rgba(255, 255, 255, .2);
+      border-radius: 100px;
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .r-range-fill {
+      height: 100%;
+      background: rgba(255, 255, 255, .65);
+      border-radius: 100px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(.4, 0, .2, 1) .3s;
+    }
+
+    .r-stats {
+      display: flex;
+      border-bottom: 1px solid var(--g100);
+    }
+
+    .r-stat {
+      flex: 1;
+      padding: 20px 24px;
+      border-right: 1px solid var(--g100);
+      text-align: center;
+    }
+
+    .r-stat:last-child {
+      border-right: none;
+    }
+
+    .r-stat-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--g900);
+      display: block;
+    }
+
+    .r-stat-val.green {
+      color: var(--green);
+    }
+
+    .r-stat-val.blue {
+      color: var(--b500);
+    }
+
+    .r-stat-lbl {
+      font-size: .7rem;
+      font-weight: 500;
+      color: var(--g500);
+      display: block;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* potential box – the money shot */
+    .potential-box {
+      margin: 28px 40px;
+      background: linear-gradient(135deg, #fef3c7, #fef9ee);
+      border: 1.5px solid #fcd34d;
+      border-radius: 16px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .pot-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .pot-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #92400e;
+      margin-bottom: 4px;
+    }
+
+    .pot-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #b45309;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .pot-sub {
+      font-size: .82rem;
+      color: #92400e;
+      opacity: .8;
+      line-height: 1.5;
+    }
+
+    /* CTA 2 */
+    .result-cta-block {
+      padding: 0 40px 36px;
+    }
+
+    .cta2 {
+      width: 100%;
+      background: var(--g900);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 20px 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .25s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .cta2:hover {
+      background: var(--b600);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(37, 99, 235, .28);
+    }
+
+    .cta2-txt {
+      text-align: left;
+      flex: 1;
+    }
+
+    .cta2-title {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .cta2-sub {
+      display: block;
+      font-size: .74rem;
+      opacity: .6;
+      margin-top: 2px;
+      font-weight: 400;
+    }
+
+    .cta2-arr {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, .12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: transform .2s;
+    }
+
+    .cta2:hover .cta2-arr {
+      transform: translateX(4px);
+    }
+
+    .r-disclaimer {
+      font-size: .72rem;
+      color: var(--g500);
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════
    SECTIONS (problem, steps, reframe, wien, final)
 ═══════════════════════════════════════════════ */
-.sec{padding:100px 5%;max-width:1200px;margin:0 auto;}
-.sec-full{padding:100px 5%;}
-.sec-inner{max-width:1200px;margin:0 auto;}
+    .sec {
+      padding: 100px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-/* problem */
-.prob-bg{background:var(--b900);}
-.prob-inner{max-width:1200px;margin:0 auto;padding:100px 5%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-.prob-inner .s-tag{color:var(--b300);}
-.prob-inner .s-h2{color:white;}
-.mistake-list{list-style:none;margin:28px 0;}
-.mistake-item{display:flex;align-items:flex-start;gap:14px;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.75);font-size:.93rem;}
-.mx{width:22px;height:22px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;margin-top:2px;}
-.loss-card{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:20px;padding:28px;margin-top:8px;}
-.loss-lbl{font-size:.76rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(239,68,68,.7);margin-bottom:8px;}
-.loss-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:800;color:var(--red);letter-spacing:-.01em;margin-bottom:6px;}
-.loss-sub{font-size:.85rem;color:rgba(255,255,255,.5);}
-.cmp-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-.cmp-lbl{font-size:.83rem;color:rgba(255,255,255,.5);margin-bottom:4px;}
-.cmp-val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:white;}
-.cmp-card.bad .cmp-val{color:var(--red);}
-.cmp-card.good{background:rgba(37,99,235,.15);border-color:rgba(37,99,235,.3);}
-.cmp-card.good .cmp-val{color:var(--b300);}
-.badge-bad{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.25);padding:4px 10px;border-radius:100px;font-size:.74rem;font-weight:500;}
-.badge-good{background:rgba(37,99,235,.15);color:var(--b300);border:1px solid rgba(37,99,235,.3);padding:4px 10px;border-radius:100px;font-size:.74rem;font-weight:500;}
-.cmp-arr{text-align:center;color:rgba(255,255,255,.2);font-size:1.2rem;padding:4px 0;margin-bottom:10px;}
+    .sec-full {
+      padding: 100px 5%;
+    }
 
-/* steps */
-.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px;}
-.step-card-lp{background:white;border:1px solid var(--g100);border-radius:20px;padding:32px;position:relative;transition:all .3s;overflow:hidden;}
-.step-card-lp:hover{border-color:var(--b300);box-shadow:var(--sh-md);transform:translateY(-4px);}
-.step-card-lp::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--b400),var(--b600));transform:scaleX(0);transition:transform .3s;}
-.step-card-lp:hover::after{transform:scaleX(1);}
-.step-num{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:800;color:var(--b100);line-height:1;margin-bottom:14px;}
-.step-ico{width:48px;height:48px;background:var(--b50);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:18px;}
-.step-h{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--g900);margin-bottom:8px;}
-.step-p{font-size:.88rem;color:var(--g500);line-height:1.6;}
+    .sec-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-/* reframe */
-.rf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px;}
-.rf-card{background:var(--off);border:1px solid var(--g100);border-radius:20px;padding:28px;transition:all .3s;}
-.rf-card:hover{background:white;box-shadow:var(--sh-md);transform:translateY(-2px);}
-.rf-ico{font-size:1.8rem;margin-bottom:14px;}
-.rf-h{font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:var(--g900);margin-bottom:8px;}
-.rf-p{font-size:.88rem;color:var(--g500);line-height:1.6;}
+    /* problem */
+    .prob-bg {
+      background: var(--b900);
+    }
 
-/* wien */
-.wien-bg{background:var(--off);}
-.wien-inner{max-width:1200px;margin:0 auto;padding:100px 5%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-.bzk-static-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-.bzk-static{background:white;border:1px solid var(--g200);border-radius:12px;padding:14px 16px;text-align:center;transition:all .2s;}
-.bzk-static:hover{border-color:var(--b300);box-shadow:0 4px 12px rgba(37,99,235,.1);}
-.bzk-n{font-family:'Playfair Display',serif;font-weight:800;font-size:1rem;color:var(--b500);}
-.bzk-l{font-size:.68rem;color:var(--g500);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.bzk-p{font-size:.73rem;font-weight:500;color:var(--g700);margin-top:4px;}
+    .prob-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
 
-/* final cta */
-.final-bg{background:var(--g900);padding:100px 5%;text-align:center;}
-.final-inner{max-width:700px;margin:0 auto;}
-.final-inner .s-tag{color:var(--b400);}
-.final-inner .s-h2{color:white;}
-.final-p{font-size:1.05rem;color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:40px;}
-.final-actions{display:flex;flex-direction:column;align-items:center;gap:12px;}
+    .prob-inner .s-tag {
+      color: var(--b300);
+    }
 
-/* footer */
-footer{background:var(--b900);padding:40px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
-.foot-logo{font-family:'Playfair Display',serif;font-weight:800;color:white;font-size:1rem;}
-.foot-trust{display:flex;gap:24px;flex-wrap:wrap;}
-.ft-item{display:flex;align-items:center;gap:6px;font-size:.8rem;color:rgba(255,255,255,.45);}
-.ft-item svg{width:14px;height:14px;opacity:.5;}
-.foot-copy{font-size:.73rem;color:rgba(255,255,255,.22);}
+    .prob-inner .s-h2 {
+      color: white;
+    }
 
-/* ═══════════════════════════════════════════════
+    .mistake-list {
+      list-style: none;
+      margin: 28px 0;
+    }
+
+    .mistake-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .07);
+      color: rgba(255, 255, 255, .75);
+      font-size: .93rem;
+    }
+
+    .mx {
+      width: 22px;
+      height: 22px;
+      background: rgba(239, 68, 68, .15);
+      border: 1px solid rgba(239, 68, 68, .3);
+      color: var(--red);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .loss-card {
+      background: rgba(239, 68, 68, .08);
+      border: 1px solid rgba(239, 68, 68, .2);
+      border-radius: 20px;
+      padding: 28px;
+      margin-top: 8px;
+    }
+
+    .loss-lbl {
+      font-size: .76rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(239, 68, 68, .7);
+      margin-bottom: 8px;
+    }
+
+    .loss-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--red);
+      letter-spacing: -.01em;
+      margin-bottom: 6px;
+    }
+
+    .loss-sub {
+      font-size: .85rem;
+      color: rgba(255, 255, 255, .5);
+    }
+
+    .cmp-card {
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .cmp-lbl {
+      font-size: .83rem;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 4px;
+    }
+
+    .cmp-val {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: white;
+    }
+
+    .cmp-card.bad .cmp-val {
+      color: var(--red);
+    }
+
+    .cmp-card.good {
+      background: rgba(37, 99, 235, .15);
+      border-color: rgba(37, 99, 235, .3);
+    }
+
+    .cmp-card.good .cmp-val {
+      color: var(--b300);
+    }
+
+    .badge-bad {
+      background: rgba(239, 68, 68, .15);
+      color: var(--red);
+      border: 1px solid rgba(239, 68, 68, .25);
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: .74rem;
+      font-weight: 500;
+    }
+
+    .badge-good {
+      background: rgba(37, 99, 235, .15);
+      color: var(--b300);
+      border: 1px solid rgba(37, 99, 235, .3);
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: .74rem;
+      font-weight: 500;
+    }
+
+    .cmp-arr {
+      text-align: center;
+      color: rgba(255, 255, 255, .2);
+      font-size: 1.2rem;
+      padding: 4px 0;
+      margin-bottom: 10px;
+    }
+
+    /* steps */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 52px;
+    }
+
+    .step-card-lp {
+      background: white;
+      border: 1px solid var(--g100);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      transition: all .3s;
+      overflow: hidden;
+    }
+
+    .step-card-lp:hover {
+      border-color: var(--b300);
+      box-shadow: var(--sh-md);
+      transform: translateY(-4px);
+    }
+
+    .step-card-lp::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--b400), var(--b600));
+      transform: scaleX(0);
+      transition: transform .3s;
+    }
+
+    .step-card-lp:hover::after {
+      transform: scaleX(1);
+    }
+
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--b100);
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .step-ico {
+      width: 48px;
+      height: 48px;
+      background: var(--b50);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 18px;
+    }
+
+    .step-h {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--g900);
+      margin-bottom: 8px;
+    }
+
+    .step-p {
+      font-size: .88rem;
+      color: var(--g500);
+      line-height: 1.6;
+    }
+
+    /* reframe */
+    .rf-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 52px;
+    }
+
+    .rf-card {
+      background: var(--off);
+      border: 1px solid var(--g100);
+      border-radius: 20px;
+      padding: 28px;
+      transition: all .3s;
+    }
+
+    .rf-card:hover {
+      background: white;
+      box-shadow: var(--sh-md);
+      transform: translateY(-2px);
+    }
+
+    .rf-ico {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+
+    .rf-h {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--g900);
+      margin-bottom: 8px;
+    }
+
+    .rf-p {
+      font-size: .88rem;
+      color: var(--g500);
+      line-height: 1.6;
+    }
+
+    /* wien */
+    .wien-bg {
+      background: var(--off);
+    }
+
+    .wien-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .bzk-static-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .bzk-static {
+      background: white;
+      border: 1px solid var(--g200);
+      border-radius: 12px;
+      padding: 14px 16px;
+      text-align: center;
+      transition: all .2s;
+    }
+
+    .bzk-static:hover {
+      border-color: var(--b300);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, .1);
+    }
+
+    .bzk-n {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--b500);
+    }
+
+    .bzk-l {
+      font-size: .68rem;
+      color: var(--g500);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .bzk-p {
+      font-size: .73rem;
+      font-weight: 500;
+      color: var(--g700);
+      margin-top: 4px;
+    }
+
+    /* final cta */
+    .final-bg {
+      background: var(--g900);
+      padding: 100px 5%;
+      text-align: center;
+    }
+
+    .final-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .final-inner .s-tag {
+      color: var(--b400);
+    }
+
+    .final-inner .s-h2 {
+      color: white;
+    }
+
+    .final-p {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, .5);
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    .final-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* footer */
+    footer {
+      background: var(--b900);
+      padding: 40px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .foot-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .foot-trust {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .ft-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .8rem;
+      color: rgba(255, 255, 255, .45);
+    }
+
+    .ft-item svg {
+      width: 14px;
+      height: 14px;
+      opacity: .5;
+    }
+
+    .foot-copy {
+      font-size: .73rem;
+      color: rgba(255, 255, 255, .22);
+    }
+
+    /* ═══════════════════════════════════════════════
    LEAD MODAL
 ═══════════════════════════════════════════════ */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:500;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s;}
-.overlay.on{opacity:1;pointer-events:all;}
-.modal{background:white;border-radius:24px;padding:44px;width:100%;max-width:480px;box-shadow:0 32px 80px rgba(0,0,0,.22);transform:translateY(20px) scale(.97);transition:transform .3s cubic-bezier(.4,0,.2,1);position:relative;}
-.overlay.on .modal{transform:none;}
-.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;background:var(--g100);border:none;border-radius:50%;cursor:pointer;font-size:1rem;color:var(--g500);display:flex;align-items:center;justify-content:center;transition:background .2s;}
-.modal-close:hover{background:var(--g200);}
-.m-eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--b500);margin-bottom:8px;}
-.m-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--g900);margin-bottom:6px;line-height:1.2;}
-.m-sub{font-size:.85rem;color:var(--g500);margin-bottom:24px;line-height:1.55;}
-.m-group{margin-bottom:14px;}
-.m-label{display:block;font-size:.78rem;font-weight:500;color:var(--g700);margin-bottom:6px;}
-.m-input{width:100%;padding:13px 15px;border:1.5px solid var(--g200);border-radius:10px;font-family:'Inter',sans-serif;font-size:.92rem;background:var(--off);outline:none;transition:all .2s;color:var(--g900);}
-.m-input:focus{border-color:var(--b400);background:white;box-shadow:0 0 0 3px rgba(37,99,235,.08);}
-.m-submit{width:100%;background:var(--b500);color:white;border:none;border-radius:12px;padding:16px;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .22s;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px;}
-.m-submit:hover{background:var(--b600);transform:translateY(-1px);box-shadow:var(--sh-blue);}
-.m-disc{font-size:.7rem;color:var(--g500);text-align:center;margin-top:12px;line-height:1.5;}
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .55);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 500;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
 
-/* ═══════════════════════════════════════════════
+    .overlay.on {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 24px;
+      padding: 44px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, .22);
+      transform: translateY(20px) scale(.97);
+      transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+      position: relative;
+    }
+
+    .overlay.on .modal {
+      transform: none;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      background: var(--g100);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--g500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+
+    .modal-close:hover {
+      background: var(--g200);
+    }
+
+    .m-eyebrow {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--b500);
+      margin-bottom: 8px;
+    }
+
+    .m-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--g900);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .m-sub {
+      font-size: .85rem;
+      color: var(--g500);
+      margin-bottom: 24px;
+      line-height: 1.55;
+    }
+
+    .m-group {
+      margin-bottom: 14px;
+    }
+
+    .m-label {
+      display: block;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--g700);
+      margin-bottom: 6px;
+    }
+
+    .m-input {
+      width: 100%;
+      padding: 13px 15px;
+      border: 1.5px solid var(--g200);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: .92rem;
+      background: var(--off);
+      outline: none;
+      transition: all .2s;
+      color: var(--g900);
+    }
+
+    .m-input:focus {
+      border-color: var(--b400);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, .08);
+    }
+
+    .m-submit {
+      width: 100%;
+      background: var(--b500);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .22s;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .m-submit:hover {
+      background: var(--b600);
+      transform: translateY(-1px);
+      box-shadow: var(--sh-blue);
+    }
+
+    .m-disc {
+      font-size: .7rem;
+      color: var(--g500);
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════
    SCROLL REVEAL
 ═══════════════════════════════════════════════ */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
-.reveal.vis{opacity:1;transform:none;}
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
 
-/* ═══════════════════════════════════════════════
+    .reveal.vis {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ═══════════════════════════════════════════════
    ANIMATIONS
 ═══════════════════════════════════════════════ */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-@keyframes barGrow{from{width:0}to{width:70%}}
-@keyframes barUp{from{transform:scaleY(0);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px)
+      }
 
-/* ═══════════════════════════════════════════════
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .4
+      }
+    }
+
+    @keyframes barGrow {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 70%
+      }
+    }
+
+    @keyframes barUp {
+      from {
+        transform: scaleY(0);
+        transform-origin: bottom
+      }
+
+      to {
+        transform: scaleY(1);
+        transform-origin: bottom
+      }
+    }
+
+    /* ═══════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════ */
-@media(max-width:900px){
-  .hero,.prob-inner,.wien-inner{grid-template-columns:1fr;gap:48px;}
-  .hero{padding-top:100px;}
-  .steps-grid,.rf-grid,.bzk-static-grid{grid-template-columns:1fr 1fr;}
-  .t-item{padding:0 16px;border-right:none;}
-  footer{flex-direction:column;text-align:center;}
-  .float1,.float2{display:none;}
-  .r-stats{flex-wrap:wrap;}
-  .r-stat{min-width:50%;}
-  .potential-box{flex-direction:column;gap:10px;}
-  .bzk-grid{grid-template-columns:repeat(3,1fr);}
-}
-@media(max-width:680px){
-  .tool-body,.result-header,.potential-box,.result-cta-block{padding-left:24px;padding-right:24px;}
-  .tool-progress{padding:16px 24px;}
-  .steps-grid,.rf-grid{grid-template-columns:1fr;}
-  .r-range{font-size:2rem;}
-  .btn-primary{width:100%;justify-content:center;}
-  .opt-grid.c3{grid-template-columns:1fr 1fr;}
-}
-</style>
+    @media(max-width:900px) {
+
+      .hero,
+      .prob-inner,
+      .wien-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero {
+        padding-top: 100px;
+      }
+
+      .steps-grid,
+      .rf-grid,
+      .bzk-static-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .t-item {
+        padding: 0 16px;
+        border-right: none;
+      }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .float1,
+      .float2 {
+        display: none;
+      }
+
+      .r-stats {
+        flex-wrap: wrap;
+      }
+
+      .r-stat {
+        min-width: 50%;
+      }
+
+      .potential-box {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .bzk-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media(max-width:680px) {
+
+      .tool-body,
+      .result-header,
+      .potential-box,
+      .result-cta-block {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .tool-progress {
+        padding: 16px 24px;
+      }
+
+      .steps-grid,
+      .rf-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .r-range {
+        font-size: 2rem;
+      }
+
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .opt-grid.c3 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ══════════════════ NAV ══════════════════ -->
-<nav>
-  <div class="nav-logo">immowert<span>wien</span></div>
-  <button class="nav-pill" onclick="scrollToTool()">Immobilie bewerten →</button>
-</nav>
+  <!-- ══════════════════ NAV ══════════════════ -->
+  <nav>
+    <div class="nav-logo">immowert<span>wien</span></div>
+    <button class="nav-pill" onclick="scrollToTool()">Immobilie bewerten →</button>
+  </nav>
 
-<!-- ══════════════════ HERO ══════════════════ -->
-<div style="padding-top:64px;">
-<div class="hero">
-  <div>
-    <div class="eyebrow"><span class="dot"></span>Immobilienbewertung Wien</div>
-    <h1>Die meisten Immobilien werden <span class="hl">unter Wert</span> verkauft.</h1>
-    <p class="hero-sub">Finde heraus, ob du Geld liegen lässt – und wie viel mehr beim Verkauf deiner Immobilie in Wien wirklich möglich ist.</p>
-    <div class="hero-actions">
-      <button class="btn-primary" onclick="scrollToTool()">
-        Immobilie jetzt bewerten <span class="arr">→</span>
-      </button>
-      <div class="meta">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Dauert nur 2 Minuten · 100% kostenlos · unverbindlich
-      </div>
-    </div>
-  </div>
-  <div class="hero-vis">
-    <div class="price-card">
-      <div class="pc-lbl">Bewertungsanalyse</div>
-      <div class="pc-addr">Mustergasse 12, 1080 Wien</div>
-      <div class="mini-chart">
-        <div class="b"></div><div class="b"></div><div class="b"></div>
-        <div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div>
-      </div>
-      <div class="chart-months"><span>Jan</span><span>Feb</span><span>Mär</span><span>Apr</span><span>Mai</span><span>Jun</span><span>Jul</span></div>
-      <div class="price-nums">
-        <div style="text-align:center">
-          <div class="pv-num">480k</div>
-          <div class="pv-label">Minimum</div>
-        </div>
-        <div class="pv-div">–</div>
-        <div style="text-align:center">
-          <div class="pv-num hi">540k</div>
-          <div class="pv-label">Maximum</div>
-        </div>
-      </div>
-      <div style="margin:14px 0"><span class="price-badge"><span>↑</span> +8–12% Verkaufspotenzial möglich</span></div>
-      <div class="price-trend">
-        <div class="trend-dot"></div>
-        <div class="trend-txt">Markttrend <strong>steigend</strong> · Nachfrage in 1080 Wien hoch</div>
-      </div>
-    </div>
-    <div class="float1">
-      <span>📍</span>
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <div style="padding-top:64px;">
+    <div class="hero">
       <div>
-        <div style="font-weight:600;font-size:.82rem;color:var(--g900);">Bezirk-Analyse</div>
-        <div style="color:var(--g500);font-size:.74rem;">Aktueller Marktvergleich</div>
-      </div>
-    </div>
-    <div class="float2">
-      <span>💰</span>
-      <div>
-        <div style="font-weight:600;font-size:.82rem;">+€47.000</div>
-        <div style="font-size:.74rem;opacity:.8;">Ø mehr erzielt</div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- ══════════════════ TRUST STRIP ══════════════════ -->
-<div class="trust-strip">
-  <div class="trust-inner">
-    <div class="t-item"><div class="t-icon">📊</div><div><div style="font-weight:600;font-size:.88rem;">Aktuelle Marktdaten</div><div style="font-size:.76rem;color:var(--g500);">Basierend auf echten Verkäufen</div></div></div>
-    <div class="t-item"><div class="t-icon">📍</div><div><div style="font-weight:600;font-size:.88rem;">Wien-spezifisch</div><div style="font-size:.76rem;color:var(--g500);">Alle 23 Bezirke analysiert</div></div></div>
-    <div class="t-item"><div class="t-icon">⚡</div><div><div style="font-weight:600;font-size:.88rem;">Sofortergebnis</div><div style="font-size:.76rem;color:var(--g500);">In unter 2 Minuten</div></div></div>
-    <div class="t-item"><div class="t-icon">🔒</div><div><div style="font-weight:600;font-size:.88rem;">100% vertraulich</div><div style="font-size:.76rem;color:var(--g500);">Deine Daten sind sicher</div></div></div>
-  </div>
-</div>
-
-<!-- ══════════════════ PROBLEM ══════════════════ -->
-<div class="prob-bg">
-  <div class="prob-inner">
-    <div class="reveal">
-      <div class="s-tag">Das Problem</div>
-      <h2 class="s-h2">Die meisten Eigentümer machen denselben Fehler</h2>
-      <p style="color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.7;margin-bottom:20px;">Sie orientieren sich an den falschen Quellen – und verlieren dabei bares Geld.</p>
-      <ul class="mistake-list">
-        <li class="mistake-item"><div class="mx">✕</div><span>Alte Preise aus vergangenen Verkäufen als Referenz nutzen</span></li>
-        <li class="mistake-item"><div class="mx">✕</div><span>Ungenaue Online-Bewertungstools ohne lokales Marktwissen</span></li>
-        <li class="mistake-item"><div class="mx">✕</div><span>Einzelne Maklermeinungen ohne objektiven Marktvergleich</span></li>
-        <li class="mistake-item"><div class="mx">✕</div><span>Emotionaler Preis statt datenbasierter Analyse</span></li>
-      </ul>
-      <div class="loss-card">
-        <div class="loss-lbl">Durchschnittlicher Verlust</div>
-        <div class="loss-num">€25.000 – €75.000</div>
-        <div class="loss-sub">Bei einem Immobilienwert von 500.000€ und 5–15% unter Potenzial verkauft</div>
-      </div>
-    </div>
-    <div class="reveal">
-      <div class="cmp-card bad">
-        <div><div class="cmp-lbl">Ohne Analyse</div><div class="cmp-val">€465.000</div></div>
-        <span class="badge-bad">–7,5% Verlust</span>
-      </div>
-      <div class="cmp-arr">↕</div>
-      <div class="cmp-card good">
-        <div><div class="cmp-lbl">Mit Optimierung</div><div class="cmp-val">€540.000</div></div>
-        <span class="badge-good">+8% mehr</span>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px;margin-top:10px;">
-        <div style="font-size:.75rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">Unterschied</div>
-        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;color:white;letter-spacing:-.01em;">€75.000</div>
-        <div style="font-size:.84rem;color:rgba(255,255,255,.45);margin-top:6px;">Das ist der Unterschied zwischen uninformiert und optimal verkaufen.</div>
-      </div>
-      <div style="margin-top:12px;background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.25);border-radius:12px;padding:16px 20px;">
-        <div style="font-size:.82rem;color:var(--b300);line-height:1.6;">👉 Genau hier entstehen die entscheidenden <strong style="color:white;">+5–15%</strong> – durch Analyse und eine durchdachte Strategie.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════ TOOL SECTION ══════════════════ -->
-<div id="tool-section">
-  <div class="tool-section-inner">
-    <div class="tool-header reveal">
-      <div class="s-tag">Sofortbewertung</div>
-      <h2 class="s-h2">Wie viel ist deine Immobilie wert?</h2>
-      <p class="s-p">Beantworte 6 kurze Fragen – und erhalte sofort eine datenbasierte Einschätzung für Wien.</p>
-    </div>
-
-    <!-- TOOL CARD -->
-    <div class="tool-card" id="toolCard">
-      <!-- progress header -->
-      <div class="tool-progress" id="toolProgress">
-        <div class="tool-progress-left">
-          <div class="tp-meta">
-            <span class="tp-label" id="tpLabel">Schritt 1 von 6</span>
-            <span class="tp-title" id="tpTitle">Immobilientyp</span>
+        <div class="eyebrow"><span class="dot"></span>Immobilienbewertung Wien</div>
+        <h1>Die meisten Immobilien werden <span class="hl">unter Wert</span> verkauft.</h1>
+        <p class="hero-sub">Finde heraus, ob du Geld liegen lässt – und wie viel mehr beim Verkauf deiner Immobilie in
+          Wien wirklich möglich ist.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="scrollToTool()">
+            Immobilie jetzt bewerten <span class="arr">→</span>
+          </button>
+          <div class="meta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            Dauert nur 2 Minuten · 100% kostenlos · unverbindlich
           </div>
-          <div class="tp-track"><div class="tp-fill" id="tpFill" style="width:16.6%"></div></div>
         </div>
       </div>
-      <!-- step body -->
-      <div class="tool-body" id="toolBody"></div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ══════════════════ HOW IT WORKS ══════════════════ -->
-<section class="sec reveal">
-  <div class="s-tag">So funktioniert's</div>
-  <h2 class="s-h2">3 Schritte zu deinem Verkaufspotenzial</h2>
-  <p class="s-p">Keine langen Formulare. Keine versteckten Kosten. Nur dein Ergebnis.</p>
-  <div class="steps-grid">
-    <div class="step-card-lp reveal">
-      <div class="step-num">01</div>
-      <div class="step-ico">🏠</div>
-      <div class="step-h">Daten eingeben</div>
-      <p class="step-p">Adresse, Größe und Zustand deiner Immobilie – in unter 2 Minuten ausgefüllt.</p>
-    </div>
-    <div class="step-card-lp reveal">
-      <div class="step-num">02</div>
-      <div class="step-ico">📊</div>
-      <div class="step-h">Analyse erhalten</div>
-      <p class="step-p">Sofortige Preisrange, Marktvergleich mit aktuellen Wiener Daten und erste Einschätzung.</p>
-    </div>
-    <div class="step-card-lp reveal">
-      <div class="step-num">03</div>
-      <div class="step-ico">💡</div>
-      <div class="step-h">Potenzial aufdecken</div>
-      <p class="step-p">Erfahre wie viel mehr beim Verkauf möglich ist – und wie du es realisierst.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════ CALL REFRAME ══════════════════ -->
-<section class="sec reveal" style="background:var(--off);max-width:none;padding:100px 5%;">
-  <div class="sec-inner">
-    <div class="s-tag">Warum der Experten-Call?</div>
-    <h2 class="s-h2">Online-Tools zeigen nur einen Teil des Bildes</h2>
-    <p class="s-p">Ein Experte kann Dinge erkennen, die kein Algorithmus sieht – und genau dort liegen die entscheidenden Prozente.</p>
-    <div class="rf-grid" style="margin-top:52px;">
-      <div class="rf-card reveal">
-        <div class="rf-ico">🔍</div>
-        <div class="rf-h">Verstecktes Potenzial erkennen</div>
-        <p class="rf-p">Lagefaktoren, Nachbarschaftsentwicklung, Sanierungsstand – Dinge, die den Preis erheblich beeinflussen, aber schwer zu quantifizieren sind.</p>
-      </div>
-      <div class="rf-card reveal">
-        <div class="rf-ico">📈</div>
-        <div class="rf-h">Preis strategisch optimieren</div>
-        <p class="rf-p">Der richtige Einstiegspreis ist entscheidend. Zu hoch bedeutet Leerstand, zu niedrig verschenktes Geld. Expertise macht den Unterschied.</p>
-      </div>
-      <div class="rf-card reveal">
-        <div class="rf-ico">🧭</div>
-        <div class="rf-h">Im Markt realistisch einordnen</div>
-        <p class="rf-p">Was in 1020 funktioniert, gilt nicht für 1190. Wiens Markt ist hyperlokal – und genau das berücksichtigt der Experte.</p>
-      </div>
-    </div>
-    <div style="margin-top:28px;background:var(--b50);border:1px solid var(--b100);border-radius:16px;padding:22px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
-      <div style="font-size:1.6rem;">💡</div>
-      <div>
-        <div style="font-weight:600;color:var(--g900);margin-bottom:4px;">Genau hier entstehen die entscheidenden +5–15%</div>
-        <div style="font-size:.87rem;color:var(--g500);">Nicht durch Glück, sondern durch gezielte Analyse und eine durchdachte Verkaufsstrategie.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════ WIEN ══════════════════ -->
-<div class="wien-bg">
-  <div class="wien-inner">
-    <div class="reveal">
-      <div class="s-tag">Lokaler Markt</div>
-      <h2 class="s-h2">Der Wiener Markt verändert sich gerade</h2>
-      <p class="s-p">Preise unterscheiden sich stark je nach Bezirk, Lage und Nachfrage. Was in 1020 funktioniert, gilt nicht automatisch für 1190.</p>
-      <div style="margin-top:28px;padding:20px 24px;background:white;border-radius:14px;border:1px solid var(--g200);">
-        <div style="font-size:.76rem;font-weight:600;color:var(--g500);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">Daher ist entscheidend</div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--g700);"><span style="color:var(--b500);">→</span>Eine bezirksspezifische Bewertung</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--g700);"><span style="color:var(--b500);">→</span>Aktuelle Nachfrageanalyse für deine Lage</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--g700);"><span style="color:var(--b500);">→</span>Preisentwicklung der letzten 6 Monate</div>
+      <div class="hero-vis">
+        <div class="price-card">
+          <div class="pc-lbl">Bewertungsanalyse</div>
+          <div class="pc-addr">Mustergasse 12, 1080 Wien</div>
+          <div class="mini-chart">
+            <div class="b"></div>
+            <div class="b"></div>
+            <div class="b"></div>
+            <div class="b"></div>
+            <div class="b"></div>
+            <div class="b"></div>
+            <div class="b"></div>
+          </div>
+          <div class="chart-months">
+            <span>Jan</span><span>Feb</span><span>Mär</span><span>Apr</span><span>Mai</span><span>Jun</span><span>Jul</span>
+          </div>
+          <div class="price-nums">
+            <div style="text-align:center">
+              <div class="pv-num">480k</div>
+              <div class="pv-label">Minimum</div>
+            </div>
+            <div class="pv-div">–</div>
+            <div style="text-align:center">
+              <div class="pv-num hi">540k</div>
+              <div class="pv-label">Maximum</div>
+            </div>
+          </div>
+          <div style="margin:14px 0"><span class="price-badge"><span>↑</span> +8–12% Verkaufspotenzial möglich</span>
+          </div>
+          <div class="price-trend">
+            <div class="trend-dot"></div>
+            <div class="trend-txt">Markttrend <strong>steigend</strong> · Nachfrage in 1080 Wien hoch</div>
+          </div>
+        </div>
+        <div class="float1">
+          <span>📍</span>
+          <div>
+            <div style="font-weight:600;font-size:.82rem;color:var(--g900);">Bezirk-Analyse</div>
+            <div style="color:var(--g500);font-size:.74rem;">Aktueller Marktvergleich</div>
+          </div>
+        </div>
+        <div class="float2">
+          <span>💰</span>
+          <div>
+            <div style="font-weight:600;font-size:.82rem;">+€47.000</div>
+            <div style="font-size:.74rem;opacity:.8;">Ø mehr erzielt</div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="reveal">
-      <div style="margin-bottom:14px;font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;color:var(--g700);">Ø Preise pro m² nach Bezirk</div>
-      <div class="bzk-static-grid">
-        <div class="bzk-static"><div class="bzk-n">1010</div><div class="bzk-l">Innere Stadt</div><div class="bzk-p">~€11.200/m²</div></div>
-        <div class="bzk-static"><div class="bzk-n">1020</div><div class="bzk-l">Leopoldstadt</div><div class="bzk-p">~€6.400/m²</div></div>
-        <div class="bzk-static"><div class="bzk-n">1080</div><div class="bzk-l">Josefstadt</div><div class="bzk-p">~€7.800/m²</div></div>
-        <div class="bzk-static"><div class="bzk-n">1090</div><div class="bzk-l">Alsergrund</div><div class="bzk-p">~€7.200/m²</div></div>
-        <div class="bzk-static" style="border-color:var(--b300)"><div class="bzk-n">1190</div><div class="bzk-l">Döbling</div><div class="bzk-p">~€9.100/m²</div></div>
-        <div class="bzk-static"><div class="bzk-n">1130</div><div class="bzk-l">Hietzing</div><div class="bzk-p">~€8.300/m²</div></div>
-        <div class="bzk-static"><div class="bzk-n">1040</div><div class="bzk-l">Wieden</div><div class="bzk-p">~€8.100/m²</div></div>
-        <div class="bzk-static"><div class="bzk-n">1100</div><div class="bzk-l">Favoriten</div><div class="bzk-p">~€4.800/m²</div></div>
-        <div class="bzk-static"><div class="bzk-n">1140</div><div class="bzk-l">Penzing</div><div class="bzk-p">~€6.200/m²</div></div>
+  </div>
+
+  <!-- ══════════════════ TRUST STRIP ══════════════════ -->
+  <div class="trust-strip">
+    <div class="trust-inner">
+      <div class="t-item">
+        <div class="t-icon">📊</div>
+        <div>
+          <div style="font-weight:600;font-size:.88rem;">Aktuelle Marktdaten</div>
+          <div style="font-size:.76rem;color:var(--g500);">Basierend auf echten Verkäufen</div>
+        </div>
       </div>
-      <div style="margin-top:12px;font-size:.72rem;color:var(--g500);">* Richtpreise auf Basis aktueller Marktdaten. Individuelle Analyse erforderlich.</div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════ FINAL CTA ══════════════════ -->
-<div class="final-bg">
-  <div class="final-inner reveal">
-    <div class="s-tag">Jetzt handeln</div>
-    <h2 class="s-h2">Finde jetzt heraus, ob du Geld liegen lässt</h2>
-    <p class="final-p">Es dauert 2 Minuten – kann dir aber mehrere Zehntausend Euro Unterschied bringen. Kostenlos. Unverbindlich. Ohne Risiko.</p>
-    <div class="final-actions">
-      <button class="btn-primary" style="font-size:1.1rem;padding:20px 44px;" onclick="scrollToTool()">
-        Immobilie jetzt bewerten <span class="arr">→</span>
-      </button>
-      <div class="meta" style="justify-content:center;color:rgba(255,255,255,.35);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Dauert nur 2 Minuten · 100% kostenlos · unverbindlich
+      <div class="t-item">
+        <div class="t-icon">📍</div>
+        <div>
+          <div style="font-weight:600;font-size:.88rem;">Wien-spezifisch</div>
+          <div style="font-size:.76rem;color:var(--g500);">Alle 23 Bezirke analysiert</div>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-icon">⚡</div>
+        <div>
+          <div style="font-weight:600;font-size:.88rem;">Sofortergebnis</div>
+          <div style="font-size:.76rem;color:var(--g500);">In unter 2 Minuten</div>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-icon">🔒</div>
+        <div>
+          <div style="font-weight:600;font-size:.88rem;">100% vertraulich</div>
+          <div style="font-size:.76rem;color:var(--g500);">Deine Daten sind sicher</div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ══════════════════ FOOTER ══════════════════ -->
-<!-- ══ IMPRESSUM & DATENSCHUTZ ══ -->
-<section id="impressum" style="background:var(--g100);padding:40px 5%;font-size:.82rem;color:var(--g500);line-height:1.8;">
-  <strong style="color:var(--g700);">Impressum</strong><br>
-  Angaben gemäß § 5 ECG:<br>
-  <em>Bitte trage hier deinen vollständigen Namen / Firmennamen, Adresse, E-Mail und UID-Nummer ein, bevor die Seite live geht.</em><br><br>
-  <strong style="color:var(--g700);">Haftungsausschluss</strong><br>
-  Die auf dieser Website dargestellten Immobilienwerte sind automatisch berechnete Ersteinschätzungen auf Basis allgemeiner Marktdaten und stellen keine verbindliche Wertermittlung oder Beratung dar.
-</section>
-<section id="datenschutz" style="background:var(--g100);padding:0 5% 40px;font-size:.82rem;color:var(--g500);line-height:1.8;border-top:1px solid var(--g200);">
-  <strong style="color:var(--g700);">Datenschutz</strong><br>
-  Personenbezogene Daten (Name, E-Mail, Telefon) werden ausschließlich zur Kontaktaufnahme verwendet und nicht an Dritte weitergegeben. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Du kannst deine Einwilligung jederzeit widerrufen.<br>
-  <em>Bitte ergänze hier deine vollständige Datenschutzerklärung vor dem Live-Gang.</em>
-</section>
-
-<footer>
-  <div class="foot-logo">immowert<span style="color:rgba(255,255,255,.35);">wien</span></div>
-  <div class="foot-trust">
-    <div class="ft-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>100% kostenlos</div>
-    <div class="ft-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Unverbindlich</div>
-    <div class="ft-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Daten vertraulich</div>
-  </div>
-  <div class="foot-copy">© 2026 ImmowertWien · <a href="#impressum" style="color:inherit;text-decoration:underline;opacity:.7;">Impressum</a> · <a href="#datenschutz" style="color:inherit;text-decoration:underline;opacity:.7;">Datenschutz</a></div>
-</footer>
-
-<!-- ══════════════════ LEAD MODAL ══════════════════ -->
-<div class="overlay" id="overlay">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="modalContent">
-      <div class="m-eyebrow">Kostenlose Expertenanalyse</div>
-      <div class="m-title">Prüfen, ob ich unter Wert verkaufe</div>
-      <div class="m-sub">Ein geprüfter Immobilienexperte meldet sich innerhalb von 24h mit deiner persönlichen Einschätzung – kostenlos und unverbindlich.</div>
-      <div class="m-group"><label class="m-label">Dein Name</label><input type="text" class="m-input" id="mName" placeholder="Max Mustermann"></div>
-      <div class="m-group"><label class="m-label">E-Mail-Adresse</label><input type="email" class="m-input" id="mEmail" placeholder="max@beispiel.at"></div>
-      <div class="m-group"><label class="m-label">Telefonnummer</label><input type="tel" class="m-input" id="mPhone" placeholder="+43 660 123 45 67"></div>
-      <button class="m-submit" onclick="submitModal()">Prüfen, ob ich unter Wert verkaufe →</button>
-      <div class="m-disc">🔒 Kostenlos & unverbindlich · Daten werden vertraulich behandelt</div>
+  <!-- ══════════════════ PROBLEM ══════════════════ -->
+  <div class="prob-bg">
+    <div class="prob-inner">
+      <div class="reveal">
+        <div class="s-tag">Das Problem</div>
+        <h2 class="s-h2">Die meisten Eigentümer machen denselben Fehler</h2>
+        <p style="color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.7;margin-bottom:20px;">Sie orientieren sich
+          an den falschen Quellen – und verlieren dabei bares Geld.</p>
+        <ul class="mistake-list">
+          <li class="mistake-item">
+            <div class="mx">✕</div><span>Alte Preise aus vergangenen Verkäufen als Referenz nutzen</span>
+          </li>
+          <li class="mistake-item">
+            <div class="mx">✕</div><span>Ungenaue Online-Bewertungstools ohne lokales Marktwissen</span>
+          </li>
+          <li class="mistake-item">
+            <div class="mx">✕</div><span>Einzelne Maklermeinungen ohne objektiven Marktvergleich</span>
+          </li>
+          <li class="mistake-item">
+            <div class="mx">✕</div><span>Emotionaler Preis statt datenbasierter Analyse</span>
+          </li>
+        </ul>
+        <div class="loss-card">
+          <div class="loss-lbl">Durchschnittlicher Verlust</div>
+          <div class="loss-num">€25.000 – €75.000</div>
+          <div class="loss-sub">Bei einem Immobilienwert von 500.000€ und 5–15% unter Potenzial verkauft</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="cmp-card bad">
+          <div>
+            <div class="cmp-lbl">Ohne Analyse</div>
+            <div class="cmp-val">€465.000</div>
+          </div>
+          <span class="badge-bad">–7,5% Verlust</span>
+        </div>
+        <div class="cmp-arr">↕</div>
+        <div class="cmp-card good">
+          <div>
+            <div class="cmp-lbl">Mit Optimierung</div>
+            <div class="cmp-val">€540.000</div>
+          </div>
+          <span class="badge-good">+8% mehr</span>
+        </div>
+        <div
+          style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px;margin-top:10px;">
+          <div
+            style="font-size:.75rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">
+            Unterschied</div>
+          <div
+            style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;color:white;letter-spacing:-.01em;">
+            €75.000</div>
+          <div style="font-size:.84rem;color:rgba(255,255,255,.45);margin-top:6px;">Das ist der Unterschied zwischen
+            uninformiert und optimal verkaufen.</div>
+        </div>
+        <div
+          style="margin-top:12px;background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.25);border-radius:12px;padding:16px 20px;">
+          <div style="font-size:.82rem;color:var(--b300);line-height:1.6;">👉 Genau hier entstehen die entscheidenden
+            <strong style="color:white;">+5–15%</strong> – durch Analyse und eine durchdachte Strategie.</div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-/* ═══════════════════════════════════════════════
-   DATA
-═══════════════════════════════════════════════ */
-const bezirke = [
-  {num:'1010',name:'Innere Stadt',p:11200},{num:'1020',name:'Leopoldstadt',p:6400},
-  {num:'1030',name:'Landstraße',p:7100},{num:'1040',name:'Wieden',p:8100},
-  {num:'1050',name:'Margareten',p:6800},{num:'1060',name:'Mariahilf',p:7600},
-  {num:'1070',name:'Neubau',p:8400},{num:'1080',name:'Josefstadt',p:7800},
-  {num:'1090',name:'Alsergrund',p:7200},{num:'1100',name:'Favoriten',p:4800},
-  {num:'1110',name:'Simmering',p:4500},{num:'1120',name:'Meidling',p:5200},
-  {num:'1130',name:'Hietzing',p:8300},{num:'1140',name:'Penzing',p:6200},
-  {num:'1150',name:'Rudolfsheim',p:5100},{num:'1160',name:'Ottakring',p:5400},
-  {num:'1170',name:'Hernals',p:5800},{num:'1180',name:'Währing',p:7400},
-  {num:'1190',name:'Döbling',p:9100},{num:'1200',name:'Brigittenau',p:5000},
-  {num:'1210',name:'Floridsdorf',p:4600},{num:'1220',name:'Donaustadt',p:5300},
-  {num:'1230',name:'Liesing',p:5600},
-];
-const condM = {renoviert:1.10,gut:1.0,mittel:.92,sanierungsbedarf:.82};
-const floorM = {eg:.95,mitte:1.0,hoch:1.05,dg:1.08};
-const typeM  = {wohnung:1.0,haus:1.05,villa:1.15,gewerbe:.90};
+  <!-- ══════════════════ TOOL SECTION ══════════════════ -->
+  <div id="tool-section">
+    <div class="tool-section-inner">
+      <div class="tool-header reveal">
+        <div class="s-tag">Sofortbewertung</div>
+        <h2 class="s-h2">Wie viel ist deine Immobilie wert?</h2>
+        <p class="s-p">Beantworte 6 kurze Fragen – und erhalte sofort eine datenbasierte Einschätzung für Wien.</p>
+      </div>
 
-const STEPS = ['type','bezirk','flaeche','zimmer','condition','floor'];
-const stepMeta = [
-  {lbl:'Schritt 1 von 6',ttl:'Immobilientyp'},
-  {lbl:'Schritt 2 von 6',ttl:'Bezirk'},
-  {lbl:'Schritt 3 von 6',ttl:'Größe'},
-  {lbl:'Schritt 4 von 6',ttl:'Zimmer'},
-  {lbl:'Schritt 5 von 6',ttl:'Zustand'},
-  {lbl:'Schritt 6 von 6',ttl:'Stockwerk'},
-];
+      <!-- TOOL CARD -->
+      <div class="tool-card" id="toolCard">
+        <!-- progress header -->
+        <div class="tool-progress" id="toolProgress">
+          <div class="tool-progress-left">
+            <div class="tp-meta">
+              <span class="tp-label" id="tpLabel">Schritt 1 von 6</span>
+              <span class="tp-title" id="tpTitle">Immobilientyp</span>
+            </div>
+            <div class="tp-track">
+              <div class="tp-fill" id="tpFill" style="width:16.6%"></div>
+            </div>
+          </div>
+        </div>
+        <!-- step body -->
+        <div class="tool-body" id="toolBody"></div>
+      </div>
 
-/* ═══════════════════════════════════════════════
-   STATE
-═══════════════════════════════════════════════ */
-const S = {cur:0, type:null, bezirk:null, flaeche:80, zimmer:null, condition:null, floor:null};
+    </div>
+  </div>
 
-/* ═══════════════════════════════════════════════
-   RENDER ENGINE
-═══════════════════════════════════════════════ */
-function render(){
-  const pct = ((S.cur+1)/(STEPS.length+1))*100;
-  document.getElementById('tpFill').style.width = Math.min(pct,100)+'%';
-  if(S.cur < STEPS.length){
-    document.getElementById('tpLabel').textContent = stepMeta[S.cur].lbl;
-    document.getElementById('tpTitle').textContent = stepMeta[S.cur].ttl;
-    document.getElementById('toolProgress').style.display='';
-  } else {
-    document.getElementById('tpFill').style.width='100%';
-    document.getElementById('tpLabel').textContent='Fertig!';
-    document.getElementById('tpTitle').textContent='Deine Bewertung';
-  }
-  const body = document.getElementById('toolBody');
-  body.innerHTML = '';
-  const html = S.cur < STEPS.length ? buildStep(STEPS[S.cur]) : buildResult();
-  body.insertAdjacentHTML('beforeend', html);
-  afterInject();
-}
+  <!-- ══════════════════ HOW IT WORKS ══════════════════ -->
+  <section class="sec reveal">
+    <div class="s-tag">So funktioniert's</div>
+    <h2 class="s-h2">3 Schritte zu deinem Verkaufspotenzial</h2>
+    <p class="s-p">Keine langen Formulare. Keine versteckten Kosten. Nur dein Ergebnis.</p>
+    <div class="steps-grid">
+      <div class="step-card-lp reveal">
+        <div class="step-num">01</div>
+        <div class="step-ico">🏠</div>
+        <div class="step-h">Daten eingeben</div>
+        <p class="step-p">Adresse, Größe und Zustand deiner Immobilie – in unter 2 Minuten ausgefüllt.</p>
+      </div>
+      <div class="step-card-lp reveal">
+        <div class="step-num">02</div>
+        <div class="step-ico">📊</div>
+        <div class="step-h">Analyse erhalten</div>
+        <p class="step-p">Sofortige Preisrange, Marktvergleich mit aktuellen Wiener Daten und erste Einschätzung.</p>
+      </div>
+      <div class="step-card-lp reveal">
+        <div class="step-num">03</div>
+        <div class="step-ico">💡</div>
+        <div class="step-h">Potenzial aufdecken</div>
+        <p class="step-p">Erfahre wie viel mehr beim Verkauf möglich ist – und wie du es realisierst.</p>
+      </div>
+    </div>
+  </section>
 
-function afterInject(){
-  const sl = document.getElementById('flaecheSlider');
-  if(sl){
-    sl.addEventListener('input', e=>{
-      S.flaeche = parseInt(e.target.value);
-      document.getElementById('flaecheVal').textContent = S.flaeche;
-      fillSlider(sl);
-    });
-    fillSlider(sl);
-  }
-  // animate result bar
-  const bar = document.getElementById('rBar');
-  if(bar) setTimeout(()=>bar.style.width='72%', 120);
-  // scroll tool into view on result
-  if(S.cur === STEPS.length){
-    setTimeout(()=>document.getElementById('toolCard').scrollIntoView({behavior:'smooth',block:'start'}),100);
-  }
-}
+  <!-- ══════════════════ CALL REFRAME ══════════════════ -->
+  <section class="sec reveal" style="background:var(--off);max-width:none;padding:100px 5%;">
+    <div class="sec-inner">
+      <div class="s-tag">Warum der Experten-Call?</div>
+      <h2 class="s-h2">Online-Tools zeigen nur einen Teil des Bildes</h2>
+      <p class="s-p">Ein Experte kann Dinge erkennen, die kein Algorithmus sieht – und genau dort liegen die
+        entscheidenden Prozente.</p>
+      <div class="rf-grid" style="margin-top:52px;">
+        <div class="rf-card reveal">
+          <div class="rf-ico">🔍</div>
+          <div class="rf-h">Verstecktes Potenzial erkennen</div>
+          <p class="rf-p">Lagefaktoren, Nachbarschaftsentwicklung, Sanierungsstand – Dinge, die den Preis erheblich
+            beeinflussen, aber schwer zu quantifizieren sind.</p>
+        </div>
+        <div class="rf-card reveal">
+          <div class="rf-ico">📈</div>
+          <div class="rf-h">Preis strategisch optimieren</div>
+          <p class="rf-p">Der richtige Einstiegspreis ist entscheidend. Zu hoch bedeutet Leerstand, zu niedrig
+            verschenktes Geld. Expertise macht den Unterschied.</p>
+        </div>
+        <div class="rf-card reveal">
+          <div class="rf-ico">🧭</div>
+          <div class="rf-h">Im Markt realistisch einordnen</div>
+          <p class="rf-p">Was in 1020 funktioniert, gilt nicht für 1190. Wiens Markt ist hyperlokal – und genau das
+            berücksichtigt der Experte.</p>
+        </div>
+      </div>
+      <div
+        style="margin-top:28px;background:var(--b50);border:1px solid var(--b100);border-radius:16px;padding:22px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
+        <div style="font-size:1.6rem;">💡</div>
+        <div>
+          <div style="font-weight:600;color:var(--g900);margin-bottom:4px;">Genau hier entstehen die entscheidenden
+            +5–15%</div>
+          <div style="font-size:.87rem;color:var(--g500);">Nicht durch Glück, sondern durch gezielte Analyse und eine
+            durchdachte Verkaufsstrategie.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-function fillSlider(sl){
-  const pct = ((sl.value-sl.min)/(sl.max-sl.min))*100;
-  sl.style.background=`linear-gradient(to right,var(--b400) ${pct}%,var(--g200) ${pct}%)`;
-}
+  <!-- ══════════════════ WIEN ══════════════════ -->
+  <div class="wien-bg">
+    <div class="wien-inner">
+      <div class="reveal">
+        <div class="s-tag">Lokaler Markt</div>
+        <h2 class="s-h2">Der Wiener Markt verändert sich gerade</h2>
+        <p class="s-p">Preise unterscheiden sich stark je nach Bezirk, Lage und Nachfrage. Was in 1020 funktioniert,
+          gilt nicht automatisch für 1190.</p>
+        <div
+          style="margin-top:28px;padding:20px 24px;background:white;border-radius:14px;border:1px solid var(--g200);">
+          <div
+            style="font-size:.76rem;font-weight:600;color:var(--g500);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;">
+            Daher ist entscheidend</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--g700);"><span
+                style="color:var(--b500);">→</span>Eine bezirksspezifische Bewertung</div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--g700);"><span
+                style="color:var(--b500);">→</span>Aktuelle Nachfrageanalyse für deine Lage</div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--g700);"><span
+                style="color:var(--b500);">→</span>Preisentwicklung der letzten 6 Monate</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div
+          style="margin-bottom:14px;font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;color:var(--g700);">
+          Ø Preise pro m² nach Bezirk</div>
+        <div class="bzk-static-grid">
+          <div class="bzk-static">
+            <div class="bzk-n">1010</div>
+            <div class="bzk-l">Innere Stadt</div>
+            <div class="bzk-p">~€11.200/m²</div>
+          </div>
+          <div class="bzk-static">
+            <div class="bzk-n">1020</div>
+            <div class="bzk-l">Leopoldstadt</div>
+            <div class="bzk-p">~€6.400/m²</div>
+          </div>
+          <div class="bzk-static">
+            <div class="bzk-n">1080</div>
+            <div class="bzk-l">Josefstadt</div>
+            <div class="bzk-p">~€7.800/m²</div>
+          </div>
+          <div class="bzk-static">
+            <div class="bzk-n">1090</div>
+            <div class="bzk-l">Alsergrund</div>
+            <div class="bzk-p">~€7.200/m²</div>
+          </div>
+          <div class="bzk-static" style="border-color:var(--b300)">
+            <div class="bzk-n">1190</div>
+            <div class="bzk-l">Döbling</div>
+            <div class="bzk-p">~€9.100/m²</div>
+          </div>
+          <div class="bzk-static">
+            <div class="bzk-n">1130</div>
+            <div class="bzk-l">Hietzing</div>
+            <div class="bzk-p">~€8.300/m²</div>
+          </div>
+          <div class="bzk-static">
+            <div class="bzk-n">1040</div>
+            <div class="bzk-l">Wieden</div>
+            <div class="bzk-p">~€8.100/m²</div>
+          </div>
+          <div class="bzk-static">
+            <div class="bzk-n">1100</div>
+            <div class="bzk-l">Favoriten</div>
+            <div class="bzk-p">~€4.800/m²</div>
+          </div>
+          <div class="bzk-static">
+            <div class="bzk-n">1140</div>
+            <div class="bzk-l">Penzing</div>
+            <div class="bzk-p">~€6.200/m²</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:.72rem;color:var(--g500);">* Richtpreise auf Basis aktueller Marktdaten.
+          Individuelle Analyse erforderlich.</div>
+      </div>
+    </div>
+  </div>
 
-/* ═══════════════════════════════════════════════
-   STEP BUILDERS
-═══════════════════════════════════════════════ */
-function buildStep(step){
-  if(step==='type') return `
+  <!-- ══════════════════ FINAL CTA ══════════════════ -->
+  <div class="final-bg">
+    <div class="final-inner reveal">
+      <div class="s-tag">Jetzt handeln</div>
+      <h2 class="s-h2">Finde jetzt heraus, ob du Geld liegen lässt</h2>
+      <p class="final-p">Es dauert 2 Minuten – kann dir aber mehrere Zehntausend Euro Unterschied bringen. Kostenlos.
+        Unverbindlich. Ohne Risiko.</p>
+      <div class="final-actions">
+        <button class="btn-primary" style="font-size:1.1rem;padding:20px 44px;" onclick="scrollToTool()">
+          Immobilie jetzt bewerten <span class="arr">→</span>
+        </button>
+        <div class="meta" style="justify-content:center;color:rgba(255,255,255,.35);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          Dauert nur 2 Minuten · 100% kostenlos · unverbindlich
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <!-- ══ IMPRESSUM & DATENSCHUTZ ══ -->
+  <section id="impressum"
+    style="background:var(--g100);padding:40px 5%;font-size:.82rem;color:var(--g500);line-height:1.8;">
+    <strong style="color:var(--g700);">Impressum</strong><br>
+    Angaben gemäß § 5 ECG:<br>
+    <em>Bitte trage hier deinen vollständigen Namen / Firmennamen, Adresse, E-Mail und UID-Nummer ein, bevor die Seite
+      live geht.</em><br><br>
+    <strong style="color:var(--g700);">Haftungsausschluss</strong><br>
+    Die auf dieser Website dargestellten Immobilienwerte sind automatisch berechnete Ersteinschätzungen auf Basis
+    allgemeiner Marktdaten und stellen keine verbindliche Wertermittlung oder Beratung dar.
+  </section>
+  <section id="datenschutz"
+    style="background:var(--g100);padding:0 5% 40px;font-size:.82rem;color:var(--g500);line-height:1.8;border-top:1px solid var(--g200);">
+    <strong style="color:var(--g700);">Datenschutz</strong><br>
+    Personenbezogene Daten (Name, E-Mail, Telefon) werden ausschließlich zur Kontaktaufnahme verwendet und nicht an
+    Dritte weitergegeben. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Du kannst deine
+    Einwilligung jederzeit widerrufen.<br>
+    <em>Bitte ergänze hier deine vollständige Datenschutzerklärung vor dem Live-Gang.</em>
+  </section>
+
+  <footer>
+    <div class="foot-logo">immowert<span style="color:rgba(255,255,255,.35);">wien</span></div>
+    <div class="foot-trust">
+      <div class="ft-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>100% kostenlos</div>
+      <div class="ft-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>Unverbindlich</div>
+      <div class="ft-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>Daten vertraulich</div>
+    </div>
+    <div class="foot-copy">© 2026 ImmowertWien · <a href="#impressum"
+        style="color:inherit;text-decoration:underline;opacity:.7;">Impressum</a> · <a href="#datenschutz"
+        style="color:inherit;text-decoration:underline;opacity:.7;">Datenschutz</a></div>
+  </footer>
+
+  <!-- ══════════════════ LEAD MODAL ══════════════════ -->
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modalContent">
+        <div class="m-eyebrow">Kostenlose Expertenanalyse</div>
+        <div class="m-title">Prüfen, ob ich unter Wert verkaufe</div>
+        <div class="m-sub">Ein geprüfter Immobilienexperte meldet sich innerhalb von 24h mit deiner persönlichen
+          Einschätzung – kostenlos und unverbindlich.</div>
+        <div class="m-group"><label class="m-label">Dein Name</label><input type="text" class="m-input" id="mName"
+            placeholder="Max Mustermann"></div>
+        <div class="m-group"><label class="m-label">E-Mail-Adresse</label><input type="email" class="m-input"
+            id="mEmail" placeholder="max@beispiel.at"></div>
+        <div class="m-group"><label class="m-label">Telefonnummer</label><input type="tel" class="m-input" id="mPhone"
+            placeholder="+43 660 123 45 67"></div>
+        <button class="m-submit" onclick="submitModal()">Prüfen, ob ich unter Wert verkaufe →</button>
+        <div class="m-disc">🔒 Kostenlos & unverbindlich · Daten werden vertraulich behandelt</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════
+       DATA
+    ═══════════════════════════════════════════════ */
+    const bezirke = [
+      { num: '1010', name: 'Innere Stadt', p: 11200 }, { num: '1020', name: 'Leopoldstadt', p: 6400 },
+      { num: '1030', name: 'Landstraße', p: 7100 }, { num: '1040', name: 'Wieden', p: 8100 },
+      { num: '1050', name: 'Margareten', p: 6800 }, { num: '1060', name: 'Mariahilf', p: 7600 },
+      { num: '1070', name: 'Neubau', p: 8400 }, { num: '1080', name: 'Josefstadt', p: 7800 },
+      { num: '1090', name: 'Alsergrund', p: 7200 }, { num: '1100', name: 'Favoriten', p: 4800 },
+      { num: '1110', name: 'Simmering', p: 4500 }, { num: '1120', name: 'Meidling', p: 5200 },
+      { num: '1130', name: 'Hietzing', p: 8300 }, { num: '1140', name: 'Penzing', p: 6200 },
+      { num: '1150', name: 'Rudolfsheim', p: 5100 }, { num: '1160', name: 'Ottakring', p: 5400 },
+      { num: '1170', name: 'Hernals', p: 5800 }, { num: '1180', name: 'Währing', p: 7400 },
+      { num: '1190', name: 'Döbling', p: 9100 }, { num: '1200', name: 'Brigittenau', p: 5000 },
+      { num: '1210', name: 'Floridsdorf', p: 4600 }, { num: '1220', name: 'Donaustadt', p: 5300 },
+      { num: '1230', name: 'Liesing', p: 5600 },
+    ];
+    const condM = { renoviert: 1.10, gut: 1.0, mittel: .92, sanierungsbedarf: .82 };
+    const floorM = { eg: .95, mitte: 1.0, hoch: 1.05, dg: 1.08 };
+    const typeM = { wohnung: 1.0, haus: 1.05, villa: 1.15, gewerbe: .90 };
+
+    const STEPS = ['type', 'bezirk', 'flaeche', 'zimmer', 'condition', 'floor'];
+    const stepMeta = [
+      { lbl: 'Schritt 1 von 6', ttl: 'Immobilientyp' },
+      { lbl: 'Schritt 2 von 6', ttl: 'Bezirk' },
+      { lbl: 'Schritt 3 von 6', ttl: 'Größe' },
+      { lbl: 'Schritt 4 von 6', ttl: 'Zimmer' },
+      { lbl: 'Schritt 5 von 6', ttl: 'Zustand' },
+      { lbl: 'Schritt 6 von 6', ttl: 'Stockwerk' },
+    ];
+
+    /* ═══════════════════════════════════════════════
+       STATE
+    ═══════════════════════════════════════════════ */
+    const S = { cur: 0, type: null, bezirk: null, flaeche: 80, zimmer: null, condition: null, floor: null };
+
+    /* ═══════════════════════════════════════════════
+       RENDER ENGINE
+    ═══════════════════════════════════════════════ */
+    function render() {
+      const pct = ((S.cur + 1) / (STEPS.length + 1)) * 100;
+      document.getElementById('tpFill').style.width = Math.min(pct, 100) + '%';
+      if (S.cur < STEPS.length) {
+        document.getElementById('tpLabel').textContent = stepMeta[S.cur].lbl;
+        document.getElementById('tpTitle').textContent = stepMeta[S.cur].ttl;
+        document.getElementById('toolProgress').style.display = '';
+      } else {
+        document.getElementById('tpFill').style.width = '100%';
+        document.getElementById('tpLabel').textContent = 'Fertig!';
+        document.getElementById('tpTitle').textContent = 'Deine Bewertung';
+      }
+      const body = document.getElementById('toolBody');
+      body.innerHTML = '';
+      const html = S.cur < STEPS.length ? buildStep(STEPS[S.cur]) : buildResult();
+      body.insertAdjacentHTML('beforeend', html);
+      afterInject();
+    }
+
+    function afterInject() {
+      const sl = document.getElementById('flaecheSlider');
+      if (sl) {
+        sl.addEventListener('input', e => {
+          S.flaeche = parseInt(e.target.value);
+          document.getElementById('flaecheVal').textContent = S.flaeche;
+          fillSlider(sl);
+        });
+        fillSlider(sl);
+      }
+      // animate result bar
+      const bar = document.getElementById('rBar');
+      if (bar) setTimeout(() => bar.style.width = '72%', 120);
+      // scroll tool into view on result
+      if (S.cur === STEPS.length) {
+        setTimeout(() => document.getElementById('toolCard').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      }
+    }
+
+    function fillSlider(sl) {
+      const pct = ((sl.value - sl.min) / (sl.max - sl.min)) * 100;
+      sl.style.background = `linear-gradient(to right,var(--b400) ${pct}%,var(--g200) ${pct}%)`;
+    }
+
+    /* ═══════════════════════════════════════════════
+       STEP BUILDERS
+    ═══════════════════════════════════════════════ */
+    function buildStep(step) {
+      if (step === 'type') return `
     <div class="step-wrap">
       <div class="step-eyebrow">Immobilienbewertung Wien</div>
       <div class="step-title">Was möchtest du bewerten?</div>
       <div class="step-sub">Wähle den Typ deiner Immobilie für eine präzisere Einschätzung.</div>
       <div class="opt-grid c2">
-        ${opt('type','wohnung','🏢','Wohnung','Eigentumswohnung')}
-        ${opt('type','haus','🏠','Haus','Einfamilienhaus')}
-        ${opt('type','villa','🏡','Villa / Luxus','Premium-Objekt')}
-        ${opt('type','gewerbe','🏬','Gewerbe','Büro, Geschäft')}
+        ${opt('type', 'wohnung', '🏢', 'Wohnung', 'Eigentumswohnung')}
+        ${opt('type', 'haus', '🏠', 'Haus', 'Einfamilienhaus')}
+        ${opt('type', 'villa', '🏡', 'Villa / Luxus', 'Premium-Objekt')}
+        ${opt('type', 'gewerbe', '🏬', 'Gewerbe', 'Büro, Geschäft')}
       </div>
       ${foot(false, !!S.type)}
     </div>`;
 
-  if(step==='bezirk') return `
+      if (step === 'bezirk') return `
     <div class="step-wrap">
       <div class="step-eyebrow">Immobilienbewertung Wien</div>
       <div class="step-title">In welchem Bezirk?</div>
       <div class="step-sub">Die Lage ist der wichtigste Preisfaktor in Wien.</div>
       <div class="bzk-grid">
-        ${bezirke.map(b=>`<button class="bzk-btn${S.bezirk===b.num?' sel':''}" onclick="pickBzk('${b.num}')"><span class="bzk-num">${b.num}</span><span class="bzk-name">${b.name}</span></button>`).join('')}
+        ${bezirke.map(b => `<button class="bzk-btn${S.bezirk === b.num ? ' sel' : ''}" onclick="pickBzk('${b.num}')"><span class="bzk-num">${b.num}</span><span class="bzk-name">${b.name}</span></button>`).join('')}
       </div>
       ${foot(true, !!S.bezirk)}
     </div>`;
 
-  if(step==='flaeche') return `
+      if (step === 'flaeche') return `
     <div class="step-wrap">
       <div class="step-eyebrow">Immobilienbewertung Wien</div>
       <div class="step-title">Wie groß ist die Immobilie?</div>
@@ -878,123 +2475,123 @@ function buildStep(step){
       ${foot(true, true)}
     </div>`;
 
-  if(step==='zimmer') return `
+      if (step === 'zimmer') return `
     <div class="step-wrap">
       <div class="step-eyebrow">Immobilienbewertung Wien</div>
       <div class="step-title">Wie viele Zimmer?</div>
       <div class="step-sub">Anzahl der Wohn- und Schlafzimmer (ohne Küche, Bad).</div>
       <div class="opt-grid c3">
-        ${['1','2','3','4','5','6+'].map(z=>`<button class="opt-simple${S.zimmer===z?' sel':''}" onclick="pickSimple('zimmer','${z}')"><span class="opt-lbl">${z} Zimmer</span></button>`).join('')}
+        ${['1', '2', '3', '4', '5', '6+'].map(z => `<button class="opt-simple${S.zimmer === z ? ' sel' : ''}" onclick="pickSimple('zimmer','${z}')"><span class="opt-lbl">${z} Zimmer</span></button>`).join('')}
       </div>
       ${foot(true, !!S.zimmer)}
     </div>`;
 
-  if(step==='condition') return `
+      if (step === 'condition') return `
     <div class="step-wrap">
       <div class="step-eyebrow">Immobilienbewertung Wien</div>
       <div class="step-title">In welchem Zustand?</div>
       <div class="step-sub">Der Zustand beeinflusst den Wert erheblich – bis zu ±15%.</div>
       <div class="opt-grid">
-        ${opt('condition','renoviert','✨','Neuwertig / Renoviert','Weniger als 5 Jahre alt oder vollständig erneuert')}
-        ${opt('condition','gut','👍','Guter Zustand','Gepflegt, keine wesentlichen Mängel')}
-        ${opt('condition','mittel','🔧','Mittlerer Zustand','Teilweise Renovierungsbedarf in den nächsten Jahren')}
-        ${opt('condition','sanierungsbedarf','🏗️','Sanierungsbedarf','Größere Investitionen notwendig')}
+        ${opt('condition', 'renoviert', '✨', 'Neuwertig / Renoviert', 'Weniger als 5 Jahre alt oder vollständig erneuert')}
+        ${opt('condition', 'gut', '👍', 'Guter Zustand', 'Gepflegt, keine wesentlichen Mängel')}
+        ${opt('condition', 'mittel', '🔧', 'Mittlerer Zustand', 'Teilweise Renovierungsbedarf in den nächsten Jahren')}
+        ${opt('condition', 'sanierungsbedarf', '🏗️', 'Sanierungsbedarf', 'Größere Investitionen notwendig')}
       </div>
       ${foot(true, !!S.condition)}
     </div>`;
 
-  if(step==='floor') return `
+      if (step === 'floor') return `
     <div class="step-wrap">
       <div class="step-eyebrow">Immobilienbewertung Wien</div>
       <div class="step-title">Welches Stockwerk?</div>
       <div class="step-sub">Lage im Gebäude wirkt sich auf Licht, Lärm und Preis aus.</div>
       <div class="opt-grid c2">
-        ${opt('floor','eg','⬇️','Erdgeschoss','Parterre oder Souterrain')}
-        ${opt('floor','mitte','🏢','Mittelgeschoss','1.–4. Stock')}
-        ${opt('floor','hoch','🔝','Obere Etage','Ab dem 5. Stock')}
-        ${opt('floor','dg','🌟','Dachgeschoss','Loft oder Penthouse')}
+        ${opt('floor', 'eg', '⬇️', 'Erdgeschoss', 'Parterre oder Souterrain')}
+        ${opt('floor', 'mitte', '🏢', 'Mittelgeschoss', '1.–4. Stock')}
+        ${opt('floor', 'hoch', '🔝', 'Obere Etage', 'Ab dem 5. Stock')}
+        ${opt('floor', 'dg', '🌟', 'Dachgeschoss', 'Loft oder Penthouse')}
       </div>
       ${foot(true, !!S.floor)}
     </div>`;
-}
+    }
 
-function opt(field, val, icon, lbl, desc){
-  const sel = S[field]===val?' sel':'';
-  return `<button class="opt-btn${sel}" onclick="pickOpt('${field}','${val}',this)">
+    function opt(field, val, icon, lbl, desc) {
+      const sel = S[field] === val ? ' sel' : '';
+      return `<button class="opt-btn${sel}" onclick="pickOpt('${field}','${val}',this)">
     <div class="opt-icon-box">${icon}</div>
-    <div class="opt-txt"><span class="opt-lbl">${lbl}</span>${desc?`<span class="opt-desc">${desc}</span>`:''}</div>
+    <div class="opt-txt"><span class="opt-lbl">${lbl}</span>${desc ? `<span class="opt-desc">${desc}</span>` : ''}</div>
     <div class="opt-check"></div>
   </button>`;
-}
+    }
 
-function foot(showBack, nextOn){
-  return `<div class="step-footer">
-    ${showBack?`<button class="btn-back" onclick="goBack()">← Zurück</button>`:'<div></div>'}
-    <button class="btn-next" id="btnNext" onclick="goNext()" ${nextOn?'':'disabled'}>Weiter →</button>
+    function foot(showBack, nextOn) {
+      return `<div class="step-footer">
+    ${showBack ? `<button class="btn-back" onclick="goBack()">← Zurück</button>` : '<div></div>'}
+    <button class="btn-next" id="btnNext" onclick="goNext()" ${nextOn ? '' : 'disabled'}>Weiter →</button>
   </div>`;
-}
+    }
 
-/* ═══════════════════════════════════════════════
-   INTERACTIONS
-═══════════════════════════════════════════════ */
-function pickOpt(field, val, el){
-  S[field]=val;
-  document.querySelectorAll('#toolBody .opt-btn').forEach(b=>b.classList.remove('sel'));
-  el.classList.add('sel');
-  const btn=document.getElementById('btnNext');
-  if(btn) btn.disabled=false;
-  if(['type','condition','floor'].includes(field)) setTimeout(goNext,300);
-}
-function pickSimple(field, val){
-  S[field]=val;
-  document.querySelectorAll('#toolBody .opt-simple').forEach(b=>b.classList.remove('sel'));
-  event.currentTarget.classList.add('sel');
-  const btn=document.getElementById('btnNext');
-  if(btn) btn.disabled=false;
-  setTimeout(goNext,300);
-}
-function pickBzk(num){
-  S.bezirk=num;
-  document.querySelectorAll('#toolBody .bzk-btn').forEach(b=>b.classList.remove('sel'));
-  event.currentTarget.classList.add('sel');
-  const btn=document.getElementById('btnNext');
-  if(btn) btn.disabled=false;
-}
-function goNext(){
-  if(S.cur<STEPS.length-1){S.cur++;render();}
-  else{S.cur=STEPS.length;render();}
-}
-function goBack(){
-  if(S.cur>0){S.cur--;render();}
-}
+    /* ═══════════════════════════════════════════════
+       INTERACTIONS
+    ═══════════════════════════════════════════════ */
+    function pickOpt(field, val, el) {
+      S[field] = val;
+      document.querySelectorAll('#toolBody .opt-btn').forEach(b => b.classList.remove('sel'));
+      el.classList.add('sel');
+      const btn = document.getElementById('btnNext');
+      if (btn) btn.disabled = false;
+      if (['type', 'condition', 'floor'].includes(field)) setTimeout(goNext, 300);
+    }
+    function pickSimple(field, val) {
+      S[field] = val;
+      document.querySelectorAll('#toolBody .opt-simple').forEach(b => b.classList.remove('sel'));
+      event.currentTarget.classList.add('sel');
+      const btn = document.getElementById('btnNext');
+      if (btn) btn.disabled = false;
+      setTimeout(goNext, 300);
+    }
+    function pickBzk(num) {
+      S.bezirk = num;
+      document.querySelectorAll('#toolBody .bzk-btn').forEach(b => b.classList.remove('sel'));
+      event.currentTarget.classList.add('sel');
+      const btn = document.getElementById('btnNext');
+      if (btn) btn.disabled = false;
+    }
+    function goNext() {
+      if (S.cur < STEPS.length - 1) { S.cur++; render(); }
+      else { S.cur = STEPS.length; render(); }
+    }
+    function goBack() {
+      if (S.cur > 0) { S.cur--; render(); }
+    }
 
-/* ═══════════════════════════════════════════════
-   CALCULATION
-═══════════════════════════════════════════════ */
-function calc(){
-  const bz=bezirke.find(b=>b.num===S.bezirk)||bezirke[7];
-  const mid=bz.p*(typeM[S.type]||1)*(condM[S.condition]||1)*(floorM[S.floor]||1)*S.flaeche;
-  const low=Math.round(mid*.93/10000)*10000;
-  const high=Math.round(mid*1.10/10000)*10000;
-  const potL=Math.round(low*.05/1000)*1000;
-  const potH=Math.round(low*.13/1000)*1000;
-  const m2=Math.round((low+high)/2/S.flaeche/100)*100;
-  return{low,high,potL,potH,m2,bz};
-}
-function fmt(n){return'€'+n.toLocaleString('de-AT');}
+    /* ═══════════════════════════════════════════════
+       CALCULATION
+    ═══════════════════════════════════════════════ */
+    function calc() {
+      const bz = bezirke.find(b => b.num === S.bezirk) || bezirke[7];
+      const mid = bz.p * (typeM[S.type] || 1) * (condM[S.condition] || 1) * (floorM[S.floor] || 1) * S.flaeche;
+      const low = Math.round(mid * .93 / 10000) * 10000;
+      const high = Math.round(mid * 1.10 / 10000) * 10000;
+      const potL = Math.round(low * .05 / 1000) * 1000;
+      const potH = Math.round(low * .13 / 1000) * 1000;
+      const m2 = Math.round((low + high) / 2 / S.flaeche / 100) * 100;
+      return { low, high, potL, potH, m2, bz };
+    }
+    function fmt(n) { return '€' + n.toLocaleString('de-AT'); }
 
-/* ═══════════════════════════════════════════════
-   RESULT SCREEN
-═══════════════════════════════════════════════ */
-function buildResult(){
-  const r=calc();
-  const tLbl={wohnung:'Wohnung',haus:'Haus',villa:'Villa',gewerbe:'Gewerbe'};
-  return `
+    /* ═══════════════════════════════════════════════
+       RESULT SCREEN
+    ═══════════════════════════════════════════════ */
+    function buildResult() {
+      const r = calc();
+      const tLbl = { wohnung: 'Wohnung', haus: 'Haus', villa: 'Villa', gewerbe: 'Gewerbe' };
+      return `
     <div class="step-wrap" style="padding:0;margin:-40px;">
 
       <div class="result-header">
         <div class="r-eyebrow">Deine Sofortbewertung</div>
-        <div class="r-address">${tLbl[S.type]||'Immobilie'} · ${r.bz.num} ${r.bz.name} · ${S.flaeche} m²</div>
+        <div class="r-address">${tLbl[S.type] || 'Immobilie'} · ${r.bz.num} ${r.bz.name} · ${S.flaeche} m²</div>
         <div class="r-range-lbl">Geschätzter Marktwert</div>
         <div class="r-range">${fmt(r.low)} – ${fmt(r.high)}</div>
         <div class="r-range-bar"><div class="r-range-fill" id="rBar"></div></div>
@@ -1030,66 +2627,105 @@ function buildResult(){
       </div>
 
     </div>`;
-}
+    }
 
-/* ═══════════════════════════════════════════════
-   MODAL
-═══════════════════════════════════════════════ */
-function openModal(){
-  document.getElementById('overlay').classList.add('on');
-  document.body.style.overflow='hidden';
-}
-function closeModal(){
-  document.getElementById('overlay').classList.remove('on');
-  document.body.style.overflow='';
-}
-function submitModal(){
-  const name=document.getElementById('mName').value.trim();
-  const email=document.getElementById('mEmail').value.trim();
-  const phone=document.getElementById('mPhone').value.trim();
-  if(!name||!email){document.getElementById('mEmail').focus();return;}
-  submitLead({name, email, phone, ...S});
-}
+    /* ═══════════════════════════════════════════════
+       MODAL
+    ═══════════════════════════════════════════════ */
+    function openModal() {
+      document.getElementById('overlay').classList.add('on');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('overlay').classList.remove('on');
+      document.body.style.overflow = '';
+    }
+    function submitModal() {
+      const name = document.getElementById('mName').value.trim();
+      const email = document.getElementById('mEmail').value.trim();
+      const phone = document.getElementById('mPhone').value.trim();
+      if (!name || !email) { document.getElementById('mEmail').focus(); return; }
+      submitLead({ name, email, phone, ...S });
+    }
 
-// ── submitLead: Platzhalter – später an Supabase / API anbinden ──
-function submitLead(leadData){
-  console.log('Lead:', leadData); // später: fetch('/api/lead', { method:'POST', body: JSON.stringify(leadData) })
-  document.getElementById('modalContent').innerHTML=`
-    <div style="text-align:center;padding:20px 0;">
-      <div style="font-size:3rem;margin-bottom:16px;">✅</div>
-      <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--g900);margin-bottom:8px;">Anfrage erhalten!</div>
-      <p style="font-size:.88rem;color:var(--g500);line-height:1.65;">Danke, ${leadData.name}.<br><br>Ein geprüfter Immobilienexperte meldet sich innerhalb von 24 Stunden, um zu prüfen wie viel du durch einen optimierten Verkauf mehr herausholen kannst.</p>
-    </div>`;
-}
-document.getElementById('overlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+    // ── Supabase Konfiguration ── HIER DEINE WERTE EINTRAGEN ──
+    const SUPABASE_URL = 'https://gxpzbhwgnsczikggdqvz.supabase.co';       // z.B. https://gxpzbhwg...supabase.co
+    const SUPABASE_KEY = 'sb_publishable_Ef3Rz4GQgYTyMoEBJ-hNLA_gv3KVySw';      // z.B. sb_publishable_Ef3Rz...
 
-/* ═══════════════════════════════════════════════
-   UTILS
-═══════════════════════════════════════════════ */
-function scrollToTool(){
-  document.getElementById('tool-section').scrollIntoView({behavior:'smooth',block:'start'});
-}
-function resetTool(){
-  S.cur=0;S.type=null;S.bezirk=null;S.flaeche=80;S.zimmer=null;S.condition=null;S.floor=null;
-  render();
-  scrollToTool();
-}
+    async function submitLead(leadData) {
+      // Ladeanimation zeigen
+      document.querySelector('.m-submit').textContent = 'Wird gesendet...';
+      document.querySelector('.m-submit').disabled = true;
 
-/* ═══════════════════════════════════════════════
-   SCROLL REVEAL
-═══════════════════════════════════════════════ */
-const revealObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){e.target.classList.add('vis');revealObs.unobserve(e.target);}
-  });
-},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
-document.querySelectorAll('.steps-grid,.rf-grid').forEach(g=>{
-  g.querySelectorAll('.reveal').forEach((c,i)=>c.style.transitionDelay=`${i*.1}s`);
-});
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            name: leadData.name,
+            email: leadData.email,
+            phone: leadData.phone,
+            type: leadData.type,
+            bezirk: leadData.bezirk,
+            flaeche: leadData.flaeche,
+            zimmer: leadData.zimmer,
+            condition: leadData.condition
+          })
+        });
 
-/* INIT */
-render();
-</script>
+        if (!res.ok) throw new Error('Fehler beim Speichern');
+
+        // Erfolgsmeldung
+        document.getElementById('modalContent').innerHTML = `
+      <div style="text-align:center;padding:20px 0;">
+        <div style="font-size:3rem;margin-bottom:16px;">✅</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--g900);margin-bottom:8px;">Anfrage erhalten!</div>
+        <p style="font-size:.88rem;color:var(--g500);line-height:1.65;">Danke, ${leadData.name}.<br><br>Ein geprüfter Immobilienexperte meldet sich innerhalb von 24 Stunden, um zu prüfen wie viel du durch einen optimierten Verkauf mehr herausholen kannst.</p>
+      </div>`;
+
+      } catch (err) {
+        // Fehlermeldung
+        document.querySelector('.m-submit').textContent = 'Prüfen, ob ich unter Wert verkaufe →';
+        document.querySelector('.m-submit').disabled = false;
+        alert('Etwas ist schiefgelaufen. Bitte versuche es nochmal.');
+        console.error(err);
+      }
+    }
+    document.getElementById('overlay').addEventListener('click', function (e) { if (e.target === this) closeModal(); });
+
+    /* ═══════════════════════════════════════════════
+       UTILS
+    ═══════════════════════════════════════════════ */
+    function scrollToTool() {
+      document.getElementById('tool-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    function resetTool() {
+      S.cur = 0; S.type = null; S.bezirk = null; S.flaeche = 80; S.zimmer = null; S.condition = null; S.floor = null;
+      render();
+      scrollToTool();
+    }
+
+    /* ═══════════════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════════════ */
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('vis'); revealObs.unobserve(e.target); }
+      });
+    }, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+    document.querySelectorAll('.steps-grid,.rf-grid').forEach(g => {
+      g.querySelectorAll('.reveal').forEach((c, i) => c.style.transitionDelay = `${i * .1}s`);
+    });
+
+    /* INIT */
+    render();
+  </script>
 </body>
+
 </html>
