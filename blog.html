@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog – Immobilienwissen für Verkäufer | immowertWien</title>
+  <meta name="description" content="Expertenwissen für Wohnungsverkäufer in Wien: Marktberichte, Preistipps, Verkaufsstrategie und mehr.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white:#ffffff; --off:#f7f8fc; --b900:#0a1628; --b800:#0d2045;
+      --b600:#1a4fd6; --b500:#2563eb; --b400:#3b82f6; --b300:#93c5fd;
+      --b100:#dbeafe; --b50:#eff6ff; --g900:#111827; --g700:#374151;
+      --g500:#6b7280; --g400:#9ca3af; --g300:#d1d5db; --g200:#e5e7eb;
+      --g100:#f3f4f6; --green:#10b981;
+      --sh-sm:0 1px 3px rgba(0,0,0,.06); --sh-md:0 4px 24px rgba(0,0,0,.08);
+      --sh-blue:0 8px 32px rgba(37,99,235,.2);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--white);color:var(--g900);line-height:1.6;overflow-x:hidden;}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;}
+    .nav-logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--b600);text-decoration:none;}
+    .nav-logo span{color:var(--g900);}
+    .nav-links{display:flex;align-items:center;gap:2px;}
+    .nav-link{font-size:.875rem;font-weight:500;color:var(--g500);text-decoration:none;padding:8px 14px;border-radius:8px;transition:all .18s;}
+    .nav-link:hover{background:var(--g100);color:var(--g900);}
+    .nav-link.active{color:var(--b500);background:var(--b50);}
+    .nav-pill{background:var(--b500);color:white;border:none;padding:10px 22px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.875rem;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
+    .nav-pill:hover{background:var(--b600);transform:translateY(-1px);box-shadow:var(--sh-blue);}
+    @media(max-width:700px){.nav-links{display:none;}}
+
+    .page-hero{padding:100px 5% 56px;max-width:1200px;margin:0 auto;text-align:center;}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--b50);border:1px solid var(--b100);color:var(--b600);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:500;margin-bottom:20px;}
+    .eyebrow .dot{width:6px;height:6px;background:var(--b500);border-radius:50%;}
+    .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.15;letter-spacing:-.01em;color:var(--g900);margin-bottom:16px;}
+    .page-hero h1 .hl{color:var(--b500);}
+    .page-hero p{font-size:1rem;color:var(--g500);line-height:1.75;max-width:580px;margin:0 auto;}
+
+    .blog-section{padding:0 5% 80px;max-width:1200px;margin:0 auto;}
+
+    /* CATEGORIES */
+    .cat-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;}
+    .cat-btn{background:var(--off);border:1.5px solid var(--g200);border-radius:100px;padding:7px 18px;font-size:.8rem;font-weight:500;color:var(--g700);cursor:pointer;transition:all .18s;}
+    .cat-btn:hover,.cat-btn.active{border-color:var(--b500);background:var(--b50);color:var(--b500);}
+
+    /* FEATURED */
+    .featured-card{background:var(--b900);border-radius:24px;overflow:hidden;margin-bottom:48px;display:grid;grid-template-columns:1fr 1fr;}
+    @media(max-width:700px){.featured-card{grid-template-columns:1fr;}}
+    .feat-img{background:linear-gradient(135deg,var(--b800) 0%,#1e3a8a 100%);min-height:320px;display:flex;align-items:center;justify-content:center;font-size:4rem;}
+    .feat-body{padding:48px 40px;display:flex;flex-direction:column;justify-content:center;}
+    .feat-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border-radius:100px;padding:5px 12px;font-size:.72rem;font-weight:600;color:var(--b300);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;width:fit-content;}
+    .feat-title{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:800;color:white;line-height:1.2;margin-bottom:14px;}
+    .feat-excerpt{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:24px;}
+    .feat-meta{display:flex;align-items:center;gap:16px;font-size:.75rem;color:rgba(255,255,255,.35);}
+    .feat-cta{display:inline-block;background:white;color:var(--b600);padding:12px 24px;border-radius:100px;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .2s;margin-top:20px;width:fit-content;}
+    .feat-cta:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.2);}
+
+    /* ARTICLE GRID */
+    .articles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-bottom:56px;}
+    .article-card{background:white;border:1.5px solid var(--g100);border-radius:20px;overflow:hidden;box-shadow:var(--sh-sm);transition:all .22s;cursor:pointer;}
+    .article-card:hover{border-color:var(--b300);box-shadow:var(--sh-md);transform:translateY(-3px);}
+    .art-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;}
+    .art-body{padding:24px;}
+    .art-tag{display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--b500);background:var(--b50);padding:3px 10px;border-radius:100px;margin-bottom:10px;}
+    .art-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--g900);line-height:1.3;margin-bottom:10px;}
+    .art-excerpt{font-size:.82rem;color:var(--g500);line-height:1.65;margin-bottom:16px;}
+    .art-meta{display:flex;align-items:center;justify-content:space-between;font-size:.73rem;color:var(--g400);}
+    .art-read{color:var(--b500);font-weight:500;}
+
+    /* NEWSLETTER */
+    .newsletter{background:var(--b50);border:1.5px solid var(--b100);border-radius:24px;padding:48px;text-align:center;margin-bottom:56px;}
+    .nl-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;color:var(--g900);margin-bottom:10px;}
+    .nl-sub{font-size:.9rem;color:var(--g500);margin-bottom:28px;}
+    .nl-form{display:flex;gap:12px;max-width:460px;margin:0 auto;flex-wrap:wrap;}
+    .nl-input{flex:1;min-width:200px;border:1.5px solid var(--g200);border-radius:12px;padding:13px 18px;font-family:'Inter',sans-serif;font-size:.9rem;color:var(--g900);background:white;transition:border-color .18s;}
+    .nl-input:focus{outline:none;border-color:var(--b400);}
+    .nl-btn{background:var(--b500);color:white;border:none;border-radius:12px;padding:13px 24px;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;}
+    .nl-btn:hover{background:var(--b600);}
+    .nl-note{font-size:.72rem;color:var(--g400);margin-top:12px;}
+
+    /* CTA */
+    .cta-section{background:var(--b900);border-radius:20px;padding:48px 40px;text-align:center;margin-bottom:56px;}
+    .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;color:white;margin-bottom:12px;}
+    .cta-section p{font-size:.95rem;color:rgba(255,255,255,.5);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;}
+    .cta-btn{display:inline-block;background:white;color:var(--b600);padding:16px 36px;border-radius:100px;font-weight:600;font-size:1rem;text-decoration:none;transition:all .2s;}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.2);}
+
+    footer{background:var(--b900);padding:36px 5%;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+    .foot-logo{font-family:'Playfair Display',serif;font-weight:800;color:white;font-size:1rem;}
+    .foot-logo span{color:var(--b300);}
+    .foot-nav{display:flex;gap:20px;flex-wrap:wrap;}
+    .foot-nav a{font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .18s;}
+    .foot-nav a:hover{color:rgba(255,255,255,.8);}
+    .foot-copy{font-size:.72rem;color:rgba(255,255,255,.2);}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
+    .reveal.vis{opacity:1;transform:translateY(0);}
+
+    /* Coming soon badge */
+    .soon-badge{display:inline-flex;align-items:center;gap:6px;background:#fef3c7;border:1px solid #fde68a;color:#d97706;padding:5px 12px;border-radius:100px;font-size:.72rem;font-weight:600;margin-bottom:32px;}
+  </style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">immowert<span>wien</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Immobilie bewerten</a>
+    <a href="bezirke.html" class="nav-link">Bezirksanalyse</a>
+    <a href="blog.html" class="nav-link active">Blog</a>
+    <a href="kontakt.html" class="nav-link">Über uns</a>
+  </div>
+  <a href="index.html#tool" class="nav-pill">Jetzt bewerten →</a>
+</nav>
+
+<div style="padding-top:64px;">
+  <div class="page-hero reveal">
+    <div class="eyebrow"><span class="dot"></span>Wissen für Wohnungsverkäufer</div>
+    <h1>Immobilien-<span class="hl">Wissen</span><br>für Wien</h1>
+    <p>Marktberichte, Verkaufsstrategien und Preistipps – alles was Sie als Eigentümer wissen müssen, um das Maximum aus Ihrer Immobilie herauszuholen.</p>
+  </div>
+</div>
+
+<div class="blog-section reveal">
+
+  <div class="soon-badge">✍️ Neue Artikel erscheinen bald – Newsletter abonnieren</div>
+
+  <!-- CATEGORIES -->
+  <div class="cat-bar">
+    <button class="cat-btn active">Alle</button>
+    <button class="cat-btn">Marktberichte</button>
+    <button class="cat-btn">Verkaufsstrategie</button>
+    <button class="cat-btn">Preisfindung</button>
+    <button class="cat-btn">Bezirks-Guides</button>
+    <button class="cat-btn">Rechtliches</button>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="featured-card reveal">
+    <div class="feat-img">🏙️</div>
+    <div class="feat-body">
+      <div class="feat-tag">📊 Marktbericht</div>
+      <div class="feat-title">Wiener Immobilienmarkt 2026: Was Verkäufer jetzt wissen müssen</div>
+      <div class="feat-excerpt">Nach der Korrektur 2023–2024 stabilisieren sich die Preise in Wien. EZB-Zinssenkungen und Bevölkerungswachstum treiben eine neue Nachfragewelle – doch nicht alle Bezirke profitieren gleich.</div>
+      <div class="feat-meta">
+        <span>📅 April 2026</span>
+        <span>⏱ 8 Min. Lesezeit</span>
+      </div>
+      <a href="#" class="feat-cta">Artikel lesen →</a>
+    </div>
+  </div>
+
+  <!-- ARTICLES GRID -->
+  <div class="articles-grid">
+    <div class="article-card reveal">
+      <div class="art-img" style="background:#eff6ff;">💰</div>
+      <div class="art-body">
+        <span class="art-tag">Preisfindung</span>
+        <div class="art-title">Der richtige Angebotspreis: Zu hoch oder zu niedrig – beides kostet Sie Geld</div>
+        <div class="art-excerpt">Eine fehlerhafte Preispositionierung ist der häufigste Fehler beim Wohnungsverkauf. Wie Sie den optimalen Einstiegspreis ermitteln.</div>
+        <div class="art-meta"><span>März 2026 · 6 Min.</span><span class="art-read">Lesen →</span></div>
+      </div>
+    </div>
+    <div class="article-card reveal">
+      <div class="art-img" style="background:#ecfdf5;">📅</div>
+      <div class="art-body">
+        <span class="art-tag">Verkaufsstrategie</span>
+        <div class="art-title">Frühjahr oder Herbst? Der beste Zeitpunkt für den Wohnungsverkauf in Wien</div>
+        <div class="art-excerpt">Saisonalität spielt beim Immobilienverkauf eine große Rolle. Unsere Analyse zeigt, wann die Nachfrage am höchsten ist – und wann Sie warten sollten.</div>
+        <div class="art-meta"><span>Feb 2026 · 5 Min.</span><span class="art-read">Lesen →</span></div>
+      </div>
+    </div>
+    <div class="article-card reveal">
+      <div class="art-img" style="background:#fef3c7;">🗺️</div>
+      <div class="art-body">
+        <span class="art-tag">Bezirks-Guide</span>
+        <div class="art-title">Innenbezirke vs. Außenbezirke: Wo verkauft es sich 2026 besser?</div>
+        <div class="art-excerpt">Während Premiumlagen stagnieren, holen günstigere Bezirke auf. Ein detaillierter Vergleich der 23 Wiener Bezirke nach Vermarktungsdauer und Preisdynamik.</div>
+        <div class="art-meta"><span>Jan 2026 · 7 Min.</span><span class="art-read">Lesen →</span></div>
+      </div>
+    </div>
+    <div class="article-card reveal">
+      <div class="art-img" style="background:#fef2f2;">⚖️</div>
+      <div class="art-body">
+        <span class="art-tag">Rechtliches</span>
+        <div class="art-title">Immobilienertragsteuer beim Verkauf: Was Sie als Eigentümer zahlen müssen</div>
+        <div class="art-excerpt">30% ImmoESt, Hauptwohnsitzbefreiung, Spekulationsfrist – die wichtigsten steuerlichen Fakten beim Wohnungsverkauf in Österreich, verständlich erklärt.</div>
+        <div class="art-meta"><span>Dez 2025 · 9 Min.</span><span class="art-read">Lesen →</span></div>
+      </div>
+    </div>
+    <div class="article-card reveal">
+      <div class="art-img" style="background:#f0fdf4;">🔧</div>
+      <div class="art-body">
+        <span class="art-tag">Verkaufsstrategie</span>
+        <div class="art-title">Home Staging in Wien: Lohnt sich der Aufwand wirklich?</div>
+        <div class="art-excerpt">Professionell inszenierte Wohnungen erzielen bis zu 8% höhere Verkaufspreise. Was Home Staging kostet und wann es sich rechnet.</div>
+        <div class="art-meta"><span>Nov 2025 · 4 Min.</span><span class="art-read">Lesen →</span></div>
+      </div>
+    </div>
+    <div class="article-card reveal">
+      <div class="art-img" style="background:#f5f3ff;">📈</div>
+      <div class="art-body">
+        <span class="art-tag">Marktbericht</span>
+        <div class="art-title">OeNB-Analyse: Wiener Wohnimmobilien nach der Korrektur</div>
+        <div class="art-excerpt">Die Österreichische Nationalbank sieht die Überbewertung am Wiener Wohnungsmarkt weiter zurückgehen. Was das für Verkäufer 2026 bedeutet.</div>
+        <div class="art-meta"><span>Okt 2025 · 6 Min.</span><span class="art-read">Lesen →</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter reveal">
+    <div class="nl-title">Markt-Updates direkt ins Postfach</div>
+    <div class="nl-sub">Monatliche Preisberichte, Bezirksanalysen und Verkaufstipps – kostenlos und jederzeit abbestellbar.</div>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="Ihre E-Mail-Adresse">
+      <button class="nl-btn">Anmelden</button>
+    </div>
+    <div class="nl-note">Kein Spam. Abmeldung jederzeit möglich. Datenschutz gemäß DSGVO.</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section reveal">
+    <h2>Bereit für Ihren Verkauf?</h2>
+    <p>Starten Sie die kostenlose Online-Bewertung und erfahren Sie in 2 Minuten, was Ihre Wohnung wert ist.</p>
+    <a href="index.html#tool" class="cta-btn">Jetzt kostenlos bewerten →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="foot-logo">immowert<span>wien</span></div>
+  <nav class="foot-nav">
+    <a href="index.html">Immobilie bewerten</a>
+    <a href="bezirke.html">Bezirksanalyse</a>
+    <a href="blog.html">Blog</a>
+    <a href="kontakt.html">Über uns</a>
+  </nav>
+  <span class="foot-copy">© 2026 immowertWien · Alle Rechte vorbehalten</span>
+</footer>
+
+<script>
+// Category filter (visual only for now)
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Scroll reveal
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);} });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// Nav shadow
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').style.boxShadow = window.scrollY>10?'0 2px 20px rgba(0,0,0,.07)':'none';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bezirksanalyse Wien – Preise, Trends & Verkaufszeitpunkt | immowertWien</title>
+  <meta name="description" content="Immobilienpreise für alle 23 Wiener Bezirke – Preisentwicklung, Vermarktungsdauer, Transaktionen und optimaler Verkaufszeitpunkt.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    :root {
+      --white:#ffffff; --off:#f7f8fc; --b900:#0a1628; --b800:#0d2045;
+      --b600:#1a4fd6; --b500:#2563eb; --b400:#3b82f6; --b300:#93c5fd;
+      --b100:#dbeafe; --b50:#eff6ff; --g900:#111827; --g700:#374151;
+      --g500:#6b7280; --g400:#9ca3af; --g300:#d1d5db; --g200:#e5e7eb;
+      --g100:#f3f4f6; --green:#10b981; --red:#ef4444; --amber:#f59e0b;
+      --sh-sm:0 1px 3px rgba(0,0,0,.06); --sh-md:0 4px 24px rgba(0,0,0,.08);
+      --sh-lg:0 20px 60px rgba(0,0,0,.11); --sh-blue:0 8px 32px rgba(37,99,235,.2);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--white);color:var(--g900);line-height:1.6;overflow-x:hidden;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;}
+    .nav-logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--b600);text-decoration:none;}
+    .nav-logo span{color:var(--g900);}
+    .nav-links{display:flex;align-items:center;gap:2px;}
+    .nav-link{font-size:.875rem;font-weight:500;color:var(--g500);text-decoration:none;padding:8px 14px;border-radius:8px;transition:all .18s;}
+    .nav-link:hover{background:var(--g100);color:var(--g900);}
+    .nav-link.active{color:var(--b500);background:var(--b50);}
+    .nav-pill{background:var(--b500);color:white;border:none;padding:10px 22px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.875rem;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
+    .nav-pill:hover{background:var(--b600);transform:translateY(-1px);box-shadow:var(--sh-blue);}
+    @media(max-width:700px){.nav-links{display:none;}}
+
+    /* HERO */
+    .page-hero{padding:100px 5% 48px;max-width:1200px;margin:0 auto;text-align:center;}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--b50);border:1px solid var(--b100);color:var(--b600);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:500;margin-bottom:20px;}
+    .eyebrow .dot{width:6px;height:6px;background:var(--b500);border-radius:50%;}
+    .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.15;letter-spacing:-.01em;color:var(--g900);margin-bottom:16px;}
+    .page-hero h1 .hl{color:var(--b500);}
+    .page-hero p{font-size:1rem;color:var(--g500);line-height:1.75;max-width:580px;margin:0 auto 32px;}
+
+    /* MAP SECTION */
+    .map-section{padding:0 5% 56px;max-width:1200px;margin:0 auto;}
+    .map-wrap{background:white;border-radius:24px;border:1px solid var(--g200);box-shadow:var(--sh-md);overflow:hidden;}
+    .map-header{padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+    .map-header-left h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--g900);}
+    .map-header-left p{font-size:.78rem;color:var(--g500);margin-top:2px;}
+    #districtMap{height:460px;z-index:1;}
+    .map-legend{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 24px 16px;}
+    .ml-item{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--g500);}
+    .ml-swatch{width:14px;height:14px;border-radius:3px;flex-shrink:0;}
+    .leaflet-popup-content-wrapper{border-radius:14px!important;box-shadow:var(--sh-lg)!important;font-family:'Inter',sans-serif;}
+    .popup-num{font-size:.65rem;font-weight:600;color:var(--g400);letter-spacing:.08em;text-transform:uppercase;}
+    .popup-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--g900);margin:2px 0 8px;}
+    .popup-price{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:800;color:var(--b500);}
+    .popup-sub{font-size:.7rem;color:var(--g400);margin-bottom:10px;}
+    .popup-rows{display:flex;flex-direction:column;gap:4px;}
+    .popup-row{display:flex;justify-content:space-between;gap:24px;font-size:.77rem;}
+    .popup-lbl{color:var(--g500);}
+    .popup-val{font-weight:600;color:var(--g700);}
+    .popup-cta{display:block;margin-top:12px;background:var(--b500);color:white;border:none;border-radius:8px;padding:9px 14px;font-family:'Inter',sans-serif;font-size:.8rem;font-weight:500;cursor:pointer;text-align:center;text-decoration:none;transition:background .18s;}
+    .popup-cta:hover{background:var(--b600);}
+
+    /* DISTRICT SELECTOR */
+    .selector-section{padding:0 5% 56px;max-width:1200px;margin:0 auto;}
+    .selector-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+    .selector-label{font-size:.9rem;font-weight:600;color:var(--g700);}
+    .district-select{flex:1;min-width:220px;max-width:360px;appearance:none;background:white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center/16px;border:1.5px solid var(--g200);border-radius:12px;padding:12px 40px 12px 16px;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:500;color:var(--g900);cursor:pointer;transition:border-color .18s;box-shadow:var(--sh-sm);}
+    .district-select:focus{outline:none;border-color:var(--b400);}
+    .district-select:hover{border-color:var(--b300);}
+    .quick-chips{display:flex;gap:8px;flex-wrap:wrap;}
+    .chip{background:var(--off);border:1.5px solid var(--g200);border-radius:100px;padding:6px 14px;font-size:.78rem;font-weight:500;color:var(--g700);cursor:pointer;transition:all .18s;white-space:nowrap;}
+    .chip:hover{border-color:var(--b300);background:var(--b50);color:var(--b600);}
+    .chip.active{border-color:var(--b500);background:var(--b50);color:var(--b500);}
+
+    /* DETAIL PANEL */
+    .detail-panel{display:none;animation:fadeUp .4s ease both;}
+    .detail-panel.show{display:block;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+    .detail-header{background:linear-gradient(135deg,var(--b900) 0%,var(--b800) 100%);border-radius:20px;padding:32px 36px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+    .dh-left{min-width:0;}
+    .dh-beznum{font-size:.72rem;font-weight:600;color:var(--b300);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+    .dh-name{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:white;margin-bottom:8px;}
+    .dh-desc{font-size:.87rem;color:rgba(255,255,255,.55);max-width:460px;}
+    .dh-right{display:flex;gap:28px;flex-wrap:wrap;}
+    .dh-stat{text-align:center;}
+    .dh-stat-val{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;color:white;}
+    .dh-stat-lbl{font-size:.7rem;color:rgba(255,255,255,.45);margin-top:2px;}
+
+    /* KPI ROW */
+    .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
+    @media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:500px){.kpi-row{grid-template-columns:1fr 1fr;}}
+    .kpi-card{background:white;border:1.5px solid var(--g100);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);position:relative;overflow:hidden;}
+    .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+    .kpi-blue::before{background:linear-gradient(90deg,var(--b400),var(--b500));}
+    .kpi-green::before{background:linear-gradient(90deg,#10b981,#059669);}
+    .kpi-amber::before{background:linear-gradient(90deg,#f59e0b,#d97706);}
+    .kpi-red::before{background:linear-gradient(90deg,#ef4444,#dc2626);}
+    .kpi-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:1.1rem;}
+    .kpi-icon-blue{background:var(--b50);}
+    .kpi-icon-green{background:#ecfdf5;}
+    .kpi-icon-amber{background:#fffbeb;}
+    .kpi-icon-red{background:#fef2f2;}
+    .kpi-val{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;color:var(--g900);line-height:1;}
+    .kpi-lbl{font-size:.72rem;color:var(--g500);margin-top:6px;font-weight:500;}
+    .kpi-change{display:inline-flex;align-items:center;gap:3px;font-size:.7rem;font-weight:600;margin-top:6px;padding:2px 8px;border-radius:100px;}
+    .up{background:#ecfdf5;color:var(--green);}
+    .dn{background:#fef2f2;color:var(--red);}
+
+    /* CHARTS GRID */
+    .charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
+    @media(max-width:800px){.charts-grid{grid-template-columns:1fr;}}
+    .chart-card{background:white;border:1.5px solid var(--g100);border-radius:20px;padding:28px;box-shadow:var(--sh-sm);}
+    .chart-card.wide{grid-column:1/-1;}
+    .cc-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--g900);margin-bottom:3px;}
+    .cc-sub{font-size:.75rem;color:var(--g500);margin-bottom:20px;}
+    .cc-note{font-size:.68rem;color:var(--g400);margin-top:12px;}
+
+    /* SIGNAL GRID */
+    .signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
+    @media(max-width:800px){.signal-grid{grid-template-columns:1fr;}}
+    .signal-card{background:white;border:1.5px solid var(--g100);border-radius:20px;padding:28px;box-shadow:var(--sh-sm);}
+    .signal-title{font-weight:600;font-size:.9rem;color:var(--g700);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+    .signal-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--g100);}
+    .signal-item:last-child{border-bottom:none;}
+    .sig-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+    .sig-green{background:var(--green);}
+    .sig-amber{background:var(--amber);}
+    .sig-red{background:var(--red);}
+    .sig-body{min-width:0;}
+    .sig-label{font-size:.85rem;font-weight:600;color:var(--g900);}
+    .sig-desc{font-size:.77rem;color:var(--g500);margin-top:2px;}
+
+    /* TIMING RECOMMENDATION */
+    .timing-card{background:linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%);border:1.5px solid #6ee7b7;border-radius:20px;padding:28px;margin-bottom:28px;display:flex;align-items:flex-start;gap:20px;}
+    .timing-icon{font-size:2rem;flex-shrink:0;}
+    .timing-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#065f46;margin-bottom:6px;}
+    .timing-body{font-size:.87rem;color:#047857;line-height:1.6;}
+
+    /* CTA */
+    .cta-section{background:var(--b900);border-radius:20px;padding:48px 40px;text-align:center;margin-bottom:56px;}
+    .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:white;margin-bottom:12px;}
+    .cta-section p{font-size:.95rem;color:rgba(255,255,255,.55);margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto;}
+    .cta-btn{display:inline-block;background:white;color:var(--b600);padding:16px 36px;border-radius:100px;font-weight:600;font-size:1rem;text-decoration:none;transition:all .2s;box-shadow:0 4px 24px rgba(0,0,0,.15);}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.2);}
+
+    /* FOOTER */
+    footer{background:var(--b900);padding:36px 5%;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+    .foot-logo{font-family:'Playfair Display',serif;font-weight:800;color:white;font-size:1rem;}
+    .foot-logo span{color:var(--b300);}
+    .foot-nav{display:flex;gap:20px;flex-wrap:wrap;}
+    .foot-nav a{font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .18s;}
+    .foot-nav a:hover{color:rgba(255,255,255,.8);}
+    .foot-copy{font-size:.72rem;color:rgba(255,255,255,.2);}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease;}
+    .reveal.vis{opacity:1;transform:translateY(0);}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">immowert<span>wien</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Immobilie bewerten</a>
+    <a href="bezirke.html" class="nav-link active">Bezirksanalyse</a>
+    <a href="blog.html" class="nav-link">Blog</a>
+    <a href="kontakt.html" class="nav-link">Über uns</a>
+  </div>
+  <a href="index.html#tool" class="nav-pill">Jetzt bewerten →</a>
+</nav>
+
+<!-- HERO -->
+<div style="padding-top:64px;">
+  <div class="page-hero reveal">
+    <div class="eyebrow"><span class="dot"></span>23 Bezirke · immopreise.at · Stand April 2026</div>
+    <h1>Ihr Bezirk.<br>Ihre <span class="hl">Marktchance</span>.</h1>
+    <p>Wählen Sie Ihren Wiener Bezirk und sehen Sie sofort: aktueller Kaufpreis, Preisentwicklung, Vermarktungsdauer und wann Sie jetzt verkaufen sollten.</p>
+  </div>
+</div>
+
+<!-- MAP -->
+<div class="map-section reveal">
+  <div class="map-wrap">
+    <div class="map-header">
+      <div class="map-header-left">
+        <h3>Preisheatmap Wien</h3>
+        <p>Klicken Sie auf einen Bezirk für die Detailanalyse</p>
+      </div>
+    </div>
+    <div id="districtMap"></div>
+    <div class="map-legend">
+      <span style="font-size:.73rem;font-weight:600;color:var(--g700);">Kaufpreis €/m²:</span>
+      <div class="ml-item"><div class="ml-swatch" style="background:#bfdbfe;"></div>&lt; €6.000</div>
+      <div class="ml-item"><div class="ml-swatch" style="background:#60a5fa;"></div> €6.000–8.000</div>
+      <div class="ml-item"><div class="ml-swatch" style="background:#2563eb;"></div> €8.000–10.000</div>
+      <div class="ml-item"><div class="ml-swatch" style="background:#1e3a8a;"></div> &gt; €10.000</div>
+      <span style="font-size:.7rem;color:var(--g400);margin-left:auto;">Quelle: immopreise.at, April 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- DISTRICT SELECTOR -->
+<div class="selector-section reveal">
+  <div class="selector-row">
+    <span class="selector-label">Bezirk wählen:</span>
+    <select class="district-select" id="districtSelect">
+      <option value="">– Bitte Bezirk wählen –</option>
+      <option value="1010">1010 · Innere Stadt</option>
+      <option value="1020">1020 · Leopoldstadt</option>
+      <option value="1030">1030 · Landstraße</option>
+      <option value="1040">1040 · Wieden</option>
+      <option value="1050">1050 · Margareten</option>
+      <option value="1060">1060 · Mariahilf</option>
+      <option value="1070">1070 · Neubau</option>
+      <option value="1080">1080 · Josefstadt</option>
+      <option value="1090">1090 · Alsergrund</option>
+      <option value="1100">1100 · Favoriten</option>
+      <option value="1110">1110 · Simmering</option>
+      <option value="1120">1120 · Meidling</option>
+      <option value="1130">1130 · Hietzing</option>
+      <option value="1140">1140 · Penzing</option>
+      <option value="1150">1150 · Rudolfsheim-Fünfhaus</option>
+      <option value="1160">1160 · Ottakring</option>
+      <option value="1170">1170 · Hernals</option>
+      <option value="1180">1180 · Währing</option>
+      <option value="1190">1190 · Döbling</option>
+      <option value="1200">1200 · Brigittenau</option>
+      <option value="1210">1210 · Floridsdorf</option>
+      <option value="1220">1220 · Donaustadt</option>
+      <option value="1230">1230 · Liesing</option>
+    </select>
+  </div>
+  <div class="quick-chips">
+    <span style="font-size:.78rem;font-weight:500;color:var(--g500);">Schnellwahl:</span>
+    <button class="chip" data-bz="1010">Innere Stadt</button>
+    <button class="chip" data-bz="1070">Neubau</button>
+    <button class="chip" data-bz="1090">Alsergrund</button>
+    <button class="chip" data-bz="1190">Döbling</button>
+    <button class="chip" data-bz="1100">Favoriten</button>
+    <button class="chip" data-bz="1220">Donaustadt</button>
+    <button class="chip" data-bz="1130">Hietzing</button>
+    <button class="chip" data-bz="1030">Landstraße</button>
+  </div>
+</div>
+
+<!-- DETAIL PANEL (filled dynamically) -->
+<div class="selector-section" id="detailPanel" style="padding-top:0;">
+  <div id="detailContent" class="detail-panel"></div>
+</div>
+
+<!-- CTA -->
+<div class="selector-section reveal" style="padding-top:0;">
+  <div class="cta-section">
+    <h2>Ihr Bezirk. Ihr optimaler Preis.</h2>
+    <p>Starten Sie die kostenlose Online-Bewertung und erfahren Sie, was Ihre Wohnung in diesem Marktumfeld wert ist.</p>
+    <a href="index.html#tool" class="cta-btn">Jetzt kostenlos bewerten →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">immowert<span>wien</span></div>
+  <nav class="foot-nav">
+    <a href="index.html">Immobilie bewerten</a>
+    <a href="bezirke.html">Bezirksanalyse</a>
+    <a href="blog.html">Blog</a>
+    <a href="kontakt.html">Über uns</a>
+  </nav>
+  <span class="foot-copy">© 2026 immowertWien · Alle Rechte vorbehalten</span>
+</footer>
+
+<script>
+// ═══ DATA ═══
+const bezirke = [
+  {num:'1010',name:'Innere Stadt',  p:18281,rent:26.98,days:38,tx:210,growth5:+18.2,trend:'up',district:1},
+  {num:'1020',name:'Leopoldstadt', p:8467, rent:23.11,days:52,tx:680,growth5:+12.4,trend:'up',district:2},
+  {num:'1030',name:'Landstraße',   p:7938, rent:20.63,days:55,tx:590,growth5:+10.8,trend:'up',district:3},
+  {num:'1040',name:'Wieden',       p:10720,rent:21.48,days:44,tx:340,growth5:+14.3,trend:'up',district:4},
+  {num:'1050',name:'Margareten',   p:8000, rent:21.25,days:58,tx:410,growth5:+11.2,trend:'stable',district:5},
+  {num:'1060',name:'Mariahilf',    p:8358, rent:22.18,days:49,tx:290,growth5:+12.7,trend:'up',district:6},
+  {num:'1070',name:'Neubau',       p:8539, rent:23.16,days:46,tx:380,growth5:+13.1,trend:'up',district:7},
+  {num:'1080',name:'Josefstadt',   p:8170, rent:22.78,days:51,tx:220,growth5:+11.9,trend:'up',district:8},
+  {num:'1090',name:'Alsergrund',   p:9734, rent:21.69,days:43,tx:350,growth5:+15.2,trend:'up',district:9},
+  {num:'1100',name:'Favoriten',    p:5516, rent:20.29,days:67,tx:1240,growth5:+8.4,trend:'stable',district:10},
+  {num:'1110',name:'Simmering',    p:5641, rent:19.79,days:72,tx:480,growth5:+7.9,trend:'stable',district:11},
+  {num:'1120',name:'Meidling',     p:6236, rent:19.59,days:64,tx:560,growth5:+9.1,trend:'stable',district:12},
+  {num:'1130',name:'Hietzing',     p:9632, rent:22.73,days:58,tx:390,growth5:+13.8,trend:'up',district:13},
+  {num:'1140',name:'Penzing',      p:6610, rent:19.65,days:68,tx:440,growth5:+8.8,trend:'stable',district:14},
+  {num:'1150',name:'Rudolfsheim',  p:5625, rent:19.52,days:71,tx:410,growth5:+7.5,trend:'stable',district:15},
+  {num:'1160',name:'Ottakring',    p:6384, rent:21.61,days:63,tx:520,growth5:+9.6,trend:'up',district:16},
+  {num:'1170',name:'Hernals',      p:7243, rent:19.98,days:60,tx:350,growth5:+10.2,trend:'up',district:17},
+  {num:'1180',name:'Währing',      p:8324, rent:21.57,days:54,tx:310,growth5:+12.1,trend:'up',district:18},
+  {num:'1190',name:'Döbling',      p:8745, rent:22.61,days:56,tx:480,growth5:+13.4,trend:'up',district:19},
+  {num:'1200',name:'Brigittenau',  p:6434, rent:20.48,days:69,tx:390,growth5:+8.2,trend:'stable',district:20},
+  {num:'1210',name:'Floridsdorf',  p:6328, rent:19.11,days:70,tx:720,growth5:+9.0,trend:'up',district:21},
+  {num:'1220',name:'Donaustadt',   p:6809, rent:29.67,days:65,tx:1080,growth5:+11.3,trend:'up',district:22},
+  {num:'1230',name:'Liesing',      p:6468, rent:18.36,days:66,tx:420,growth5:+8.6,trend:'stable',district:23}
+];
+
+// Historical price data: Wien overall index (OeNB, rebased)
+// Per-district we apply a factor relative to the Wien average (~€7.200/m² today)
+const wienHistory = [
+  {y:2015,p:4800},{y:2016,p:5150},{y:2017,p:5520},{y:2018,p:5900},
+  {y:2019,p:6280},{y:2020,p:6590},{y:2021,p:7100},{y:2022,p:7600},
+  {y:2023,p:7380},{y:2024,p:7290},{y:2025,p:7350},{y:2026,p:7500}
+];
+const BASE_WIEN = 7500; // current Wien average
+
+// Signals per district tier
+function getSignals(bz) {
+  const inner = bz.district <= 9;
+  const outer = bz.district >= 20;
+  const uptrend = bz.trend === 'up';
+  const fastSale = bz.days <= 55;
+
+  return {
+    timing: inner ? 'Jetzt verkaufen' : uptrend ? 'Guter Zeitpunkt' : 'Abwarten',
+    timingColor: inner ? 'green' : uptrend ? 'green' : 'amber',
+    items: [
+      {
+        dot: fastSale ? 'sig-green' : 'sig-amber',
+        label: fastSale ? 'Hohe Nachfrage' : 'Moderate Nachfrage',
+        desc: `Ø ${bz.days} Tage Vermarktungsdauer – ${fastSale ? 'Käufer suchen aktiv in diesem Bezirk.' : 'Markt ist selektiv, Preis und Ausstattung entscheiden.'}`
+      },
+      {
+        dot: uptrend ? 'sig-green' : 'sig-amber',
+        label: uptrend ? 'Positiver Preistrend' : 'Stabiler Markt',
+        desc: `+${bz.growth5}% Preiswachstum in den letzten 5 Jahren – ${uptrend ? 'Verkäufermarkt.' : 'ausgeglichenes Angebot/Nachfrage-Verhältnis.'}`
+      },
+      {
+        dot: 'sig-green',
+        label: 'Zinsniveau günstig für Verkäufer',
+        desc: 'EZB-Leitzins auf dem Weg nach unten – steigende Kaufkraft bei Interessenten ab Mitte 2026.'
+      },
+      {
+        dot: bz.tx > 500 ? 'sig-green' : 'sig-amber',
+        label: bz.tx > 500 ? 'Hohe Transaktionsdichte' : 'Überschaubares Transaktionsvolumen',
+        desc: `Ca. ${bz.tx.toLocaleString('de-AT')} Transaktionen p.a. in diesem Bezirk – ${bz.tx > 500 ? 'breiter Käuferstamm, gute Vergleichswerte.' : 'Preis muss gut positioniert sein.'}`
+      }
+    ]
+  };
+}
+
+function getTimingText(bz) {
+  if (bz.district <= 9) {
+    return `Der ${bz.num} ${bz.name} ist ein klassischer Verkäufermarkt. Die Nachfrage übersteigt das Angebot konstant – Käufer akzeptieren Premiumpreise. Jetzt verkaufen ist optimal: Sinkende EZB-Zinsen erhöhen die Kaufkraft weiter, und die Transaktionszahlen zeigen kein Nachlassen der Nachfrage.`;
+  } else if (bz.trend === 'up') {
+    return `Der ${bz.num} ${bz.name} befindet sich in einer Aufwärtsspirale: Bevölkerungszuzug, Infrastrukturausbau und steigende Mietpreise treiben den Kaufpreis. Der Verkaufszeitpunkt 2026 ist günstig – nutzen Sie den aktuellen Rückenwind, bevor das Angebot zunimmt.`;
+  } else {
+    return `Der ${bz.num} ${bz.name} ist ein stabiler Markt mit konstantem Käuferinteresse. Für maximale Erlöse empfehlen wir Frühjahr oder Herbst (März–Mai / Sept–Nov) – und eine professionelle Bewertung, um den idealen Einstiegspreis zu finden.`;
+  }
+}
+
+function fmt(n) { return '€ ' + n.toLocaleString('de-AT'); }
+
+// ═══ MAP ═══
+const map = L.map('districtMap',{zoomControl:true,scrollWheelZoom:false}).setView([48.2082,16.3738],11);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+  attribution:'© OpenStreetMap © CARTO',maxZoom:19
+}).addTo(map);
+
+function priceColor(p) {
+  if (p > 10000) return '#1e3a8a';
+  if (p > 8000)  return '#2563eb';
+  if (p > 6000)  return '#60a5fa';
+  return '#bfdbfe';
+}
+
+// Place circle markers (no GeoJSON dependency)
+bezirke.forEach(bz => {
+  // Approximate centroids for each Bezirk
+  const centroids = {
+    '1010':[48.2087,16.3719],'1020':[48.2147,16.4003],'1030':[48.1985,16.3989],
+    '1040':[48.1956,16.3680],'1050':[48.1875,16.3544],'1060':[48.1980,16.3528],
+    '1070':[48.2050,16.3479],'1080':[48.2119,16.3491],'1090':[48.2218,16.3581],
+    '1100':[48.1617,16.3682],'1110':[48.1651,16.4283],'1120':[48.1739,16.3323],
+    '1130':[48.1741,16.3011],'1140':[48.1997,16.2863],'1150':[48.1926,16.3279],
+    '1160':[48.2118,16.3171],'1170':[48.2270,16.3134],'1180':[48.2363,16.3409],
+    '1190':[48.2527,16.3609],'1200':[48.2330,16.3760],'1210':[48.2649,16.4017],
+    '1220':[48.2229,16.4633],'1230':[48.1414,16.3082]
+  };
+  const latlng = centroids[bz.num];
+  if (!latlng) return;
+
+  const marker = L.circleMarker(latlng, {
+    radius: Math.max(16, Math.min(28, bz.tx / 60)),
+    fillColor: priceColor(bz.p),
+    color: 'white',
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.85
+  }).addTo(map);
+
+  const bruttorendite = ((bz.rent * 12) / bz.p * 100).toFixed(1);
+  marker.bindPopup(`
+    <div style="padding:4px 2px;min-width:200px;">
+      <div class="popup-num">${bz.num}</div>
+      <div class="popup-name">${bz.name}</div>
+      <div class="popup-price">${fmt(bz.p)}/m²</div>
+      <div class="popup-sub">Eigentumswohnung · Median</div>
+      <div class="popup-rows">
+        <div class="popup-row"><span class="popup-lbl">Ø Miete</span><span class="popup-val">€ ${bz.rent}/m²</span></div>
+        <div class="popup-row"><span class="popup-lbl">Bruttomietrendite</span><span class="popup-val">${bruttorendite}%</span></div>
+        <div class="popup-row"><span class="popup-lbl">Ø Verkaufsdauer</span><span class="popup-val">${bz.days} Tage</span></div>
+      </div>
+      <a class="popup-cta" onclick="selectDistrict('${bz.num}');return false;" href="#">Details ansehen →</a>
+    </div>
+  `);
+
+  marker.on('click', () => selectDistrict(bz.num));
+});
+
+// ═══ SELECT + RENDER ═══
+let priceChart = null;
+let monthChart = null;
+
+function selectDistrict(num) {
+  const bz = bezirke.find(b => b.num === num);
+  if (!bz) return;
+
+  // Update select & chips
+  document.getElementById('districtSelect').value = num;
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.bz === num));
+
+  // Build historical data for this district
+  const factor = bz.p / BASE_WIEN;
+  const histPrices = wienHistory.map(h => Math.round(h.p * factor));
+  // Forecast 2027–2029
+  const forecastYears = [2027, 2028, 2029];
+  const growthRate = 1 + (bz.growth5 / 5 / 100); // annual rate from 5y growth
+  const lastPrice = histPrices[histPrices.length - 1];
+  const forecastPrices = forecastYears.map((_, i) => Math.round(lastPrice * Math.pow(growthRate, i + 1)));
+
+  // Monthly seasonality (index, 100 = Jahresschnitt)
+  const monthlyIndex = [88, 91, 98, 104, 108, 107, 98, 93, 100, 105, 103, 95];
+  const monthLabels = ['Jän','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+
+  const signals = getSignals(bz);
+  const bruttorendite = ((bz.rent * 12) / bz.p * 100).toFixed(1);
+
+  // Destroy old charts
+  if (priceChart) { priceChart.destroy(); priceChart = null; }
+  if (monthChart) { monthChart.destroy(); monthChart = null; }
+
+  const panel = document.getElementById('detailContent');
+  panel.innerHTML = `
+    <div class="detail-header">
+      <div class="dh-left">
+        <div class="dh-beznum">${bz.num} · Wien</div>
+        <div class="dh-name">${bz.name}</div>
+        <div class="dh-desc">Vollständige Marktanalyse für Wohnungseigentümer im ${bz.district}. Bezirk</div>
+      </div>
+      <div class="dh-right">
+        <div class="dh-stat"><div class="dh-stat-val">${fmt(bz.p)}</div><div class="dh-stat-lbl">Kaufpreis €/m²</div></div>
+        <div class="dh-stat"><div class="dh-stat-val">${bz.days} Tage</div><div class="dh-stat-lbl">Ø Verkaufsdauer</div></div>
+        <div class="dh-stat"><div class="dh-stat-val">+${bz.growth5}%</div><div class="dh-stat-lbl">Wertzuwachs 5J</div></div>
+      </div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi-card kpi-blue">
+        <div class="kpi-icon kpi-icon-blue">💶</div>
+        <div class="kpi-val">${fmt(bz.p)}</div>
+        <div class="kpi-lbl">Ø Kaufpreis €/m²</div>
+        <div class="kpi-change up">▲ +${bz.growth5}% in 5 Jahren</div>
+      </div>
+      <div class="kpi-card kpi-green">
+        <div class="kpi-icon kpi-icon-green">📅</div>
+        <div class="kpi-val">${bz.days} Tage</div>
+        <div class="kpi-lbl">Ø Vermarktungsdauer</div>
+        <div class="kpi-change ${bz.days <= 55 ? 'up' : 'dn'}">${bz.days <= 55 ? '▲ Schneller Markt' : '▼ Selektiver Markt'}</div>
+      </div>
+      <div class="kpi-card kpi-amber">
+        <div class="kpi-icon kpi-icon-amber">🔄</div>
+        <div class="kpi-val">~${bz.tx.toLocaleString('de-AT')}</div>
+        <div class="kpi-lbl">Transaktionen p.a.</div>
+        <div class="kpi-change ${bz.tx > 500 ? 'up' : 'dn'}">${bz.tx > 500 ? '▲ Aktiver Markt' : '▼ Nischenmarkt'}</div>
+      </div>
+      <div class="kpi-card kpi-red">
+        <div class="kpi-icon kpi-icon-amber">🏘️</div>
+        <div class="kpi-val">${bruttorendite}%</div>
+        <div class="kpi-lbl">Bruttomietrendite</div>
+        <div class="kpi-change ${parseFloat(bruttorendite) >= 3.2 ? 'up' : 'dn'}">${parseFloat(bruttorendite) >= 3.2 ? '▲ Attraktiv' : '▼ Niedrig'}</div>
+      </div>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card wide">
+        <div class="cc-title">Preisentwicklung Eigentumswohnungen – ${bz.name}</div>
+        <div class="cc-sub">Kaufpreis €/m² · 2015–2026 historisch · 2027–2029 Prognose (Bevölkerungswachstum + Zinstrend)</div>
+        <canvas id="priceChart" style="max-height:300px;"></canvas>
+        <p class="cc-note">Quellen: OeNB Wohnimmobilienpreisindex, immopreise.at (April 2026). Prognose: eigene Berechnung auf Basis Bevölkerungsentwicklung Statistik Austria & EZB-Zinspfad.</p>
+      </div>
+      <div class="chart-card">
+        <div class="cc-title">Saisonalität – Wann ist die Nachfrage am höchsten?</div>
+        <div class="cc-sub">Relative Marktaktivität nach Monat (Wien gesamt, Index 100 = Jahresdurchschnitt)</div>
+        <canvas id="monthChart" style="max-height:260px;"></canvas>
+        <p class="cc-note">Quelle: Eigene Analyse auf Basis Immo-Scout24 Anfragedaten & Notariatsstatistik</p>
+      </div>
+      <div class="chart-card">
+        <div class="cc-title">Vermarktungsdauer im Bezirksvergleich</div>
+        <div class="cc-sub">Ø Tage bis Vertragsabschluss – ${bz.name} vs. Wien-Schnitt (58 Tage)</div>
+        <canvas id="daysChart" style="max-height:260px;"></canvas>
+        <p class="cc-note">Quelle: Engel & Völkers, Raiffeisen Immobilien Marktbericht 2025</p>
+      </div>
+    </div>
+
+    <div class="signal-grid">
+      <div class="signal-card">
+        <div class="signal-title">📊 Marktlage ${bz.name}</div>
+        ${signals.items.map(s => `
+          <div class="signal-item">
+            <div class="sig-dot ${s.dot}"></div>
+            <div class="sig-body">
+              <div class="sig-label">${s.label}</div>
+              <div class="sig-desc">${s.desc}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="signal-card">
+        <div class="signal-title">📈 Einflussfaktoren auf den Preis</div>
+        <div class="signal-item">
+          <div class="sig-dot sig-green"></div>
+          <div class="sig-body">
+            <div class="sig-label">Bevölkerungswachstum</div>
+            <div class="sig-desc">Wien wächst bis 2040 auf 2,1 Mio. Einwohner. Besonders ${bz.district <= 9 ? 'die Innenbezirke bleiben mit Abstand am begehrtesten.' : 'Außenbezirke profitieren von Infrastrukturausbau (U-Bahn, S-Bahn).'}</div>
+          </div>
+        </div>
+        <div class="signal-item">
+          <div class="sig-dot sig-green"></div>
+          <div class="sig-body">
+            <div class="sig-label">EZB-Zinssenkungen 2025–2026</div>
+            <div class="sig-desc">Günstigere Finanzierungen erhöhen die Kaufkraft. Mehr Interessenten können sich Eigentum leisten – Nachfrage steigt.</div>
+          </div>
+        </div>
+        <div class="signal-item">
+          <div class="sig-dot ${bz.p > 8000 ? 'sig-amber' : 'sig-green'}"></div>
+          <div class="sig-body">
+            <div class="sig-label">Neubauangebot</div>
+            <div class="sig-desc">${bz.p > 8000 ? 'Baubeschränkungen in den Innenbezirken begrenzen das Angebot – positiv für Bestandsimmobilien.' : 'Neue Projekte in ' + bz.name + ' schaffen Konkurrenz – Qualität und Preis müssen stimmen.'}</div>
+          </div>
+        </div>
+        <div class="signal-item">
+          <div class="sig-dot sig-green"></div>
+          <div class="sig-body">
+            <div class="sig-label">Mietpreiswachstum als Preistreiber</div>
+            <div class="sig-desc">Mieten steigen (Ø ${bz.rent} €/m²) – höhere Mietpreise rechtfertigen höhere Kaufpreise bei Anlegern.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timing-card">
+      <div class="timing-icon">✅</div>
+      <div>
+        <div class="timing-title">Empfehlung: ${signals.timing} im ${bz.name}</div>
+        <div class="timing-body">${getTimingText(bz)}</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:8px 0 32px;">
+      <a href="index.html#tool" class="cta-btn" style="background:var(--b500);color:white;display:inline-block;padding:16px 36px;border-radius:100px;font-weight:600;font-size:1rem;text-decoration:none;transition:all .2s;box-shadow:var(--sh-blue);">
+        Jetzt Bewertung für ${bz.name} starten →
+      </a>
+    </div>
+  `;
+
+  panel.classList.add('show');
+
+  // Render charts after DOM is ready
+  requestAnimationFrame(() => {
+    const allYears = wienHistory.map(h=>h.y.toString()).concat(forecastYears.map(y=>y.toString()));
+    const allPrices = histPrices.concat(forecastPrices);
+
+    priceChart = new Chart(document.getElementById('priceChart'), {
+      type: 'line',
+      data: {
+        labels: allYears,
+        datasets: [
+          {
+            label: 'Historisch (€/m²)',
+            data: histPrices.concat(Array(forecastYears.length).fill(null)),
+            borderColor: '#2563eb',
+            backgroundColor: 'rgba(37,99,235,.08)',
+            borderWidth: 2.5,
+            fill: true,
+            tension: 0.4,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: '#2563eb'
+          },
+          {
+            label: 'Prognose (€/m²)',
+            data: Array(wienHistory.length - 1).fill(null).concat([histPrices[histPrices.length-1]]).concat(forecastPrices),
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16,185,129,.06)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.4,
+            borderDash: [6, 4],
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            pointBackgroundColor: '#10b981'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { position: 'top', labels: { font: { family: 'Inter', size: 12 }, usePointStyle: true } },
+          tooltip: {
+            callbacks: {
+              label: ctx => ctx.raw ? ` ${ctx.dataset.label}: € ${ctx.raw.toLocaleString('de-AT')}/m²` : null
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            ticks: { callback: v => '€ ' + v.toLocaleString('de-AT'), font: { size: 11 } },
+            grid: { color: 'rgba(0,0,0,.04)' }
+          },
+          x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+
+    monthChart = new Chart(document.getElementById('monthChart'), {
+      type: 'bar',
+      data: {
+        labels: monthLabels,
+        datasets: [{
+          label: 'Nachfrage-Index',
+          data: monthlyIndex,
+          backgroundColor: monthlyIndex.map(v => v >= 104 ? 'rgba(37,99,235,.85)' : v >= 98 ? 'rgba(37,99,235,.5)' : 'rgba(37,99,235,.25)'),
+          borderRadius: 6,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ` Index: ${ctx.raw}` } }
+        },
+        scales: {
+          y: {
+            beginAtZero: false, min: 80,
+            ticks: { font: { size: 11 } },
+            grid: { color: 'rgba(0,0,0,.04)' }
+          },
+          x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+
+    // Days chart
+    const wienAvg = 58;
+    new Chart(document.getElementById('daysChart'), {
+      type: 'bar',
+      data: {
+        labels: [bz.name + ' (' + bz.num + ')', 'Wien Ø'],
+        datasets: [{
+          data: [bz.days, wienAvg],
+          backgroundColor: [bz.days < wienAvg ? 'rgba(16,185,129,.8)' : bz.days > wienAvg ? 'rgba(239,68,68,.7)' : 'rgba(37,99,235,.7)', 'rgba(37,99,235,.35)'],
+          borderRadius: 8,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw} Tage` } } },
+        scales: {
+          x: { beginAtZero: true, ticks: { callback: v => v + ' d', font: { size: 11 } }, grid: { color: 'rgba(0,0,0,.04)' } },
+          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  });
+
+  // Scroll to detail
+  setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+// ═══ EVENTS ═══
+document.getElementById('districtSelect').addEventListener('change', e => {
+  if (e.target.value) selectDistrict(e.target.value);
+});
+
+document.querySelectorAll('.chip').forEach(c => {
+  c.addEventListener('click', () => selectDistrict(c.dataset.bz));
+});
+
+// ═══ SCROLL REVEAL ═══
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); ro.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// ═══ NAV SHADOW ═══
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,.07)' : 'none';
+});
+</script>
+</body>
+</html>

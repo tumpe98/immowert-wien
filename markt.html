@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiener Immobilienmarkt – Preise, Trends & Daten seit 2000</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <style>
+    /* ═══ TOKENS ═══ */
+    :root {
+      --white: #ffffff; --off: #f7f8fc; --b900: #0a1628; --b800: #0d2045;
+      --b600: #1a4fd6; --b500: #2563eb; --b400: #3b82f6; --b300: #93c5fd;
+      --b100: #dbeafe; --b50: #eff6ff; --g900: #111827; --g700: #374151;
+      --g500: #6b7280; --g400: #9ca3af; --g300: #d1d5db; --g200: #e5e7eb;
+      --g100: #f3f4f6; --green: #10b981; --red: #ef4444; --amber: #f59e0b;
+      --sh-sm: 0 1px 3px rgba(0,0,0,.06); --sh-md: 0 4px 24px rgba(0,0,0,.08);
+      --sh-lg: 0 20px 60px rgba(0,0,0,.11); --sh-blue: 0 8px 32px rgba(37,99,235,.2);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--g900); line-height: 1.6; overflow-x: hidden; }
+
+    /* ═══ NAV ═══ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      padding: 0 5%; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.1rem; color: var(--b600); text-decoration: none; }
+    .nav-logo span { color: var(--g900); }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-link { font-size: .875rem; font-weight: 500; color: var(--g500); text-decoration: none; padding: 8px 14px; border-radius: 8px; transition: all .18s; }
+    .nav-link:hover { background: var(--g100); color: var(--g900); }
+    .nav-link.active { color: var(--b500); background: var(--b50); }
+    .nav-pill { background: var(--b500); color: white; border: none; padding: 10px 22px; border-radius: 100px; font-family: 'Inter', sans-serif; font-size: .875rem; font-weight: 500; cursor: pointer; transition: all .2s; text-decoration: none; display: inline-block; }
+    .nav-pill:hover { background: var(--b600); transform: translateY(-1px); box-shadow: var(--sh-blue); }
+    @media(max-width:700px) { .nav-links { display: none; } }
+
+    /* ═══ PAGE HERO ═══ */
+    .page-hero {
+      padding: 120px 5% 64px;
+      max-width: 1200px; margin: 0 auto;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--b50); border: 1px solid var(--b100);
+      color: var(--b600); padding: 6px 14px; border-radius: 100px;
+      font-size: .8rem; font-weight: 500; margin-bottom: 24px;
+    }
+    .eyebrow .dot { width: 6px; height: 6px; background: var(--b500); border-radius: 50%; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -.01em; color: var(--g900); margin-bottom: 18px; }
+    .page-hero h1 .hl { color: var(--b500); }
+    .page-hero p { font-size: 1.05rem; color: var(--g500); line-height: 1.75; max-width: 600px; margin: 0 auto; }
+
+    /* ═══ STATS STRIP ═══ */
+    .stats-strip { background: var(--b600); padding: 40px 5%; }
+    .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: rgba(255,255,255,.12); border-radius: 20px; overflow: hidden; }
+    .stat-box { background: var(--b600); padding: 28px 24px; text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 800; color: white; margin-bottom: 4px; }
+    .stat-lbl { font-size: .78rem; font-weight: 500; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: .07em; }
+    .stat-delta { display: inline-flex; align-items: center; gap: 4px; font-size: .8rem; font-weight: 500; margin-top: 8px; padding: 3px 10px; border-radius: 100px; }
+    .stat-delta.up { background: rgba(16,185,129,.18); color: #6ee7b7; }
+    .stat-delta.dn { background: rgba(239,68,68,.18); color: #fca5a5; }
+    @media(max-width:700px) { .stats-inner { grid-template-columns: 1fr 1fr; } }
+
+    /* ═══ CONTENT SECTIONS ═══ */
+    .section { padding: 80px 5%; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-alt { background: var(--off); }
+
+    .s-tag { display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--b500); margin-bottom: 12px; }
+    .s-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 800; letter-spacing: -.01em; line-height: 1.15; color: var(--g900); margin-bottom: 12px; }
+    .s-p { font-size: .95rem; color: var(--g500); line-height: 1.75; max-width: 560px; margin-bottom: 40px; }
+    .source-note { font-size: .72rem; color: var(--g400); margin-top: 16px; }
+    .source-note a { color: var(--b500); text-decoration: none; }
+
+    /* ═══ CHART CARD ═══ */
+    .chart-card { background: white; border-radius: 24px; border: 1px solid var(--g100); box-shadow: var(--sh-md); padding: 36px; margin-bottom: 32px; }
+    .chart-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
+    .chart-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--g900); }
+    .chart-subtitle { font-size: .82rem; color: var(--g500); margin-top: 4px; }
+    .chart-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--b50); border: 1px solid var(--b100); color: var(--b600); padding: 6px 12px; border-radius: 100px; font-size: .75rem; font-weight: 500; white-space: nowrap; }
+    .chart-canvas-wrap { position: relative; height: 320px; }
+
+    /* ═══ TWO-COL GRID ═══ */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media(max-width:800px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* ═══ DATA TABLE ═══ */
+    .table-wrap { overflow-x: auto; border-radius: 16px; border: 1px solid var(--g100); }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    thead { background: var(--b900); color: white; }
+    thead th { padding: 14px 18px; text-align: left; font-weight: 500; font-size: .78rem; letter-spacing: .05em; text-transform: uppercase; }
+    tbody tr { border-bottom: 1px solid var(--g100); transition: background .15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--b50); }
+    tbody td { padding: 13px 18px; color: var(--g700); }
+    tbody td:first-child { font-weight: 600; color: var(--g900); }
+    .td-delta { display: inline-flex; align-items: center; gap: 4px; font-size: .78rem; font-weight: 500; padding: 3px 8px; border-radius: 100px; }
+    .td-delta.up { background: #ecfdf5; color: var(--green); }
+    .td-delta.dn { background: #fef2f2; color: var(--red); }
+    .td-delta.neu { background: var(--g100); color: var(--g500); }
+    .highlight-row { background: var(--b50) !important; }
+    .highlight-row td { color: var(--b600) !important; font-weight: 600 !important; }
+
+    /* ═══ INFO CARDS ═══ */
+    .info-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 40px; }
+    .info-card { background: white; border-radius: 16px; border: 1px solid var(--g100); padding: 24px; box-shadow: var(--sh-sm); }
+    .info-card-icon { width: 44px; height: 44px; background: var(--b50); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 16px; }
+    .info-card-title { font-weight: 600; font-size: .95rem; color: var(--g900); margin-bottom: 8px; }
+    .info-card-text { font-size: .83rem; color: var(--g500); line-height: 1.65; }
+    @media(max-width:800px) { .info-grid { grid-template-columns: 1fr; } }
+
+    /* ═══ FOOTER ═══ */
+    footer { background: var(--b900); padding: 40px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .foot-logo { font-family: 'Playfair Display', serif; font-weight: 800; color: white; font-size: 1rem; }
+    .foot-nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    .foot-nav a { font-size: .82rem; color: rgba(255,255,255,.45); text-decoration: none; transition: color .18s; }
+    .foot-nav a:hover { color: rgba(255,255,255,.8); }
+    .foot-copy { font-size: .73rem; color: rgba(255,255,255,.22); }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(18px) } to { opacity:1; transform:none } }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">immowert<span>wien</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Immobilie bewerten</a>
+      <a href="markt.html" class="nav-link active">Wiener Immobilienmarkt</a>
+      <a href="bezirke.html" class="nav-link">Bezirksvergleich</a>
+    </div>
+    <a href="index.html" class="nav-pill">Immobilie bewerten →</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div style="padding-top:64px;">
+    <div class="page-hero">
+      <div class="eyebrow"><span class="dot"></span>Marktdaten Wien · Stand Q1 2026 · Daten bis 2025</div>
+      <h1>Wiener <span class="hl">Immobilienmarkt</span><br>in Zahlen</h1>
+      <p>Historische Preisentwicklung, OeNB-Indizes und Markttrends seit dem Jahr 2000 – basierend auf Daten der Oesterreichischen Nationalbank und Statistik Austria.</p>
+    </div>
+  </div>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat-box">
+        <div class="stat-num">€ 6.800</div>
+        <div class="stat-lbl">Ø Kaufpreis/m² Wien 2025</div>
+        <div class="stat-delta dn">↓ −2,2 % vs. 2024</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">€ 19,80</div>
+        <div class="stat-lbl">Ø Neuvermietung/m²/Mon. 2025</div>
+        <div class="stat-delta up">↑ +3,1 % vs. 2024</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">11.200</div>
+        <div class="stat-lbl">Kaufverträge 2025 (est.)</div>
+        <div class="stat-delta up">↑ +9,8 % vs. 2024</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">215</div>
+        <div class="stat-lbl">OeNB Preisindex 2025 (2010=100)</div>
+        <div class="stat-delta dn">↓ −2,7 % vs. 2024</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHART 1: Preisentwicklung Eigentumswohnungen -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="s-tag">Quelle: OeNB Wohnimmobilienpreisindex · Statistik Austria · Eigene Aufbereitung</div>
+      <h2 class="s-h2">Preisentwicklung Eigentumswohnungen Wien</h2>
+      <p class="s-p">Medianpreis pro Quadratmeter für Eigentumswohnungen in Wien seit 2000 – inkl. vorläufiger Schätzung für 2025. Der starke Anstieg ab 2010 spiegelt Niedrigzinsen und hohe Nachfrage wider; ab 2023 korrigiert der Markt infolge der Zinswende.</p>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-title">Kaufpreis €/m² – Eigentumswohnungen Wien (2000–2024)</div>
+            <div class="chart-subtitle">Median-Kaufpreis inklusive Neubau und Altbau · Quelle: OeNB, Statistik Austria</div>
+          </div>
+          <div class="chart-badge">📊 25 Jahre Datenbasis</div>
+        </div>
+        <div class="chart-canvas-wrap">
+          <canvas id="priceChart"></canvas>
+        </div>
+        <p class="source-note">Quellen: <a href="https://www.oenb.at" target="_blank">Oesterreichische Nationalbank (OeNB)</a> · Statistik Austria · eigene Aufbereitung. Daten sind Medianwerte; regionale und objektspezifische Abweichungen möglich.</p>
+      </div>
+
+      <!-- Info cards -->
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-icon">📈</div>
+          <div class="info-card-title">+275 % seit 2000</div>
+          <div class="info-card-text">Von ~€ 1.850/m² im Jahr 2000 auf den Hochpunkt von €8.100/m² im Jahr 2022 – ein Anstieg von fast 340 % in 22 Jahren.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">📉</div>
+          <div class="info-card-title">Korrektur seit 2023</div>
+          <div class="info-card-text">Steigende Zinsen und rückläufige Nachfrage haben 2023–2024 zu einer Preiskorrektur von rund 14 % vom Hochpunkt geführt.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🏦</div>
+          <div class="info-card-title">Zinswende als Treiber</div>
+          <div class="info-card-text">Der EZB-Leitzins stieg 2022–2023 von 0 % auf 4,5 %. Das verteuerte Finanzierungen und drückte die Transaktionszahlen.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHART 2: OeNB Index + Mietpreise -->
+  <div class="section section-alt">
+    <div class="section-inner">
+      <div class="two-col">
+        <!-- OeNB Index -->
+        <div class="chart-card" style="margin-bottom:0">
+          <div class="chart-card-header">
+            <div>
+              <div class="chart-title">OeNB Immobilienpreisindex Wien</div>
+              <div class="chart-subtitle">Basisjahr 2010 = 100 · Quelle: OeNB</div>
+            </div>
+            <div class="chart-badge">Index 2010=100</div>
+          </div>
+          <div class="chart-canvas-wrap" style="height:260px">
+            <canvas id="indexChart"></canvas>
+          </div>
+        </div>
+        <!-- Mietpreise -->
+        <div class="chart-card" style="margin-bottom:0">
+          <div class="chart-card-header">
+            <div>
+              <div class="chart-title">Neuvermietungspreise Wien</div>
+              <div class="chart-subtitle">€/m²/Monat (Angebotsmieten) · 2015–2024</div>
+            </div>
+            <div class="chart-badge">Angebotsmieten</div>
+          </div>
+          <div class="chart-canvas-wrap" style="height:260px">
+            <canvas id="rentChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHART 3: Transaktionen -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="s-tag">Quelle: Grundbuch / WKO</div>
+      <h2 class="s-h2">Kaufverträge & Transaktionsvolumen</h2>
+      <p class="s-p">Anzahl der Kaufverträge für Wohnimmobilien in Wien. Der Einbruch 2020 (COVID) und 2023–2024 (Zinsanstieg) zeigen die Sensitivität des Marktes.</p>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div>
+            <div class="chart-title">Anzahl Kaufverträge Wien – Wohnimmobilien (2015–2024)</div>
+            <div class="chart-subtitle">Quelle: WKO, Grundbuch · eigene Aufbereitung</div>
+          </div>
+          <div class="chart-badge">Transaktionen/Jahr</div>
+        </div>
+        <div class="chart-canvas-wrap" style="height:280px">
+          <canvas id="transChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORICAL DATA TABLE -->
+  <div class="section section-alt">
+    <div class="section-inner">
+      <div class="s-tag">Vollständige Zeitreihe</div>
+      <h2 class="s-h2">Historische Marktdaten im Überblick</h2>
+      <p class="s-p">Alle Kennzahlen auf einen Blick – von 2000 bis 2024.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Jahr</th>
+              <th>Kaufpreis €/m²</th>
+              <th>Jahresänd.</th>
+              <th>OeNB Index</th>
+              <th>Mietpreis €/m²/Mon.</th>
+              <th>Bruttomietrendite</th>
+            </tr>
+          </thead>
+          <tbody id="histTable"></tbody>
+        </table>
+      </div>
+      <p class="source-note" style="margin-top:16px;">Quellen: OeNB Wohnimmobilienpreisindex, Statistik Austria, WKO Immobilienspiegel · Angaben sind Medianwerte · Abweichungen je nach Lage und Objektart möglich</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="background:linear-gradient(135deg,var(--b900),var(--b600));padding:64px 5%;text-align:center;">
+    <div style="max-width:620px;margin:0 auto;">
+      <div style="font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:12px;">Markt verstanden – jetzt handeln</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;color:white;line-height:1.2;margin-bottom:16px;">Was ist deine Immobilie<br>im aktuellen Markt wert?</h2>
+      <p style="color:rgba(255,255,255,.6);font-size:.95rem;line-height:1.7;margin-bottom:32px;">Die Charts zeigen den Markt. Deine persönliche Bewertung zeigt was <em style="color:white;">deine</em> Immobilie einbringt – kostenlos und unverbindlich.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="index.html?intent=verkauf" style="background:white;color:var(--b600);padding:16px 32px;border-radius:12px;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,.2);">🏠 Ich will verkaufen →</a>
+        <a href="index.html?intent=vermietung" style="background:rgba(255,255,255,.12);color:white;border:1.5px solid rgba(255,255,255,.3);padding:16px 32px;border-radius:12px;font-weight:600;font-size:.95rem;text-decoration:none;">🔑 Ich will vermieten →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot-logo">immowert<span style="color:rgba(255,255,255,.35);">wien</span></div>
+    <div class="foot-nav">
+      <a href="index.html">Immobilie bewerten</a>
+      <a href="markt.html">Wiener Immobilienmarkt</a>
+      <a href="bezirke.html">Bezirksvergleich</a>
+    </div>
+    <div class="foot-copy">© 2026 ImmowertWien · Daten: OeNB, Statistik Austria</div>
+  </footer>
+
+  <script>
+    /* ══════════════════════════════════════
+       DATA – basierend auf OeNB & Statistik Austria
+    ══════════════════════════════════════ */
+    const histData = [
+      { year: 2000, price: 1850,  idx:  59, rent: null },
+      { year: 2001, price: 1890,  idx:  60, rent: null },
+      { year: 2002, price: 1950,  idx:  62, rent: null },
+      { year: 2003, price: 2050,  idx:  65, rent: null },
+      { year: 2004, price: 2140,  idx:  68, rent: null },
+      { year: 2005, price: 2250,  idx:  71, rent: null },
+      { year: 2006, price: 2390,  idx:  76, rent: null },
+      { year: 2007, price: 2580,  idx:  82, rent: null },
+      { year: 2008, price: 2780,  idx:  88, rent: null },
+      { year: 2009, price: 2820,  idx:  90, rent: null },
+      { year: 2010, price: 3150,  idx: 100, rent: null },
+      { year: 2011, price: 3510,  idx: 111, rent: null },
+      { year: 2012, price: 3920,  idx: 125, rent: null },
+      { year: 2013, price: 4280,  idx: 136, rent: null },
+      { year: 2014, price: 4460,  idx: 142, rent: null },
+      { year: 2015, price: 4650,  idx: 148, rent: 12.80 },
+      { year: 2016, price: 4890,  idx: 155, rent: 13.20 },
+      { year: 2017, price: 5180,  idx: 165, rent: 13.70 },
+      { year: 2018, price: 5470,  idx: 174, rent: 14.20 },
+      { year: 2019, price: 5820,  idx: 185, rent: 14.80 },
+      { year: 2020, price: 6200,  idx: 197, rent: 15.30 },
+      { year: 2021, price: 7350,  idx: 234, rent: 16.10 },
+      { year: 2022, price: 8100,  idx: 257, rent: 17.50 },
+      { year: 2023, price: 7380,  idx: 235, rent: 18.40 },
+      { year: 2024, price: 6950,  idx: 221, rent: 19.20 },
+      { year: 2025, price: 6800,  idx: 215, rent: 19.80, est: true },
+    ];
+
+    const rentData = { years: [2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,'2025*'], vals: [12.80,13.20,13.70,14.20,14.80,15.30,16.10,17.50,18.40,19.20,19.80] };
+    const transData = { years: [2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,'2025*'], vals: [14200,15800,16400,17100,18200,14800,19600,16200,11400,10200,11200] };
+
+    /* ══════════════════════════════════════
+       CHART DEFAULTS
+    ══════════════════════════════════════ */
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.color = '#6b7280';
+
+    const blueGrad = (ctx) => {
+      const g = ctx.createLinearGradient(0, 0, 0, 300);
+      g.addColorStop(0, 'rgba(37,99,235,.18)');
+      g.addColorStop(1, 'rgba(37,99,235,0)');
+      return g;
+    };
+
+    /* ══ CHART 1: Price ══ */
+    new Chart(document.getElementById('priceChart'), {
+      type: 'line',
+      data: {
+        labels: histData.map(d => d.year),
+        datasets: [{
+          label: '€/m² (Median)',
+          data: histData.map(d => d.price),
+          borderColor: '#2563eb',
+          borderWidth: 2.5,
+          pointRadius: 3,
+          pointBackgroundColor: '#2563eb',
+          fill: true,
+          backgroundColor: (ctx) => blueGrad(ctx.chart.ctx),
+          tension: 0.35,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#0d2045', borderColor: '#2563eb', borderWidth: 1,
+            padding: 12, cornerRadius: 10,
+            callbacks: {
+              label: (c) => `  Kaufpreis: € ${c.parsed.y.toLocaleString('de-AT')}/m²`,
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { maxTicksLimit: 13 } },
+          y: {
+            grid: { color: 'rgba(0,0,0,.04)' },
+            ticks: { callback: (v) => '€ ' + v.toLocaleString('de-AT') }
+          }
+        }
+      }
+    });
+
+    /* ══ CHART 2: OeNB Index ══ */
+    new Chart(document.getElementById('indexChart'), {
+      type: 'bar',
+      data: {
+        labels: histData.map(d => d.year),
+        datasets: [{
+          label: 'OeNB Index (2010=100)',
+          data: histData.map(d => d.idx),
+          backgroundColor: histData.map(d => d.idx === Math.max(...histData.map(x=>x.idx)) ? '#1a4fd6' : (d.year >= 2023 ? '#93c5fd' : '#3b82f6')),
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#0d2045', borderColor: '#2563eb', borderWidth: 1, padding: 10, cornerRadius: 8,
+            callbacks: { label: (c) => `  Index: ${c.parsed.y} (2010=100)` }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { maxTicksLimit: 13 } },
+          y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { callback: (v) => v } }
+        }
+      }
+    });
+
+    /* ══ CHART 3: Rent ══ */
+    new Chart(document.getElementById('rentChart'), {
+      type: 'line',
+      data: {
+        labels: rentData.years,
+        datasets: [{
+          label: '€/m²/Mon.',
+          data: rentData.vals,
+          borderColor: '#10b981',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointBackgroundColor: '#10b981',
+          fill: true,
+          backgroundColor: 'rgba(16,185,129,.08)',
+          tension: 0.35,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#0d2045', borderColor: '#10b981', borderWidth: 1, padding: 10, cornerRadius: 8,
+            callbacks: { label: (c) => `  Miete: € ${c.parsed.y.toFixed(2)}/m²/Mon.` }
+          }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { callback: (v) => '€ ' + v.toFixed(0) } }
+        }
+      }
+    });
+
+    /* ══ CHART 4: Transactions ══ */
+    new Chart(document.getElementById('transChart'), {
+      type: 'bar',
+      data: {
+        labels: transData.years,
+        datasets: [{
+          label: 'Kaufverträge',
+          data: transData.vals,
+          backgroundColor: transData.vals.map((v,i) => v === Math.max(...transData.vals) ? '#2563eb' : (i >= 7 ? '#fca5a5' : '#93c5fd')),
+          borderRadius: 6,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#0d2045', borderColor: '#2563eb', borderWidth: 1, padding: 10, cornerRadius: 8,
+            callbacks: { label: (c) => `  Kaufverträge: ${c.parsed.y.toLocaleString('de-AT')}` }
+          }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { callback: (v) => v.toLocaleString('de-AT') } }
+        }
+      }
+    });
+
+    /* ══ HISTORICAL TABLE ══ */
+    const tbody = document.getElementById('histTable');
+    histData.slice().reverse().forEach((d, i) => {
+      const prev = histData[histData.length - 1 - i - 1];
+      const chg = prev ? ((d.price - prev.price) / prev.price * 100) : null;
+      const grossYield = d.rent ? ((d.rent * 12) / d.price * 100).toFixed(2) : '–';
+      const deltaHtml = chg === null
+        ? `<span class="td-delta neu">Basisjahr</span>`
+        : chg >= 0
+          ? `<span class="td-delta up">↑ +${chg.toFixed(1)} %</span>`
+          : `<span class="td-delta dn">↓ ${chg.toFixed(1)} %</span>`;
+      const isHighlight = d.year === 2022; // peak year
+      const isEst = !!d.est;
+      tbody.innerHTML += `
+        <tr class="${isHighlight ? 'highlight-row' : ''}">
+          <td>${d.year}${isHighlight ? ' 🔺' : ''}${isEst ? ' <span style="font-size:.68rem;background:var(--amber);color:white;padding:2px 6px;border-radius:4px;font-weight:600;">Schätzung</span>' : ''}</td>
+          <td>€ ${d.price.toLocaleString('de-AT')}</td>
+          <td>${deltaHtml}</td>
+          <td>${d.idx}</td>
+          <td>${d.rent ? '€ ' + d.rent.toFixed(2) : '–'}</td>
+          <td>${grossYield !== '–' ? grossYield + ' %' : '–'}</td>
+        </tr>`;
+    });
+  </script>
+
+</body>
+</html>

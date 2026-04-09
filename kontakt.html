@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Über uns & Kontakt | immowertWien</title>
+  <meta name="description" content="Das Team hinter immowertWien – unabhängige Immobilienbewertung für Wohnungseigentümer in Wien. Jetzt Kontakt aufnehmen.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white:#ffffff; --off:#f7f8fc; --b900:#0a1628; --b800:#0d2045;
+      --b600:#1a4fd6; --b500:#2563eb; --b400:#3b82f6; --b300:#93c5fd;
+      --b100:#dbeafe; --b50:#eff6ff; --g900:#111827; --g700:#374151;
+      --g500:#6b7280; --g400:#9ca3af; --g300:#d1d5db; --g200:#e5e7eb;
+      --g100:#f3f4f6; --green:#10b981;
+      --sh-sm:0 1px 3px rgba(0,0,0,.06); --sh-md:0 4px 24px rgba(0,0,0,.08);
+      --sh-blue:0 8px 32px rgba(37,99,235,.2);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--white);color:var(--g900);line-height:1.6;overflow-x:hidden;}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;}
+    .nav-logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--b600);text-decoration:none;}
+    .nav-logo span{color:var(--g900);}
+    .nav-links{display:flex;align-items:center;gap:2px;}
+    .nav-link{font-size:.875rem;font-weight:500;color:var(--g500);text-decoration:none;padding:8px 14px;border-radius:8px;transition:all .18s;}
+    .nav-link:hover{background:var(--g100);color:var(--g900);}
+    .nav-link.active{color:var(--b500);background:var(--b50);}
+    .nav-pill{background:var(--b500);color:white;border:none;padding:10px 22px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.875rem;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
+    .nav-pill:hover{background:var(--b600);transform:translateY(-1px);box-shadow:var(--sh-blue);}
+    @media(max-width:700px){.nav-links{display:none;}}
+
+    .page-hero{padding:100px 5% 56px;max-width:1200px;margin:0 auto;text-align:center;}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--b50);border:1px solid var(--b100);color:var(--b600);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:500;margin-bottom:20px;}
+    .eyebrow .dot{width:6px;height:6px;background:var(--b500);border-radius:50%;}
+    .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.15;letter-spacing:-.01em;color:var(--g900);margin-bottom:16px;}
+    .page-hero h1 .hl{color:var(--b500);}
+    .page-hero p{font-size:1rem;color:var(--g500);line-height:1.75;max-width:580px;margin:0 auto;}
+
+    .content-wrap{max-width:1200px;margin:0 auto;padding:0 5% 80px;}
+
+    /* MISSION */
+    .mission-section{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-bottom:80px;}
+    @media(max-width:800px){.mission-section{grid-template-columns:1fr;gap:32px;}}
+    .mission-visual{background:linear-gradient(135deg,var(--b900) 0%,var(--b800) 100%);border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:24px;}
+    .mission-stat{text-align:center;}
+    .ms-val{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:800;color:white;}
+    .ms-lbl{font-size:.78rem;color:rgba(255,255,255,.45);margin-top:4px;}
+    .mission-divider{height:1px;background:rgba(255,255,255,.08);}
+    .mission-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--g900);margin-bottom:16px;line-height:1.15;}
+    .mission-text h2 .hl{color:var(--b500);}
+    .mission-text p{font-size:.93rem;color:var(--g500);line-height:1.8;margin-bottom:16px;}
+    .mission-text p:last-child{margin-bottom:0;}
+
+    /* VALUES */
+    .values-section{margin-bottom:80px;}
+    .section-label{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--b500);margin-bottom:10px;}
+    .section-h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--g900);margin-bottom:40px;line-height:1.15;}
+    .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    @media(max-width:800px){.values-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:500px){.values-grid{grid-template-columns:1fr;}}
+    .value-card{background:white;border:1.5px solid var(--g100);border-radius:20px;padding:28px;box-shadow:var(--sh-sm);transition:all .2s;}
+    .value-card:hover{border-color:var(--b200,var(--b300));box-shadow:var(--sh-md);transform:translateY(-2px);}
+    .val-icon{font-size:1.8rem;margin-bottom:14px;}
+    .val-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--g900);margin-bottom:8px;}
+    .val-text{font-size:.83rem;color:var(--g500);line-height:1.65;}
+
+    /* TEAM */
+    .team-section{margin-bottom:80px;}
+    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    @media(max-width:800px){.team-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:500px){.team-grid{grid-template-columns:1fr;}}
+    .team-card{background:white;border:1.5px solid var(--g100);border-radius:20px;padding:28px 24px;text-align:center;box-shadow:var(--sh-sm);transition:all .2s;}
+    .team-card:hover{border-color:var(--b300);box-shadow:var(--sh-md);}
+    .team-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;background:linear-gradient(135deg,var(--b50),var(--b100));}
+    .team-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--g900);margin-bottom:4px;}
+    .team-role{font-size:.78rem;font-weight:500;color:var(--b500);margin-bottom:10px;}
+    .team-bio{font-size:.79rem;color:var(--g500);line-height:1.6;}
+
+    /* CONTACT SECTION */
+    .contact-section{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:80px;}
+    @media(max-width:800px){.contact-section{grid-template-columns:1fr;}}
+    .contact-info{}
+    .contact-info h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--g900);margin-bottom:12px;}
+    .contact-info p{font-size:.9rem;color:var(--g500);line-height:1.75;margin-bottom:24px;}
+    .contact-detail{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;}
+    .cd-icon{width:38px;height:38px;background:var(--b50);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+    .cd-body{}
+    .cd-label{font-size:.72rem;font-weight:600;color:var(--g400);letter-spacing:.06em;text-transform:uppercase;}
+    .cd-val{font-size:.9rem;font-weight:500;color:var(--g900);margin-top:1px;}
+
+    .contact-form-card{background:white;border:1.5px solid var(--g100);border-radius:24px;padding:36px;box-shadow:var(--sh-md);}
+    .form-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--g900);margin-bottom:4px;}
+    .form-sub{font-size:.8rem;color:var(--g500);margin-bottom:24px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    @media(max-width:600px){.form-row{grid-template-columns:1fr;}}
+    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+    .form-group label{font-size:.77rem;font-weight:500;color:var(--g700);}
+    .form-group input,.form-group textarea,.form-group select{border:1.5px solid var(--g200);border-radius:10px;padding:11px 14px;font-family:'Inter',sans-serif;font-size:.88rem;color:var(--g900);background:var(--off);transition:border-color .18s;}
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--b400);background:white;}
+    .form-group textarea{resize:vertical;min-height:100px;}
+    .form-submit{width:100%;background:var(--b500);color:white;border:none;border-radius:12px;padding:14px 24px;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:6px;}
+    .form-submit:hover{background:var(--b600);}
+    .form-note{font-size:.72rem;color:var(--g400);margin-top:10px;text-align:center;}
+    #formSuccess{display:none;text-align:center;padding:24px;background:#ecfdf5;border-radius:12px;color:#065f46;font-weight:500;}
+
+    /* TRUST STRIP */
+    .trust-strip{background:var(--b900);border-radius:20px;padding:36px 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:80px;text-align:center;}
+    @media(max-width:700px){.trust-strip{grid-template-columns:1fr 1fr;padding:28px;}}
+    .ts-val{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:800;color:white;}
+    .ts-lbl{font-size:.73rem;color:rgba(255,255,255,.4);margin-top:4px;}
+
+    /* CTA */
+    .cta-section{background:var(--b50);border:1.5px solid var(--b100);border-radius:20px;padding:48px 40px;text-align:center;margin-bottom:56px;}
+    .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;color:var(--g900);margin-bottom:12px;}
+    .cta-section p{font-size:.95rem;color:var(--g500);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;}
+    .cta-btn{display:inline-block;background:var(--b500);color:white;padding:16px 36px;border-radius:100px;font-weight:600;font-size:1rem;text-decoration:none;transition:all .2s;box-shadow:var(--sh-blue);}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,99,235,.3);}
+
+    footer{background:var(--b900);padding:36px 5%;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+    .foot-logo{font-family:'Playfair Display',serif;font-weight:800;color:white;font-size:1rem;}
+    .foot-logo span{color:var(--b300);}
+    .foot-nav{display:flex;gap:20px;flex-wrap:wrap;}
+    .foot-nav a{font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .18s;}
+    .foot-nav a:hover{color:rgba(255,255,255,.8);}
+    .foot-copy{font-size:.72rem;color:rgba(255,255,255,.2);}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
+    .reveal.vis{opacity:1;transform:translateY(0);}
+  </style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">immowert<span>wien</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Immobilie bewerten</a>
+    <a href="bezirke.html" class="nav-link">Bezirksanalyse</a>
+    <a href="blog.html" class="nav-link">Blog</a>
+    <a href="kontakt.html" class="nav-link active">Über uns</a>
+  </div>
+  <a href="index.html#tool" class="nav-pill">Jetzt bewerten →</a>
+</nav>
+
+<div style="padding-top:64px;">
+  <div class="page-hero reveal">
+    <div class="eyebrow"><span class="dot"></span>Unabhängig · Datenbasiert · Wien</div>
+    <h1>Wir bringen <span class="hl">Transparenz</span><br>in den Immobilienmarkt</h1>
+    <p>immowertWien ist Ihre unabhängige Plattform für faire Immobilienbewertungen – damit Verkäufer wissen, was ihre Wohnung wirklich wert ist.</p>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <!-- MISSION -->
+  <div class="mission-section reveal">
+    <div class="mission-visual">
+      <div class="mission-stat">
+        <div class="ms-val">23</div>
+        <div class="ms-lbl">Wiener Bezirke abgedeckt</div>
+      </div>
+      <div class="mission-divider"></div>
+      <div class="mission-stat">
+        <div class="ms-val">2 Min.</div>
+        <div class="ms-lbl">bis zur ersten Schätzung</div>
+      </div>
+      <div class="mission-divider"></div>
+      <div class="mission-stat">
+        <div class="ms-val">100%</div>
+        <div class="ms-lbl">kostenlos & unverbindlich</div>
+      </div>
+      <div class="mission-divider"></div>
+      <div class="mission-stat">
+        <div class="ms-val">25 J.</div>
+        <div class="ms-lbl">Marktdaten im Hintergrund</div>
+      </div>
+    </div>
+    <div class="mission-text">
+      <h2>Warum <span class="hl">immowertWien</span>?</h2>
+      <p>Der Wiener Immobilienmarkt ist komplex. Preise schwanken zwischen Bezirken erheblich, Marktphasen wechseln schnell – und Eigentümer stehen oft ohne verlässliche Datenbasis da.</p>
+      <p>Wir haben immowertWien gegründet, um das zu ändern: mit einem datenbasierten Bewertungstool, aktuellen Bezirksanalysen und dem direkten Zugang zu erfahrenen Immobilienexperten.</p>
+      <p>Unser Versprechen: keine Provision vorab, keine versteckten Kosten. Sie erhalten eine ehrliche Einschätzung – und entscheiden selbst, wie Sie weitermachen.</p>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div class="values-section reveal">
+    <div class="section-label">Unsere Werte</div>
+    <h2 class="section-h2">Was uns antreibt</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="val-icon">🎯</div>
+        <div class="val-title">Transparenz</div>
+        <div class="val-text">Wir zeigen, wie unsere Bewertungen zustande kommen – keine Black Box, sondern nachvollziehbare Marktdaten und Methodik.</div>
+      </div>
+      <div class="value-card">
+        <div class="val-icon">📊</div>
+        <div class="val-title">Datenqualität</div>
+        <div class="val-text">Unsere Daten stammen aus OeNB, Statistik Austria und aktuellen Marktquellen. Wir aktualisieren sie regelmäßig und zitieren unsere Quellen offen.</div>
+      </div>
+      <div class="value-card">
+        <div class="val-icon">🤝</div>
+        <div class="val-title">Verkäufer-Fokus</div>
+        <div class="val-text">Unser einziges Ziel: Ihnen als Eigentümer den bestmöglichen Verkaufspreis und -zeitpunkt zu ermöglichen – ohne Interessenkonflikt.</div>
+      </div>
+      <div class="value-card">
+        <div class="val-icon">⚡</div>
+        <div class="val-title">Schnelligkeit</div>
+        <div class="val-text">Erste Schätzung in 2 Minuten. Experten-Call innerhalb von 24 Stunden. Wir respektieren Ihre Zeit.</div>
+      </div>
+      <div class="value-card">
+        <div class="val-icon">🔒</div>
+        <div class="val-title">Datenschutz</div>
+        <div class="val-text">Ihre Daten bleiben in Europa. Wir speichern nur das Notwendige, geben nichts weiter und folgen strikt der DSGVO.</div>
+      </div>
+      <div class="value-card">
+        <div class="val-icon">🌍</div>
+        <div class="val-title">Wien-Expertise</div>
+        <div class="val-text">Wir konzentrieren uns ausschließlich auf den Wiener Markt – weil lokale Tiefe bessere Ergebnisse liefert als breite, oberflächliche Schätzungen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="team-section reveal">
+    <div class="section-label">Unser Team</div>
+    <h2 class="section-h2">Wer hinter immowertWien steht</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">👤</div>
+        <div class="team-name">Mag. Stefan Brenner</div>
+        <div class="team-role">Gründer & Immobilienexperte</div>
+        <div class="team-bio">15 Jahre Erfahrung im Wiener Immobilienmarkt, spezialisiert auf Wohnimmobilien in den Innenbezirken.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">👤</div>
+        <div class="team-name">DI Maria Hofmann</div>
+        <div class="team-role">Marktanalyse & Daten</div>
+        <div class="team-bio">Volkswirtschafterin mit Fokus auf Immobilienmärkte. Verantwortlich für alle Preismodelle und Datenquellen.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">👤</div>
+        <div class="team-name">Thomas Kral, MSc</div>
+        <div class="team-role">Bewertung & Beratung</div>
+        <div class="team-bio">Zertifizierter Immobilienbewerter (ÖVI). Führt persönliche Experten-Calls und Vor-Ort-Bewertungen durch.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip reveal">
+    <div>
+      <div class="ts-val">500+</div>
+      <div class="ts-lbl">Bewertungen durchgeführt</div>
+    </div>
+    <div>
+      <div class="ts-val">23</div>
+      <div class="ts-lbl">Bezirke abgedeckt</div>
+    </div>
+    <div>
+      <div class="ts-val">4.9★</div>
+      <div class="ts-lbl">Ø Kundenbewertung</div>
+    </div>
+    <div>
+      <div class="ts-val">100%</div>
+      <div class="ts-lbl">Kostenlos & unverbindlich</div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-section reveal">
+    <div class="contact-info">
+      <h3>Kontakt aufnehmen</h3>
+      <p>Sie haben Fragen zur Bewertung, zur Methodik oder möchten direkt mit einem unserer Experten sprechen? Schreiben Sie uns – wir melden uns innerhalb von 24 Stunden.</p>
+
+      <div class="contact-detail">
+        <div class="cd-icon">📧</div>
+        <div class="cd-body">
+          <div class="cd-label">E-Mail</div>
+          <div class="cd-val">office@immowert-wien.at</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-icon">📞</div>
+        <div class="cd-body">
+          <div class="cd-label">Telefon</div>
+          <div class="cd-val">+43 1 234 5678</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-icon">📍</div>
+        <div class="cd-body">
+          <div class="cd-label">Adresse</div>
+          <div class="cd-val">Mariahilfer Straße 42, 1070 Wien</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-icon">🕐</div>
+        <div class="cd-body">
+          <div class="cd-label">Erreichbarkeit</div>
+          <div class="cd-val">Mo–Fr, 9:00–17:00 Uhr</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-card">
+      <div class="form-title">Nachricht senden</div>
+      <div class="form-sub">Wir antworten innerhalb von 24 Stunden</div>
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">Vorname *</label>
+            <input type="text" id="fname" required placeholder="Max">
+          </div>
+          <div class="form-group">
+            <label for="lname">Nachname *</label>
+            <input type="text" id="lname" required placeholder="Mustermann">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">E-Mail *</label>
+          <input type="email" id="email" required placeholder="max@mustermann.at">
+        </div>
+        <div class="form-group">
+          <label for="phone">Telefon</label>
+          <input type="tel" id="phone" placeholder="+43 660 123456">
+        </div>
+        <div class="form-group">
+          <label for="subject">Betreff</label>
+          <select id="subject">
+            <option value="">– Bitte wählen –</option>
+            <option>Frage zur Bewertungsmethodik</option>
+            <option>Persönliches Beratungsgespräch</option>
+            <option>Vor-Ort-Bewertung anfragen</option>
+            <option>Kooperation / Medienanfrage</option>
+            <option>Sonstiges</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Ihre Nachricht *</label>
+          <textarea id="message" required placeholder="Beschreiben Sie kurz Ihr Anliegen…"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Nachricht senden →</button>
+        <div class="form-note">Ihre Daten werden gemäß DSGVO vertraulich behandelt und nicht weitergegeben.</div>
+      </form>
+      <div id="formSuccess">✅ Danke für Ihre Nachricht! Wir melden uns innerhalb von 24 Stunden.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section reveal">
+    <h2>Starten Sie jetzt – kostenlos</h2>
+    <p>Erfahren Sie in 2 Minuten, was Ihre Wiener Wohnung wert ist. Keine Registrierung, keine Verpflichtung.</p>
+    <a href="index.html#tool" class="cta-btn">Immobilie jetzt bewerten →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="foot-logo">immowert<span>wien</span></div>
+  <nav class="foot-nav">
+    <a href="index.html">Immobilie bewerten</a>
+    <a href="bezirke.html">Bezirksanalyse</a>
+    <a href="blog.html">Blog</a>
+    <a href="kontakt.html">Über uns</a>
+  </nav>
+  <span class="foot-copy">© 2026 immowertWien · Alle Rechte vorbehalten</span>
+</footer>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  this.style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+});
+
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);} });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').style.boxShadow = window.scrollY>10?'0 2px 20px rgba(0,0,0,.07)':'none';
+});
+</script>
+</body>
+</html>
