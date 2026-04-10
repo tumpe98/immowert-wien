@@ -228,6 +228,23 @@
     .markt-cta-row{display:flex;align-items:center;justify-content:space-between;background:var(--b50);border:1px solid var(--b100);border-radius:16px;padding:20px 28px;flex-wrap:wrap;gap:16px}
     @media(max-width:700px){.markt-grid{grid-template-columns:1fr}}
 
+    /* ── FAQ ── */
+    .faq-section{padding:80px 5%;background:white}
+    .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+    @media(max-width:800px){.faq-grid{grid-template-columns:1fr}}
+    .faq-item{background:var(--off);border:1.5px solid var(--g100);border-radius:20px;overflow:hidden;transition:border-color .2s}
+    .faq-item.open{border-color:var(--b300);background:white}
+    .faq-q{width:100%;background:none;border:none;padding:22px 24px;text-align:left;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;color:var(--g900);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;line-height:1.4}
+    .faq-q:hover{color:var(--b500)}
+    .faq-arr{font-size:1.1rem;transition:transform .25s;flex-shrink:0;color:var(--b500)}
+    .faq-item.open .faq-arr{transform:rotate(45deg)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .faq-item.open .faq-a{max-height:400px}
+    .faq-a-inner{padding:0 24px 22px;font-size:.87rem;color:var(--g500);line-height:1.75}
+    .faq-a-inner ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:10px}
+    .faq-a-inner ul li{display:flex;align-items:flex-start;gap:8px}
+    .faq-a-inner ul li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
+
     /* ── FINAL CTA ── */
     .final-section{padding:100px 5%;background:linear-gradient(135deg,var(--b900) 0%,var(--b600) 100%);text-align:center}
     .final-section .s-tag{color:rgba(255,255,255,.5)}
@@ -308,8 +325,8 @@
   <div class="hero">
     <div>
       <div class="eyebrow"><span class="dot"></span>Immobilienbewertung Wien · Kostenlos</div>
-      <h1>Die meisten Immobilien werden <span class="hl">unter Wert</span> verkauft.</h1>
-      <p class="hero-sub">Finde heraus, ob du Geld liegen lässt – und wie viel mehr beim Verkauf deiner Immobilie in Wien wirklich möglich ist.</p>
+      <h1>Weißt du wirklich, was deine Immobilie in Wien <span class="hl">wert ist</span>?</h1>
+      <p class="hero-sub">Die meisten Eigentümer verlassen sich auf Nachbarn und Bauchgefühl – nicht auf Daten. Finde in 2 Minuten heraus, was der Markt wirklich zahlt.</p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="scrollToTool()">
           Immobilie jetzt bewerten <span class="arr">→</span>
@@ -323,19 +340,19 @@
     <div class="hero-vis">
       <div class="price-card">
         <div class="pc-lbl">Bewertungsanalyse</div>
-        <div class="pc-addr">Mustergasse 12, 1070 Wien</div>
+        <div class="pc-addr">Radetzkystraße 12, 1030 Wien</div>
         <div class="mini-chart"><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div></div>
         <div class="chart-months"><span>Jan</span><span>Feb</span><span>Mär</span><span>Apr</span><span>Mai</span><span>Jun</span><span>Jul</span></div>
         <div class="price-nums">
-          <div style="text-align:center"><div class="pv-num">510k</div><div class="pv-label">Minimum</div></div>
+          <div style="text-align:center"><div class="pv-num">490k</div><div class="pv-label">Minimum</div></div>
           <div style="font-size:1.2rem;color:var(--g300)">–</div>
-          <div style="text-align:center"><div class="pv-num hi">580k</div><div class="pv-label">Maximum</div></div>
+          <div style="text-align:center"><div class="pv-num hi">558k</div><div class="pv-label">Maximum</div></div>
         </div>
-        <div style="margin:12px 0"><span class="price-badge">↑ +9–14% Verkaufspotenzial möglich</span></div>
-        <div class="price-trend"><div class="trend-dot"></div><div class="trend-txt">Markttrend <strong>steigend</strong> · Nachfrage in 1070 Wien hoch</div></div>
+        <div style="margin:12px 0"><span class="price-badge">↑ +10–14% Verkaufspotenzial möglich</span></div>
+        <div class="price-trend"><div class="trend-dot"></div><div class="trend-txt">Markttrend <strong>steigend</strong> · Nachfrage in 1030 Landstraße hoch</div></div>
       </div>
-      <div class="float1"><span>📍</span><div><div style="font-weight:600;font-size:.8rem;color:var(--g900)">Bezirk 1070</div><div style="color:var(--g500);font-size:.72rem">€ 8.539/m² Ø</div></div></div>
-      <div class="float2"><span>💰</span><div><div style="font-weight:600;font-size:.8rem">+€ 54.000</div><div style="font-size:.72rem;opacity:.8">Ø mehr erzielt</div></div></div>
+      <div class="float1"><span>📍</span><div><div style="font-weight:600;font-size:.8rem;color:var(--g900)">Bezirk 1030 · Landstraße</div><div style="color:var(--g500);font-size:.72rem">€ 7.938/m² Ø · immopreise.at</div></div></div>
+      <div class="float2"><span>💰</span><div><div style="font-weight:600;font-size:.8rem">+€ 52.000</div><div style="font-size:.72rem;opacity:.8">Ø mehr erzielt</div></div></div>
     </div>
   </div>
 </div>
@@ -367,7 +384,7 @@
   <div class="section-inner">
     <div class="reveal">
       <div class="s-tag">Das Problem</div>
-      <h2 class="s-h2">Warum so viele Verkäufer Geld liegen lassen</h2>
+      <h2 class="s-h2">Menschen wissen nicht, was ihre Immobilie wert ist – weil sie auf ihr Umfeld hören statt auf Daten</h2>
       <p class="s-p">Drei Fehler, die beim Immobilienverkauf in Wien immer wieder passieren – und bares Geld kosten.</p>
     </div>
     <div class="problem-grid">
@@ -480,6 +497,89 @@
           <div><span class="exp-stat-val">23</span><span class="exp-stat-lbl">Bezirke</span></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-inner">
+    <div style="text-align:center" class="reveal">
+      <div class="s-tag" style="color:var(--b500)">Häufige Fragen</div>
+      <h2 class="s-h2 dark">Was du wissen willst</h2>
+      <p class="s-p dark" style="margin:0 auto">Alles zum Bewertungsprozess, zum Experten-Call und dazu, was deinen Preis wirklich bestimmt.</p>
+    </div>
+    <div class="faq-grid">
+
+      <div class="faq-item reveal" style="transition-delay:.05s">
+        <button class="faq-q" onclick="toggleFaq(this)">Wie läuft der kostenlose Experten-Call ab? <span class="faq-arr">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Der Call dauert ca. 30 Minuten – per Telefon oder Zoom, ganz wie du magst.<br><br>
+          Der Experte sieht sich folgendes an:
+          <ul>
+            <li>Lage deiner Immobilie: Bezirk, Straße, Ausrichtung, Infrastruktur</li>
+            <li>Aktuelle Nachfrage- und Preislage in deinem Bezirk</li>
+            <li>Zustand, Grundriss, Stockwerk und besondere Merkmale</li>
+            <li>Optimaler Einstiegspreis und Verhandlungsspielraum</li>
+            <li>Timing: Wann ist der beste Zeitpunkt für den Verkauf?</li>
+          </ul>
+          <br>Am Ende hast du eine klare Empfehlung – ohne Vertrag, ohne Druck.
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal" style="transition-delay:.1s">
+        <button class="faq-q" onclick="toggleFaq(this)">Was bestimmt den Preis meiner Immobilie? <span class="faq-arr">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Der Marktwert entsteht aus mehreren Faktoren – nicht nur der Größe:
+          <ul>
+            <li><strong>Lage:</strong> Bezirk, Straße, Entfernung zu U-Bahn & Schulen</li>
+            <li><strong>Zustand & Ausstattung:</strong> Renovierung kann den Wert um bis zu 25% beeinflussen</li>
+            <li><strong>Stockwerk & Ausrichtung:</strong> Dachgeschoss oder Hochparterre machen Tausende Euro Unterschied</li>
+            <li><strong>Marktlage:</strong> Angebot vs. Nachfrage im Bezirk zum Verkaufszeitpunkt</li>
+            <li><strong>Timing:</strong> Frühjahr (März–Mai) und Herbst erzielen bis zu 12% mehr als der Jänner</li>
+            <li><strong>Vermarktungsstrategie:</strong> Professionelle Fotos, Exposé und Preisstrategie</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal" style="transition-delay:.15s">
+        <button class="faq-q" onclick="toggleFaq(this)">Ist die Bewertung wirklich kostenlos? <span class="faq-arr">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Ja – zu 100%. Das Online-Tool, die Sofortbewertung und der persönliche Experten-Call kosten dich nichts.<br><br>
+          Wir verdienen nur, wenn du dich entscheidest, mit einem unserer Partnerexperten zu verkaufen – und das läuft auf Erfolgsbasis. Du hast keinerlei Verpflichtung.
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal" style="transition-delay:.2s">
+        <button class="faq-q" onclick="toggleFaq(this)">Wie genau ist die Online-Bewertung? <span class="faq-arr">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Die Sofortbewertung basiert auf aktuellen Marktdaten von immopreise.at (April 2026), dem OeNB-Wohnimmobilienpreisindex und Zustandsfaktoren aus dem Immobilienmarkt.<br><br>
+          Sie gibt dir eine solide Erstorientierung mit einer Bandbreite von ca. ±10–15%. Die genaue Einschätzung – inkl. Lage, Grundriss und aktueller Nachfrage – liefert der persönliche Experten-Call.
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal" style="transition-delay:.25s">
+        <button class="faq-q" onclick="toggleFaq(this)">Wie unterscheidet sich Wien Bezirk für Bezirk? <span class="faq-arr">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Enorm. Eine 70m²-Wohnung in der Inneren Stadt (1010) kann € 1,28 Mio. wert sein – dieselbe Wohnung in Favoriten (1100) liegt bei ca. € 386.000.<br><br>
+          Auch innerhalb eines Bezirks machen Straßenseite, U-Bahn-Nähe und Grünflächen Zehntausende Euro Unterschied. Die Bezirksanalyse zeigt dir alle 23 Bezirke im Detail.
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal" style="transition-delay:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)">Was passiert nach dem Experten-Call? <span class="faq-arr">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Du entscheidest. Mögliche nächste Schritte:
+          <ul>
+            <li>Vor-Ort-Besichtigung durch den Experten für eine präzise Bewertung</li>
+            <li>Erstellung eines professionellen Verkaufsexposés</li>
+            <li>Gezielter Zugang zu vorgemerkten Käufern im Bezirk</li>
+            <li>Oder einfach: du nimmst die Einschätzung mit und entscheidest später</li>
+          </ul>
+          Kein Vertrag, kein Druck. Vollständig in deinem Tempo.
+        </div></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -704,21 +804,55 @@
   function fmt(n){return'€'+n.toLocaleString('de-AT')}
 
   /* ── RESULT ── */
+  // Simple sparkline: 6 relative price points for each district (normalized history)
+  const sparkData = {
+    '1010':[72,78,84,91,100,100],'1020':[68,74,81,88,97,100],'1030':[70,75,82,89,96,100],
+    '1040':[71,77,83,90,98,100],'1050':[69,74,80,87,95,100],'1060':[70,76,82,89,96,100],
+    '1070':[71,77,83,90,97,100],'1080':[70,75,81,88,96,100],'1090':[72,78,85,92,99,100],
+    '1100':[65,70,76,83,92,100],'1110':[64,69,75,82,91,100],'1120':[66,71,77,84,93,100],
+    '1130':[71,77,83,90,97,100],'1140':[65,70,76,83,92,100],'1150':[64,69,75,82,91,100],
+    '1160':[66,71,77,84,93,100],'1170':[68,73,79,86,94,100],'1180':[70,76,82,89,96,100],
+    '1190':[71,77,83,90,97,100],'1200':[65,70,76,83,92,100],'1210':[66,71,78,85,93,100],
+    '1220':[67,72,79,86,94,100],'1230':[65,70,76,83,91,100]
+  };
+  function buildSparkline(bzNum){
+    const pts=sparkData[bzNum]||sparkData['1070'];
+    const W=120,H=36,pad=2;
+    const xs=pts.map((_,i)=>pad+i*(W-2*pad)/5);
+    const ys=pts.map(v=>H-pad-(v/100)*(H-2*pad));
+    const d='M'+xs.map((x,i)=>`${x},${ys[i]}`).join(' L');
+    const fill='M'+xs[0]+','+H+' L'+xs.map((x,i)=>`${x},${ys[i]}`).join(' L')+` L${xs[5]},${H} Z`;
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="display:block">
+      <path d="${fill}" fill="rgba(255,255,255,.15)"/>
+      <path d="${d}" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="${xs[5]}" cy="${ys[5]}" r="3" fill="white"/>
+    </svg>`;
+  }
+
   function buildResult(){
     const r=calc();
     const tLbl={wohnung:'Wohnung',haus:'Haus',villa:'Villa',gewerbe:'Gewerbe'};
     return `<div class="step-wrap" style="padding:0;margin:-40px">
       <div class="result-header">
-        <div class="r-eyebrow">Deine Sofortbewertung · ${r.bz.num} ${r.bz.name}</div>
-        <div class="r-address">${tLbl[S.type]||'Immobilie'} · ${S.flaeche} m² · Quelle: immopreise.at 2026</div>
-        <div class="r-range-lbl">Geschätzter Marktwert</div>
-        <div class="r-range">${fmt(r.low)} – ${fmt(r.high)}</div>
-        <div class="r-range-bar"><div class="r-range-fill" id="rBar"></div></div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <div style="flex:1">
+            <div class="r-eyebrow">Deine Sofortbewertung · ${r.bz.num} ${r.bz.name}</div>
+            <div class="r-address">${tLbl[S.type]||'Immobilie'} · ${S.flaeche} m² · Quelle: immopreise.at 2026, OeNB</div>
+            <div class="r-range-lbl">Geschätzter Marktwert</div>
+            <div class="r-range">${fmt(r.low)} – ${fmt(r.high)}</div>
+            <div class="r-range-bar"><div class="r-range-fill" id="rBar"></div></div>
+          </div>
+          <div style="text-align:right;flex-shrink:0">
+            <div style="font-size:.65rem;color:rgba(255,255,255,.5);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Preistrend 5 Jahre</div>
+            ${buildSparkline(r.bz.num)}
+            <div style="font-size:.65rem;color:rgba(255,255,255,.5);margin-top:3px">2021 → 2026</div>
+          </div>
+        </div>
       </div>
       <div class="r-stats">
-        <div class="r-stat"><span class="r-stat-val blue">~${fmt(r.m2)}</span><span class="r-stat-lbl">Wert / m²</span></div>
-        <div class="r-stat"><span class="r-stat-val green">↑ steigend</span><span class="r-stat-lbl">Markttrend</span></div>
-        <div class="r-stat"><span class="r-stat-val">${r.bz.num}</span><span class="r-stat-lbl">Bezirk</span></div>
+        <div class="r-stat"><span class="r-stat-val blue">~${fmt(r.m2)}/m²</span><span class="r-stat-lbl">Aktueller Bezirkswert</span></div>
+        <div class="r-stat"><span class="r-stat-val green">↑ steigend</span><span class="r-stat-lbl">Markttrend ${r.bz.num}</span></div>
+        <div class="r-stat"><span class="r-stat-val">${r.bz.name}</span><span class="r-stat-lbl">Bezirk · ${r.bz.num}</span></div>
       </div>
       <div class="potential-box">
         <div class="pot-icon">💰</div>
@@ -727,6 +861,10 @@
           <div class="pot-amount">${fmt(r.potL)} – ${fmt(r.potH)}</div>
           <div class="pot-sub">Viele Eigentümer lassen genau diesen Betrag liegen – durch einen nicht optimierten Verkaufspreis. Ein Experte prüft kostenlos, ob das auch bei dir so ist.</div>
         </div>
+      </div>
+      <div style="margin:0;padding:16px 40px;background:#fffbeb;border-left:4px solid var(--amber);display:flex;align-items:flex-start;gap:12px">
+        <span style="font-size:1.2rem;flex-shrink:0">💡</span>
+        <div style="font-size:.82rem;color:var(--g700);line-height:1.6"><strong>Hinweis:</strong> Diese Schätzung basiert auf Marktdurchschnittswerten. Was wirklich rauszuholen ist, hängt von Grundriss, Zustand, Ausrichtung und Verhandlungsstrategie ab – das prüft ein Experte mit bewährten Bewertungsmethoden persönlich für dich.</div>
       </div>
       <div class="result-cta-block">
         <button class="cta2" onclick="openModal()">
@@ -771,6 +909,14 @@
     }
   }
   document.getElementById('overlay').addEventListener('click',function(e){if(e.target===this)closeModal()});
+
+  /* ── FAQ ── */
+  function toggleFaq(btn){
+    const item=btn.closest('.faq-item');
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!isOpen) item.classList.add('open');
+  }
 
   /* ── UTILS ── */
   function scrollToTool(){document.getElementById('tool-section').scrollIntoView({behavior:'smooth',block:'start'})}
