@@ -7,6 +7,8 @@
   <meta name="description" content="Kostenlose Immobilienbewertung Wien. Finde in 2 Minuten heraus was deine Wohnung oder dein Haus wert ist – und ob du Geld liegen lässt.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
   <style>
     :root {
       --white:#ffffff; --off:#f7f8fc; --b900:#0a1628; --b800:#0d2045;
@@ -35,9 +37,11 @@
     @media(max-width:780px){.nav-links{display:none}}
 
     /* ── HERO ── */
-    .hero-wrap{padding-top:64px;background:#f0f4f8;overflow:hidden;position:relative}
-    #cityCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.55}
-    .hero-gradient-overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(240,244,248,.96) 0%,rgba(240,244,248,.88) 40%,rgba(240,244,248,.3) 70%,rgba(240,244,248,.05) 100%);pointer-events:none}
+    .hero-wrap{padding-top:64px;background:#e8edf2;overflow:hidden;position:relative}
+    #wienMap3d{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+    #wienMap3d .maplibregl-canvas{display:block;}
+    .maplibregl-ctrl-bottom-left,.maplibregl-ctrl-bottom-right,.maplibregl-ctrl-top-left,.maplibregl-ctrl-top-right{display:none!important;}
+    .hero-gradient-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(232,237,242,.97) 0%,rgba(232,237,242,.90) 38%,rgba(232,237,242,.35) 65%,rgba(232,237,242,.0) 100%);pointer-events:none;}
     .hero{padding:100px 5% 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--b50);border:1px solid var(--b100);color:var(--b600);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:500;margin-bottom:24px}
     .eyebrow .dot{width:6px;height:6px;background:var(--b500);border-radius:50%;animation:pulse 2s infinite}
@@ -324,7 +328,7 @@
 
 <!-- HERO -->
 <div class="hero-wrap">
-  <canvas id="cityCanvas" aria-hidden="true"></canvas>
+  <div id="wienMap3d" aria-hidden="true"></div>
   <div class="hero-gradient-overlay"></div>
   <div class="hero">
     <div>
@@ -895,102 +899,76 @@
   /* ── NAV SCROLL ── */
   window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>20),{passive:true});
 
-  /* ── VIENNA ISOMETRIC CITY ── */
+  /* ── MAPLIBRE 3D WIEN ── */
   (function(){
-    const cv=document.getElementById('cityCanvas');
-    if(!cv)return;
-    const cx=cv.getContext('2d');
-    function sr(seed){let s=seed;return()=>{s=(s*1664525+1013904223)&0xffffffff;return(s>>>0)/0xffffffff;};}
-    const rng=sr(1337);
-    const TW=46,TH=23;
-    function iso(c,r,h){return{x:(c-r)*TW/2,y:(c+r)*TH/2-h};}
-    const COLS=34,ROWS=28;
-    // Ringstraße oval
-    const RCX=14,RCY=14,RA=5.2,RB=4.0;
-    function ringDist(c,r){return Math.sqrt(((c-RCX)/RA)**2+((r-RCY)/RB)**2);}
-    function isInneresStadt(c,r){return ringDist(c,r)<0.87;}
-    function isRingstrasse(c,r){const d=ringDist(c,r);return d>=0.87&&d<=1.13;}
-    // Danube: diagonal band across top
-    function isDanube(c,r){const y=4.8-(c-4)*0.045;return r>=y-1.3&&r<=y+1.3;}
-    function isDonaukanal(c,r){if(c<10||c>20)return false;const y=7.2-(c-10)*0.09;return r>=y-0.55&&r<=y+0.55;}
-    // Parks
-    function isPrater(c,r)    {return c>=20&&c<=30&&r>=5&&r<=14&&!isDanube(c,r);}
-    function isSchoenbrunn(c,r){return c>=4&&c<=11&&r>=18&&r<=24;}
-    function isWienerwald(c,r) {return c<=5&&r<=9;}
-    function isStadtpark(c,r)  {return c>=17&&c<=20&&r>=10&&r<=13;}
-    function isBelvedere(c,r)  {return c>=13&&c<=18&&r>=15&&r<=19;}
-    function isAugarten(c,r)   {return c>=16&&c<=19&&r>=6&&r<=9&&!isDanube(c,r);}
-    // Stable heights
-    const ht=new Float32Array(COLS*ROWS);
-    for(let i=0;i<ht.length;i++)ht[i]=rng();
-    function getH(c,r){
-      const rd=ringDist(c,r);let base;
-      if(isInneresStadt(c,r))  base=16+ht[r*COLS+c]*14;
-      else if(rd<1.4)          base=10+ht[r*COLS+c]*10;
-      else if(rd<2.2)          base=6+ht[r*COLS+c]*7;
-      else{const od=Math.sqrt((c-RCX)**2+(r-RCY)**2);base=Math.max(2,9-od*0.38)+ht[r*COLS+c]*4;}
-      return base*TH*0.30;
-    }
-    const cells=[];
-    for(let r=0;r<ROWS;r++){for(let c=0;c<COLS;c++){
-      let type='building';
-      if(isDanube(c,r))            type='water';
-      else if(isDonaukanal(c,r))   type='waterThin';
-      else if(isWienerwald(c,r))   type='forest';
-      else if(isPrater(c,r))       type='park';
-      else if(isSchoenbrunn(c,r))  type='park';
-      else if(isStadtpark(c,r))    type='park';
-      else if(isBelvedere(c,r))    type='park';
-      else if(isAugarten(c,r))     type='park';
-      else if(isRingstrasse(c,r))  type='ringroad';
-      else if(c%5===0||r%5===0)    type='road';
-      cells.push({c,r,type,h:type==='building'?getH(c,r):0});
-    }}
-    cells.sort((a,b)=>(a.c+a.r)-(b.c+b.r));
-    let sOff=0,W,H,ox,oy;
-    function resize(){W=cv.offsetWidth;H=cv.offsetHeight;cv.width=W;cv.height=H;ox=W*0.70;oy=H*0.08;}
-    function p(c,r,h){const v=iso(c,r,h);return{x:v.x+ox,y:v.y+oy+sOff};}
-    function flatTile(c,r,fill,stroke){
-      const tl=p(c,r,0),tr=p(c+1,r,0),br=p(c+1,r+1,0),bl=p(c,r+1,0);
-      cx.beginPath();cx.moveTo(tl.x,tl.y);cx.lineTo(tr.x,tr.y);cx.lineTo(br.x,br.y);cx.lineTo(bl.x,bl.y);cx.closePath();
-      cx.fillStyle=fill;cx.fill();
-      if(stroke){cx.strokeStyle=stroke;cx.lineWidth=0.4;cx.stroke();}
-    }
-    function bldg(c,r,h){
-      const tl=p(c,r,h),tr=p(c+1,r,h),br=p(c+1,r+1,h),bl=p(c,r+1,h);
-      const tlb=p(c,r,0),trb=p(c+1,r,0),brb=p(c+1,r+1,0),blb=p(c,r+1,0);
-      cx.beginPath();cx.moveTo(tl.x,tl.y);cx.lineTo(tr.x,tr.y);cx.lineTo(br.x,br.y);cx.lineTo(bl.x,bl.y);cx.closePath();
-      cx.fillStyle='rgba(232,239,247,.94)';cx.fill();cx.strokeStyle='rgba(172,190,212,.45)';cx.lineWidth=0.5;cx.stroke();
-      cx.beginPath();cx.moveTo(tr.x,tr.y);cx.lineTo(br.x,br.y);cx.lineTo(brb.x,brb.y);cx.lineTo(trb.x,trb.y);cx.closePath();
-      cx.fillStyle='rgba(185,202,222,.88)';cx.fill();cx.strokeStyle='rgba(158,178,200,.38)';cx.lineWidth=0.4;cx.stroke();
-      cx.beginPath();cx.moveTo(tl.x,tl.y);cx.lineTo(bl.x,bl.y);cx.lineTo(blb.x,blb.y);cx.lineTo(tlb.x,tlb.y);cx.closePath();
-      cx.fillStyle='rgba(206,218,232,.80)';cx.fill();cx.strokeStyle='rgba(158,178,200,.32)';cx.lineWidth=0.4;cx.stroke();
-    }
-    function spire(){
-      const sc=RCX+0.4,sr2=RCY+0.5;
-      const base=p(sc,sr2,0),mid=p(sc,sr2,TH*7),peak={x:mid.x,y:mid.y-TH*5.5};
-      cx.beginPath();cx.moveTo(base.x-5,base.y);cx.lineTo(base.x+5,base.y);cx.lineTo(mid.x+2.5,mid.y);cx.lineTo(mid.x-2.5,mid.y);cx.closePath();
-      cx.fillStyle='rgba(195,208,225,.92)';cx.fill();cx.strokeStyle='rgba(148,168,192,.55)';cx.lineWidth=0.7;cx.stroke();
-      cx.beginPath();cx.moveTo(mid.x-2.5,mid.y);cx.lineTo(mid.x+2.5,mid.y);cx.lineTo(peak.x,peak.y);cx.closePath();
-      cx.fillStyle='rgba(165,180,202,.92)';cx.fill();cx.strokeStyle='rgba(138,158,182,.45)';cx.lineWidth=0.5;cx.stroke();
-    }
-    function render(){
-      cx.clearRect(0,0,W,H);
-      cx.fillStyle='#edf1f6';cx.fillRect(0,0,W,H);
-      cells.forEach(({c,r,type,h})=>{
-        if(type==='water')     return flatTile(c,r,'rgba(145,202,236,.65)','rgba(122,185,222,.5)');
-        if(type==='waterThin') return flatTile(c,r,'rgba(145,202,236,.38)','rgba(122,185,222,.28)');
-        if(type==='forest')    return flatTile(c,r,'rgba(145,182,138,.42)','rgba(122,162,116,.3)');
-        if(type==='park')      return flatTile(c,r,'rgba(165,210,155,.50)','rgba(138,188,128,.3)');
-        if(type==='road')      return flatTile(c,r,'rgba(210,218,228,.58)');
-        if(type==='ringroad')  return flatTile(c,r,'rgba(220,226,235,.68)','rgba(188,200,216,.4)');
-        if(h>0) bldg(c,r,h);
+    const el=document.getElementById('wienMap3d');
+    if(!el||typeof maplibregl==='undefined')return;
+    const KEY='ooaUNOxW9pQZRAKyL4Pe';
+    const map=new maplibregl.Map({
+      container:'wienMap3d',
+      style:`https://api.maptiler.com/maps/bright/style.json?key=${KEY}`,
+      center:[16.3738,48.2082],   // Wien Innere Stadt
+      zoom:14.5,
+      pitch:58,
+      bearing:-28,
+      interactive:false,
+      attributionControl:false
+    });
+    map.on('load',()=>{
+      // Override map colors to match monochrome design
+      const layers=map.getStyle().layers;
+      layers.forEach(layer=>{
+        if(layer.type==='background'){map.setPaintProperty(layer.id,'background-color','#e8edf2');return;}
+        if(layer.type==='fill'){
+          const id=layer.id;
+          if(id.includes('water')){map.setPaintProperty(id,'fill-color','#b8d4e8');map.setPaintProperty(id,'fill-opacity',.7);return;}
+          if(id.includes('park')||id.includes('green')||id.includes('grass')||id.includes('forest')){map.setPaintProperty(id,'fill-color','#c8dfc0');map.setPaintProperty(id,'fill-opacity',.6);return;}
+          if(id.includes('road')||id.includes('street')){return;}
+          map.setPaintProperty(id,'fill-color','#dde3eb');
+        }
+        if(layer.type==='line'){
+          if(layer.id.includes('road')||layer.id.includes('street')){map.setPaintProperty(layer.id,'line-color','#c8cfd8');}
+        }
       });
-      spire();
-    }
-    resize();render();
-    window.addEventListener('resize',()=>{resize();render();},{passive:true});
-    window.addEventListener('scroll',()=>{sOff=scrollY*0.28;render();},{passive:true});
+
+      // Add 3D buildings layer
+      if(!map.getSource('openmaptiles')&&!map.getSource('maptiler_planet'))return;
+      const srcId=map.getSource('openmaptiles')?'openmaptiles':'maptiler_planet';
+      map.addLayer({
+        id:'3d-buildings',
+        source:srcId,
+        'source-layer':'building',
+        type:'fill-extrusion',
+        minzoom:13,
+        paint:{
+          'fill-extrusion-color':[
+            'interpolate',['linear'],['get','render_height'],
+            0,'#dde4ed',
+            20,'#d2dbe8',
+            50,'#c5cfe2',
+            100,'#b8c4da'
+          ],
+          'fill-extrusion-height':['coalesce',['get','render_height'],['get','height'],10],
+          'fill-extrusion-base':['coalesce',['get','render_min_height'],0],
+          'fill-extrusion-opacity':0.88
+        }
+      });
+
+      // Slow auto-rotate for parallax feel
+      let bearing=-28;
+      function rotate(){
+        bearing-=0.012;
+        map.setBearing(bearing);
+        requestAnimationFrame(rotate);
+      }
+      rotate();
+    });
+
+    // Scroll: adjust pitch/zoom for parallax depth
+    window.addEventListener('scroll',()=>{
+      const pct=Math.min(scrollY/600,1);
+      map.setPitch(58+pct*10);
+    },{passive:true});
   })();
 
   /* ── STICKY CTA ── */
