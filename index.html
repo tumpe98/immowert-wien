@@ -35,8 +35,9 @@
     @media(max-width:780px){.nav-links{display:none}}
 
     /* ── HERO ── */
-    .hero-wrap{padding-top:64px;background:linear-gradient(170deg,var(--off) 0%,var(--white) 100%);overflow:hidden;position:relative}
-    .wien-map-bg{position:absolute;right:-4%;top:50%;transform:translateY(-50%);width:54%;max-width:640px;opacity:1;pointer-events:none;color:var(--b400);will-change:transform}
+    .hero-wrap{padding-top:64px;background:#f0f4f8;overflow:hidden;position:relative}
+    #cityCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.55}
+    .hero-gradient-overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(240,244,248,.96) 0%,rgba(240,244,248,.88) 40%,rgba(240,244,248,.3) 70%,rgba(240,244,248,.05) 100%);pointer-events:none}
     .hero{padding:100px 5% 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--b50);border:1px solid var(--b100);color:var(--b600);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:500;margin-bottom:24px}
     .eyebrow .dot{width:6px;height:6px;background:var(--b500);border-radius:50%;animation:pulse 2s infinite}
@@ -323,37 +324,8 @@
 
 <!-- HERO -->
 <div class="hero-wrap">
-  <!-- Vienna outline background -->
-  <svg id="wienMapBg" class="wien-map-bg" viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <!-- Vienna city boundary (simplified) -->
-    <path d="M 88,6 C 100,4 118,8 138,14 C 158,20 178,30 194,48 C 206,62 212,80 210,100 C 208,118 200,136 190,150 C 178,166 162,178 144,188 C 126,198 106,204 86,202 C 68,200 52,192 38,178 C 26,166 16,150 12,132 C 8,114 10,94 18,76 C 26,58 40,42 58,28 C 70,18 78,8 88,6 Z"
-      stroke="currentColor" stroke-width="1.8" fill="rgba(37,99,235,0.04)" stroke-linejoin="round"/>
-    <!-- Donau river (main) -->
-    <path d="M 32,90 C 55,84 80,80 105,82 C 128,84 148,92 168,90 C 184,88 196,80 206,72"
-      stroke="currentColor" stroke-width="2.2" fill="none" opacity="0.5" stroke-linecap="round"/>
-    <!-- Neue Donau / Donaukanal (lighter) -->
-    <path d="M 48,100 C 70,95 94,92 116,94 C 136,96 154,102 172,100"
-      stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.28" stroke-linecap="round" stroke-dasharray="4,3"/>
-    <!-- District grid lines (very faint) -->
-    <line x1="105" y1="82" x2="108" y2="190" stroke="currentColor" stroke-width="0.6" opacity="0.12"/>
-    <line x1="148" y1="88" x2="150" y2="185" stroke="currentColor" stroke-width="0.6" opacity="0.12"/>
-    <line x1="30" y1="130" x2="210" y2="128" stroke="currentColor" stroke-width="0.6" opacity="0.12"/>
-    <line x1="22" y1="100" x2="210" y2="98" stroke="currentColor" stroke-width="0.6" opacity="0.12"/>
-    <!-- Innere Stadt dot -->
-    <circle cx="122" cy="108" r="4" fill="currentColor" opacity="0.25"/>
-    <circle cx="122" cy="108" r="8" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.15"/>
-    <!-- District dots -->
-    <circle cx="148" cy="118" r="2.5" fill="currentColor" opacity="0.15"/>
-    <circle cx="118" cy="130" r="2.5" fill="currentColor" opacity="0.15"/>
-    <circle cx="96" cy="122" r="2.5" fill="currentColor" opacity="0.15"/>
-    <circle cx="165" cy="140" r="2.5" fill="currentColor" opacity="0.15"/>
-    <circle cx="80" cy="145" r="2.5" fill="currentColor" opacity="0.15"/>
-    <circle cx="140" cy="160" r="2.5" fill="currentColor" opacity="0.12"/>
-    <circle cx="105" cy="170" r="2.5" fill="currentColor" opacity="0.12"/>
-    <circle cx="55" cy="115" r="2.5" fill="currentColor" opacity="0.12"/>
-    <circle cx="70" cy="92" r="2.5" fill="currentColor" opacity="0.12"/>
-    <circle cx="155" cy="68" r="2.5" fill="currentColor" opacity="0.12"/>
-  </svg>
+  <canvas id="cityCanvas" aria-hidden="true"></canvas>
+  <div class="hero-gradient-overlay"></div>
   <div class="hero">
     <div>
       <div class="eyebrow"><span class="dot"></span>Immobilienbewertung Wien · Kostenlos</div>
@@ -923,13 +895,196 @@
   /* ── NAV SCROLL ── */
   window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>20),{passive:true});
 
-  /* ── WIEN MAP PARALLAX ── */
-  const wienMap=document.getElementById('wienMapBg');
-  if(wienMap){
+  /* ── ISOMETRIC CITY CANVAS ── */
+  (function(){
+    const canvas=document.getElementById('cityCanvas');
+    if(!canvas)return;
+    const ctx=canvas.getContext('2d');
+
+    // Seeded random for consistent layout
+    function seededRand(seed){
+      let s=seed;
+      return function(){s=(s*1664525+1013904223)&0xffffffff;return(s>>>0)/0xffffffff};
+    }
+    const rng=seededRand(42);
+
+    // Isometric projection
+    const TW=48,TH=24; // tile width/height
+    function iso(col,row,h){
+      return{
+        x:(col-row)*TW/2,
+        y:(col+row)*TH/2-h
+      };
+    }
+
+    // City grid definition
+    // Each cell: {type:'building'|'park'|'road'|'water', h:height, w:cellW, d:cellD}
+    const GRID_COLS=22, GRID_ROWS=18;
+
+    // Park locations (Innerer Stadtpark, Prater, etc.)
+    const parks=new Set(['4,7','4,8','5,7','5,8','14,3','14,4','15,3','15,4','16,3','8,14','9,14','9,15']);
+    // Water (Donau rough position)
+    const water=new Set(['2,5','3,5','4,5','5,5','6,5','7,5','8,5','9,5','10,5','11,5','12,5','13,5','14,5','2,4','3,4','4,4','5,4','6,4','7,4']);
+
+    // Build cell data
+    const cells=[];
+    for(let r=0;r<GRID_ROWS;r++){
+      for(let c=0;c<GRID_COLS;c++){
+        const key=`${c},${r}`;
+        let type='building';
+        if(water.has(key)) type='water';
+        else if(parks.has(key)) type='park';
+        // Road every 4 tiles
+        else if(c%4===0||r%4===0) type='road';
+
+        let h=0;
+        if(type==='building'){
+          // Denser/taller in center (Innere Stadt area)
+          const cx=Math.abs(c-8),cy=Math.abs(r-10);
+          const dist=Math.sqrt(cx*cx+cy*cy);
+          const baseH=Math.max(4,22-dist*1.8);
+          h=(rng()*baseH+4)*TH*0.35;
+        }
+        cells.push({c,r,type,h});
+      }
+    }
+
+    // Sort back-to-front for isometric rendering
+    cells.sort((a,b)=>(a.c+a.r)-(b.c+b.r));
+
+    let scrollOffset=0;
+    let W,H,offX,offY;
+
+    function resize(){
+      W=canvas.offsetWidth;H=canvas.offsetHeight;
+      canvas.width=W*devicePixelRatio;
+      canvas.height=H*devicePixelRatio;
+      ctx.scale(devicePixelRatio,devicePixelRatio);
+      // Center the grid
+      offX=W*0.72;
+      offY=H*0.18;
+    }
+
+    function drawCell(c,r,type,h){
+      const p=iso(c,r,0);
+      const px=p.x+offX;
+      const py=p.y+offY+scrollOffset;
+
+      // Top-left, top-right, bottom-right, bottom-left of tile top
+      const tl=iso(c,r,h);
+      const tr=iso(c+1,r,h);
+      const br=iso(c+1,r+1,h);
+      const bl=iso(c,r+1,h);
+      const tlb=iso(c,r,0);
+      const trb=iso(c+1,r,0);
+      const brb=iso(c+1,r+1,0);
+      const blb=iso(c,r+1,0);
+
+      function px2(pt){return pt.x+offX;}
+      function py2(pt){return pt.y+offY+scrollOffset;}
+
+      if(type==='water'){
+        // Flat water tile
+        ctx.beginPath();
+        ctx.moveTo(px2(tlb),py2(tlb));
+        ctx.lineTo(px2(trb),py2(trb));
+        ctx.lineTo(px2(brb),py2(brb));
+        ctx.lineTo(px2(blb),py2(blb));
+        ctx.closePath();
+        ctx.fillStyle='rgba(147,197,253,0.45)';
+        ctx.fill();
+        ctx.strokeStyle='rgba(147,197,253,0.6)';
+        ctx.lineWidth=0.5;
+        ctx.stroke();
+        return;
+      }
+
+      if(type==='park'){
+        ctx.beginPath();
+        ctx.moveTo(px2(tlb),py2(tlb));
+        ctx.lineTo(px2(trb),py2(trb));
+        ctx.lineTo(px2(brb),py2(brb));
+        ctx.lineTo(px2(blb),py2(blb));
+        ctx.closePath();
+        ctx.fillStyle='rgba(134,200,150,0.35)';
+        ctx.fill();
+        ctx.strokeStyle='rgba(120,180,130,0.4)';
+        ctx.lineWidth=0.5;
+        ctx.stroke();
+        return;
+      }
+
+      if(type==='road'){
+        ctx.beginPath();
+        ctx.moveTo(px2(tlb),py2(tlb));
+        ctx.lineTo(px2(trb),py2(trb));
+        ctx.lineTo(px2(brb),py2(brb));
+        ctx.lineTo(px2(blb),py2(blb));
+        ctx.closePath();
+        ctx.fillStyle='rgba(220,226,232,0.5)';
+        ctx.fill();
+        return;
+      }
+
+      if(h<=0) return;
+
+      // Building: top face
+      ctx.beginPath();
+      ctx.moveTo(px2(tl),py2(tl));
+      ctx.lineTo(px2(tr),py2(tr));
+      ctx.lineTo(px2(br),py2(br));
+      ctx.lineTo(px2(bl),py2(bl));
+      ctx.closePath();
+      ctx.fillStyle='rgba(235,239,244,0.92)';
+      ctx.fill();
+      ctx.strokeStyle='rgba(180,192,208,0.6)';
+      ctx.lineWidth=0.6;
+      ctx.stroke();
+
+      // Right face (darker)
+      ctx.beginPath();
+      ctx.moveTo(px2(tr),py2(tr));
+      ctx.lineTo(px2(br),py2(br));
+      ctx.lineTo(px2(brb),py2(brb));
+      ctx.lineTo(px2(trb),py2(trb));
+      ctx.closePath();
+      ctx.fillStyle='rgba(195,207,220,0.82)';
+      ctx.fill();
+      ctx.strokeStyle='rgba(170,185,200,0.5)';
+      ctx.lineWidth=0.5;
+      ctx.stroke();
+
+      // Left face (medium)
+      ctx.beginPath();
+      ctx.moveTo(px2(tl),py2(tl));
+      ctx.lineTo(px2(bl),py2(bl));
+      ctx.lineTo(px2(blb),py2(blb));
+      ctx.lineTo(px2(tlb),py2(tlb));
+      ctx.closePath();
+      ctx.fillStyle='rgba(210,220,232,0.75)';
+      ctx.fill();
+      ctx.strokeStyle='rgba(170,185,200,0.4)';
+      ctx.lineWidth=0.5;
+      ctx.stroke();
+    }
+
+    function render(){
+      ctx.clearRect(0,0,canvas.width/devicePixelRatio,canvas.height/devicePixelRatio);
+      // Ground
+      ctx.fillStyle='#f0f4f8';
+      ctx.fillRect(0,0,W,H);
+      cells.forEach(cell=>drawCell(cell.c,cell.r,cell.type,cell.h));
+    }
+
+    resize();
+    render();
+
+    window.addEventListener('resize',()=>{resize();render();},{passive:true});
     window.addEventListener('scroll',()=>{
-      wienMap.style.transform=`translateY(calc(-50% + ${scrollY*0.22}px))`;
+      scrollOffset=scrollY*0.28;
+      render();
     },{passive:true});
-  }
+  })();
 
   /* ── STICKY CTA ── */
   const heroEl=document.querySelector('.hero');
