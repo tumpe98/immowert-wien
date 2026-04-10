@@ -895,195 +895,102 @@
   /* ── NAV SCROLL ── */
   window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>20),{passive:true});
 
-  /* ── ISOMETRIC CITY CANVAS ── */
+  /* ── VIENNA ISOMETRIC CITY ── */
   (function(){
-    const canvas=document.getElementById('cityCanvas');
-    if(!canvas)return;
-    const ctx=canvas.getContext('2d');
-
-    // Seeded random for consistent layout
-    function seededRand(seed){
-      let s=seed;
-      return function(){s=(s*1664525+1013904223)&0xffffffff;return(s>>>0)/0xffffffff};
+    const cv=document.getElementById('cityCanvas');
+    if(!cv)return;
+    const cx=cv.getContext('2d');
+    function sr(seed){let s=seed;return()=>{s=(s*1664525+1013904223)&0xffffffff;return(s>>>0)/0xffffffff;};}
+    const rng=sr(1337);
+    const TW=46,TH=23;
+    function iso(c,r,h){return{x:(c-r)*TW/2,y:(c+r)*TH/2-h};}
+    const COLS=34,ROWS=28;
+    // Ringstraße oval
+    const RCX=14,RCY=14,RA=5.2,RB=4.0;
+    function ringDist(c,r){return Math.sqrt(((c-RCX)/RA)**2+((r-RCY)/RB)**2);}
+    function isInneresStadt(c,r){return ringDist(c,r)<0.87;}
+    function isRingstrasse(c,r){const d=ringDist(c,r);return d>=0.87&&d<=1.13;}
+    // Danube: diagonal band across top
+    function isDanube(c,r){const y=4.8-(c-4)*0.045;return r>=y-1.3&&r<=y+1.3;}
+    function isDonaukanal(c,r){if(c<10||c>20)return false;const y=7.2-(c-10)*0.09;return r>=y-0.55&&r<=y+0.55;}
+    // Parks
+    function isPrater(c,r)    {return c>=20&&c<=30&&r>=5&&r<=14&&!isDanube(c,r);}
+    function isSchoenbrunn(c,r){return c>=4&&c<=11&&r>=18&&r<=24;}
+    function isWienerwald(c,r) {return c<=5&&r<=9;}
+    function isStadtpark(c,r)  {return c>=17&&c<=20&&r>=10&&r<=13;}
+    function isBelvedere(c,r)  {return c>=13&&c<=18&&r>=15&&r<=19;}
+    function isAugarten(c,r)   {return c>=16&&c<=19&&r>=6&&r<=9&&!isDanube(c,r);}
+    // Stable heights
+    const ht=new Float32Array(COLS*ROWS);
+    for(let i=0;i<ht.length;i++)ht[i]=rng();
+    function getH(c,r){
+      const rd=ringDist(c,r);let base;
+      if(isInneresStadt(c,r))  base=16+ht[r*COLS+c]*14;
+      else if(rd<1.4)          base=10+ht[r*COLS+c]*10;
+      else if(rd<2.2)          base=6+ht[r*COLS+c]*7;
+      else{const od=Math.sqrt((c-RCX)**2+(r-RCY)**2);base=Math.max(2,9-od*0.38)+ht[r*COLS+c]*4;}
+      return base*TH*0.30;
     }
-    const rng=seededRand(42);
-
-    // Isometric projection
-    const TW=48,TH=24; // tile width/height
-    function iso(col,row,h){
-      return{
-        x:(col-row)*TW/2,
-        y:(col+row)*TH/2-h
-      };
-    }
-
-    // City grid definition
-    // Each cell: {type:'building'|'park'|'road'|'water', h:height, w:cellW, d:cellD}
-    const GRID_COLS=22, GRID_ROWS=18;
-
-    // Park locations (Innerer Stadtpark, Prater, etc.)
-    const parks=new Set(['4,7','4,8','5,7','5,8','14,3','14,4','15,3','15,4','16,3','8,14','9,14','9,15']);
-    // Water (Donau rough position)
-    const water=new Set(['2,5','3,5','4,5','5,5','6,5','7,5','8,5','9,5','10,5','11,5','12,5','13,5','14,5','2,4','3,4','4,4','5,4','6,4','7,4']);
-
-    // Build cell data
     const cells=[];
-    for(let r=0;r<GRID_ROWS;r++){
-      for(let c=0;c<GRID_COLS;c++){
-        const key=`${c},${r}`;
-        let type='building';
-        if(water.has(key)) type='water';
-        else if(parks.has(key)) type='park';
-        // Road every 4 tiles
-        else if(c%4===0||r%4===0) type='road';
-
-        let h=0;
-        if(type==='building'){
-          // Denser/taller in center (Innere Stadt area)
-          const cx=Math.abs(c-8),cy=Math.abs(r-10);
-          const dist=Math.sqrt(cx*cx+cy*cy);
-          const baseH=Math.max(4,22-dist*1.8);
-          h=(rng()*baseH+4)*TH*0.35;
-        }
-        cells.push({c,r,type,h});
-      }
-    }
-
-    // Sort back-to-front for isometric rendering
+    for(let r=0;r<ROWS;r++){for(let c=0;c<COLS;c++){
+      let type='building';
+      if(isDanube(c,r))            type='water';
+      else if(isDonaukanal(c,r))   type='waterThin';
+      else if(isWienerwald(c,r))   type='forest';
+      else if(isPrater(c,r))       type='park';
+      else if(isSchoenbrunn(c,r))  type='park';
+      else if(isStadtpark(c,r))    type='park';
+      else if(isBelvedere(c,r))    type='park';
+      else if(isAugarten(c,r))     type='park';
+      else if(isRingstrasse(c,r))  type='ringroad';
+      else if(c%5===0||r%5===0)    type='road';
+      cells.push({c,r,type,h:type==='building'?getH(c,r):0});
+    }}
     cells.sort((a,b)=>(a.c+a.r)-(b.c+b.r));
-
-    let scrollOffset=0;
-    let W,H,offX,offY;
-
-    function resize(){
-      W=canvas.offsetWidth;H=canvas.offsetHeight;
-      canvas.width=W*devicePixelRatio;
-      canvas.height=H*devicePixelRatio;
-      ctx.scale(devicePixelRatio,devicePixelRatio);
-      // Center the grid
-      offX=W*0.72;
-      offY=H*0.18;
+    let sOff=0,W,H,ox,oy;
+    function resize(){W=cv.offsetWidth;H=cv.offsetHeight;cv.width=W;cv.height=H;ox=W*0.70;oy=H*0.08;}
+    function p(c,r,h){const v=iso(c,r,h);return{x:v.x+ox,y:v.y+oy+sOff};}
+    function flatTile(c,r,fill,stroke){
+      const tl=p(c,r,0),tr=p(c+1,r,0),br=p(c+1,r+1,0),bl=p(c,r+1,0);
+      cx.beginPath();cx.moveTo(tl.x,tl.y);cx.lineTo(tr.x,tr.y);cx.lineTo(br.x,br.y);cx.lineTo(bl.x,bl.y);cx.closePath();
+      cx.fillStyle=fill;cx.fill();
+      if(stroke){cx.strokeStyle=stroke;cx.lineWidth=0.4;cx.stroke();}
     }
-
-    function drawCell(c,r,type,h){
-      const p=iso(c,r,0);
-      const px=p.x+offX;
-      const py=p.y+offY+scrollOffset;
-
-      // Top-left, top-right, bottom-right, bottom-left of tile top
-      const tl=iso(c,r,h);
-      const tr=iso(c+1,r,h);
-      const br=iso(c+1,r+1,h);
-      const bl=iso(c,r+1,h);
-      const tlb=iso(c,r,0);
-      const trb=iso(c+1,r,0);
-      const brb=iso(c+1,r+1,0);
-      const blb=iso(c,r+1,0);
-
-      function px2(pt){return pt.x+offX;}
-      function py2(pt){return pt.y+offY+scrollOffset;}
-
-      if(type==='water'){
-        // Flat water tile
-        ctx.beginPath();
-        ctx.moveTo(px2(tlb),py2(tlb));
-        ctx.lineTo(px2(trb),py2(trb));
-        ctx.lineTo(px2(brb),py2(brb));
-        ctx.lineTo(px2(blb),py2(blb));
-        ctx.closePath();
-        ctx.fillStyle='rgba(147,197,253,0.45)';
-        ctx.fill();
-        ctx.strokeStyle='rgba(147,197,253,0.6)';
-        ctx.lineWidth=0.5;
-        ctx.stroke();
-        return;
-      }
-
-      if(type==='park'){
-        ctx.beginPath();
-        ctx.moveTo(px2(tlb),py2(tlb));
-        ctx.lineTo(px2(trb),py2(trb));
-        ctx.lineTo(px2(brb),py2(brb));
-        ctx.lineTo(px2(blb),py2(blb));
-        ctx.closePath();
-        ctx.fillStyle='rgba(134,200,150,0.35)';
-        ctx.fill();
-        ctx.strokeStyle='rgba(120,180,130,0.4)';
-        ctx.lineWidth=0.5;
-        ctx.stroke();
-        return;
-      }
-
-      if(type==='road'){
-        ctx.beginPath();
-        ctx.moveTo(px2(tlb),py2(tlb));
-        ctx.lineTo(px2(trb),py2(trb));
-        ctx.lineTo(px2(brb),py2(brb));
-        ctx.lineTo(px2(blb),py2(blb));
-        ctx.closePath();
-        ctx.fillStyle='rgba(220,226,232,0.5)';
-        ctx.fill();
-        return;
-      }
-
-      if(h<=0) return;
-
-      // Building: top face
-      ctx.beginPath();
-      ctx.moveTo(px2(tl),py2(tl));
-      ctx.lineTo(px2(tr),py2(tr));
-      ctx.lineTo(px2(br),py2(br));
-      ctx.lineTo(px2(bl),py2(bl));
-      ctx.closePath();
-      ctx.fillStyle='rgba(235,239,244,0.92)';
-      ctx.fill();
-      ctx.strokeStyle='rgba(180,192,208,0.6)';
-      ctx.lineWidth=0.6;
-      ctx.stroke();
-
-      // Right face (darker)
-      ctx.beginPath();
-      ctx.moveTo(px2(tr),py2(tr));
-      ctx.lineTo(px2(br),py2(br));
-      ctx.lineTo(px2(brb),py2(brb));
-      ctx.lineTo(px2(trb),py2(trb));
-      ctx.closePath();
-      ctx.fillStyle='rgba(195,207,220,0.82)';
-      ctx.fill();
-      ctx.strokeStyle='rgba(170,185,200,0.5)';
-      ctx.lineWidth=0.5;
-      ctx.stroke();
-
-      // Left face (medium)
-      ctx.beginPath();
-      ctx.moveTo(px2(tl),py2(tl));
-      ctx.lineTo(px2(bl),py2(bl));
-      ctx.lineTo(px2(blb),py2(blb));
-      ctx.lineTo(px2(tlb),py2(tlb));
-      ctx.closePath();
-      ctx.fillStyle='rgba(210,220,232,0.75)';
-      ctx.fill();
-      ctx.strokeStyle='rgba(170,185,200,0.4)';
-      ctx.lineWidth=0.5;
-      ctx.stroke();
+    function bldg(c,r,h){
+      const tl=p(c,r,h),tr=p(c+1,r,h),br=p(c+1,r+1,h),bl=p(c,r+1,h);
+      const tlb=p(c,r,0),trb=p(c+1,r,0),brb=p(c+1,r+1,0),blb=p(c,r+1,0);
+      cx.beginPath();cx.moveTo(tl.x,tl.y);cx.lineTo(tr.x,tr.y);cx.lineTo(br.x,br.y);cx.lineTo(bl.x,bl.y);cx.closePath();
+      cx.fillStyle='rgba(232,239,247,.94)';cx.fill();cx.strokeStyle='rgba(172,190,212,.45)';cx.lineWidth=0.5;cx.stroke();
+      cx.beginPath();cx.moveTo(tr.x,tr.y);cx.lineTo(br.x,br.y);cx.lineTo(brb.x,brb.y);cx.lineTo(trb.x,trb.y);cx.closePath();
+      cx.fillStyle='rgba(185,202,222,.88)';cx.fill();cx.strokeStyle='rgba(158,178,200,.38)';cx.lineWidth=0.4;cx.stroke();
+      cx.beginPath();cx.moveTo(tl.x,tl.y);cx.lineTo(bl.x,bl.y);cx.lineTo(blb.x,blb.y);cx.lineTo(tlb.x,tlb.y);cx.closePath();
+      cx.fillStyle='rgba(206,218,232,.80)';cx.fill();cx.strokeStyle='rgba(158,178,200,.32)';cx.lineWidth=0.4;cx.stroke();
     }
-
+    function spire(){
+      const sc=RCX+0.4,sr2=RCY+0.5;
+      const base=p(sc,sr2,0),mid=p(sc,sr2,TH*7),peak={x:mid.x,y:mid.y-TH*5.5};
+      cx.beginPath();cx.moveTo(base.x-5,base.y);cx.lineTo(base.x+5,base.y);cx.lineTo(mid.x+2.5,mid.y);cx.lineTo(mid.x-2.5,mid.y);cx.closePath();
+      cx.fillStyle='rgba(195,208,225,.92)';cx.fill();cx.strokeStyle='rgba(148,168,192,.55)';cx.lineWidth=0.7;cx.stroke();
+      cx.beginPath();cx.moveTo(mid.x-2.5,mid.y);cx.lineTo(mid.x+2.5,mid.y);cx.lineTo(peak.x,peak.y);cx.closePath();
+      cx.fillStyle='rgba(165,180,202,.92)';cx.fill();cx.strokeStyle='rgba(138,158,182,.45)';cx.lineWidth=0.5;cx.stroke();
+    }
     function render(){
-      ctx.clearRect(0,0,canvas.width/devicePixelRatio,canvas.height/devicePixelRatio);
-      // Ground
-      ctx.fillStyle='#f0f4f8';
-      ctx.fillRect(0,0,W,H);
-      cells.forEach(cell=>drawCell(cell.c,cell.r,cell.type,cell.h));
+      cx.clearRect(0,0,W,H);
+      cx.fillStyle='#edf1f6';cx.fillRect(0,0,W,H);
+      cells.forEach(({c,r,type,h})=>{
+        if(type==='water')     return flatTile(c,r,'rgba(145,202,236,.65)','rgba(122,185,222,.5)');
+        if(type==='waterThin') return flatTile(c,r,'rgba(145,202,236,.38)','rgba(122,185,222,.28)');
+        if(type==='forest')    return flatTile(c,r,'rgba(145,182,138,.42)','rgba(122,162,116,.3)');
+        if(type==='park')      return flatTile(c,r,'rgba(165,210,155,.50)','rgba(138,188,128,.3)');
+        if(type==='road')      return flatTile(c,r,'rgba(210,218,228,.58)');
+        if(type==='ringroad')  return flatTile(c,r,'rgba(220,226,235,.68)','rgba(188,200,216,.4)');
+        if(h>0) bldg(c,r,h);
+      });
+      spire();
     }
-
-    resize();
-    render();
-
+    resize();render();
     window.addEventListener('resize',()=>{resize();render();},{passive:true});
-    window.addEventListener('scroll',()=>{
-      scrollOffset=scrollY*0.28;
-      render();
-    },{passive:true});
+    window.addEventListener('scroll',()=>{sOff=scrollY*0.28;render();},{passive:true});
   })();
 
   /* ── STICKY CTA ── */
