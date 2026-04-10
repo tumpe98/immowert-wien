@@ -904,71 +904,78 @@
     const el=document.getElementById('wienMap3d');
     if(!el||typeof maplibregl==='undefined')return;
     const KEY='ooaUNOxW9pQZRAKyL4Pe';
+
+    // Minimal style: only roads, water, parks, buildings — no labels
+    const STYLE=`https://api.maptiler.com/maps/dataviz-light/style.json?key=${KEY}`;
+
     const map=new maplibregl.Map({
       container:'wienMap3d',
-      style:`https://api.maptiler.com/maps/bright/style.json?key=${KEY}`,
-      center:[16.3738,48.2082],   // Wien Innere Stadt
-      zoom:14.5,
-      pitch:58,
-      bearing:-28,
+      style:STYLE,
+      center:[16.3731,48.2085],   // Stephansdom
+      zoom:15.4,
+      pitch:62,
+      bearing:22,               // looking from NW toward Stephansdom
       interactive:false,
-      attributionControl:false
+      attributionControl:false,
+      fadeDuration:0            // tiles appear instantly, no fade-in
     });
+
     map.on('load',()=>{
-      // Override map colors to match monochrome design
       const layers=map.getStyle().layers;
       layers.forEach(layer=>{
+        // Hide all labels/symbols — removes abgeschnittene Beschriftungen
+        if(layer.type==='symbol'){map.setLayoutProperty(layer.id,'visibility','none');return;}
+        // Background
         if(layer.type==='background'){map.setPaintProperty(layer.id,'background-color','#e8edf2');return;}
-        if(layer.type==='fill'){
-          const id=layer.id;
-          if(id.includes('water')){map.setPaintProperty(id,'fill-color','#b8d4e8');map.setPaintProperty(id,'fill-opacity',.7);return;}
-          if(id.includes('park')||id.includes('green')||id.includes('grass')||id.includes('forest')){map.setPaintProperty(id,'fill-color','#c8dfc0');map.setPaintProperty(id,'fill-opacity',.6);return;}
-          if(id.includes('road')||id.includes('street')){return;}
-          map.setPaintProperty(id,'fill-color','#dde3eb');
+        // Water
+        if(layer.type==='fill'&&(layer.id.includes('water')||layer.id.includes('river')||layer.id.includes('lake'))){
+          map.setPaintProperty(layer.id,'fill-color','#b8d0e6');
+          map.setPaintProperty(layer.id,'fill-opacity',.75);
+          return;
         }
-        if(layer.type==='line'){
-          if(layer.id.includes('road')||layer.id.includes('street')){map.setPaintProperty(layer.id,'line-color','#c8cfd8');}
+        // Parks / green
+        if(layer.type==='fill'&&(layer.id.includes('park')||layer.id.includes('green')||layer.id.includes('grass')||layer.id.includes('forest')||layer.id.includes('wood')||layer.id.includes('landuse_residential'))){
+          map.setPaintProperty(layer.id,'fill-color','#ccdfc4');
+          map.setPaintProperty(layer.id,'fill-opacity',.55);
+          return;
         }
+        // All other fills → monochrome
+        if(layer.type==='fill'){map.setPaintProperty(layer.id,'fill-color','#dde3ea');}
+        // Roads → subtle grey
+        if(layer.type==='line'){map.setPaintProperty(layer.id,'line-color','#c4cdd8');}
       });
 
-      // Add 3D buildings layer
-      if(!map.getSource('openmaptiles')&&!map.getSource('maptiler_planet'))return;
-      const srcId=map.getSource('openmaptiles')?'openmaptiles':'maptiler_planet';
-      map.addLayer({
-        id:'3d-buildings',
-        source:srcId,
-        'source-layer':'building',
-        type:'fill-extrusion',
-        minzoom:13,
-        paint:{
-          'fill-extrusion-color':[
-            'interpolate',['linear'],['get','render_height'],
-            0,'#dde4ed',
-            20,'#d2dbe8',
-            50,'#c5cfe2',
-            100,'#b8c4da'
-          ],
-          'fill-extrusion-height':['coalesce',['get','render_height'],['get','height'],10],
-          'fill-extrusion-base':['coalesce',['get','render_min_height'],0],
-          'fill-extrusion-opacity':0.88
-        }
-      });
+      // 3D buildings
+      const srcId=['openmaptiles','maptiler_planet','maptiler-planet'].find(id=>map.getSource(id));
+      if(srcId){
+        map.addLayer({
+          id:'3d-buildings',
+          source:srcId,
+          'source-layer':'building',
+          type:'fill-extrusion',
+          minzoom:13,
+          paint:{
+            'fill-extrusion-color':[
+              'interpolate',['linear'],['get','render_height'],
+              0,'#dce4ee',20,'#d0d9e7',50,'#c3cde0',100,'#b6c2d8'
+            ],
+            'fill-extrusion-height':['coalesce',['get','render_height'],['get','height'],10],
+            'fill-extrusion-base':['coalesce',['get','render_min_height'],0],
+            'fill-extrusion-opacity':0.92,
+            'fill-extrusion-ambient-occlusion-intensity':0.3
+          }
+        });
+      }
 
-      // Slow auto-rotate for parallax feel
-      let bearing=-28;
+      // Very slow rotation around Stephansdom
+      let bearing=22;
       function rotate(){
-        bearing-=0.012;
+        bearing-=0.008;
         map.setBearing(bearing);
         requestAnimationFrame(rotate);
       }
       rotate();
     });
-
-    // Scroll: adjust pitch/zoom for parallax depth
-    window.addEventListener('scroll',()=>{
-      const pct=Math.min(scrollY/600,1);
-      map.setPitch(58+pct*10);
-    },{passive:true});
   })();
 
   /* ── STICKY CTA ── */
