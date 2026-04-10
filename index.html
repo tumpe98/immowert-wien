@@ -7,6 +7,9 @@
   <meta name="description" content="Kostenlose Immobilienbewertung Wien. Finde in 2 Minuten heraus was deine Wohnung oder dein Haus wert ist – und ob du Geld liegen lässt.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://api.maptiler.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://api.maptiler.com">
   <link href="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
   <style>
@@ -38,7 +41,8 @@
 
     /* ── HERO ── */
     .hero-wrap{padding-top:64px;background:#e8edf2;overflow:hidden;position:relative}
-    #wienMap3d{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+    #wienMap3d{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity 1s ease;}
+    #wienMap3d.ready{opacity:1;}
     #wienMap3d .maplibregl-canvas{display:block;}
     .maplibregl-ctrl-bottom-left,.maplibregl-ctrl-bottom-right,.maplibregl-ctrl-top-left,.maplibregl-ctrl-top-right{display:none!important;}
     .hero-gradient-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(232,237,242,.97) 0%,rgba(232,237,242,.90) 38%,rgba(232,237,242,.35) 65%,rgba(232,237,242,.0) 100%);pointer-events:none;}
@@ -905,76 +909,91 @@
     if(!el||typeof maplibregl==='undefined')return;
     const KEY='ooaUNOxW9pQZRAKyL4Pe';
 
-    // Minimal style: only roads, water, parks, buildings — no labels
-    const STYLE=`https://api.maptiler.com/maps/dataviz-light/style.json?key=${KEY}`;
+    const KEY='ooaUNOxW9pQZRAKyL4Pe';
 
     const map=new maplibregl.Map({
       container:'wienMap3d',
-      style:STYLE,
-      center:[16.3731,48.2085],   // Stephansdom
+      style:`https://api.maptiler.com/maps/bright/style.json?key=${KEY}`,
+      center:[16.3731,48.2085],  // Stephansdom
       zoom:15.4,
       pitch:62,
-      bearing:22,               // looking from NW toward Stephansdom
+      bearing:22,
       interactive:false,
       attributionControl:false,
-      fadeDuration:0            // tiles appear instantly, no fade-in
+      fadeDuration:0,
+      renderWorldCopies:false,
+      maxTileCacheSize:50
     });
 
     map.on('load',()=>{
       const layers=map.getStyle().layers;
       layers.forEach(layer=>{
-        // Hide all labels/symbols — removes abgeschnittene Beschriftungen
-        if(layer.type==='symbol'){map.setLayoutProperty(layer.id,'visibility','none');return;}
-        // Background
-        if(layer.type==='background'){map.setPaintProperty(layer.id,'background-color','#e8edf2');return;}
-        // Water
-        if(layer.type==='fill'&&(layer.id.includes('water')||layer.id.includes('river')||layer.id.includes('lake'))){
-          map.setPaintProperty(layer.id,'fill-color','#b8d0e6');
-          map.setPaintProperty(layer.id,'fill-opacity',.75);
+        // Remove all text/icon labels
+        if(layer.type==='symbol'){
+          map.setLayoutProperty(layer.id,'visibility','none');
           return;
         }
-        // Parks / green
-        if(layer.type==='fill'&&(layer.id.includes('park')||layer.id.includes('green')||layer.id.includes('grass')||layer.id.includes('forest')||layer.id.includes('wood')||layer.id.includes('landuse_residential'))){
-          map.setPaintProperty(layer.id,'fill-color','#ccdfc4');
-          map.setPaintProperty(layer.id,'fill-opacity',.55);
+        if(layer.type==='background'){
+          map.setPaintProperty(layer.id,'background-color','#e8edf2');
           return;
         }
-        // All other fills → monochrome
-        if(layer.type==='fill'){map.setPaintProperty(layer.id,'fill-color','#dde3ea');}
-        // Roads → subtle grey
-        if(layer.type==='line'){map.setPaintProperty(layer.id,'line-color','#c4cdd8');}
+        if(layer.type==='fill'){
+          const id=layer.id;
+          if(/water|river|lake|ocean/.test(id)){
+            map.setPaintProperty(id,'fill-color','#b8d0e6');
+            map.setPaintProperty(id,'fill-opacity',.78);
+            return;
+          }
+          if(/park|green|grass|forest|wood|cemetery|pitch|garden/.test(id)){
+            map.setPaintProperty(id,'fill-color','#c8dfc0');
+            map.setPaintProperty(id,'fill-opacity',.6);
+            return;
+          }
+          map.setPaintProperty(id,'fill-color','#dde3ea');
+        }
+        if(layer.type==='line'){
+          map.setPaintProperty(layer.id,'line-color','#c2ccd6');
+        }
       });
 
-      // 3D buildings
-      const srcId=['openmaptiles','maptiler_planet','maptiler-planet'].find(id=>map.getSource(id));
+      // 3D buildings — try all known source names
+      const srcId=['openmaptiles','maptiler_planet','maptiler-planet','composite'].find(id=>map.getSource(id));
       if(srcId){
+        // Remove flat building fill first so 3D replaces it cleanly
+        if(map.getLayer('building')) map.removeLayer('building');
+        if(map.getLayer('building-top')) map.removeLayer('building-top');
+
         map.addLayer({
           id:'3d-buildings',
           source:srcId,
           'source-layer':'building',
           type:'fill-extrusion',
-          minzoom:13,
+          minzoom:12,
           paint:{
             'fill-extrusion-color':[
-              'interpolate',['linear'],['get','render_height'],
-              0,'#dce4ee',20,'#d0d9e7',50,'#c3cde0',100,'#b6c2d8'
+              'interpolate',['linear'],
+              ['coalesce',['get','render_height'],['get','height'],8],
+              0,'#dce4ee', 15,'#d2dae8', 40,'#c5cfe2', 80,'#b8c4da'
             ],
-            'fill-extrusion-height':['coalesce',['get','render_height'],['get','height'],10],
+            'fill-extrusion-height':['coalesce',['get','render_height'],['get','height'],8],
             'fill-extrusion-base':['coalesce',['get','render_min_height'],0],
-            'fill-extrusion-opacity':0.92,
-            'fill-extrusion-ambient-occlusion-intensity':0.3
+            'fill-extrusion-opacity':0.90
           }
         });
       }
 
-      // Very slow rotation around Stephansdom
+      // Slow rotation around Stephansdom
       let bearing=22;
-      function rotate(){
-        bearing-=0.008;
+      (function rotate(){
+        bearing-=0.007;
         map.setBearing(bearing);
         requestAnimationFrame(rotate);
-      }
-      rotate();
+      })();
+    });
+
+    // Fade in only once all tiles are fully rendered — no half-loaded flash
+    map.once('idle',()=>{
+      document.getElementById('wienMap3d').classList.add('ready');
     });
   })();
 
