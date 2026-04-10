@@ -22,7 +22,7 @@
     body{font-family:'Inter',sans-serif;background:var(--white);color:var(--g900);line-height:1.6;overflow-x:hidden}
 
     /* ── NAV ── */
-    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s}
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s}
     nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,.08)}
     .nav-logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--b600);text-decoration:none}
     .nav-logo span{color:var(--g900)}
@@ -35,8 +35,9 @@
     @media(max-width:780px){.nav-links{display:none}}
 
     /* ── HERO ── */
-    .hero-wrap{padding-top:64px;background:linear-gradient(170deg,var(--off) 0%,var(--white) 100%)}
-    .hero{padding:100px 5% 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .hero-wrap{padding-top:64px;background:linear-gradient(170deg,var(--off) 0%,var(--white) 100%);overflow:hidden;position:relative}
+    .wien-map-bg{position:absolute;right:-4%;top:50%;transform:translateY(-50%);width:54%;max-width:640px;opacity:1;pointer-events:none;color:var(--b400);will-change:transform}
+    .hero{padding:100px 5% 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--b50);border:1px solid var(--b100);color:var(--b600);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:500;margin-bottom:24px}
     .eyebrow .dot{width:6px;height:6px;background:var(--b500);border-radius:50%;animation:pulse 2s infinite}
     @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
@@ -322,6 +323,37 @@
 
 <!-- HERO -->
 <div class="hero-wrap">
+  <!-- Vienna outline background -->
+  <svg id="wienMapBg" class="wien-map-bg" viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Vienna city boundary (simplified) -->
+    <path d="M 88,6 C 100,4 118,8 138,14 C 158,20 178,30 194,48 C 206,62 212,80 210,100 C 208,118 200,136 190,150 C 178,166 162,178 144,188 C 126,198 106,204 86,202 C 68,200 52,192 38,178 C 26,166 16,150 12,132 C 8,114 10,94 18,76 C 26,58 40,42 58,28 C 70,18 78,8 88,6 Z"
+      stroke="currentColor" stroke-width="1.8" fill="rgba(37,99,235,0.04)" stroke-linejoin="round"/>
+    <!-- Donau river (main) -->
+    <path d="M 32,90 C 55,84 80,80 105,82 C 128,84 148,92 168,90 C 184,88 196,80 206,72"
+      stroke="currentColor" stroke-width="2.2" fill="none" opacity="0.5" stroke-linecap="round"/>
+    <!-- Neue Donau / Donaukanal (lighter) -->
+    <path d="M 48,100 C 70,95 94,92 116,94 C 136,96 154,102 172,100"
+      stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.28" stroke-linecap="round" stroke-dasharray="4,3"/>
+    <!-- District grid lines (very faint) -->
+    <line x1="105" y1="82" x2="108" y2="190" stroke="currentColor" stroke-width="0.6" opacity="0.12"/>
+    <line x1="148" y1="88" x2="150" y2="185" stroke="currentColor" stroke-width="0.6" opacity="0.12"/>
+    <line x1="30" y1="130" x2="210" y2="128" stroke="currentColor" stroke-width="0.6" opacity="0.12"/>
+    <line x1="22" y1="100" x2="210" y2="98" stroke="currentColor" stroke-width="0.6" opacity="0.12"/>
+    <!-- Innere Stadt dot -->
+    <circle cx="122" cy="108" r="4" fill="currentColor" opacity="0.25"/>
+    <circle cx="122" cy="108" r="8" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.15"/>
+    <!-- District dots -->
+    <circle cx="148" cy="118" r="2.5" fill="currentColor" opacity="0.15"/>
+    <circle cx="118" cy="130" r="2.5" fill="currentColor" opacity="0.15"/>
+    <circle cx="96" cy="122" r="2.5" fill="currentColor" opacity="0.15"/>
+    <circle cx="165" cy="140" r="2.5" fill="currentColor" opacity="0.15"/>
+    <circle cx="80" cy="145" r="2.5" fill="currentColor" opacity="0.15"/>
+    <circle cx="140" cy="160" r="2.5" fill="currentColor" opacity="0.12"/>
+    <circle cx="105" cy="170" r="2.5" fill="currentColor" opacity="0.12"/>
+    <circle cx="55" cy="115" r="2.5" fill="currentColor" opacity="0.12"/>
+    <circle cx="70" cy="92" r="2.5" fill="currentColor" opacity="0.12"/>
+    <circle cx="155" cy="68" r="2.5" fill="currentColor" opacity="0.12"/>
+  </svg>
   <div class="hero">
     <div>
       <div class="eyebrow"><span class="dot"></span>Immobilienbewertung Wien · Kostenlos</div>
@@ -580,44 +612,6 @@
         </div></div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- MARKT PREVIEW -->
-<section class="markt-preview">
-  <div class="section-inner">
-    <div style="text-align:center" class="reveal">
-      <div class="s-tag" style="color:var(--b500)">Wiener Markt · Stand April 2026</div>
-      <h2 class="s-h2 dark">Was den Preis deiner Immobilie bestimmt</h2>
-      <p class="s-p dark" style="margin:0 auto">Lage, Timing und Marktlage – drei Faktoren, die Tausende Euro Unterschied machen können.</p>
-    </div>
-    <div class="markt-grid">
-      <div class="markt-fact reveal" style="transition-delay:.1s">
-        <div class="mf-icon">🗺️</div>
-        <div class="mf-val">€ 18.281 vs. € 5.516</div>
-        <div class="mf-lbl">Preisunterschied Bezirk 1 vs. 10</div>
-        <div class="mf-sub">Die Lage ist der größte Preisfaktor. Quelle: immopreise.at 2026</div>
-      </div>
-      <div class="markt-fact reveal" style="transition-delay:.2s">
-        <div class="mf-icon">📅</div>
-        <div class="mf-val">März – Mai</div>
-        <div class="mf-lbl">Stärkste Verkaufsphase in Wien</div>
-        <div class="mf-sub">Frühling bringt bis zu 12% höhere Transaktionspreise als Jänner</div>
-      </div>
-      <div class="markt-fact reveal" style="transition-delay:.3s">
-        <div class="mf-icon">📉</div>
-        <div class="mf-val">−14%</div>
-        <div class="mf-lbl">Preiskorrektur seit Hochpunkt 2022</div>
-        <div class="mf-sub">2025 stabilisiert sich der Markt – jetzt bewerten lohnt sich. Quelle: OeNB</div>
-      </div>
-    </div>
-    <div class="markt-cta-row reveal">
-      <div>
-        <div style="font-weight:600;color:var(--g900);margin-bottom:4px">Wie entwickeln sich Preise in deinem Bezirk?</div>
-        <div style="font-size:.84rem;color:var(--g500)">Preisentwicklung, Transaktionsdaten und optimaler Verkaufszeitpunkt für alle 23 Wiener Bezirke.</div>
-      </div>
-      <a href="bezirke.html" style="background:var(--b500);color:white;padding:14px 28px;border-radius:12px;font-weight:600;font-size:.9rem;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0" onmouseover="this.style.background='var(--b600)'" onmouseout="this.style.background='var(--b500)'">Bezirksanalyse öffnen →</a>
     </div>
   </div>
 </section>
@@ -928,6 +922,14 @@
 
   /* ── NAV SCROLL ── */
   window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>20),{passive:true});
+
+  /* ── WIEN MAP PARALLAX ── */
+  const wienMap=document.getElementById('wienMapBg');
+  if(wienMap){
+    window.addEventListener('scroll',()=>{
+      wienMap.style.transform=`translateY(calc(-50% + ${scrollY*0.22}px))`;
+    },{passive:true});
+  }
 
   /* ── STICKY CTA ── */
   const heroEl=document.querySelector('.hero');
