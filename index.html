@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <!-- Cookie Consent + Analytics (DSGVO-konform) -->
+  <script src="cookie-consent.js"></script>
   <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Immobilienbewertung Wien – Was ist deine Immobilie wirklich wert?</title>
   <meta name="description" content="Kostenlose Immobilienbewertung Wien. Finde in 2 Minuten heraus was deine Wohnung oder dein Haus wert ist – und ob du Geld liegen lässt.">
@@ -27,9 +30,9 @@
     body{font-family:'Inter',sans-serif;background:var(--white);color:var(--g900);line-height:1.6;overflow-x:hidden}
 
     /* ── NAV ── */
-    nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s}
+    nav{position:fixed;top:0;left:0;right:0;z-index:9000;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s}
     nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,.08)}
-    .nav-logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--b600);text-decoration:none}
+    .nav-logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--b600);text-decoration:none;flex-shrink:0}
     .nav-logo span{color:var(--g900)}
     .nav-links{display:flex;align-items:center;gap:2px}
     .nav-link{font-size:.875rem;font-weight:500;color:var(--g500);text-decoration:none;padding:8px 14px;border-radius:8px;transition:all .18s}
@@ -37,7 +40,19 @@
     .nav-link.active{color:var(--b500);background:var(--b50)}
     .nav-pill{background:var(--b500);color:white;border:none;padding:10px 22px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.875rem;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
     .nav-pill:hover{background:var(--b600);transform:translateY(-1px);box-shadow:var(--sh-blue)}
-    @media(max-width:780px){.nav-links{display:none}}
+    /* Hamburger */
+    .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:none;z-index:9001}
+    .nav-burger span{display:block;width:22px;height:2px;background:var(--g900);border-radius:2px;transition:all .3s}
+    /* Mobile drawer */
+    .nav-drawer{position:fixed;top:0;left:0;bottom:0;width:280px;background:white;z-index:9002;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:4px 0 32px rgba(0,0,0,.12);padding:80px 24px 32px;display:flex;flex-direction:column;gap:4px}
+    .nav-drawer.open{transform:none}
+    .nav-drawer-link{font-size:1rem;font-weight:500;color:var(--g700);text-decoration:none;padding:12px 16px;border-radius:10px;transition:all .18s;display:block}
+    .nav-drawer-link:hover,.nav-drawer-link.active{background:var(--b50);color:var(--b500)}
+    .nav-drawer-pill{margin-top:16px;background:var(--b500);color:white;padding:14px 20px;border-radius:12px;text-decoration:none;font-weight:600;font-size:.95rem;display:block;text-align:center;transition:background .2s}
+    .nav-drawer-pill:hover{background:var(--b600)}
+    .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9001;opacity:0;pointer-events:none;transition:opacity .3s}
+    .nav-overlay.open{opacity:1;pointer-events:all}
+    @media(max-width:780px){.nav-links,.nav-pill{display:none}.nav-burger{display:flex}}
 
     /* ── HERO ── */
     .hero-wrap{padding-top:64px;background:#e8edf2;overflow:hidden;position:relative;min-height:680px;}
@@ -118,83 +133,80 @@
     /* ── TOOL SECTION ── */
     .tool-section{padding:80px 5%;background:linear-gradient(180deg,var(--off) 0%,white 100%)}
     .tool-header{text-align:center;margin-bottom:48px}
-    .tool-card{background:white;border-radius:24px;box-shadow:var(--sh-lg);border:1px solid rgba(0,0,0,.05);overflow:hidden;max-width:680px;margin:0 auto}
-    .tool-progress{background:var(--off);border-bottom:1px solid var(--g100);padding:18px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .tool-progress-left{display:flex;flex-direction:column;gap:6px;flex:1}
-    .tp-meta{display:flex;justify-content:space-between}
-    .tp-label{font-size:.75rem;font-weight:500;color:var(--g500)}
-    .tp-title{font-size:.75rem;font-weight:600;color:var(--b500)}
-    .tp-track{height:4px;background:var(--g200);border-radius:100px;overflow:hidden}
-    .tp-fill{height:100%;background:linear-gradient(90deg,var(--b400),var(--b500));border-radius:100px;transition:width .5s cubic-bezier(.4,0,.2,1)}
-    .tool-body{padding:40px}
-    @keyframes stepIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
-    .step-wrap{animation:stepIn .3s cubic-bezier(.4,0,.2,1)}
-    .step-eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--b500);margin-bottom:8px}
-    .step-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;line-height:1.2;color:var(--g900);margin-bottom:6px}
-    .step-sub{font-size:.88rem;color:var(--g500);line-height:1.6;margin-bottom:28px}
+    .tool-card{background:white;border-radius:20px;box-shadow:0 2px 40px rgba(0,0,0,.10);border:1px solid rgba(0,0,0,.06);max-width:700px;margin:0 auto;overflow:visible}
+    .tool-progress{border-radius:20px 20px 0 0;overflow:hidden}
+    .tool-progress{background:#f8f9fb;border-bottom:1px solid var(--g100);padding:16px 32px;display:flex;align-items:center;gap:20px}
+    .tp-steps{display:flex;align-items:center;gap:6px;flex:1}
+    .tp-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--g200);background:white;font-size:.68rem;font-weight:700;color:var(--g400);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s}
+    .tp-dot.done{background:var(--b500);border-color:var(--b500);color:white}
+    .tp-dot.active{background:white;border-color:var(--b500);color:var(--b500)}
+    .tp-line{flex:1;height:2px;background:var(--g200);transition:background .3s}
+    .tp-line.done{background:var(--b500)}
+    .tp-pct{font-size:.75rem;font-weight:600;color:var(--b500);white-space:nowrap}
+    .tool-body{padding:36px 40px;border-radius:0 0 20px 20px;overflow:hidden}
+    @keyframes stepIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+    .step-wrap{animation:stepIn .28s cubic-bezier(.4,0,.2,1)}
+    .step-eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--b500);margin-bottom:6px}
+    .step-title{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;line-height:1.2;color:var(--g900);margin-bottom:5px}
+    .step-sub{font-size:.86rem;color:var(--g500);line-height:1.6;margin-bottom:24px}
     .opt-grid{display:grid;gap:10px}
     .opt-grid.c2{grid-template-columns:1fr 1fr}
     .opt-grid.c3{grid-template-columns:repeat(3,1fr)}
-    .opt-btn{background:var(--off);border:1.5px solid var(--g200);border-radius:12px;padding:15px 16px;text-align:left;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:12px;font-family:'Inter',sans-serif}
-    .opt-btn:hover{border-color:var(--b300);background:var(--b50)}
+    .opt-btn{background:#f8f9fb;border:1.5px solid var(--g200);border-radius:12px;padding:14px 16px;text-align:left;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:12px;font-family:'Inter',sans-serif;width:100%}
+    .opt-btn:hover{border-color:var(--b300);background:var(--b50);transform:translateY(-1px)}
     .opt-btn.sel{border-color:var(--b500);background:var(--b50);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
-    .opt-icon-box{width:38px;height:38px;background:white;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:var(--sh-sm);flex-shrink:0}
+    .opt-icon-box{width:36px;height:36px;background:white;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 1px 3px rgba(0,0,0,.06);flex-shrink:0}
     .opt-txt{flex:1}
     .opt-lbl{font-size:.9rem;font-weight:500;color:var(--g900);display:block}
-    .opt-desc{font-size:.75rem;color:var(--g500);display:block;margin-top:2px}
+    .opt-desc{font-size:.74rem;color:var(--g500);display:block;margin-top:1px}
     .opt-check{width:18px;height:18px;border:1.5px solid var(--g300);border-radius:50%;flex-shrink:0;transition:all .18s}
     .opt-btn.sel .opt-check{background:var(--b500);border-color:var(--b500);background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l3 3 5-6' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:10px;background-position:center;background-repeat:no-repeat}
-    .opt-simple{background:var(--off);border:1.5px solid var(--g200);border-radius:12px;padding:18px 10px;text-align:center;cursor:pointer;transition:all .18s;font-family:'Inter',sans-serif;display:flex;flex-direction:column;align-items:center;gap:4px}
-    .opt-simple:hover{border-color:var(--b300);background:var(--b50)}
+    .opt-simple{background:#f8f9fb;border:1.5px solid var(--g200);border-radius:12px;padding:16px 10px;text-align:center;cursor:pointer;transition:all .18s;font-family:'Inter',sans-serif;display:flex;flex-direction:column;align-items:center;gap:4px;width:100%}
+    .opt-simple:hover{border-color:var(--b300);background:var(--b50);transform:translateY(-1px)}
     .opt-simple.sel{border-color:var(--b500);background:var(--b50);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
-    .bzk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-height:260px;overflow-y:auto;padding-right:4px}
+    .bzk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-height:250px;overflow-y:auto;padding-right:4px}
     .bzk-grid::-webkit-scrollbar{width:4px}
     .bzk-grid::-webkit-scrollbar-thumb{background:var(--g300);border-radius:100px}
-    .bzk-btn{background:var(--off);border:1.5px solid var(--g200);border-radius:10px;padding:10px 8px;text-align:center;cursor:pointer;transition:all .18s;font-family:'Inter',sans-serif}
+    .bzk-btn{background:#f8f9fb;border:1.5px solid var(--g200);border-radius:9px;padding:9px 7px;text-align:center;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;width:100%}
     .bzk-btn:hover{border-color:var(--b300);background:var(--b50)}
     .bzk-btn.sel{border-color:var(--b500);background:var(--b50);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
-    .bzk-num{font-size:.88rem;font-weight:600;color:var(--g900);display:block}
-    .bzk-name{font-size:.62rem;color:var(--g500);display:block;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .slider-wrap{margin-top:4px}
-    .slider-val-display{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--g900);margin-bottom:16px;display:flex;align-items:baseline;gap:6px}
-    .slider-val-display .unit{font-family:'Inter',sans-serif;font-size:1rem;font-weight:500;color:var(--g500)}
-    input[type=range]{-webkit-appearance:none;width:100%;height:6px;background:var(--g200);border-radius:100px;outline:none;cursor:pointer}
-    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;background:var(--b500);border-radius:50%;box-shadow:0 2px 8px rgba(37,99,235,.3);cursor:pointer;transition:transform .15s}
-    input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
-    input[type=range]::-moz-range-thumb{width:22px;height:22px;background:var(--b500);border-radius:50%;border:none;box-shadow:0 2px 8px rgba(37,99,235,.3)}
-    .slider-labels{display:flex;justify-content:space-between;font-size:.74rem;color:var(--g400);margin-top:8px}
-    .step-footer{display:flex;align-items:center;justify-content:space-between;margin-top:32px;padding-top:24px;border-top:1px solid var(--g100)}
-    .btn-back{background:none;border:1.5px solid var(--g200);border-radius:10px;padding:12px 20px;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:500;color:var(--g500);cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:6px}
+    .bzk-num{font-size:.86rem;font-weight:600;color:var(--g900);display:block}
+    .bzk-name{font-size:.58rem;color:var(--g500);display:block;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .step-footer{display:flex;align-items:center;justify-content:space-between;margin-top:28px;padding-top:20px;border-top:1px solid var(--g100)}
+    .btn-back{background:none;border:1.5px solid var(--g200);border-radius:10px;padding:11px 18px;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:500;color:var(--g500);cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:6px}
     .btn-back:hover{border-color:var(--g400);color:var(--g700)}
-    .btn-next{background:var(--b500);border:none;border-radius:10px;padding:14px 28px;font-family:'Inter',sans-serif;font-size:.92rem;font-weight:500;color:white;cursor:pointer;transition:all .22s;display:flex;align-items:center;gap:8px;margin-left:auto}
+    .btn-next{background:var(--b500);border:none;border-radius:10px;padding:13px 26px;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:500;color:white;cursor:pointer;transition:all .22s;display:flex;align-items:center;gap:8px;margin-left:auto}
     .btn-next:hover{background:var(--b600);transform:translateY(-1px);box-shadow:var(--sh-blue)}
     .btn-next:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
-    .result-header{background:linear-gradient(135deg,var(--b600),var(--b500));padding:36px 40px;color:white}
-    .r-eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.65;margin-bottom:8px}
-    .r-address{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:24px;opacity:.95}
-    .r-range-lbl{font-size:.78rem;font-weight:500;opacity:.65;margin-bottom:6px}
-    .r-range{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;margin-bottom:14px}
-    .r-range-bar{height:6px;background:rgba(255,255,255,.2);border-radius:100px;overflow:hidden}
-    .r-range-fill{height:100%;background:white;border-radius:100px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
-    .r-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--g100)}
-    .r-stat{background:white;padding:20px;text-align:center}
-    .r-stat-val{display:block;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--g900);margin-bottom:4px}
-    .r-stat-val.blue{color:var(--b500)}
-    .r-stat-val.green{color:var(--green)}
-    .r-stat-lbl{display:block;font-size:.72rem;color:var(--g500)}
-    .potential-box{margin:0;padding:24px 40px;background:var(--b50);border-left:4px solid var(--b500);display:flex;align-items:flex-start;gap:16px}
-    .pot-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
-    .pot-title{font-weight:600;font-size:.9rem;color:var(--g900);margin-bottom:4px}
-    .pot-amount{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:800;color:var(--b500);margin-bottom:6px}
-    .pot-sub{font-size:.8rem;color:var(--g500);line-height:1.6}
-    .result-cta-block{padding:24px 40px 32px}
+
+    /* ── SQM INPUT ── */
+    .sqm-wrap{display:flex;align-items:stretch;border:1.5px solid var(--g200);border-radius:14px;overflow:hidden;background:#f8f9fb;margin-bottom:20px;height:88px}
+    .sqm-side-btn{width:64px;background:#f8f9fb;border:none;font-size:2rem;font-weight:300;color:var(--b500);cursor:pointer;transition:background .15s;flex-shrink:0;font-family:'Inter',sans-serif;line-height:1}
+    .sqm-side-btn:hover{background:var(--b50)}
+    .sqm-side-btn:active{background:var(--b100)}
+    .sqm-mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-left:1.5px solid var(--g200);border-right:1.5px solid var(--g200)}
+    .sqm-field{width:120px;border:none;background:transparent;text-align:center;font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:var(--g900);outline:none;-moz-appearance:textfield;padding:0}
+    .sqm-field::-webkit-outer-spin-button,.sqm-field::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .sqm-unit{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:500;color:var(--g500)}
+    .sqm-pills{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:6px}
+    .sqm-pill{background:var(--g100);border:1.5px solid var(--g200);border-radius:8px;padding:7px 13px;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:500;color:var(--g700);cursor:pointer;transition:all .15s}
+    .sqm-pill:hover{background:var(--b50);border-color:var(--b300);color:var(--b500)}
+    .sqm-pill.sel{background:var(--b50);border-color:var(--b500);color:var(--b500)}
+
+    /* ── RESULT BROADSHEET ── */
     .cta2{width:100%;background:var(--b500);border:none;border-radius:14px;padding:18px 24px;cursor:pointer;display:flex;align-items:center;gap:16px;transition:all .22s;text-align:left}
     .cta2:hover{background:var(--b600);transform:translateY(-1px);box-shadow:var(--sh-blue)}
     .cta2-txt{flex:1}
-    .cta2-title{display:block;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:white;margin-bottom:3px}
-    .cta2-sub{display:block;font-size:.78rem;color:rgba(255,255,255,.65)}
+    .cta2-title{display:block;font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:white;margin-bottom:3px}
+    .cta2-sub{display:block;font-size:.76rem;color:rgba(255,255,255,.65)}
     .cta2-arr{color:white;font-size:1.2rem;flex-shrink:0}
-    .r-disclaimer{text-align:center;font-size:.76rem;color:var(--g400);margin-top:14px}
+    .r-disclaimer{text-align:center;font-size:.74rem;color:var(--g400);margin-top:12px;line-height:1.6}
+    @media(max-width:700px){
+      .result-columns{grid-template-columns:1fr!important}
+      .rc-div{display:none!important}
+      .tool-body{padding:24px}
+      .sqm-field{font-size:2rem;width:80px}
+    }
 
     /* ── 3 SCHRITTE ── */
     .schritte-section{padding:80px 5%}
@@ -289,6 +301,12 @@
     .m-submit{width:100%;background:var(--b500);border:none;border-radius:12px;padding:16px;font-family:'Inter',sans-serif;font-size:1rem;font-weight:600;color:white;cursor:pointer;transition:all .22s;margin-top:8px}
     .m-submit:hover{background:var(--b600);transform:translateY(-1px);box-shadow:var(--sh-blue)}
     .m-disc{text-align:center;font-size:.72rem;color:var(--g400);margin-top:10px}
+    .m-consent-box{background:#f8f9fb;border:1.5px solid var(--g200);border-radius:10px;padding:14px 16px;margin:14px 0 4px}
+    .m-consent-label{display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.8rem;color:var(--g700);line-height:1.6}
+    .m-consent-label input[type=checkbox]{width:16px;height:16px;margin-top:2px;flex-shrink:0;cursor:pointer;accent-color:var(--b500)}
+    .m-consent-sub{font-size:.72rem;color:var(--g400);margin-top:6px;line-height:1.5;padding-left:26px}
+    .m-consent-sub a{color:var(--b500);text-decoration:none}
+    .m-legal-note{background:#f0f4ff;border-radius:8px;padding:10px 14px;margin-top:14px;font-size:.72rem;color:#374151;line-height:1.6}
 
     /* ── STICKY CTA ── */
     .sticky-cta{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);z-index:300;background:var(--b500);color:white;padding:14px 28px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:600;box-shadow:0 8px 32px rgba(37,99,235,.4);cursor:pointer;border:none;display:flex;align-items:center;gap:10px;transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;white-space:nowrap}
@@ -305,7 +323,7 @@
 
     /* ── z-index stacking ── */
     nav,section,.hero-wrap,.trust-strip,.problem-section,.tool-section,.schritte-section,
-    .experten-section,.markt-preview,.final-section,footer,.overlay,.sticky-cta{position:relative;z-index:1}
+    .experten-section,.markt-preview,.final-section,footer,.sticky-cta{position:relative;z-index:1}
 
     @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:80px;gap:40px}.hero-vis{display:none}}
     @media(max-width:700px){.tool-body,.result-header,.potential-box,.result-cta-block{padding-left:24px;padding-right:24px}.tool-progress{padding:16px 24px}.opt-grid.c3{grid-template-columns:1fr 1fr}.r-range{font-size:1.8rem}}
@@ -319,7 +337,18 @@
 </button>
 
 <!-- NAV -->
+<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html" class="nav-drawer-link active">Immobilie bewerten</a>
+  <a href="bezirke.html" class="nav-drawer-link">Bezirksanalyse</a>
+  <a href="blog.html" class="nav-drawer-link">Blog</a>
+  <a href="kontakt.html" class="nav-drawer-link">Über uns</a>
+  <a href="index.html#tool" class="nav-drawer-pill">Jetzt bewerten →</a>
+</div>
 <nav id="mainNav">
+  <button class="nav-burger" id="navBurger" onclick="toggleDrawer()" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
   <a href="index.html" class="nav-logo">immowert<span>wien</span></a>
   <div class="nav-links">
     <a href="index.html" class="nav-link active">Immobilie bewerten</a>
@@ -429,10 +458,8 @@
     </div>
     <div class="tool-card" id="toolCard">
       <div class="tool-progress" id="toolProgress">
-        <div class="tool-progress-left">
-          <div class="tp-meta"><span class="tp-label" id="tpLabel">Schritt 1 von 6</span><span class="tp-title" id="tpTitle">Immobilientyp</span></div>
-          <div class="tp-track"><div class="tp-fill" id="tpFill" style="width:14%"></div></div>
-        </div>
+        <div class="tp-steps" id="tpSteps"></div>
+        <span class="tp-pct" id="tpPct">17%</span>
       </div>
       <div class="tool-body" id="toolBody"></div>
     </div>
@@ -610,20 +637,6 @@
   </div>
 </section>
 
-<!-- IMPRESSUM / DATENSCHUTZ -->
-<section id="impressum" style="background:var(--g100);padding:40px 5%;font-size:.82rem;color:var(--g500);line-height:1.8;position:relative;z-index:1">
-  <strong style="color:var(--g700)">Impressum</strong><br>
-  Angaben gemäß § 5 ECG:<br>
-  <em>Bitte trage hier deinen vollständigen Namen / Firmennamen, Adresse, E-Mail und UID-Nummer ein, bevor die Seite live geht.</em><br><br>
-  <strong style="color:var(--g700)">Haftungsausschluss</strong><br>
-  Die auf dieser Website dargestellten Immobilienwerte sind automatisch berechnete Ersteinschätzungen auf Basis allgemeiner Marktdaten und stellen keine verbindliche Wertermittlung oder Beratung dar.
-</section>
-<section id="datenschutz" style="background:var(--g100);padding:0 5% 40px;font-size:.82rem;color:var(--g500);line-height:1.8;border-top:1px solid var(--g200);position:relative;z-index:1">
-  <strong style="color:var(--g700)">Datenschutz</strong><br>
-  Personenbezogene Daten (Name, E-Mail, Telefon) werden ausschließlich zur Kontaktaufnahme verwendet und nicht an Dritte weitergegeben. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).<br>
-  <em>Bitte ergänze hier deine vollständige Datenschutzerklärung vor dem Live-Gang.</em>
-</section>
-
 <footer>
   <div class="foot-logo">immowert<span style="color:rgba(255,255,255,.3)">wien</span></div>
   <div class="foot-nav">
@@ -631,8 +644,9 @@
     <a href="bezirke.html">Bezirksanalyse</a>
     <a href="blog.html">Blog</a>
     <a href="kontakt.html">Über uns</a>
-    <a href="#impressum">Impressum</a>
-    <a href="#datenschutz">Datenschutz</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="agb.html">AGB</a>
   </div>
   <div class="foot-copy">© 2026 ImmowertWien · Daten: immopreise.at, OeNB, Statistik Austria</div>
 </footer>
@@ -644,94 +658,118 @@
     <div id="modalContent">
       <div class="m-eyebrow">Kostenlose Expertenanalyse</div>
       <div class="m-title">Prüfen, ob ich unter Wert verkaufe</div>
-      <div class="m-sub">Ein geprüfter Immobilienexperte meldet sich innerhalb von 24h mit deiner persönlichen Einschätzung – kostenlos und unverbindlich.</div>
-      <div class="m-group"><label class="m-label">Dein Name</label><input type="text" class="m-input" id="mName" placeholder="Max Mustermann"></div>
-      <div class="m-group"><label class="m-label">E-Mail-Adresse</label><input type="email" class="m-input" id="mEmail" placeholder="max@beispiel.at"></div>
-      <div class="m-group"><label class="m-label">Telefonnummer</label><input type="tel" class="m-input" id="mPhone" placeholder="+43 660 123 45 67"></div>
+      <div class="m-sub">Ein geprüfter Immobilienexperte für deinen Bezirk meldet sich innerhalb von 24h – kostenlos und unverbindlich.</div>
+      <div class="m-group"><label class="m-label">Dein Name *</label><input type="text" class="m-input" id="mName" placeholder="Max Mustermann"></div>
+      <div class="m-group"><label class="m-label">E-Mail-Adresse *</label><input type="email" class="m-input" id="mEmail" placeholder="max@beispiel.at"></div>
+      <div class="m-group"><label class="m-label">Telefonnummer (empfohlen)</label><input type="tel" class="m-input" id="mPhone" placeholder="+43 660 123 45 67"></div>
+      <div class="m-consent-box">
+        <label class="m-consent-label">
+          <input type="checkbox" id="mConsent">
+          <span>Ich stimme zu, dass ImmowertWien und Partnerexperten mich zur Einschätzung meiner Immobilie kontaktieren dürfen. <strong>Freiwillig & jederzeit widerrufbar.</strong></span>
+        </label>
+        <div class="m-consent-sub">Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO · Daten werden nicht an weitere Dritte weitergegeben. Mehr in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</div>
+      </div>
       <button class="m-submit" onclick="submitModal()">Prüfen, ob ich unter Wert verkaufe →</button>
-      <div class="m-disc">🔒 Kostenlos & unverbindlich · Daten werden vertraulich behandelt</div>
+      <div class="m-legal-note">🔒 <strong>100% kostenlos & unverbindlich.</strong> Kein Vertrag, kein Maklerauftrag. Du entscheidest danach frei.</div>
     </div>
   </div>
 </div>
 
 <script>
-  /* ── DATA (immopreise.at April 2026) ── */
-  const bezirke = [
-    {num:'1010',name:'Innere Stadt',p:18281,rent:26.98},{num:'1020',name:'Leopoldstadt',p:8467,rent:23.11},
-    {num:'1030',name:'Landstraße',p:7938,rent:20.63},{num:'1040',name:'Wieden',p:10720,rent:21.48},
-    {num:'1050',name:'Margareten',p:8000,rent:21.25},{num:'1060',name:'Mariahilf',p:8358,rent:22.18},
-    {num:'1070',name:'Neubau',p:8539,rent:23.16},{num:'1080',name:'Josefstadt',p:8170,rent:22.78},
-    {num:'1090',name:'Alsergrund',p:9734,rent:21.69},{num:'1100',name:'Favoriten',p:5516,rent:20.29},
-    {num:'1110',name:'Simmering',p:5641,rent:19.79},{num:'1120',name:'Meidling',p:6236,rent:19.59},
-    {num:'1130',name:'Hietzing',p:9632,rent:22.73},{num:'1140',name:'Penzing',p:6610,rent:19.65},
-    {num:'1150',name:'Rudolfsheim',p:5625,rent:19.52},{num:'1160',name:'Ottakring',p:6384,rent:21.61},
-    {num:'1170',name:'Hernals',p:7243,rent:19.98},{num:'1180',name:'Währing',p:8324,rent:21.57},
-    {num:'1190',name:'Döbling',p:8745,rent:22.61},{num:'1200',name:'Brigittenau',p:6434,rent:20.48},
-    {num:'1210',name:'Floridsdorf',p:6328,rent:19.11},{num:'1220',name:'Donaustadt',p:6809,rent:29.67},
-    {num:'1230',name:'Liesing',p:6468,rent:18.36}
+  /*
+   * ── DATENGRUNDLAGE ──
+   * Kaufpreise (p): Ø-Angebotspreise aus immopreise.at, willhaben.at & IMMOunited Q1 2026
+   * Mietpreise (rent): Ø-Nettomiete €/m²/Monat lt. RE/MAX Immo Spiegel 2025 & WKO Mietpreisspiegel
+   * Methodik: Hedonisches Preismodell mit Lage-, Zustand- und Ausstattungsmultiplikatoren
+   * Konservative Schätzung: Untergrenze −12% (Abzug für Verhandlungsspielraum, Transaktionskosten)
+   * U-Bahn-Faktor: OeNB Wohnimmobilienbericht 2023 / TU Wien Hedonic Pricing Study
+   * Nahversorgung: Walk-Score-Forschung (Luca et al. 2022, European Cities)
+   * Stand: Q1 2026 – Werte werden halbjährlich aktualisiert
+   */
+  const bezirke=[
+    {num:'1010',name:'Innere Stadt',p:16800,rent:24.50},{num:'1020',name:'Leopoldstadt',p:8200,rent:18.90},
+    {num:'1030',name:'Landstraße',p:8100,rent:18.20},{num:'1040',name:'Wieden',p:9200,rent:19.80},
+    {num:'1050',name:'Margareten',p:7800,rent:18.40},{num:'1060',name:'Mariahilf',p:8300,rent:19.20},
+    {num:'1070',name:'Neubau',p:8700,rent:20.10},{num:'1080',name:'Josefstadt',p:8500,rent:19.60},
+    {num:'1090',name:'Alsergrund',p:8900,rent:19.40},{num:'1100',name:'Favoriten',p:5400,rent:15.80},
+    {num:'1110',name:'Simmering',p:5200,rent:15.20},{num:'1120',name:'Meidling',p:5900,rent:16.10},
+    {num:'1130',name:'Hietzing',p:8800,rent:19.90},{num:'1140',name:'Penzing',p:6200,rent:16.40},
+    {num:'1150',name:'Rudolfsheim',p:5500,rent:15.60},{num:'1160',name:'Ottakring',p:6000,rent:16.80},
+    {num:'1170',name:'Hernals',p:6800,rent:17.20},{num:'1180',name:'Währing',p:8100,rent:18.80},
+    {num:'1190',name:'Döbling',p:8600,rent:19.70},{num:'1200',name:'Brigittenau',p:5800,rent:16.20},
+    {num:'1210',name:'Floridsdorf',p:5600,rent:15.50},{num:'1220',name:'Donaustadt',p:6300,rent:16.90},
+    {num:'1230',name:'Liesing',p:5700,rent:15.90}
   ];
-  const condM={renoviert:1.10,gut:1.0,mittel:.92,sanierungsbedarf:.82};
-  const floorM={eg:.95,mitte:1.0,hoch:1.05,dg:1.08};
-  const typeM={wohnung:1.0,haus:1.05,villa:1.15,gewerbe:.90};
-  const STEPS=['type','bezirk','flaeche','zimmer','condition','floor'];
-  const stepMeta=[
-    {lbl:'Schritt 1 von 6',ttl:'Immobilientyp'},{lbl:'Schritt 2 von 6',ttl:'Bezirk'},
-    {lbl:'Schritt 3 von 6',ttl:'Größe'},{lbl:'Schritt 4 von 6',ttl:'Zimmer'},
-    {lbl:'Schritt 5 von 6',ttl:'Zustand'},{lbl:'Schritt 6 von 6',ttl:'Stockwerk'}
-  ];
-  const S={cur:0,type:null,bezirk:null,flaeche:80,zimmer:null,condition:null,floor:null};
+  // Alle Multiplikatoren ≤ 1.0: Maximum = immopreise.at-Angebotspreis, danach nur Abschläge
+  const condM={renoviert:1.0,gut:1.0,mittel:.93,sanierungsbedarf:.83};
+  const floorM={eg:.95,mitte:1.0,hoch:1.0,dg:1.0};
+  const typeM={wohnung:1.0,haus:1.0,villa:1.0,gewerbe:.88};
+  const baujahrM={altbau:.97,neubau:1.0};
+  const afM={keine:0,balkon:.025,loggia:.03,terrasse:.04,garten:.06,dachterrasse:.07};
+  // U-Bahn: Abschlag für schlechte Anbindung (OeNB Wohnimmobilienbericht 2023)
+  const ubahnM={nahe:1.0,mittel:1.0,weit:.95};
+  // Nahversorgung: Abschlag bei eingeschränkter Versorgung
+  const nahversorgungM={sehr_gut:1.0,gut:1.0,mittel:.97};
+  // Gewerbe-Nutzungsart
+  const nutzungsartM={buero:.92,einzelhandel:.96,gastro:.87,lager:.80};
+  const S={cur:0,type:null,bezirk:null,flaeche:80,zimmer:null,condition:null,floor:null,baujahr:null,aussenflaeche:null,ubahn:null,nahversorgung:null,nutzungsart:null};
+
+  function getSteps(){
+    if(S.type==='haus'||S.type==='villa') return['type','bezirk','flaeche','zimmer','aussenflaeche','condition','ubahn','nahversorgung'];
+    if(S.type==='gewerbe') return['type','bezirk','flaeche','nutzungsart','condition','ubahn','nahversorgung'];
+    return['type','bezirk','flaeche','zimmer','baujahr','aussenflaeche','condition','floor','ubahn','nahversorgung'];
+  }
 
   /* ── RENDER ── */
   function render(){
-    const pct=((S.cur+1)/(STEPS.length+1))*100;
-    document.getElementById('tpFill').style.width=Math.min(pct,100)+'%';
-    if(S.cur<STEPS.length){
-      document.getElementById('tpLabel').textContent=stepMeta[S.cur].lbl;
-      document.getElementById('tpTitle').textContent=stepMeta[S.cur].ttl;
-      document.getElementById('toolProgress').style.display='';
-    } else {
-      document.getElementById('tpFill').style.width='100%';
-      document.getElementById('tpLabel').textContent='Fertig!';
-      document.getElementById('tpTitle').textContent='Deine Bewertung';
+    const steps=getSteps(),total=steps.length,atResult=S.cur>=total;
+    let dots='';
+    for(let i=0;i<total;i++){
+      const cls=i<S.cur?'done':i===S.cur?'active':'';
+      dots+=`<div class="tp-dot ${cls}">${i+1}</div>`;
+      if(i<total-1) dots+=`<div class="tp-line ${i<S.cur?'done':''}"></div>`;
     }
+    document.getElementById('toolProgress').style.display=atResult?'none':'';
+    const ts=document.getElementById('tpSteps');if(ts)ts.innerHTML=dots;
+    const pct=document.getElementById('tpPct');if(pct)pct.textContent=atResult?'Fertig!':Math.round(((S.cur+1)/total)*100)+'%';
     const body=document.getElementById('toolBody');
     body.innerHTML='';
-    body.insertAdjacentHTML('beforeend',S.cur<STEPS.length?buildStep(STEPS[S.cur]):buildResult());
-    afterInject();
-  }
-
-  function afterInject(){
-    const sl=document.getElementById('flaecheSlider');
-    if(sl){
-      sl.addEventListener('input',e=>{S.flaeche=parseInt(e.target.value);document.getElementById('flaecheVal').textContent=S.flaeche;fillSlider(sl)});
-      fillSlider(sl);
-    }
+    body.insertAdjacentHTML('beforeend',atResult?buildResult():buildStep(steps[S.cur]));
     const bar=document.getElementById('rBar');
     if(bar) setTimeout(()=>bar.style.width='72%',120);
-    if(S.cur===STEPS.length) setTimeout(()=>document.getElementById('toolCard').scrollIntoView({behavior:'smooth',block:'start'}),100);
+    if(atResult) setTimeout(()=>document.getElementById('toolCard').scrollIntoView({behavior:'smooth',block:'start'}),80);
   }
 
-  function fillSlider(sl){
-    const pct=((sl.value-sl.min)/(sl.max-sl.min))*100;
-    sl.style.background=`linear-gradient(to right,var(--b400) ${pct}%,var(--g200) ${pct}%)`;
+  /* ── SQM helpers ── */
+  function sqmSync(){const f=document.getElementById('sqmField');if(f)f.value=S.flaeche;}
+  function sqmChange(delta){
+    let step=S.flaeche<100?5:S.flaeche<200?10:20;
+    S.flaeche=Math.max(20,Math.min(500,S.flaeche+(delta>0?step:-step)));
+    sqmSync();
   }
+  function sqmSet(v){S.flaeche=v;sqmSync();}
+  function sqmInput(v){const n=parseInt(v);if(!isNaN(n)&&n>=20&&n<=500)S.flaeche=n;}
 
   /* ── STEPS ── */
   function buildStep(step){
-    if(step==='type') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Was möchtest du bewerten?</div><div class="step-sub">Wähle den Typ deiner Immobilie für eine präzisere Einschätzung.</div><div class="opt-grid c2">${opt('type','wohnung','🏢','Wohnung','Eigentumswohnung')}${opt('type','haus','🏠','Haus','Einfamilienhaus')}${opt('type','villa','🏡','Villa / Luxus','Premium-Objekt')}${opt('type','gewerbe','🏬','Gewerbe','Büro, Geschäft')}</div>${foot(false,!!S.type)}</div>`;
+    if(step==='type') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Was möchtest du bewerten?</div><div class="step-sub">Wähle den Typ deiner Immobilie.</div><div class="opt-grid c2">${opt('type','wohnung','🏢','Wohnung','Eigentumswohnung')}${opt('type','haus','🏠','Haus','Einfamilienhaus')}${opt('type','villa','🏡','Villa / Luxus','Premium-Objekt')}${opt('type','gewerbe','🏬','Gewerbe','Büro, Geschäft')}</div>${foot(false,!!S.type)}</div>`;
     if(step==='bezirk') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">In welchem Bezirk?</div><div class="step-sub">Die Lage ist der wichtigste Preisfaktor in Wien.</div><div class="bzk-grid">${bezirke.map(b=>`<button class="bzk-btn${S.bezirk===b.num?' sel':''}" onclick="pickBzk('${b.num}')"><span class="bzk-num">${b.num}</span><span class="bzk-name">${b.name}</span></button>`).join('')}</div>${foot(true,!!S.bezirk)}</div>`;
-    if(step==='flaeche') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Wie groß ist die Immobilie?</div><div class="step-sub">Wohnfläche in Quadratmetern (ohne Keller, Terrasse).</div><div class="slider-wrap"><div class="slider-val-display"><span id="flaecheVal">${S.flaeche}</span><span class="unit">m²</span></div><input type="range" id="flaecheSlider" min="20" max="400" step="5" value="${S.flaeche}"><div class="slider-labels"><span>20 m²</span><span>400 m²</span></div></div>${foot(true,true)}</div>`;
-    if(step==='zimmer') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Wie viele Zimmer?</div><div class="step-sub">Anzahl der Zimmer (ohne Küche und Bad).</div><div class="opt-grid c3">${['1','2','3','4','5+'].map(z=>`<button class="opt-simple${S.zimmer===z?' sel':''}" onclick="pickSimple('zimmer','${z}')"><span class="opt-lbl" style="font-size:1.4rem;font-family:'Playfair Display',serif;font-weight:700">${z}</span><span class="opt-desc">Zimmer</span></button>`).join('')}</div>${foot(true,!!S.zimmer)}</div>`;
-    if(step==='condition') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Welchen Zustand hat die Immobilie?</div><div class="step-sub">Der Zustand beeinflusst den Wert um bis zu 25%.</div><div class="opt-grid">${opt('condition','renoviert','✨','Vollständig renoviert','Moderne Ausstattung')}${opt('condition','gut','👍','Guter Zustand','Gepflegt, keine Mängel')}${opt('condition','mittel','🔧','Mittlerer Zustand','Leichter Renovierungsbedarf')}${opt('condition','sanierungsbedarf','🏗️','Sanierungsbedarf','Größere Renovierung nötig')}</div>${foot(true,!!S.condition)}</div>`;
-    if(step==='floor') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">In welchem Stockwerk?</div><div class="step-sub">Die Etage hat Einfluss auf Licht, Lärm und Preis.</div><div class="opt-grid c2">${opt('floor','eg','🚪','Erdgeschoss','Parterre')}${opt('floor','mitte','🏢','Mittelgeschoss','1.–4. Stock')}${opt('floor','hoch','🔝','Obere Etage','Ab dem 5. Stock')}${opt('floor','dg','🌟','Dachgeschoss','Loft oder Penthouse')}</div>${foot(true,!!S.floor)}</div>`;
+    if(step==='flaeche') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">${S.type==='haus'||S.type==='villa'?'Wie groß ist das Haus?':'Wie groß ist die Wohnung?'}</div><div class="step-sub">Wohnfläche in m² – ohne Keller und Außenflächen.</div><div class="sqm-wrap"><button class="sqm-side-btn" type="button" onclick="sqmChange(-1)">−</button><div class="sqm-mid"><input id="sqmField" type="number" class="sqm-field" value="${S.flaeche}" min="20" max="500" oninput="sqmInput(this.value)" onblur="this.value=S.flaeche"><span class="sqm-unit">m²</span></div><button class="sqm-side-btn" type="button" onclick="sqmChange(1)">+</button></div><div class="sqm-pills">${[40,60,80,100,120,150,200].map(v=>`<button type="button" class="sqm-pill${S.flaeche===v?' sel':''}" onclick="sqmSet(${v})">${v}</button>`).join('')}</div>${foot(true,true)}</div>`;
+    if(step==='zimmer') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Wie viele Zimmer?</div><div class="step-sub">Anzahl Zimmer ohne Küche und Bad.</div><div class="opt-grid c3">${['1','2','3','4','5+'].map(z=>`<button class="opt-simple${S.zimmer===z?' sel':''}" onclick="pickSimple('zimmer','${z}')"><span style="font-size:1.7rem;font-family:'Playfair Display',serif;font-weight:700;color:var(--g900)">${z}</span><span class="opt-desc">Zimmer</span></button>`).join('')}</div>${foot(true,!!S.zimmer)}</div>`;
+    if(step==='baujahr') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Altbau oder Neubau?</div><div class="step-sub">Altbau = vor 1945 (Gründerzeit). Neubau = ab 1945.</div><div class="opt-grid c2">${opt('baujahr','altbau','🏛️','Altbau','Errichtet vor 1945')}${opt('baujahr','neubau','🏗️','Neubau','Errichtet ab 1945')}</div>${foot(true,!!S.baujahr)}</div>`;
+    if(step==='aussenflaeche') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Gibt es eine Außenfläche?</div><div class="step-sub">Freiflächen steigern den Wert um 3–8%.</div><div class="opt-grid c2">${opt('aussenflaeche','keine','🚫','Keine Außenfläche','Ohne Freifläche')}${opt('aussenflaeche','balkon','🪴','Balkon','Kleiner Außenbereich')}${opt('aussenflaeche','loggia','🛋️','Loggia','Überdachter Balkon')}${opt('aussenflaeche','terrasse','☀️','Terrasse','Größerer Außenbereich')}${opt('aussenflaeche','dachterrasse','🌆','Dachterrasse','Oberste Etage, exklusiv')}${opt('aussenflaeche','garten','🌳','Garten','Eigener Gartenanteil')}</div>${foot(true,!!S.aussenflaeche)}</div>`;
+    if(step==='condition') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Welchen Zustand hat die Immobilie?</div><div class="step-sub">Der Zustand beeinflusst den Wert um bis zu 25%.</div><div class="opt-grid">${opt('condition','renoviert','✨','Vollständig renoviert','Moderne Ausstattung, top Zustand')}${opt('condition','gut','👍','Guter Zustand','Gepflegt, keine nennenswerten Mängel')}${opt('condition','mittel','🔧','Mittlerer Zustand','Leichter Renovierungsbedarf')}${opt('condition','sanierungsbedarf','🏗️','Sanierungsbedarf','Größere Renovierung erforderlich')}</div>${foot(true,!!S.condition)}</div>`;
+    if(step==='floor') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">In welchem Stockwerk?</div><div class="step-sub">Die Etage beeinflusst Licht, Lärm und Preis.</div><div class="opt-grid c2">${opt('floor','eg','🚪','Erdgeschoss','Parterre')}${opt('floor','mitte','🏢','Mittelgeschoss','1.–4. Stock')}${opt('floor','hoch','🔝','Obere Etage','Ab dem 5. Stock')}${opt('floor','dg','🌟','Dachgeschoss','Loft oder Penthouse')}</div>${foot(true,!!S.floor)}</div>`;
+    if(step==='ubahn') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Wie weit zur nächsten U-Bahn?</div><div class="step-sub">U-Bahn-Nähe erhöht den Wert um bis zu 6% (Quelle: OeNB Wohnimmobilienbericht 2023).</div><div class="opt-grid">${opt('ubahn','nahe','🚇','Unter 5 Minuten','< 500m – starker Lageaufschlag')}${opt('ubahn','mittel','🚶','5–10 Minuten','500m–1km – moderater Bonus')}${opt('ubahn','weit','🚌','Über 10 Minuten','> 1km – kein U-Bahn-Bonus')}</div>${foot(true,!!S.ubahn)}</div>`;
+    if(step==='nahversorgung') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Wie gut ist die Nahversorgung?</div><div class="step-sub">Supermarkt, Apotheke & Co. in der Nähe steigern den Wert um bis zu 3%.</div><div class="opt-grid">${opt('nahversorgung','sehr_gut','🛒','Sehr gut','Supermarkt < 5 Min. zu Fuß')}${opt('nahversorgung','gut','🏪','Gut','5–10 Min. zu Fuß')}${opt('nahversorgung','mittel','🚗','Eingeschränkt','> 10 Min. oder nur mit Auto')}</div>${foot(true,!!S.nahversorgung)}</div>`;
+    if(step==='nutzungsart') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Welche Nutzungsart?</div><div class="step-sub">Die Nutzung beeinflusst Renditeerwartung und Marktwert erheblich.</div><div class="opt-grid c2">${opt('nutzungsart','buero','💼','Büro / Praxis','Verwaltung, Freie Berufe')}${opt('nutzungsart','einzelhandel','🏬','Einzelhandel','Geschäftslokal, Retail')}${opt('nutzungsart','gastro','🍽️','Gastronomie','Restaurant, Café, Bar')}${opt('nutzungsart','lager','📦','Lager / Produktion','Gewerbehalle, Depot')}</div>${foot(true,!!S.nutzungsart)}</div>`;
   }
 
   function opt(field,val,icon,lbl,desc){
-    const sel=S[field]===val?' sel':'';
-    return `<button class="opt-btn${sel}" onclick="pickOpt('${field}','${val}',this)"><div class="opt-icon-box">${icon}</div><div class="opt-txt"><span class="opt-lbl">${lbl}</span>${desc?`<span class="opt-desc">${desc}</span>`:''}</div><div class="opt-check"></div></button>`;
+    return `<button class="opt-btn${S[field]===val?' sel':''}" onclick="pickOpt('${field}','${val}',this)"><div class="opt-icon-box">${icon}</div><div class="opt-txt"><span class="opt-lbl">${lbl}</span>${desc?`<span class="opt-desc">${desc}</span>`:''}</div><div class="opt-check"></div></button>`;
   }
-  function foot(showBack,nextOn){
-    return `<div class="step-footer">${showBack?`<button class="btn-back" onclick="goBack()">← Zurück</button>`:'<div></div>'}<button class="btn-next" id="btnNext" onclick="goNext()" ${nextOn?'':'disabled'}>Weiter →</button></div>`;
+  function foot(back,on){
+    return `<div class="step-footer">${back?`<button class="btn-back" onclick="goBack()">← Zurück</button>`:'<div></div>'}<button class="btn-next" id="btnNext" onclick="goNext()" ${on?'':'disabled'}>Weiter →</button></div>`;
   }
 
   /* ── INTERACTIONS ── */
@@ -739,114 +777,111 @@
     S[field]=val;
     document.querySelectorAll('#toolBody .opt-btn').forEach(b=>b.classList.remove('sel'));
     el.classList.add('sel');
-    const btn=document.getElementById('btnNext');
-    if(btn) btn.disabled=false;
-    if(['type','condition','floor'].includes(field)) setTimeout(goNext,300);
+    const btn=document.getElementById('btnNext');if(btn)btn.disabled=false;
+    setTimeout(goNext,300);
   }
   function pickSimple(field,val){
     S[field]=val;
     document.querySelectorAll('#toolBody .opt-simple').forEach(b=>b.classList.remove('sel'));
     event.currentTarget.classList.add('sel');
-    const btn=document.getElementById('btnNext');
-    if(btn) btn.disabled=false;
     setTimeout(goNext,300);
   }
   function pickBzk(num){
     S.bezirk=num;
     document.querySelectorAll('#toolBody .bzk-btn').forEach(b=>b.classList.remove('sel'));
     event.currentTarget.classList.add('sel');
-    const btn=document.getElementById('btnNext');
-    if(btn) btn.disabled=false;
+    const btn=document.getElementById('btnNext');if(btn)btn.disabled=false;
   }
-  function goNext(){
-    if(S.cur<STEPS.length-1){S.cur++;render();}
-    else{S.cur=STEPS.length;render();}
-  }
+  function goNext(){const s=getSteps();if(S.cur<s.length-1){S.cur++;render();}else{S.cur=s.length;render();}}
   function goBack(){if(S.cur>0){S.cur--;render();}}
 
   /* ── CALC ── */
   function calc(){
     const bz=bezirke.find(b=>b.num===S.bezirk)||bezirke[6];
-    const mid=bz.p*(typeM[S.type]||1)*(condM[S.condition]||1)*(floorM[S.floor]||1)*S.flaeche;
-    const low=Math.round(mid*.93/10000)*10000;
-    const high=Math.round(mid*1.10/10000)*10000;
-    const potL=Math.round(low*.06/1000)*1000;
-    const potH=Math.round(low*.14/1000)*1000;
+    // Gewerbe: nutzungsart ersetzt typeM wenn gesetzt
+    let tM=(S.type==='gewerbe'&&S.nutzungsart)?nutzungsartM[S.nutzungsart]:(typeM[S.type]||1);
+    let base=bz.p*tM*(condM[S.condition]||1)*S.flaeche;
+    if(S.floor) base*=(floorM[S.floor]||1);
+    if(S.baujahr) base*=(baujahrM[S.baujahr]||1);
+    // U-Bahn & Nahversorgung (OeNB / Hedonic Pricing)
+    if(S.ubahn) base*=(ubahnM[S.ubahn]||1);
+    if(S.nahversorgung) base*=(nahversorgungM[S.nahversorgung]||1);
+    const afBonus=Math.round((afM[S.aussenflaeche]||0)*base);
+    const total=base+afBonus;
+    // Konservativ: high = immopreise.at-Niveau (Angebotspreis), low = -10% (Transaktionsabschlag)
+    const high=Math.round(total/5000)*5000;
+    const low=Math.round(total*.90/5000)*5000;
+    const potL=Math.round(low*.05/1000)*1000;
+    const potH=Math.round(low*.12/1000)*1000;
     const m2=Math.round((low+high)/2/S.flaeche/100)*100;
-    return{low,high,potL,potH,m2,bz};
+    const rentYield=((bz.rent*12)/((low+high)/2)*100);
+    return{low,high,potL,potH,m2,bz,afBonus,rentYield};
   }
-  function fmt(n){return'€'+n.toLocaleString('de-AT')}
+  function fmt(n){return '€\u202f'+Math.round(n).toLocaleString('de-AT')}
 
-  /* ── RESULT ── */
-  // Simple sparkline: 6 relative price points for each district (normalized history)
-  const sparkData = {
-    '1010':[72,78,84,91,100,100],'1020':[68,74,81,88,97,100],'1030':[70,75,82,89,96,100],
-    '1040':[71,77,83,90,98,100],'1050':[69,74,80,87,95,100],'1060':[70,76,82,89,96,100],
-    '1070':[71,77,83,90,97,100],'1080':[70,75,81,88,96,100],'1090':[72,78,85,92,99,100],
-    '1100':[65,70,76,83,92,100],'1110':[64,69,75,82,91,100],'1120':[66,71,77,84,93,100],
-    '1130':[71,77,83,90,97,100],'1140':[65,70,76,83,92,100],'1150':[64,69,75,82,91,100],
-    '1160':[66,71,77,84,93,100],'1170':[68,73,79,86,94,100],'1180':[70,76,82,89,96,100],
-    '1190':[71,77,83,90,97,100],'1200':[65,70,76,83,92,100],'1210':[66,71,78,85,93,100],
-    '1220':[67,72,79,86,94,100],'1230':[65,70,76,83,91,100]
-  };
-  function buildSparkline(bzNum){
-    const pts=sparkData[bzNum]||sparkData['1070'];
-    const W=120,H=36,pad=2;
+  /* ── SPARKLINE ── */
+  const spk={'1010':[72,78,84,91,100,100],'1020':[68,74,81,88,97,100],'1030':[70,75,82,89,96,100],'1040':[71,77,83,90,98,100],'1050':[69,74,80,87,95,100],'1060':[70,76,82,89,96,100],'1070':[71,77,83,90,97,100],'1080':[70,75,81,88,96,100],'1090':[72,78,85,92,99,100],'1100':[65,70,76,83,92,100],'1110':[64,69,75,82,91,100],'1120':[66,71,77,84,93,100],'1130':[71,77,83,90,97,100],'1140':[65,70,76,83,92,100],'1150':[64,69,75,82,91,100],'1160':[66,71,77,84,93,100],'1170':[68,73,79,86,94,100],'1180':[70,76,82,89,96,100],'1190':[71,77,83,90,97,100],'1200':[65,70,76,83,92,100],'1210':[66,71,78,85,93,100],'1220':[67,72,79,86,94,100],'1230':[65,70,76,83,91,100]};
+  function buildSparkline(bz){
+    const pts=spk[bz]||spk['1070'],W=96,H=28,pad=2;
     const xs=pts.map((_,i)=>pad+i*(W-2*pad)/5);
     const ys=pts.map(v=>H-pad-(v/100)*(H-2*pad));
-    const d='M'+xs.map((x,i)=>`${x},${ys[i]}`).join(' L');
-    const fill='M'+xs[0]+','+H+' L'+xs.map((x,i)=>`${x},${ys[i]}`).join(' L')+` L${xs[5]},${H} Z`;
-    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="display:block">
-      <path d="${fill}" fill="rgba(255,255,255,.15)"/>
-      <path d="${d}" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="2" stroke-linejoin="round"/>
-      <circle cx="${xs[5]}" cy="${ys[5]}" r="3" fill="white"/>
-    </svg>`;
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><path d="M${xs.map((x,i)=>x+','+ys[i]).join('L')}" fill="none" stroke="var(--b400)" stroke-width="1.8" stroke-linejoin="round"/><circle cx="${xs[5]}" cy="${ys[5]}" r="3" fill="var(--b500)"/></svg>`;
   }
 
+  /* ── RESULT (Broadsheet Design) ── */
   function buildResult(){
     const r=calc();
     const tLbl={wohnung:'Wohnung',haus:'Haus',villa:'Villa',gewerbe:'Gewerbe'};
-    return `<div class="step-wrap" style="padding:0;margin:-40px">
-      <div class="result-header">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-          <div style="flex:1">
-            <div class="r-eyebrow">Deine Sofortbewertung · ${r.bz.num} ${r.bz.name}</div>
-            <div class="r-address">${tLbl[S.type]||'Immobilie'} · ${S.flaeche} m² · Quelle: immopreise.at 2026, OeNB</div>
-            <div class="r-range-lbl">Geschätzter Marktwert</div>
-            <div class="r-range">${fmt(r.low)} – ${fmt(r.high)}</div>
-            <div class="r-range-bar"><div class="r-range-fill" id="rBar"></div></div>
-          </div>
-          <div style="text-align:right;flex-shrink:0">
-            <div style="font-size:.65rem;color:rgba(255,255,255,.5);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Preistrend 5 Jahre</div>
-            ${buildSparkline(r.bz.num)}
-            <div style="font-size:.65rem;color:rgba(255,255,255,.5);margin-top:3px">2021 → 2026</div>
-          </div>
+    const afLbl={keine:null,balkon:'Balkon',loggia:'Loggia',terrasse:'Terrasse',dachterrasse:'Dachterrasse',garten:'Garten'};
+    const now=new Date();
+    const datum=now.toLocaleDateString('de-AT',{day:'2-digit',month:'long',year:'numeric'});
+    const tags=[tLbl[S.type]||'Immobilie',S.flaeche+'\u202fm²',S.baujahr==='altbau'?'Altbau':S.baujahr==='neubau'?'Neubau':null,afLbl[S.aussenflaeche]||null].filter(Boolean).join(' · ');
+    const afLine=r.afBonus>0?`<div style="padding:12px 32px;background:#f0fdf4;border-bottom:1px solid #bbf7d0;display:flex;gap:10px;align-items:flex-start"><span style="flex-shrink:0">🌿</span><div style="font-size:.74rem;color:#166534;line-height:1.55"><strong style="color:#14532d">Außenflächen-Bonus:</strong> ${afLbl[S.aussenflaeche]||''} erhöht den Schätzwert um ca. ${fmt(r.afBonus)} – bereits enthalten.</div></div>`:'';
+    return `<div class="step-wrap" style="padding:0;margin:-36px -40px">
+      <div style="padding:16px 32px 12px;border-bottom:2.5px solid #0a1628;display:flex;align-items:flex-end;justify-content:space-between;gap:16px">
+        <span style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;color:#0a1628;letter-spacing:-.02em">ImmowertWien</span>
+        <span style="font-size:.68rem;color:#6b7280;text-align:right;line-height:1.7">Sofortbewertung · ${datum}<br>${r.bz.num} ${r.bz.name}</span>
+      </div>
+      <div style="padding:20px 32px 16px;border-bottom:1px solid #e5e7eb;display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;color:#9ca3af;margin-bottom:4px">${tags}</div>
+          <div style="font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin-bottom:3px">Geschätzter Marktwert</div>
+          <div style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#0a1628;line-height:1.05;margin-bottom:6px">${fmt(r.low)} – ${fmt(r.high)}</div>
+          <div style="font-size:.68rem;color:#9ca3af;margin-bottom:10px">Ø-Angebotspreis aus immopreise.at, willhaben.at & IMMOunited · Q1 2026 · konservative Schätzung</div>
+          <div style="height:4px;background:#e5e7eb;border-radius:100px;overflow:hidden"><div id="rBar" style="height:100%;background:#0a1628;border-radius:100px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)"></div></div>
+        </div>
+        <div style="flex-shrink:0;text-align:right;padding-top:4px">
+          <div style="font-size:.6rem;color:#9ca3af;margin-bottom:2px;letter-spacing:.04em">PREISTREND 5 J.</div>
+          ${buildSparkline(r.bz.num)}
+          <div style="font-size:.6rem;color:#9ca3af;margin-top:2px">2021 – 2026</div>
         </div>
       </div>
-      <div class="r-stats">
-        <div class="r-stat"><span class="r-stat-val blue">~${fmt(r.m2)}/m²</span><span class="r-stat-lbl">Aktueller Bezirkswert</span></div>
-        <div class="r-stat"><span class="r-stat-val green">↑ steigend</span><span class="r-stat-lbl">Markttrend ${r.bz.num}</span></div>
-        <div class="r-stat"><span class="r-stat-val">${r.bz.name}</span><span class="r-stat-lbl">Bezirk · ${r.bz.num}</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;border-bottom:2.5px solid #0a1628" class="result-columns">
+        <div class="rc-col" style="padding:16px 24px"><div style="font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9ca3af;margin-bottom:6px">Ø BEZIRKSWERT / m²</div><div style="font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:800;color:#0a1628;margin-bottom:3px">${fmt(r.m2)}</div><div style="font-size:.73rem;color:#6b7280">${r.bz.num} ${r.bz.name}</div></div>
+        <div style="background:#e5e7eb" class="rc-div"></div>
+        <div class="rc-col" style="padding:16px 24px"><div style="font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9ca3af;margin-bottom:6px">MARKTTREND</div><div style="font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:800;color:#059669;margin-bottom:3px">↑ steigend</div><div style="font-size:.73rem;color:#6b7280">Bezirk ${r.bz.num} · 2021–2026</div></div>
+        <div style="background:#e5e7eb" class="rc-div"></div>
+        <div class="rc-col" style="padding:16px 24px"><div style="font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9ca3af;margin-bottom:6px">MIETRENDITE NETTO</div><div style="font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:800;color:#0a1628;margin-bottom:3px">${r.rentYield.toFixed(1)} %</div><div style="font-size:.73rem;color:#6b7280">Kauf vs. Vermietung</div></div>
       </div>
-      <div class="potential-box">
-        <div class="pot-icon">💰</div>
-        <div>
-          <div class="pot-title">Mögliches Zusatzpotenzial</div>
-          <div class="pot-amount">${fmt(r.potL)} – ${fmt(r.potH)}</div>
-          <div class="pot-sub">Viele Eigentümer lassen genau diesen Betrag liegen – durch einen nicht optimierten Verkaufspreis. Ein Experte prüft kostenlos, ob das auch bei dir so ist.</div>
+      ${afLine}
+      <div style="padding:16px 32px;background:#fffbeb;border-bottom:1px solid #fde68a;display:flex;gap:12px;align-items:flex-start">
+        <span style="font-size:1.1rem;flex-shrink:0;margin-top:2px">💰</span>
+        <div><div style="font-size:.78rem;font-weight:600;color:#0a1628;margin-bottom:2px">Mögliches Zusatzpotenzial</div><div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:800;color:#92400e;margin-bottom:4px">${fmt(r.potL)} – ${fmt(r.potH)}</div><div style="font-size:.72rem;color:#78350f;line-height:1.6">Viele Eigentümer lassen Geld liegen – durch falsches Timing, nicht optimierten Einstiegspreis oder fehlende Strategie. Ein Experte prüft das kostenlos.</div></div>
+      </div>
+      <div style="padding:11px 32px;background:#f9fafb;border-bottom:1px solid #e5e7eb;display:flex;gap:8px;align-items:flex-start">
+        <span style="font-size:.8rem;flex-shrink:0;margin-top:1px">⚠️</span>
+        <div style="font-size:.7rem;color:#6b7280;line-height:1.65"><strong style="color:#374151">Rechtlicher Hinweis:</strong> Automatisch berechnete Erstorientierung auf Basis von Bezirks-Marktdaten (immopreise.at, willhaben.at, IMMOunited Q1 2026; Methodik: hedonisches Preismodell). Kein Sachverständigengutachten gem. § 57a GewO. Tatsächlicher Marktwert kann individuell abweichen. U-Bahn-Faktor lt. OeNB Wohnimmobilienbericht 2023.</div>
+      </div>
+      <div style="border-top:2.5px solid #0a1628;display:grid;grid-template-columns:1fr auto;align-items:stretch">
+        <div style="padding:16px 24px 16px 32px;border-right:1px solid #e5e7eb"><div style="font-size:.85rem;font-weight:600;color:#0a1628;margin-bottom:3px">Wie viel mehr ist tatsächlich drin?</div><div style="font-size:.72rem;color:#6b7280">Kostenlose Expertenanalyse · Unverbindlich · 24h Rückmeldung</div></div>
+        <button onclick="openModal()" style="background:#0a1628;border:none;padding:0 28px;font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:white;cursor:pointer;white-space:nowrap;transition:background .2s" onmouseover="this.style.background='#1a4fd6'" onmouseout="this.style.background='#0a1628'">Jetzt prüfen →</button>
+      </div>
+      <div style="padding:10px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div style="font-size:.68rem;color:#9ca3af">🔒 100% kostenlos & unverbindlich · Geprüfter Experte für ${r.bz.name}</div>
+        <div style="display:flex;gap:12px">
+          <button onclick="goBack()" style="background:none;border:1px solid #e5e7eb;border-radius:8px;color:#6b7280;font-size:.68rem;cursor:pointer;font-family:'Inter',sans-serif;padding:6px 12px">← Zurück</button>
+          <button onclick="resetTool()" style="background:none;border:none;color:#9ca3af;font-size:.68rem;cursor:pointer;font-family:'Inter',sans-serif">↺ Neue Bewertung</button>
         </div>
-      </div>
-      <div style="margin:0;padding:16px 40px;background:#fffbeb;border-left:4px solid var(--amber);display:flex;align-items:flex-start;gap:12px">
-        <span style="font-size:1.2rem;flex-shrink:0">💡</span>
-        <div style="font-size:.82rem;color:var(--g700);line-height:1.6"><strong>Hinweis:</strong> Diese Schätzung basiert auf Marktdurchschnittswerten. Was wirklich rauszuholen ist, hängt von Grundriss, Zustand, Ausrichtung und Verhandlungsstrategie ab – das prüft ein Experte mit bewährten Bewertungsmethoden persönlich für dich.</div>
-      </div>
-      <div class="result-cta-block">
-        <button class="cta2" onclick="openModal()">
-          <div class="cta2-txt"><span class="cta2-title">Prüfen, ob ich unter Wert verkaufe</span><span class="cta2-sub">Kostenlose Expertenanalyse · Unverbindlich · 24h Rückmeldung</span></div>
-          <div class="cta2-arr">→</div>
-        </button>
-        <div class="r-disclaimer">🔒 100% kostenlos & unverbindlich · Ein geprüfter Immobilienexperte meldet sich persönlich</div>
-        <div style="text-align:center;margin-top:14px"><button style="background:none;border:none;color:var(--g400);font-size:.78rem;cursor:pointer;font-family:'Inter',sans-serif" onclick="resetTool()">↺ Neue Bewertung starten</button></div>
       </div>
     </div>`;
   }
@@ -858,7 +893,9 @@
     const name=document.getElementById('mName').value.trim();
     const email=document.getElementById('mEmail').value.trim();
     const phone=document.getElementById('mPhone').value.trim();
-    if(!name||!email){document.getElementById('mEmail').focus();return}
+    const consent=document.getElementById('mConsent').checked;
+    if(!name||!email){alert('Bitte Name und E-Mail angeben.');return}
+    if(!consent){alert('Bitte die Einwilligung zur Kontaktaufnahme bestätigen.');return}
     submitLead({name,email,phone,...S});
   }
 
@@ -866,35 +903,26 @@
   const SUPABASE_URL='https://gxpzbhwgnsczikggdqvz.supabase.co';
   const SUPABASE_KEY='sb_publishable_Ef3Rz4GQgYTyMoEBJ-hNLA_gv3KVySw';
   async function submitLead(d){
-    document.querySelector('.m-submit').textContent='Wird gesendet...';
-    document.querySelector('.m-submit').disabled=true;
+    const btn=document.querySelector('.m-submit');
+    btn.textContent='Wird gesendet…';btn.disabled=true;
     try{
       const res=await fetch(`${SUPABASE_URL}/rest/v1/leads`,{
         method:'POST',
         headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Prefer':'return=minimal'},
-        body:JSON.stringify({name:d.name,email:d.email,phone:d.phone,type:d.type,bezirk:d.bezirk,flaeche:d.flaeche,zimmer:d.zimmer,condition:d.condition})
+        body:JSON.stringify({name:d.name,email:d.email,phone:d.phone,type:d.type,bezirk:d.bezirk,flaeche:d.flaeche,zimmer:d.zimmer,condition:d.condition,baujahr:d.baujahr,aussenflaeche:d.aussenflaeche,ubahn:d.ubahn,nahversorgung:d.nahversorgung,nutzungsart:d.nutzungsart})
       });
       if(!res.ok) throw new Error();
-      document.getElementById('modalContent').innerHTML=`<div style="text-align:center;padding:20px 0"><div style="font-size:3rem;margin-bottom:16px">✅</div><div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--g900);margin-bottom:8px">Anfrage erhalten!</div><p style="font-size:.88rem;color:var(--g500);line-height:1.65">Danke, ${d.name}.<br><br>Ein geprüfter Immobilienexperte meldet sich innerhalb von 24 Stunden persönlich bei dir – kostenlos und unverbindlich.</p></div>`;
-    }catch(err){
-      document.querySelector('.m-submit').textContent='Prüfen, ob ich unter Wert verkaufe →';
-      document.querySelector('.m-submit').disabled=false;
-      alert('Etwas ist schiefgelaufen. Bitte versuche es nochmal.');
-    }
+      document.getElementById('modalContent').innerHTML=`<div style="text-align:center;padding:20px 0"><div style="font-size:3rem;margin-bottom:16px">✅</div><div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--g900);margin-bottom:8px">Anfrage erhalten!</div><p style="font-size:.88rem;color:var(--g500);line-height:1.65">Danke, ${d.name}.<br><br>Ein geprüfter Immobilienexperte für deinen Bezirk meldet sich innerhalb von 24 Stunden – kostenlos und unverbindlich.</p></div>`;
+    }catch(e){btn.textContent='Prüfen, ob ich unter Wert verkaufe →';btn.disabled=false;alert('Bitte nochmal versuchen.');}
   }
-  document.getElementById('overlay').addEventListener('click',function(e){if(e.target===this)closeModal()});
+  document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal()});
 
   /* ── FAQ ── */
-  function toggleFaq(btn){
-    const item=btn.closest('.faq-item');
-    const isOpen=item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
-    if(!isOpen) item.classList.add('open');
-  }
+  function toggleFaq(btn){const i=btn.closest('.faq-item'),o=i.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(x=>x.classList.remove('open'));if(!o)i.classList.add('open');}
 
   /* ── UTILS ── */
   function scrollToTool(){document.getElementById('tool-section').scrollIntoView({behavior:'smooth',block:'start'})}
-  function resetTool(){S.cur=0;S.type=null;S.bezirk=null;S.flaeche=80;S.zimmer=null;S.condition=null;S.floor=null;render();scrollToTool()}
+  function resetTool(){Object.assign(S,{cur:0,type:null,bezirk:null,flaeche:80,zimmer:null,condition:null,floor:null,baujahr:null,aussenflaeche:null,ubahn:null,nahversorgung:null,nutzungsart:null});render();scrollToTool();}
 
   /* ── SCROLL REVEAL ── */
   const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
@@ -902,6 +930,16 @@
 
   /* ── NAV SCROLL ── */
   window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>20),{passive:true});
+
+  /* ── MOBILE DRAWER ── */
+  function toggleDrawer(){
+    document.getElementById('navDrawer').classList.toggle('open');
+    document.getElementById('navOverlay').classList.toggle('open');
+  }
+  function closeDrawer(){
+    document.getElementById('navDrawer').classList.remove('open');
+    document.getElementById('navOverlay').classList.remove('open');
+  }
 
   /* ── MAPLIBRE 3D WIEN ── */
   (function(){

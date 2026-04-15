@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <!-- Cookie Consent + Analytics (DSGVO-konform) -->
+  <script src="cookie-consent.js"></script>
   <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bezirksanalyse Wien – Preise, Trends & Verkaufszeitpunkt | immowertWien</title>
   <meta name="description" content="Immobilienpreise für alle 23 Wiener Bezirke – Preisentwicklung, Vermarktungsdauer, Transaktionen und optimaler Verkaufszeitpunkt.">
@@ -25,7 +28,12 @@
     body{font-family:'Inter',sans-serif;background:var(--white);color:var(--g900);line-height:1.6;overflow-x:hidden;}
 
     /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:9000;background:#fff;border-bottom:1px solid rgba(0,0,0,.08);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 12px rgba(0,0,0,.06);}
+    /* Leaflet stays below nav */
+    .leaflet-pane{z-index:1!important;}
+    .leaflet-top,.leaflet-bottom{z-index:10!important;}
+    .leaflet-popup-pane{z-index:20!important;}
+    .leaflet-control-container .leaflet-top,.leaflet-control-container .leaflet-bottom{z-index:30!important;}
     .nav-logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--b600);text-decoration:none;}
     .nav-logo span{color:var(--g900);}
     .nav-links{display:flex;align-items:center;gap:2px;}
@@ -46,7 +54,7 @@
 
     /* MAP SECTION */
     .map-section{padding:0 5% 56px;max-width:1200px;margin:0 auto;}
-    .map-wrap{background:white;border-radius:24px;border:1px solid var(--g200);box-shadow:var(--sh-md);overflow:hidden;}
+    .map-wrap{background:white;border-radius:24px;border:1px solid var(--g200);box-shadow:var(--sh-md);overflow:hidden;isolation:isolate;}
     .map-header{padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
     .map-header-left h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--g900);}
     .map-header-left p{font-size:.78rem;color:var(--g500);margin-top:2px;}
@@ -189,7 +197,7 @@
 </div>
 
 <!-- MAP -->
-<div class="map-section reveal">
+<div class="map-section">
   <div class="map-wrap">
     <div class="map-header">
       <div class="map-header-left">
@@ -275,6 +283,9 @@
     <a href="bezirke.html">Bezirksanalyse</a>
     <a href="blog.html">Blog</a>
     <a href="kontakt.html">Über uns</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="agb.html">AGB</a>
   </nav>
   <span class="foot-copy">© 2026 immowertWien · Alle Rechte vorbehalten</span>
 </footer>
