@@ -285,12 +285,13 @@
     .foot-copy{font-size:.73rem;color:rgba(255,255,255,.2)}
 
     /* ── MODAL ── */
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:500;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);display:flex;align-items:flex-start;justify-content:center;z-index:500;padding:20px;padding-top:max(20px,env(safe-area-inset-top));overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .3s}
     .overlay.on{opacity:1;pointer-events:all}
-    .modal{background:white;border-radius:24px;padding:44px;width:100%;max-width:480px;box-shadow:0 32px 80px rgba(0,0,0,.22);transform:translateY(20px) scale(.97);transition:transform .3s cubic-bezier(.4,0,.2,1);position:relative}
+    .modal{background:white;border-radius:24px;padding:44px;width:100%;max-width:480px;box-shadow:0 32px 80px rgba(0,0,0,.22);transform:translateY(20px) scale(.97);transition:transform .3s cubic-bezier(.4,0,.2,1);position:relative;margin:auto}
     .overlay.on .modal{transform:none}
     .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;background:var(--g100);border:none;border-radius:50%;cursor:pointer;font-size:1rem;color:var(--g500);display:flex;align-items:center;justify-content:center;transition:background .2s}
     .modal-close:hover{background:var(--g200)}
+    @media(max-width:600px){.modal{padding:28px 20px;border-radius:16px;}}
     .m-eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--b500);margin-bottom:8px}
     .m-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--g900);margin-bottom:6px;line-height:1.2}
     .m-sub{font-size:.85rem;color:var(--g500);margin-bottom:24px;line-height:1.55}
@@ -808,9 +809,9 @@
     if(S.nahversorgung) base*=(nahversorgungM[S.nahversorgung]||1);
     const afBonus=Math.round((afM[S.aussenflaeche]||0)*base);
     const total=base+afBonus;
-    // Konservativ: high = immopreise.at-Niveau (Angebotspreis), low = -10% (Transaktionsabschlag)
-    const high=Math.round(total/5000)*5000;
-    const low=Math.round(total*.90/5000)*5000;
+    // Konservativ: high = -7% vs immopreise.at, low = -17% (Transaktionsabschlag)
+    const high=Math.round(total*.93/5000)*5000;
+    const low=Math.round(total*.83/5000)*5000;
     const potL=Math.round(low*.05/1000)*1000;
     const potH=Math.round(low*.12/1000)*1000;
     const m2=Math.round((low+high)/2/S.flaeche/100)*100;

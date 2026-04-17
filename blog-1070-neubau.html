@@ -26,7 +26,17 @@
     .nav-link:hover{background:var(--g100);color:var(--g900)}
     .nav-pill{background:var(--b500);color:white;border:none;padding:10px 22px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.875rem;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
     .nav-pill:hover{background:var(--b600)}
-    @media(max-width:780px){.nav-links{display:none}}
+    .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:none;z-index:9001}
+    .nav-burger span{display:block;width:22px;height:2px;background:var(--g900);border-radius:2px;transition:all .3s}
+    .nav-drawer{position:fixed;top:0;left:0;bottom:0;width:280px;background:white;z-index:9002;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:4px 0 32px rgba(0,0,0,.12);padding:80px 24px 32px;display:flex;flex-direction:column;gap:4px}
+    .nav-drawer.open{transform:none}
+    .nav-drawer-link{font-size:1rem;font-weight:500;color:var(--g700);text-decoration:none;padding:12px 16px;border-radius:10px;transition:all .18s;display:block}
+    .nav-drawer-link:hover,.nav-drawer-link.active{background:var(--b50);color:var(--b500)}
+    .nav-drawer-pill{margin-top:16px;background:var(--b500);color:white;padding:14px 20px;border-radius:12px;text-decoration:none;font-weight:600;font-size:.95rem;display:block;text-align:center;transition:background .2s}
+    .nav-drawer-pill:hover{background:var(--b600)}
+    .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9001;opacity:0;pointer-events:none;transition:opacity .3s}
+    .nav-overlay.open{opacity:1;pointer-events:all}
+    @media(max-width:780px){.nav-links,.nav-pill{display:none}.nav-burger{display:flex}}
 
     /* ARTICLE LAYOUT */
     .article-wrap{padding-top:64px;max-width:720px;margin:0 auto;padding-left:5%;padding-right:5%}
@@ -79,15 +89,26 @@
 </head>
 <body>
 
-<nav>
+<div class="nav-overlay" id="navOverlay" onclick="closeDrawer()"></div>
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html" class="nav-drawer-link">Immobilie bewerten</a>
+  <a href="bezirke.html" class="nav-drawer-link">Bezirksanalyse</a>
+  <a href="blog.html" class="nav-drawer-link active">Blog</a>
+  <a href="kontakt.html" class="nav-drawer-link">Über uns</a>
+  <a href="index.html#tool" class="nav-drawer-pill">Jetzt bewerten →</a>
+</div>
+<nav id="mainNav">
+  <button class="nav-burger" id="navBurger" onclick="toggleDrawer()" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
   <a class="nav-logo" href="index.html">immowert<span>wien</span></a>
   <div class="nav-links">
     <a class="nav-link" href="index.html">Immobilie bewerten</a>
     <a class="nav-link" href="bezirke.html">Bezirksanalyse</a>
     <a class="nav-link active" href="blog.html">Blog</a>
     <a class="nav-link" href="kontakt.html">Über uns</a>
-    <a class="nav-pill" href="index.html#tool">Kostenlos bewerten</a>
   </div>
+  <a class="nav-pill" href="index.html#tool">Kostenlos bewerten</a>
 </nav>
 
 <div class="article-wrap">
@@ -185,5 +206,15 @@
   </div>
   <div class="foot-copy">© 2026 ImmowertWien · Daten: immopreise.at, OeNB, Statistik Austria</div>
 </footer>
+<script>
+function toggleDrawer(){
+  document.getElementById('navDrawer').classList.toggle('open');
+  document.getElementById('navOverlay').classList.toggle('open');
+}
+function closeDrawer(){
+  document.getElementById('navDrawer').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('open');
+}
+</script>
 </body>
 </html>
