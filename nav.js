@@ -54,7 +54,7 @@
   <a href="index.html#tool" class="nav-pill-btn">Jetzt bewerten →</a>
 </nav>`;
 
-  document.currentScript.insertAdjacentHTML('beforebegin', html);
+  document.body.insertAdjacentHTML('afterbegin', html);
 
   window.toggleNavDrawer = function() {
     document.getElementById('navDrawer').classList.toggle('open');
