@@ -100,16 +100,26 @@
     .b.act{background:var(--b500)}
 
     /* ── HERO CAROUSEL ── */
-    .pc-status{display:inline-flex;align-items:center;gap:5px;font-size:.65rem;font-weight:700;letter-spacing:.08em;color:var(--b500);text-transform:uppercase;margin-bottom:6px}
+    .pc-status{display:inline-flex;align-items:center;gap:5px;font-size:.63rem;font-weight:700;letter-spacing:.08em;color:var(--b500);text-transform:uppercase;margin-bottom:8px}
     .pc-status .pulse-dot{width:6px;height:6px;background:var(--b500);border-radius:50%;animation:pulse 1.5s infinite;flex-shrink:0}
     .pc-status.done{color:var(--green)}.pc-status.done .pulse-dot{background:var(--green);animation:none}
-    .chart-months .bar-now{color:var(--b500);font-weight:700;position:relative}
-    .chart-months .bar-now::before{content:'Jetzt';position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:.55rem;color:var(--b500);font-weight:700;white-space:nowrap;background:var(--b50);border-radius:4px;padding:1px 4px}
-    .locked-row{display:flex;align-items:center;gap:7px;background:var(--g100);border-radius:10px;padding:9px 13px;margin-top:10px;font-size:.74rem;color:var(--g500);border:1px dashed var(--g200)}
-    .locked-row .li{font-size:.9rem;flex-shrink:0}
+    .factor-list{display:flex;flex-direction:column;gap:9px;margin:14px 0 14px}
+    .factor-row{display:flex;align-items:center;gap:8px}
+    .factor-label{font-size:.67rem;color:var(--g500);flex:0 0 112px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .factor-bar-wrap{flex:1;height:5px;background:var(--g100);border-radius:3px;overflow:hidden}
+    .factor-bar{height:100%;background:linear-gradient(90deg,var(--b300),var(--b500));border-radius:3px;transform-origin:left center;animation:barGrowX .55s cubic-bezier(.4,0,.2,1) both}
+    @keyframes barGrowX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    .factor-score{font-size:.67rem;font-weight:700;color:var(--b500);flex:0 0 22px;text-align:right}
+    .factor-chip{font-size:.6rem;color:var(--b500);background:var(--b50);border:1px solid var(--b100);border-radius:5px;padding:2px 6px;white-space:nowrap;margin-left:2px}
+    .pc-price-block{background:var(--b50);border-radius:12px;padding:11px 16px;margin-bottom:10px}
+    .pc-price-lbl{font-size:.62rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--g400);margin-bottom:5px}
+    .pc-price-vals{display:flex;align-items:center;gap:10px}
+    .pc-price-dash{color:var(--g300)}
+    .locked-row{display:flex;align-items:center;gap:7px;background:var(--g100);border-radius:10px;padding:9px 13px;margin-top:8px;font-size:.73rem;color:var(--g500);border:1px dashed var(--g200)}
+    .locked-row .li{font-size:.85rem;flex-shrink:0}
     .blur-val{filter:blur(5px);user-select:none;pointer-events:none}
     .hero-dots{display:flex;justify-content:center;gap:8px;margin-top:16px;position:relative;z-index:2}
-    .h-dot{width:7px;height:7px;border-radius:50%;background:var(--g300);cursor:pointer;transition:all .35s cubic-bezier(.4,0,.2,1);border:none;padding:0;flex-shrink:0}
+    .h-dot{width:7px;height:7px;border-radius:50%;background:var(--g300);cursor:pointer;transition:all .4s cubic-bezier(.4,0,.2,1);border:none;padding:0;flex-shrink:0}
     .h-dot.on{background:var(--b500);width:22px;border-radius:4px}
     @keyframes barUp{from{transform:scaleY(0);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
     .chart-months{display:flex;justify-content:space-between;font-size:.7rem;color:var(--g400);margin-bottom:18px}
@@ -669,54 +679,66 @@
 <script>
   /* ── HERO CAROUSEL ── */
   (function(){
+    // Factors model what a broker actually discusses in a valuation call.
+    // Showing scores + market facts = credibility. Locking the "so what" = drives sign-up.
     const CARDS = [
       {
         live: true,
         addr: 'Radetzkystraße 12, 1030 Wien',
-        bars: [28,45,70,100,84,60,40],
-        min: '490k', max: '558k',
-        badge: 'green', badgeTxt: '↑ Frühjahrsfenster geöffnet · Apr–Mai ideal',
-        trend: 'Markttrend <strong>steigend</strong> · Nachfrage in 1030 hoch',
-        locked: 'Optimale Verkaufsstrategie · 3 Preistreiber erkannt',
+        factors: [
+          { label: 'Lage-Score',      pct: 92, chip: null },
+          { label: 'Markt-Timing',    pct: 88, chip: '↑ Frühjahrsfenster Apr–Mai' },
+          { label: 'Zustandsfaktor',  pct: 74, chip: null },
+        ],
+        min: '490.000 €', max: null,
+        insight: { style: 'green', txt: '📍 U-Bahn-Nähe &lt;400m · +12% Lageaufschlag' },
+        locked: 'Maximales Verkaufspreis-Potenzial wird berechnet …',
         f1t:'Bezirk 1030 · Landstraße', f1s:'€ 7.938/m² Ø · immopreise.at',
-        f2i:'💰', f2t:'+€ 52.000', f2s:'Ø mehr erzielt',
+        f2i:'⚡', f2t:'Analyse läuft', f2s:'Ergebnis in Kürze',
       },
       {
         live: false,
         addr: 'Pragerstraße 80, 1210 Wien',
-        bars: [22,38,62,88,75,52,35],
-        min: '285k', max: null,
-        badge: 'blue', badgeTxt: '🔍 Sanierungspotenzial erkannt',
-        trend: 'Floridsdorf: Preise <strong>+18%</strong> seit 2024',
-        locked: 'Maximales Preispotenzial · Verhandlungsstrategie',
+        factors: [
+          { label: 'Lage-Score',           pct: 64, chip: null },
+          { label: 'Sanierungspotenzial',   pct: 81, chip: '🔧 Hebel erkannt' },
+          { label: 'Markt-Nachfrage',       pct: 70, chip: null },
+        ],
+        min: '285.000 €', max: null,
+        insight: { style: 'blue', txt: '🚇 Wohnungen mit U-Bahn-Nähe: Ø +12% besser' },
+        locked: 'Preisspanne nach Sanierung · Verkaufsstrategie',
         f1t:'Bezirk 1210 · Floridsdorf', f1s:'€ 4.340/m² Ø · immopreise.at',
-        f2i:'🔔', f2t:'2 Kaufanfragen', f2s:'im Bezirk vorgemerkt',
+        f2i:'📊', f2t:'1 Hebel erkannt', f2s:'Details gesperrt',
       },
       {
         live: false,
         addr: 'Gersthofer Str. 22, 1180 Wien',
-        bars: [30,48,74,100,86,62,42],
-        min: '380k', max: '445k',
-        badge: 'green', badgeTxt: '🌳 Grünlage-Aufschlag +8% kalkuliert',
-        trend: 'Währing: <strong>Top-5</strong> nachgefragteste Bezirke Wiens',
-        locked: '12 Vergleichsobjekte analysiert · Details',
+        factors: [
+          { label: 'Lage-Score',      pct: 84, chip: null },
+          { label: 'Grünlage-Bonus',  pct: 78, chip: '🌳 +8% Aufschlag' },
+          { label: 'Markt-Timing',    pct: 86, chip: null },
+        ],
+        min: '380.000 €', max: '445.000 €',
+        insight: { style: 'green', txt: '📈 Vergleichsobj. in 1180: Ø 34 Tage bis Abschluss' },
+        locked: 'Individuelle Preisstrategie · 12 Vergleichsobjekte',
         f1t:'Bezirk 1180 · Währing', f1s:'€ 6.127/m² Ø · immopreise.at',
         f2i:'💰', f2t:'+€ 38.000', f2s:'Ø Potenzial erkannt',
       },
       {
         live: false,
         addr: 'Längenfeldgasse 14, 1120 Wien',
-        bars: [25,40,65,92,78,55,36],
+        factors: [
+          { label: 'Lage-Score',       pct: 69, chip: null },
+          { label: 'U4-Aufschlag',     pct: 77, chip: '🚇 +12% Bonus' },
+          { label: 'Markt-Nachfrage',  pct: 66, chip: null },
+        ],
         min: null, max: null,
-        badge: 'blue', badgeTxt: '🚇 U4-Nähe · +12% Lageaufschlag',
-        trend: 'Meidling im Aufwind · <strong>Preise +6%</strong> ggü. Vorjahr',
-        locked: 'Vollständige Bewertung · Jetzt kostenlos freischalten',
+        insight: { style: 'blue', txt: '📊 Meidling: Preise +6% ggü. Vorjahr · Aufwind' },
+        locked: 'Verkaufswert + Strategie · Jetzt kostenlos freischalten',
         f1t:'Bezirk 1120 · Meidling', f1s:'€ 4.810/m² Ø · immopreise.at',
         f2i:'🔒', f2t:'Ergebnis bereit', f2s:'Jetzt ansehen →',
       },
     ];
-    const MONTHS = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul'];
-    const PEAK = 3; // April index
     let cur = 0, timer = null;
 
     function renderCard(idx) {
@@ -726,26 +748,26 @@
       const f2 = document.getElementById('heroF2');
       if (!el) return;
 
-      const maxH = Math.max(...c.bars);
-      const bars = c.bars.map((h,i) => {
-        const pct = Math.round(h/maxH*100);
-        return `<div class="b${i===PEAK?' act':''}" style="height:${pct}%;animation:barUp .4s ${.05+i*.06}s both"></div>`;
-      }).join('');
-
-      const mons = MONTHS.map((m,i) =>
-        i===PEAK ? `<span class="bar-now">${m}</span>` : `<span>${m}</span>`
-      ).join('');
+      const factorsHtml = c.factors.map((f, i) => `
+        <div class="factor-row" style="animation:fadeUp .3s ${.08+i*.09}s both">
+          <div class="factor-label">${f.label}</div>
+          <div class="factor-bar-wrap">
+            <div class="factor-bar" style="width:${f.pct}%;animation:barGrowX .5s ${.1+i*.1}s both"></div>
+          </div>
+          <div class="factor-score">${f.pct}</div>
+          ${f.chip ? `<span class="factor-chip">${f.chip}</span>` : ''}
+        </div>`).join('');
 
       const minH = c.min
-        ? `<div class="pv-num">${c.min}</div>`
-        : `<div class="pv-num blur-val">•••k</div>`;
-      const maxH2 = c.max
-        ? `<div class="pv-num hi">${c.max}</div>`
-        : `<div class="pv-num blur-val hi">•••k</div>`;
+        ? `<span class="pv-num" style="font-size:1.2rem">${c.min}</span>`
+        : `<span class="pv-num blur-val" style="font-size:1.2rem">••••• €</span>`;
+      const maxH = c.max
+        ? `<span class="pv-num hi" style="font-size:1.2rem">${c.max}</span>`
+        : `<span class="pv-num blur-val" style="font-size:1.2rem;color:var(--b500)">••••• €</span>`;
 
-      const bStyle = c.badge==='green'
-        ? 'background:#ecfdf5;color:var(--green);border:1px solid #a7f3d0'
-        : 'background:var(--b50);color:var(--b500);border:1px solid var(--b100)';
+      const iStyle = c.insight.style === 'green'
+        ? 'background:#ecfdf5;color:#059669;border:1px solid #a7f3d0'
+        : 'background:var(--b50);color:var(--b600);border:1px solid var(--b100)';
 
       const statusHtml = c.live
         ? `<div class="pc-status"><span class="pulse-dot"></span>Bewertung läuft…</div>`
@@ -753,22 +775,18 @@
 
       el.innerHTML = `
         ${statusHtml}
-        <div class="pc-addr">${c.addr}</div>
-        <div class="mini-chart" style="margin-top:12px">${bars}</div>
-        <div class="chart-months" style="margin-top:20px">${mons}</div>
-        <div class="price-nums" style="margin:12px 0 0">
-          <div style="text-align:center">${minH}<div class="pv-label">Minimum</div></div>
-          <div style="font-size:1.2rem;color:var(--g300)">–</div>
-          <div style="text-align:center">${maxH2}<div class="pv-label">Maximum</div></div>
+        <div class="pc-addr" style="margin-bottom:2px">${c.addr}</div>
+        <div class="factor-list">${factorsHtml}</div>
+        <div class="pc-price-block">
+          <div class="pc-price-lbl">Geschätzter Marktwert</div>
+          <div class="pc-price-vals">${minH}<span class="pc-price-dash">–</span>${maxH}</div>
         </div>
-        <div style="margin:12px 0"><span class="price-badge" style="${bStyle}">${c.badgeTxt}</span></div>
-        <div class="price-trend"><div class="trend-dot"></div><div class="trend-txt">${c.trend}</div></div>
+        <div style="margin:8px 0"><span class="price-badge" style="font-size:.74rem;${iStyle}">${c.insight.txt}</span></div>
         <div class="locked-row"><span class="li">🔒</span><span>${c.locked}</span></div>
       `;
 
       f1.innerHTML = `<span>📍</span><div><div style="font-weight:600;font-size:.8rem;color:var(--g900)">${c.f1t}</div><div style="color:var(--g500);font-size:.72rem">${c.f1s}</div></div>`;
       f2.innerHTML = `<span>${c.f2i}</span><div><div style="font-weight:600;font-size:.8rem">${c.f2t}</div><div style="font-size:.72rem;opacity:.8">${c.f2s}</div></div>`;
-
       document.querySelectorAll('.h-dot').forEach((d,i) => d.classList.toggle('on', i===idx));
     }
 
@@ -776,28 +794,32 @@
       cur = ((idx % CARDS.length) + CARDS.length) % CARDS.length;
       const el = document.getElementById('heroPriceCard');
       el.style.opacity = '0';
-      el.style.transform = 'translateY(10px)';
+      el.style.transform = 'translateY(10px) scale(0.98)';
       setTimeout(() => {
         renderCard(cur);
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-      }, 220);
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        }));
+      }, 280);
     }
 
     window.heroGo = function(i) {
       clearInterval(timer);
       go(i);
-      timer = setInterval(() => go(cur + 1), 5500);
+      timer = setInterval(() => go(cur + 1), 6000);
     };
 
     function init() {
       const dots = document.getElementById('heroDots');
       if (!dots) return;
+      const el = document.getElementById('heroPriceCard');
+      if (el) el.style.transition = 'opacity .35s cubic-bezier(.4,0,.2,1), transform .35s cubic-bezier(.4,0,.2,1)';
       dots.innerHTML = CARDS.map((_,i) =>
         `<button class="h-dot${i===0?' on':''}" onclick="heroGo(${i})" aria-label="Beispiel ${i+1}"></button>`
       ).join('');
       renderCard(0);
-      timer = setInterval(() => go(cur + 1), 5500);
+      timer = setInterval(() => go(cur + 1), 6000);
     }
 
     document.readyState === 'loading'
