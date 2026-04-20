@@ -1,0 +1,8 @@
+# ImmowertWien – robots.txt
+# Aktuell: noindex-Phase (noch nicht live)
+# Zum Aktivieren: "Disallow: /" entfernen und alle noindex-Tags aus HTML entfernen
+
+User-agent: *
+Disallow: /
+
+Sitemap: https://immobilienwert-wien.at/sitemap.xml
