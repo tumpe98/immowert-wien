@@ -97,10 +97,20 @@
     .mini-chart{display:flex;align-items:flex-end;gap:5px;height:44px;margin-bottom:12px}
     .b{flex:1;border-radius:4px 4px 0 0;background:var(--b100)}
     .b:last-child{background:var(--b500)}
-    .b:nth-child(1){height:30%;animation:barUp .5s .7s both} .b:nth-child(2){height:50%;animation:barUp .5s .8s both}
-    .b:nth-child(3){height:42%;animation:barUp .5s .9s both} .b:nth-child(4){height:68%;animation:barUp .5s 1s both}
-    .b:nth-child(5){height:62%;animation:barUp .5s 1.1s both} .b:nth-child(6){height:78%;animation:barUp .5s 1.2s both}
-    .b:nth-child(7){height:100%;animation:barUp .5s 1.3s both}
+    .b.act{background:var(--b500)}
+
+    /* ── HERO CAROUSEL ── */
+    .pc-status{display:inline-flex;align-items:center;gap:5px;font-size:.65rem;font-weight:700;letter-spacing:.08em;color:var(--b500);text-transform:uppercase;margin-bottom:6px}
+    .pc-status .pulse-dot{width:6px;height:6px;background:var(--b500);border-radius:50%;animation:pulse 1.5s infinite;flex-shrink:0}
+    .pc-status.done{color:var(--green)}.pc-status.done .pulse-dot{background:var(--green);animation:none}
+    .chart-months .bar-now{color:var(--b500);font-weight:700;position:relative}
+    .chart-months .bar-now::before{content:'Jetzt';position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:.55rem;color:var(--b500);font-weight:700;white-space:nowrap;background:var(--b50);border-radius:4px;padding:1px 4px}
+    .locked-row{display:flex;align-items:center;gap:7px;background:var(--g100);border-radius:10px;padding:9px 13px;margin-top:10px;font-size:.74rem;color:var(--g500);border:1px dashed var(--g200)}
+    .locked-row .li{font-size:.9rem;flex-shrink:0}
+    .blur-val{filter:blur(5px);user-select:none;pointer-events:none}
+    .hero-dots{display:flex;justify-content:center;gap:8px;margin-top:16px;position:relative;z-index:2}
+    .h-dot{width:7px;height:7px;border-radius:50%;background:var(--g300);cursor:pointer;transition:all .35s cubic-bezier(.4,0,.2,1);border:none;padding:0;flex-shrink:0}
+    .h-dot.on{background:var(--b500);width:22px;border-radius:4px}
     @keyframes barUp{from{transform:scaleY(0);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
     .chart-months{display:flex;justify-content:space-between;font-size:.7rem;color:var(--g400);margin-bottom:18px}
     .price-nums{display:flex;justify-content:space-between;align-items:center;background:var(--b50);border-radius:12px;padding:14px 18px;margin-bottom:14px}
@@ -370,22 +380,11 @@
         </div>
       </div>
     </div>
-    <div class="hero-vis">
-      <div class="price-card">
-        <div class="pc-lbl">Bewertungsanalyse</div>
-        <div class="pc-addr">Radetzkystraße 12, 1030 Wien</div>
-        <div class="mini-chart"><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div></div>
-        <div class="chart-months"><span>Jan</span><span>Feb</span><span>Mär</span><span>Apr</span><span>Mai</span><span>Jun</span><span>Jul</span></div>
-        <div class="price-nums">
-          <div style="text-align:center"><div class="pv-num">490k</div><div class="pv-label">Minimum</div></div>
-          <div style="font-size:1.2rem;color:var(--g300)">–</div>
-          <div style="text-align:center"><div class="pv-num hi">558k</div><div class="pv-label">Maximum</div></div>
-        </div>
-        <div style="margin:12px 0"><span class="price-badge">↑ +10–14% Verkaufspotenzial möglich</span></div>
-        <div class="price-trend"><div class="trend-dot"></div><div class="trend-txt">Markttrend <strong>steigend</strong> · Nachfrage in 1030 Landstraße hoch</div></div>
-      </div>
-      <div class="float1"><span>📍</span><div><div style="font-weight:600;font-size:.8rem;color:var(--g900)">Bezirk 1030 · Landstraße</div><div style="color:var(--g500);font-size:.72rem">€ 7.938/m² Ø · immopreise.at</div></div></div>
-      <div class="float2"><span>💰</span><div><div style="font-weight:600;font-size:.8rem">+€ 52.000</div><div style="font-size:.72rem;opacity:.8">Ø mehr erzielt</div></div></div>
+    <div class="hero-vis" id="heroVis">
+      <div class="price-card" id="heroPriceCard" style="transition:opacity .22s ease,transform .22s ease;min-height:260px"></div>
+      <div class="float1" id="heroF1"></div>
+      <div class="float2" id="heroF2"></div>
+      <div class="hero-dots" id="heroDots"></div>
     </div>
   </div>
 </div>
@@ -668,6 +667,144 @@
 </div>
 
 <script>
+  /* ── HERO CAROUSEL ── */
+  (function(){
+    const CARDS = [
+      {
+        live: true,
+        addr: 'Radetzkystraße 12, 1030 Wien',
+        bars: [28,45,70,100,84,60,40],
+        min: '490k', max: '558k',
+        badge: 'green', badgeTxt: '↑ Frühjahrsfenster geöffnet · Apr–Mai ideal',
+        trend: 'Markttrend <strong>steigend</strong> · Nachfrage in 1030 hoch',
+        locked: 'Optimale Verkaufsstrategie · 3 Preistreiber erkannt',
+        f1t:'Bezirk 1030 · Landstraße', f1s:'€ 7.938/m² Ø · immopreise.at',
+        f2i:'💰', f2t:'+€ 52.000', f2s:'Ø mehr erzielt',
+      },
+      {
+        live: false,
+        addr: 'Pragerstraße 80, 1210 Wien',
+        bars: [22,38,62,88,75,52,35],
+        min: '285k', max: null,
+        badge: 'blue', badgeTxt: '🔍 Sanierungspotenzial erkannt',
+        trend: 'Floridsdorf: Preise <strong>+18%</strong> seit 2024',
+        locked: 'Maximales Preispotenzial · Verhandlungsstrategie',
+        f1t:'Bezirk 1210 · Floridsdorf', f1s:'€ 4.340/m² Ø · immopreise.at',
+        f2i:'🔔', f2t:'2 Kaufanfragen', f2s:'im Bezirk vorgemerkt',
+      },
+      {
+        live: false,
+        addr: 'Gersthofer Str. 22, 1180 Wien',
+        bars: [30,48,74,100,86,62,42],
+        min: '380k', max: '445k',
+        badge: 'green', badgeTxt: '🌳 Grünlage-Aufschlag +8% kalkuliert',
+        trend: 'Währing: <strong>Top-5</strong> nachgefragteste Bezirke Wiens',
+        locked: '12 Vergleichsobjekte analysiert · Details',
+        f1t:'Bezirk 1180 · Währing', f1s:'€ 6.127/m² Ø · immopreise.at',
+        f2i:'💰', f2t:'+€ 38.000', f2s:'Ø Potenzial erkannt',
+      },
+      {
+        live: false,
+        addr: 'Längenfeldgasse 14, 1120 Wien',
+        bars: [25,40,65,92,78,55,36],
+        min: null, max: null,
+        badge: 'blue', badgeTxt: '🚇 U4-Nähe · +12% Lageaufschlag',
+        trend: 'Meidling im Aufwind · <strong>Preise +6%</strong> ggü. Vorjahr',
+        locked: 'Vollständige Bewertung · Jetzt kostenlos freischalten',
+        f1t:'Bezirk 1120 · Meidling', f1s:'€ 4.810/m² Ø · immopreise.at',
+        f2i:'🔒', f2t:'Ergebnis bereit', f2s:'Jetzt ansehen →',
+      },
+    ];
+    const MONTHS = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul'];
+    const PEAK = 3; // April index
+    let cur = 0, timer = null;
+
+    function renderCard(idx) {
+      const c = CARDS[idx];
+      const el = document.getElementById('heroPriceCard');
+      const f1 = document.getElementById('heroF1');
+      const f2 = document.getElementById('heroF2');
+      if (!el) return;
+
+      const maxH = Math.max(...c.bars);
+      const bars = c.bars.map((h,i) => {
+        const pct = Math.round(h/maxH*100);
+        return `<div class="b${i===PEAK?' act':''}" style="height:${pct}%;animation:barUp .4s ${.05+i*.06}s both"></div>`;
+      }).join('');
+
+      const mons = MONTHS.map((m,i) =>
+        i===PEAK ? `<span class="bar-now">${m}</span>` : `<span>${m}</span>`
+      ).join('');
+
+      const minH = c.min
+        ? `<div class="pv-num">${c.min}</div>`
+        : `<div class="pv-num blur-val">•••k</div>`;
+      const maxH2 = c.max
+        ? `<div class="pv-num hi">${c.max}</div>`
+        : `<div class="pv-num blur-val hi">•••k</div>`;
+
+      const bStyle = c.badge==='green'
+        ? 'background:#ecfdf5;color:var(--green);border:1px solid #a7f3d0'
+        : 'background:var(--b50);color:var(--b500);border:1px solid var(--b100)';
+
+      const statusHtml = c.live
+        ? `<div class="pc-status"><span class="pulse-dot"></span>Bewertung läuft…</div>`
+        : `<div class="pc-status done"><span class="pulse-dot"></span>Analyse abgeschlossen</div>`;
+
+      el.innerHTML = `
+        ${statusHtml}
+        <div class="pc-addr">${c.addr}</div>
+        <div class="mini-chart" style="margin-top:12px">${bars}</div>
+        <div class="chart-months" style="margin-top:20px">${mons}</div>
+        <div class="price-nums" style="margin:12px 0 0">
+          <div style="text-align:center">${minH}<div class="pv-label">Minimum</div></div>
+          <div style="font-size:1.2rem;color:var(--g300)">–</div>
+          <div style="text-align:center">${maxH2}<div class="pv-label">Maximum</div></div>
+        </div>
+        <div style="margin:12px 0"><span class="price-badge" style="${bStyle}">${c.badgeTxt}</span></div>
+        <div class="price-trend"><div class="trend-dot"></div><div class="trend-txt">${c.trend}</div></div>
+        <div class="locked-row"><span class="li">🔒</span><span>${c.locked}</span></div>
+      `;
+
+      f1.innerHTML = `<span>📍</span><div><div style="font-weight:600;font-size:.8rem;color:var(--g900)">${c.f1t}</div><div style="color:var(--g500);font-size:.72rem">${c.f1s}</div></div>`;
+      f2.innerHTML = `<span>${c.f2i}</span><div><div style="font-weight:600;font-size:.8rem">${c.f2t}</div><div style="font-size:.72rem;opacity:.8">${c.f2s}</div></div>`;
+
+      document.querySelectorAll('.h-dot').forEach((d,i) => d.classList.toggle('on', i===idx));
+    }
+
+    function go(idx) {
+      cur = ((idx % CARDS.length) + CARDS.length) % CARDS.length;
+      const el = document.getElementById('heroPriceCard');
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(10px)';
+      setTimeout(() => {
+        renderCard(cur);
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }, 220);
+    }
+
+    window.heroGo = function(i) {
+      clearInterval(timer);
+      go(i);
+      timer = setInterval(() => go(cur + 1), 5500);
+    };
+
+    function init() {
+      const dots = document.getElementById('heroDots');
+      if (!dots) return;
+      dots.innerHTML = CARDS.map((_,i) =>
+        `<button class="h-dot${i===0?' on':''}" onclick="heroGo(${i})" aria-label="Beispiel ${i+1}"></button>`
+      ).join('');
+      renderCard(0);
+      timer = setInterval(() => go(cur + 1), 5500);
+    }
+
+    document.readyState === 'loading'
+      ? document.addEventListener('DOMContentLoaded', init)
+      : init();
+  })();
+
   /*
    * ── DATENGRUNDLAGE ──
    * Kaufpreise (p): Ø-Angebotspreise aus immopreise.at, willhaben.at & IMMOunited Q1 2026
