@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- Cookie Consent + Analytics (DSGVO-konform) -->
   <script src="cookie-consent.js"></script>
   <meta charset="UTF-8">
   <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Über uns & Kontakt | immowertWien</title>
-  <meta name="description" content="Das Team hinter immowertWien – unabhängige Immobilienbewertung für Wohnungseigentümer in Wien. Jetzt Kontakt aufnehmen.">
+  <title>Über uns | immowertWien – Immobilienbewertung Wien</title>
+  <meta name="description" content="ImmowertWien ist Österreichs präziseste Immobilienbewertungsplattform – spezialisiert auf alle 23 Wiener Bezirke. Datenbasiert, unabhängig, kostenlos.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -24,7 +23,6 @@
     html{scroll-behavior:smooth;}
     body{font-family:'Inter',sans-serif;background:var(--white);color:var(--g900);line-height:1.6;overflow-x:hidden;}
 
-
     .page-hero{padding:100px 5% 56px;max-width:1200px;margin:0 auto;text-align:center;}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--b50);border:1px solid var(--b100);color:var(--b600);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:500;margin-bottom:20px;}
     .eyebrow .dot{width:6px;height:6px;background:var(--b500);border-radius:50%;}
@@ -33,6 +31,9 @@
     .page-hero p{font-size:1rem;color:var(--g500);line-height:1.75;max-width:580px;margin:0 auto;}
 
     .content-wrap{max-width:1200px;margin:0 auto;padding:0 5% 80px;}
+
+    .section-label{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--b500);margin-bottom:10px;}
+    .section-h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--g900);margin-bottom:40px;line-height:1.15;}
 
     /* MISSION */
     .mission-section{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-bottom:80px;}
@@ -45,65 +46,52 @@
     .mission-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--g900);margin-bottom:16px;line-height:1.15;}
     .mission-text h2 .hl{color:var(--b500);}
     .mission-text p{font-size:.93rem;color:var(--g500);line-height:1.8;margin-bottom:16px;}
-    .mission-text p:last-child{margin-bottom:0;}
+    .mission-quote{background:var(--b50);border-left:3px solid var(--b500);border-radius:0 12px 12px 0;padding:20px 24px;margin-top:24px;font-size:.95rem;font-weight:500;color:var(--b900);line-height:1.6;font-style:italic;}
 
     /* VALUES */
     .values-section{margin-bottom:80px;}
-    .section-label{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--b500);margin-bottom:10px;}
-    .section-h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--g900);margin-bottom:40px;line-height:1.15;}
     .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
     @media(max-width:800px){.values-grid{grid-template-columns:1fr 1fr;}}
     @media(max-width:500px){.values-grid{grid-template-columns:1fr;}}
     .value-card{background:white;border:1.5px solid var(--g100);border-radius:20px;padding:28px;box-shadow:var(--sh-sm);transition:all .2s;}
-    .value-card:hover{border-color:var(--b200,var(--b300));box-shadow:var(--sh-md);transform:translateY(-2px);}
+    .value-card:hover{border-color:var(--b300);box-shadow:var(--sh-md);transform:translateY(-2px);}
     .val-icon{font-size:1.8rem;margin-bottom:14px;}
     .val-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--g900);margin-bottom:8px;}
     .val-text{font-size:.83rem;color:var(--g500);line-height:1.65;}
 
-    /* TEAM */
-    .team-section{margin-bottom:80px;}
-    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-    @media(max-width:800px){.team-grid{grid-template-columns:1fr 1fr;}}
-    @media(max-width:500px){.team-grid{grid-template-columns:1fr;}}
-    .team-card{background:white;border:1.5px solid var(--g100);border-radius:20px;padding:28px 24px;text-align:center;box-shadow:var(--sh-sm);transition:all .2s;}
-    .team-card:hover{border-color:var(--b300);box-shadow:var(--sh-md);}
-    .team-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;background:linear-gradient(135deg,var(--b50),var(--b100));}
-    .team-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--g900);margin-bottom:4px;}
-    .team-role{font-size:.78rem;font-weight:500;color:var(--b500);margin-bottom:10px;}
-    .team-bio{font-size:.79rem;color:var(--g500);line-height:1.6;}
+    /* STATS */
+    .stats-strip{background:var(--b900);border-radius:20px;padding:40px 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:80px;text-align:center;}
+    @media(max-width:700px){.stats-strip{grid-template-columns:1fr 1fr;padding:28px;}}
+    .stat-val{font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;color:white;}
+    .stat-lbl{font-size:.73rem;color:rgba(255,255,255,.4);margin-top:4px;line-height:1.4;}
 
-    /* CONTACT SECTION */
-    .contact-section{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:80px;}
-    @media(max-width:800px){.contact-section{grid-template-columns:1fr;}}
-    .contact-info{}
-    .contact-info h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--g900);margin-bottom:12px;}
-    .contact-info p{font-size:.9rem;color:var(--g500);line-height:1.75;margin-bottom:24px;}
-    .contact-detail{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;}
-    .cd-icon{width:38px;height:38px;background:var(--b50);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
-    .cd-body{}
-    .cd-label{font-size:.72rem;font-weight:600;color:var(--g400);letter-spacing:.06em;text-transform:uppercase;}
-    .cd-val{font-size:.9rem;font-weight:500;color:var(--g900);margin-top:1px;}
+    /* PROCESS */
+    .process-section{margin-bottom:80px;}
+    .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    @media(max-width:800px){.process-grid{grid-template-columns:1fr;}}
+    .process-card{background:var(--off);border:1.5px solid var(--g200);border-radius:20px;padding:32px 28px;display:flex;gap:20px;align-items:flex-start;}
+    .process-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:800;color:var(--g300);line-height:1;flex-shrink:0;}
+    .process-title{font-weight:600;font-size:.95rem;color:var(--g900);margin-bottom:8px;}
+    .process-text{font-size:.83rem;color:var(--g500);line-height:1.65;}
 
-    .contact-form-card{background:white;border:1.5px solid var(--g100);border-radius:24px;padding:36px;box-shadow:var(--sh-md);}
-    .form-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--g900);margin-bottom:4px;}
-    .form-sub{font-size:.8rem;color:var(--g500);margin-bottom:24px;}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-    @media(max-width:600px){.form-row{grid-template-columns:1fr;}}
-    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
-    .form-group label{font-size:.77rem;font-weight:500;color:var(--g700);}
-    .form-group input,.form-group textarea,.form-group select{border:1.5px solid var(--g200);border-radius:10px;padding:11px 14px;font-family:'Inter',sans-serif;font-size:.88rem;color:var(--g900);background:var(--off);transition:border-color .18s;}
-    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--b400);background:white;}
-    .form-group textarea{resize:vertical;min-height:100px;}
-    .form-submit{width:100%;background:var(--b500);color:white;border:none;border-radius:12px;padding:14px 24px;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:6px;}
-    .form-submit:hover{background:var(--b600);}
-    .form-note{font-size:.72rem;color:var(--g400);margin-top:10px;text-align:center;}
-    #formSuccess{display:none;text-align:center;padding:24px;background:#ecfdf5;border-radius:12px;color:#065f46;font-weight:500;}
+    /* FAQ */
+    .faq-section{margin-bottom:80px;}
+    .faq-item{border-bottom:1px solid var(--g200);}
+    .faq-btn{width:100%;text-align:left;background:none;border:none;padding:20px 0;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;color:var(--g900);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+    .faq-btn:hover{color:var(--b500);}
+    .faq-arrow{font-size:.75rem;color:var(--b500);transition:transform .25s;flex-shrink:0;}
+    .faq-item.open .faq-arrow{transform:rotate(180deg);}
+    .faq-body{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+    .faq-item.open .faq-body{max-height:300px;}
+    .faq-body p{padding-bottom:20px;font-size:.9rem;color:var(--g500);line-height:1.75;}
 
-    /* TRUST STRIP */
-    .trust-strip{background:var(--b900);border-radius:20px;padding:36px 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:80px;text-align:center;}
-    @media(max-width:700px){.trust-strip{grid-template-columns:1fr 1fr;padding:28px;}}
-    .ts-val{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:800;color:white;}
-    .ts-lbl{font-size:.73rem;color:rgba(255,255,255,.4);margin-top:4px;}
+    /* DATA SOURCES */
+    .sources-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+    @media(max-width:600px){.sources-grid{grid-template-columns:1fr;}}
+    .source-card{background:var(--off);border:1.5px solid var(--g100);border-radius:16px;padding:20px;display:flex;gap:14px;align-items:flex-start;}
+    .source-icon{font-size:1.3rem;flex-shrink:0;}
+    .source-title{font-weight:600;font-size:.88rem;color:var(--g900);margin-bottom:4px;}
+    .source-text{font-size:.8rem;color:var(--g500);line-height:1.6;}
 
     /* CTA */
     .cta-section{background:var(--b50);border:1.5px solid var(--b100);border-radius:20px;padding:48px 40px;text-align:center;margin-bottom:56px;}
@@ -131,79 +119,108 @@
 
 <div style="padding-top:64px;">
   <div class="page-hero reveal">
-    <div class="eyebrow"><span class="dot"></span>Unabhängig · Datenbasiert · Wien</div>
-    <h1>Bessere Entscheidungen<br>durch <span class="hl">mehr Transparenz</span></h1>
-    <p>Der Wiener Immobilienmarkt ist komplex. Wir fassen zusammen, was bisher verstreut war – damit Sie als Eigentümer mit echten Daten entscheiden, nicht mit Bauchgefühl.</p>
+    <div class="eyebrow"><span class="dot"></span>Über ImmowertWien</div>
+    <h1>Transparenz für den<br><span class="hl">Wiener Immobilienmarkt</span>.</h1>
+    <p>Wir glauben, dass jeder Eigentümer das Recht auf eine ehrliche, datenbasierte Einschätzung seines Immobilienwerts hat – unabhängig und kostenlos.</p>
   </div>
 </div>
 
 <div class="content-wrap">
 
-  <!-- PROBLEM / WHY -->
+  <!-- MISSION -->
   <div class="mission-section reveal">
     <div class="mission-visual">
       <div class="mission-stat">
         <div class="ms-val">23</div>
-        <div class="ms-lbl">Wiener Bezirke mit teils sehr unterschiedlichen Preisniveaus</div>
-      </div>
-      <div class="mission-divider"></div>
-      <div class="mission-stat">
-        <div class="ms-val">3–5</div>
-        <div class="ms-lbl">verschiedene Datenquellen, die kein Verkäufer einzeln liest</div>
-      </div>
-      <div class="mission-divider"></div>
-      <div class="mission-stat">
-        <div class="ms-val">∅ 15%</div>
-        <div class="ms-lbl">Preisdifferenz zwischen gut und schlecht informierten Verkäufern</div>
+        <div class="ms-lbl">Wiener Bezirke vollständig analysiert</div>
       </div>
       <div class="mission-divider"></div>
       <div class="mission-stat">
         <div class="ms-val">2 Min.</div>
         <div class="ms-lbl">bis zur ersten datenbasierten Einschätzung</div>
       </div>
+      <div class="mission-divider"></div>
+      <div class="mission-stat">
+        <div class="ms-val">100%</div>
+        <div class="ms-lbl">kostenlos & unverbindlich für Eigentümer</div>
+      </div>
+      <div class="mission-divider"></div>
+      <div class="mission-stat">
+        <div class="ms-val">24h</div>
+        <div class="ms-lbl">bis zum Rückruf durch den Experten</div>
+      </div>
     </div>
     <div class="mission-text">
-      <h2>Warum Wien ein solches Tool <span class="hl">braucht</span></h2>
-      <p>Wer in Wien eine Wohnung verkaufen will, steht vor einem Problem: Die Daten sind zwar vorhanden – bei der OeNB, bei Statistik Austria, auf Immobilienplattformen, in Bezirksberichten – aber sie sind über dutzende Quellen verstreut, schwer verständlich und selten aktuell.</p>
-      <p>Das Ergebnis: Eigentümer verlassen sich auf Nachbarn, Makler mit Eigeninteresse oder veraltete Online-Schätzungen. Manche verkaufen zu früh, manche zu günstig, manche zum falschen Zeitpunkt.</p>
-      <p>immowertWien aggregiert diese Daten an einem Ort, macht sie lesbar – und gibt Ihnen damit eine echte Grundlage für die wichtigste Entscheidung beim Immobilienverkauf: den Preis.</p>
+      <h2>Der Wiener Immobilienmarkt ist komplex. Wir machen ihn <span class="hl">lesbar</span>.</h2>
+      <p>Wer in Wien eine Immobilie besitzt, steht vor einer schwierigen Frage: Was ist sie wirklich wert? Nicht was der Nachbar sagt. Nicht was der Makler schätzt, der ein Mandat möchte. Sondern was der Markt tatsächlich zahlt.</p>
+      <p>ImmowertWien entstand aus der Überzeugung, dass diese Information zugänglich und kostenlos sein muss. Auf Basis echter Transaktionsdaten, bezirksspezifisch, in unter 2 Minuten. Kein Verkaufsinteresse. Keine versteckten Kosten. Keine Verpflichtung.</p>
+      <div class="mission-quote">„Der Makler kennt den Markt. Der Eigentümer soll <strong>auch</strong> den Markt kennen."</div>
     </div>
   </div>
 
-  <!-- USP / HOW WE'RE DIFFERENT -->
+  <!-- VALUES -->
   <div class="values-section reveal">
-    <div class="section-label">Unser Ansatz</div>
+    <div class="section-label">Unsere Grundsätze</div>
     <h2 class="section-h2">Was uns von einer einfachen Preisschätzung unterscheidet</h2>
     <div class="values-grid">
       <div class="value-card">
-        <div class="val-icon">🔗</div>
-        <div class="val-title">Mehrere Quellen, ein Bild</div>
-        <div class="val-text">Wir kombinieren Transaktionsdaten, Angebotspreise, Mietentwicklung und makroökonomische Signale – statt uns auf eine einzige Quelle zu verlassen.</div>
+        <div class="val-icon">📊</div>
+        <div class="val-title">Daten statt Bauchgefühl</div>
+        <div class="val-text">Jede Bewertung basiert auf echten Transaktionsdaten aus dem Wiener Markt – nicht auf Schätzungen oder Verkaufsinteressen.</div>
       </div>
       <div class="value-card">
         <div class="val-icon">📍</div>
-        <div class="val-title">Bezirkstiefe statt Stadtschnitt</div>
-        <div class="val-text">Ein Durchschnittspreis für ganz Wien sagt wenig. Wir analysieren alle 23 Bezirke separat – weil der 1. und der 15. Bezirk zwei verschiedene Märkte sind.</div>
+        <div class="val-title">Wien-spezifisch bis zum Bezirk</div>
+        <div class="val-text">Alle 23 Bezirke separat analysiert. Weil eine Wohnung in Neubau andere Marktgesetze hat als eine in Favoriten – und diese Unterschiede zählen.</div>
       </div>
       <div class="value-card">
-        <div class="val-icon">⏱</div>
-        <div class="val-title">Timing ist alles</div>
-        <div class="val-text">Neben dem Preis zeigen wir, wann der richtige Moment zum Verkaufen ist – basierend auf Nachfrage, Saison und Zinsentwicklung.</div>
+        <div class="val-icon">🔒</div>
+        <div class="val-title">Unverbindlich & vertraulich</div>
+        <div class="val-text">Die Bewertung verpflichtet zu nichts. Ihre Daten werden nicht an mehrere Makler weitergegeben. Transparenz ist kein Versprechen – es ist unser Modell.</div>
+      </div>
+      <div class="value-card">
+        <div class="val-icon">⚡</div>
+        <div class="val-title">Sofort – nicht irgendwann</div>
+        <div class="val-text">In unter 2 Minuten erhalten Sie eine fundierte Ersteinschätzung. Weil Ihre Zeit wertvoller ist als ein langes Erstgespräch ohne Grundlage.</div>
       </div>
       <div class="value-card">
         <div class="val-icon">🤝</div>
-        <div class="val-title">Experten auf Wunsch</div>
-        <div class="val-text">Wer nach der Bewertung mehr möchte, kann sich mit einem unabhängigen Immobilienexperten verbinden. Kein Makler mit Provisionsinteresse – sondern echte Beratung.</div>
-      </div>
-      <div class="value-card">
-        <div class="val-icon">🪟</div>
-        <div class="val-title">Keine Black Box</div>
-        <div class="val-text">Wir erklären, wie Schätzungen zustande kommen und welche Faktoren den größten Einfluss auf Ihren Preis haben. Transparenz ist kein Versprechen, sondern Prinzip.</div>
+        <div class="val-title">Ausgewählte Experten</div>
+        <div class="val-text">Wir arbeiten nur mit geprüften, lokal erfahrenen Maklern zusammen – die Ihre Immobilie kennen und nicht bloß kennenlernen wollen.</div>
       </div>
       <div class="value-card">
         <div class="val-icon">🎯</div>
-        <div class="val-title">Nur für Verkäufer</div>
-        <div class="val-text">Wir erfinden nichts Neues – aber wir stellen uns klar auf die Seite des Verkäufers. Unser Tool ist nicht für Käufer, Makler oder Banken gebaut. Nur für Sie.</div>
+        <div class="val-title">100% kostenlos für Eigentümer</div>
+        <div class="val-text">Das Tool, die Bewertung, das Erstgespräch – alles ohne Kosten. Wir werden nur dann vergütet, wenn ein Verkauf erfolgreich abgeschlossen wird.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW WE WORK -->
+  <div class="process-section reveal">
+    <div class="section-label">Wie wir arbeiten</div>
+    <h2 class="section-h2">Drei Schritte. Keine Überraschungen.</h2>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-num">01</div>
+        <div>
+          <div class="process-title">Daten erheben, nicht erfinden</div>
+          <div class="process-text">Unsere Preisdaten stammen aus realen Transaktionen auf dem Wiener Markt. Keine Hochrechnungen. Keine Durchschnittswerte aus ganz Österreich. Bezirk für Bezirk.</div>
+        </div>
+      </div>
+      <div class="process-card">
+        <div class="process-num">02</div>
+        <div>
+          <div class="process-title">Nur vorbereitete Experten</div>
+          <div class="process-text">Wenn ein Makler den Kontakt aufnimmt, kennt er Ihre Immobilie bereits. Bezirk, Größe, Zustand, Ihre Präferenz. Kein Kaltstart, kein Zeitverlust.</div>
+        </div>
+      </div>
+      <div class="process-card">
+        <div class="process-num">03</div>
+        <div>
+          <div class="process-title">Sie behalten die Kontrolle</div>
+          <div class="process-text">Nach der Bewertung und dem Experten-Call entscheiden Sie – ohne Druck, ohne Frist, ohne Vertrag. Unsere Aufgabe endet, wenn Ihre Entscheidung beginnt.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -212,45 +229,80 @@
   <div class="values-section reveal">
     <div class="section-label">Datenquellen</div>
     <h2 class="section-h2">Woher kommen unsere Daten?</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-      <div style="background:var(--off);border:1.5px solid var(--g100);border-radius:16px;padding:24px;display:flex;gap:16px;align-items:flex-start;">
-        <div style="font-size:1.4rem;flex-shrink:0;">🏛</div>
+    <div class="sources-grid">
+      <div class="source-card">
+        <div class="source-icon">🏛</div>
         <div>
-          <div style="font-weight:600;font-size:.9rem;color:var(--g900);margin-bottom:4px;">OeNB Immobilienpreisindex</div>
-          <div style="font-size:.82rem;color:var(--g500);line-height:1.6;">Offizielle Preisentwicklung der Österreichischen Nationalbank – quartalsweise aktualisiert.</div>
+          <div class="source-title">OeNB Immobilienpreisindex</div>
+          <div class="source-text">Offizielle Preisentwicklung der Österreichischen Nationalbank – quartalsweise aktualisiert.</div>
         </div>
       </div>
-      <div style="background:var(--off);border:1.5px solid var(--g100);border-radius:16px;padding:24px;display:flex;gap:16px;align-items:flex-start;">
-        <div style="font-size:1.4rem;flex-shrink:0;">📈</div>
+      <div class="source-card">
+        <div class="source-icon">📈</div>
         <div>
-          <div style="font-weight:600;font-size:.9rem;color:var(--g900);margin-bottom:4px;">Statistik Austria</div>
-          <div style="font-size:.82rem;color:var(--g500);line-height:1.6;">Transaktionsdaten, Wohnungsbestand und demografische Entwicklung pro Bezirk.</div>
+          <div class="source-title">Statistik Austria</div>
+          <div class="source-text">Transaktionsdaten, Wohnungsbestand und demografische Entwicklung pro Bezirk.</div>
         </div>
       </div>
-      <div style="background:var(--off);border:1.5px solid var(--g100);border-radius:16px;padding:24px;display:flex;gap:16px;align-items:flex-start;">
-        <div style="font-size:1.4rem;flex-shrink:0;">🏠</div>
+      <div class="source-card">
+        <div class="source-icon">🏠</div>
         <div>
-          <div style="font-weight:600;font-size:.9rem;color:var(--g900);margin-bottom:4px;">Angebotspreise (immopreise.at)</div>
-          <div style="font-size:.82rem;color:var(--g500);line-height:1.6;">Aktuelle Inserate und Angebotspreise nach Bezirk, Objekttyp und Größe.</div>
+          <div class="source-title">Angebotspreise (immopreise.at)</div>
+          <div class="source-text">Aktuelle Inserate und Angebotspreise nach Bezirk, Objekttyp und Größe.</div>
         </div>
       </div>
-      <div style="background:var(--off);border:1.5px solid var(--g100);border-radius:16px;padding:24px;display:flex;gap:16px;align-items:flex-start;">
-        <div style="font-size:1.4rem;flex-shrink:0;">📉</div>
+      <div class="source-card">
+        <div class="source-icon">📉</div>
         <div>
-          <div style="font-weight:600;font-size:.9rem;color:var(--g900);margin-bottom:4px;">EZB Zinsentwicklung</div>
-          <div style="font-size:.82rem;color:var(--g500);line-height:1.6;">Leitzins und Kreditkonditionen als makroökonomischer Kontext für den Timing-Score.</div>
+          <div class="source-title">EZB Zinsentwicklung</div>
+          <div class="source-text">Leitzins und Kreditkonditionen als makroökonomischer Kontext für den Timing-Score.</div>
         </div>
       </div>
     </div>
-    <p style="font-size:.82rem;color:var(--g400);margin-top:20px;line-height:1.7;">Wir wollen ehrlich sein: immowertWien ist kein Gutachten und kein Ersatz für eine professionelle Vor-Ort-Bewertung. Wir sind eine Orientierungshilfe – der erste, informierte Schritt vor dem Gespräch mit einem Experten.</p>
+    <p style="font-size:.82rem;color:var(--g400);line-height:1.7;">ImmowertWien ist kein Gutachten und kein Ersatz für eine professionelle Vor-Ort-Bewertung. Wir sind eine Orientierungshilfe – der erste, informierte Schritt vor dem Gespräch mit einem Experten.</p>
   </div>
 
+  <!-- FAQ -->
+  <div class="faq-section reveal">
+    <div class="section-label">Häufige Fragen</div>
+    <h2 class="section-h2">Über ImmowertWien</h2>
+
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        Was ist ImmowertWien und wie funktioniert die Plattform?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-body">
+        <p>ImmowertWien ist eine kostenlose Immobilienbewertungsplattform, spezialisiert auf alle 23 Wiener Bezirke. Eigentümer beantworten einige kurze Fragen zu ihrer Immobilie und erhalten sofort eine Ersteinschätzung des Marktwerts – basierend auf aktuellen Transaktionsdaten. Auf Wunsch vermitteln wir einen vorbereiteten lokalen Experten für ein unverbindliches Gespräch.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        Ist ImmowertWien ein Makler?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-body">
+        <p>Nein. ImmowertWien ist kein Makler. Wir versorgen Sie mit den richtigen Marktdaten für Ihre Immobilie – bezirksspezifisch, datenbasiert und kostenlos. Auf Wunsch verbinden wir Sie anschließend mit einem geprüften Immobilienexperten in Wien, der Sie persönlich begleitet.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        Wie werden meine Daten verwendet?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-body">
+        <p>Ihre Daten werden ausschließlich für die Bewertung und – wenn Sie das möchten – für die Vermittlung an einen einzelnen, vertraglich gebundenen Partnerexperten verwendet. Es gibt keinen Mehrfachverkauf an konkurrierende Makler. Alle Daten werden DSGVO-konform nach österreichischem Recht verarbeitet.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- CTA -->
   <div class="cta-section reveal">
-    <h2>Starten Sie jetzt – kostenlos</h2>
-    <p>Erfahren Sie in 2 Minuten, was Ihre Wiener Wohnung wert ist. Keine Registrierung, keine Verpflichtung.</p>
-    <a href="index.html#tool" class="cta-btn">Immobilie jetzt bewerten →</a>
+    <h2>Erfahren Sie, was Ihre Immobilie wert ist.</h2>
+    <p>Kostenlos. Unverbindlich. In unter 2 Minuten.</p>
+    <a href="index.html#tool" class="cta-btn">Jetzt kostenlos bewerten →</a>
   </div>
 
 </div>
@@ -270,22 +322,17 @@
 </footer>
 
 <script>
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  this.style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
-});
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
 
 const ro = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);} });
 },{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-
-window.addEventListener('scroll',()=>{
-  document.getElementById('mainNav').style.boxShadow = window.scrollY>10?'0 2px 20px rgba(0,0,0,.07)':'none';
-});
-
-
 </script>
 </body>
 </html>
