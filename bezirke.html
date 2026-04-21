@@ -722,8 +722,11 @@ function selectDistrict(num) {
     });
   });
 
-  // Scroll to detail
-  setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  // Scroll to detail — offset by nav height (64px) so header isn't covered
+  setTimeout(() => {
+    const top = panel.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }, 100);
 }
 
 // ═══ EVENTS ═══
