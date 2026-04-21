@@ -56,7 +56,8 @@
     @media(max-width:500px){.values-grid{grid-template-columns:1fr;}}
     .value-card{background:white;border:1.5px solid var(--g100);border-radius:20px;padding:28px;box-shadow:var(--sh-sm);transition:all .2s;}
     .value-card:hover{border-color:var(--b300);box-shadow:var(--sh-md);transform:translateY(-2px);}
-    .val-icon{font-size:1.8rem;margin-bottom:14px;}
+    .val-icon{font-size:1.8rem;margin-bottom:14px;line-height:1;}
+    .val-icon .lc{width:28px;height:28px;color:#2563eb;}
     .val-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--g900);margin-bottom:8px;}
     .val-text{font-size:.83rem;color:var(--g500);line-height:1.65;}
 
@@ -90,7 +91,8 @@
     .sources-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
     @media(max-width:600px){.sources-grid{grid-template-columns:1fr;}}
     .source-card{background:var(--off);border:1.5px solid var(--g100);border-radius:16px;padding:20px;display:flex;gap:14px;align-items:flex-start;}
-    .source-icon{font-size:1.3rem;flex-shrink:0;}
+    .source-icon{font-size:1.3rem;flex-shrink:0;line-height:1;}
+    .source-icon .lc{width:20px;height:20px;color:#2563eb;}
     .source-title{font-weight:600;font-size:.88rem;color:var(--g900);margin-bottom:4px;}
     .source-text{font-size:.8rem;color:var(--g500);line-height:1.6;}
 
@@ -165,32 +167,32 @@
     <h2 class="section-h2">Was uns von einer einfachen Preisschätzung unterscheidet</h2>
     <div class="values-grid">
       <div class="value-card">
-        <div class="val-icon">📊</div>
+        <div class="val-icon"><i data-lucide="bar-chart-2" class="lc"></i></div>
         <div class="val-title">Daten statt Bauchgefühl</div>
         <div class="val-text">Jede Bewertung basiert auf öffentlichen Marktdaten (Angebotspreise + Transaktionsquote) aus dem Wiener Markt – nicht auf Schätzungen oder Verkaufsinteressen.</div>
       </div>
       <div class="value-card">
-        <div class="val-icon">📍</div>
+        <div class="val-icon"><i data-lucide="map-pin" class="lc"></i></div>
         <div class="val-title">Wien-spezifisch bis zum Bezirk</div>
         <div class="val-text">Alle 23 Bezirke separat analysiert. Weil eine Wohnung in Neubau andere Marktgesetze hat als eine in Favoriten – und diese Unterschiede zählen.</div>
       </div>
       <div class="value-card">
-        <div class="val-icon">🔒</div>
+        <div class="val-icon"><i data-lucide="lock" class="lc"></i></div>
         <div class="val-title">Unverbindlich & vertraulich</div>
-        <div class="val-text">Die Bewertung verpflichtet zu nichts. Ihre Daten werden nicht an mehrere Makler weitergegeben. Transparenz ist kein Versprechen – es ist unser Modell.</div>
+        <div class="val-text">Die Bewertung verpflichtet zu nichts. Deine Daten werden nicht an mehrere Makler weitergegeben. Transparenz ist kein Versprechen – es ist unser Modell.</div>
       </div>
       <div class="value-card">
-        <div class="val-icon">⚡</div>
+        <div class="val-icon"><i data-lucide="zap" class="lc"></i></div>
         <div class="val-title">Sofort – nicht irgendwann</div>
-        <div class="val-text">In unter 2 Minuten erhalten Sie eine fundierte Ersteinschätzung. Weil Ihre Zeit wertvoller ist als ein langes Erstgespräch ohne Grundlage.</div>
+        <div class="val-text">In unter 2 Minuten erhältst du eine fundierte Ersteinschätzung. Weil deine Zeit wertvoller ist als ein langes Erstgespräch ohne Grundlage.</div>
       </div>
       <div class="value-card">
-        <div class="val-icon">🤝</div>
+        <div class="val-icon"><i data-lucide="handshake" class="lc"></i></div>
         <div class="val-title">Ausgewählte Experten</div>
-        <div class="val-text">Wir arbeiten nur mit geprüften, lokal erfahrenen Maklern zusammen – die Ihre Immobilie kennen und nicht bloß kennenlernen wollen.</div>
+        <div class="val-text">Wir arbeiten nur mit geprüften, lokal erfahrenen Maklern zusammen – die deine Immobilie kennen und nicht bloß kennenlernen wollen.</div>
       </div>
       <div class="value-card">
-        <div class="val-icon">🎯</div>
+        <div class="val-icon"><i data-lucide="target" class="lc"></i></div>
         <div class="val-title">100% kostenlos für Eigentümer</div>
         <div class="val-text">Das Tool, die Bewertung, das Erstgespräch – alles ohne Kosten. Wir werden nur dann vergütet, wenn ein Verkauf erfolgreich abgeschlossen wird.</div>
       </div>
@@ -213,14 +215,14 @@
         <div class="process-num">02</div>
         <div>
           <div class="process-title">Nur vorbereitete Experten</div>
-          <div class="process-text">Wenn ein Makler den Kontakt aufnimmt, kennt er Ihre Immobilie bereits. Bezirk, Größe, Zustand, Ihre Präferenz. Kein Kaltstart, kein Zeitverlust.</div>
+          <div class="process-text">Wenn ein Makler den Kontakt aufnimmt, kennt er deine Immobilie bereits. Bezirk, Größe, Zustand, deine Präferenz. Kein Kaltstart, kein Zeitverlust.</div>
         </div>
       </div>
       <div class="process-card">
         <div class="process-num">03</div>
         <div>
-          <div class="process-title">Sie behalten die Kontrolle</div>
-          <div class="process-text">Nach der Bewertung und dem Experten-Call entscheiden Sie – ohne Druck, ohne Frist, ohne Vertrag. Unsere Aufgabe endet, wenn Ihre Entscheidung beginnt.</div>
+          <div class="process-title">Du behältst die Kontrolle</div>
+          <div class="process-text">Nach der Bewertung und dem Experten-Call entscheidest du – ohne Druck, ohne Frist, ohne Vertrag. Unsere Aufgabe endet, wenn deine Entscheidung beginnt.</div>
         </div>
       </div>
     </div>
@@ -232,28 +234,28 @@
     <h2 class="section-h2">Woher kommen unsere Daten?</h2>
     <div class="sources-grid">
       <div class="source-card">
-        <div class="source-icon">🏛</div>
+        <div class="source-icon"><i data-lucide="landmark" class="lc"></i></div>
         <div>
           <div class="source-title">OeNB Immobilienpreisindex</div>
           <div class="source-text">Offizielle Preisentwicklung der Österreichischen Nationalbank – quartalsweise aktualisiert.</div>
         </div>
       </div>
       <div class="source-card">
-        <div class="source-icon">📈</div>
+        <div class="source-icon"><i data-lucide="trending-up" class="lc"></i></div>
         <div>
           <div class="source-title">Statistik Austria</div>
           <div class="source-text">Wohnungsbestand und demografische Entwicklung pro Bezirk.</div>
         </div>
       </div>
       <div class="source-card">
-        <div class="source-icon">🏠</div>
+        <div class="source-icon"><i data-lucide="home" class="lc"></i></div>
         <div>
           <div class="source-title">Angebotspreise (immopreise.at)</div>
           <div class="source-text">Aktuelle Inserate und Angebotspreise nach Bezirk, Objekttyp und Größe.</div>
         </div>
       </div>
       <div class="source-card">
-        <div class="source-icon">📉</div>
+        <div class="source-icon"><i data-lucide="trending-down" class="lc"></i></div>
         <div>
           <div class="source-title">EZB Zinsentwicklung</div>
           <div class="source-text">Leitzins und Kreditkonditionen als makroökonomischer Kontext für den Timing-Score.</div>
@@ -284,7 +286,7 @@
         <span class="faq-arrow">▼</span>
       </button>
       <div class="faq-body">
-        <p>Nein. ImmowertWien ist kein Makler. Wir versorgen Sie mit den richtigen Marktdaten für Ihre Immobilie – bezirksspezifisch, datenbasiert und kostenlos. Auf Wunsch verbinden wir Sie anschließend mit einem geprüften Immobilienexperten in Wien, der Sie persönlich begleitet.</p>
+        <p>Nein. ImmowertWien ist kein Makler. Wir versorgen dich mit den richtigen Marktdaten für deine Immobilie – bezirksspezifisch, datenbasiert und kostenlos. Auf Wunsch verbinden wir dich anschließend mit einem geprüften Immobilienexperten in Wien, der dich persönlich begleitet.</p>
       </div>
     </div>
 
@@ -294,14 +296,14 @@
         <span class="faq-arrow">▼</span>
       </button>
       <div class="faq-body">
-        <p>Ihre Daten werden ausschließlich für die Bewertung und – wenn Sie das möchten – für die Vermittlung an einen einzelnen, vertraglich gebundenen Partnerexperten verwendet. Es gibt keinen Mehrfachverkauf an konkurrierende Makler. Alle Daten werden DSGVO-konform nach österreichischem Recht verarbeitet.</p>
+        <p>Deine Daten werden ausschließlich für die Bewertung und – wenn du das möchtest – für die Vermittlung an einen einzelnen, vertraglich gebundenen Partnerexperten verwendet. Es gibt keinen Mehrfachverkauf an konkurrierende Makler. Alle Daten werden DSGVO-konform nach österreichischem Recht verarbeitet.</p>
       </div>
     </div>
   </div>
 
   <!-- CTA -->
   <div class="cta-section reveal">
-    <h2>Erfahren Sie, was Ihre Immobilie wert ist.</h2>
+    <h2>Erfahre, was deine Immobilie wert ist.</h2>
     <p>Kostenlos. Unverbindlich. In unter 2 Minuten.</p>
     <a href="index.html#tool" class="cta-btn">Jetzt kostenlos bewerten →</a>
   </div>
@@ -335,5 +337,7 @@ const ro = new IntersectionObserver(entries => {
 },{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 </script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script>
 </body>
 </html>
