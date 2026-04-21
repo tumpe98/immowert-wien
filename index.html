@@ -40,7 +40,7 @@
   }
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Immobilienbewertung Wien – Was weiß dein Käufer, das du nicht weißt?</title>
+  <title>immowertwien – Was weiß dein Käufer, das du nicht weißt?</title>
   <meta name="description" content="Käufer haben Daten. Du auch? Kostenloser Marktüberblick für alle 23 Wiener Bezirke – damit du weißt, was der Markt wirklich zahlt, bevor du verkaufst.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -275,6 +275,16 @@
     .e-item{display:flex;align-items:flex-start;gap:16px;padding:20px;background:white;border-radius:16px;border:1px solid var(--g100);box-shadow:var(--sh-sm);transition:all .2s}
     .e-item:hover{border-color:var(--b300);box-shadow:var(--sh-md)}
     .e-icon{width:44px;height:44px;background:var(--b50);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+
+    /* ── Lucide icon system ── */
+    .lc{display:block;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    .t-icon .lc{width:22px;height:22px;color:var(--b500)}
+    .pc-icon{display:flex;align-items:center;justify-content:center;width:48px;height:48px;background:rgba(255,255,255,.07);border-radius:12px;margin-bottom:14px}
+    .pc-icon .lc{width:26px;height:26px;color:rgba(255,255,255,.75)}
+    .step-card-icon{font-size:0!important;display:flex;align-items:center;justify-content:center;height:36px;margin-bottom:10px}
+    .step-card-icon .lc{width:32px;height:32px;color:var(--b500)}
+    .e-icon .lc{width:22px;height:22px;color:var(--b500)}
+
     .e-title{font-weight:600;font-size:.9rem;color:var(--g900);margin-bottom:4px}
     .e-text{font-size:.82rem;color:var(--g500);line-height:1.6}
     .experten-visual{position:relative}
@@ -419,19 +429,19 @@
 <div class="trust-strip reveal">
   <div class="trust-inner">
     <div class="t-item">
-      <div class="t-icon">🏠</div>
+      <div class="t-icon"><i data-lucide="home" class="lc"></i></div>
       <div><span class="t-big"><span class="counter" data-to="23">0</span></span><span class="t-sub">Wiener Bezirke analysiert</span></div>
     </div>
     <div class="t-item">
-      <div class="t-icon">📊</div>
+      <div class="t-icon"><i data-lucide="bar-chart-2" class="lc"></i></div>
       <div><span class="t-big">€ <span class="counter" data-to="8539">0</span></span><span class="t-sub">Ø Kaufpreis/m² Neubau Wien</span></div>
     </div>
     <div class="t-item">
-      <div class="t-icon">📈</div>
+      <div class="t-icon"><i data-lucide="trending-up" class="lc"></i></div>
       <div><span class="t-big"><span class="counter" data-to="25">0</span> J.</span><span class="t-sub">Historische Marktdaten</span></div>
     </div>
     <div class="t-item">
-      <div class="t-icon">⚡</div>
+      <div class="t-icon"><i data-lucide="zap" class="lc"></i></div>
       <div><span class="t-big"><span class="counter" data-to="2">0</span> Min.</span><span class="t-sub">Bis zur Erstbewertung</span></div>
     </div>
   </div>
@@ -447,17 +457,17 @@
     </div>
     <div class="problem-grid">
       <div class="problem-card reveal" style="transition-delay:.1s">
-        <div class="pc-icon">🎯</div>
+        <div class="pc-icon"><i data-lucide="target" class="lc"></i></div>
         <div class="pc-title">Du tust das einmal. Er täglich.</div>
         <div class="pc-text">Kaufinteressenten kennen jeden vergleichbaren Verkauf im Bezirk. Sie wissen genau, wo dein Preis zu hoch ist – und wo sie noch drücken können. Du weißt das nicht. Noch nicht.</div>
       </div>
       <div class="problem-card reveal" style="transition-delay:.2s">
-        <div class="pc-icon">💸</div>
+        <div class="pc-icon"><i data-lucide="banknote" class="lc"></i></div>
         <div class="pc-title">5 % Fehler = bis zu € 25.000 verloren</div>
         <div class="pc-text">Bei einer Wohnung im Wert von € 500.000 sind 5 % Preisfehler nach unten € 25.000, die du verschenkst. Nach oben: kein Käufer weit und breit. Beides kostet dich reales Geld.</div>
       </div>
       <div class="problem-card reveal" style="transition-delay:.3s">
-        <div class="pc-icon">🔒</div>
+        <div class="pc-icon"><i data-lucide="lock" class="lc"></i></div>
         <div class="pc-title">Echte Verkaufspreise sind nicht öffentlich</div>
         <div class="pc-text">In Österreich sind tatsächlich erzielte Kaufpreise nicht frei zugänglich. Wer zahlt dafür? Die Verkäufer, die ohne diese Information in die Verhandlung gehen.</div>
       </div>
@@ -494,21 +504,21 @@
     <div class="steps-grid">
       <div class="step-card reveal" style="transition-delay:.1s">
         <div class="step-num">1</div>
-        <div class="step-card-icon">📊</div>
+        <div class="step-card-icon"><i data-lucide="bar-chart-2" class="lc"></i></div>
         <div class="step-card-title">Marktüberblick holen</div>
         <div class="step-card-text">Beantworte 6 kurze Fragen. Du siehst sofort den Marktwert, aktuelle Preistrends und wo deine Immobilie im Bezirksvergleich steht – kostenlos, ohne Registrierung.</div>
         <span class="step-card-time">⏱ 2 Minuten</span>
       </div>
       <div class="step-card reveal" style="transition-delay:.2s">
         <div class="step-num">2</div>
-        <div class="step-card-icon">📞</div>
+        <div class="step-card-icon"><i data-lucide="phone" class="lc"></i></div>
         <div class="step-card-title">Tiefenanalyse mit Experten</div>
         <div class="step-card-text">Ein geprüfter Wiener Immobilienexperte erklärt dir kostenlos, was deinen spezifischen Preis wirklich bestimmt – Lage, Zeitpunkt, Strategie.</div>
         <span class="step-card-time">⏱ 30 Minuten · kostenlos</span>
       </div>
       <div class="step-card reveal" style="transition-delay:.3s">
         <div class="step-num">3</div>
-        <div class="step-card-icon">🤝</div>
+        <div class="step-card-icon"><i data-lucide="handshake" class="lc"></i></div>
         <div class="step-card-title">Auf Augenhöhe verhandeln</div>
         <div class="step-card-text">Mit echtem Marktwissen, der richtigen Preisstrategie und Zugang zu qualifizierten Käufern verhandelst du auf Augenhöhe – statt blind in eine Verhandlung zu gehen.</div>
         <span class="step-card-time">📈 Fundiert statt geraten</span>
@@ -525,19 +535,19 @@
       <h2 class="s-h2 dark">Was Marktkenntnis dir im Verkauf konkret bringt</h2>
       <div class="experten-list">
         <div class="e-item">
-          <div class="e-icon">📊</div>
+          <div class="e-icon"><i data-lucide="bar-chart-2" class="lc"></i></div>
           <div><div class="e-title">Angebotspreise + Transaktionsquote kombiniert</div><div class="e-text">Unser Tool kombiniert Angebotspreise (immopreise.at) mit der durchschnittlichen Transaktionspreisquote aus dem OeNB Grundstückspreisspiegel – näher an der Realität als reine Inseratspreise.</div></div>
         </div>
         <div class="e-item">
-          <div class="e-icon">📍</div>
+          <div class="e-icon"><i data-lucide="map-pin" class="lc"></i></div>
           <div><div class="e-title">Bezirkstiefe: Was in deiner Straße gilt</div><div class="e-text">Preisunterschiede zwischen Straßenseiten, U-Bahn-Nähe und Grünflächen können Zehntausende Euro bedeuten. Der Experten-Call liefert das hyperlokale Wissen für deinen Bezirk.</div></div>
         </div>
         <div class="e-item">
-          <div class="e-icon">🎯</div>
+          <div class="e-icon"><i data-lucide="crosshair" class="lc"></i></div>
           <div><div class="e-title">Dein Preispotenzial – nicht der Durchschnitt</div><div class="e-text">Der Marktdurchschnitt ist ein Orientierungspunkt. Was zählt, ist was deine spezifische Immobilie in Zustand, Lage und zum richtigen Zeitpunkt erzielen kann.</div></div>
         </div>
         <div class="e-item">
-          <div class="e-icon">⚡</div>
+          <div class="e-icon"><i data-lucide="zap" class="lc"></i></div>
           <div><div class="e-title">Kein Vertrag, kein Druck</div><div class="e-text">Das Tool ist kostenlos. Der Experten-Call ist kostenlos. Du entscheidest danach frei, ob und wie du weitermachst – Transparenz bedeutet auch: keine versteckten Verpflichtungen.</div></div>
         </div>
       </div>
@@ -665,7 +675,7 @@
     <a href="datenschutz.html">Datenschutz</a>
     <a href="agb.html">AGB</a>
   </div>
-  <div class="foot-copy">© 2026 ImmowertWien · Daten: immopreise.at, OeNB, Statistik Austria</div>
+  <div class="foot-copy">© 2026 immowertwien · Daten: immopreise.at, OeNB, Statistik Austria</div>
 </footer>
 
 <!-- MODAL -->
@@ -1228,5 +1238,7 @@
 
   render();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>if(typeof lucide!=='undefined')lucide.createIcons();</script>
 </body>
 </html>
