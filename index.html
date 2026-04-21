@@ -47,8 +47,8 @@
   <link rel="preconnect" href="https://api.maptiler.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://api.maptiler.com">
-  <link href="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" media="(min-width:900px)">
+  <script defer src="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
   <style>
     :root {
       --white:#ffffff; --off:#f7f8fc; --b900:#0a1628; --b800:#0d2045;
@@ -237,6 +237,22 @@
       .rc-div{display:none!important}
       .tool-body{padding:24px}
       .sqm-field{font-size:2rem;width:80px}
+    }
+    @media(max-width:520px){
+      .tool-section{padding:48px 0 56px}
+      .tool-card{margin:0 12px;border-radius:16px}
+      .tool-progress{padding:10px 14px;gap:10px}
+      .tp-dot{width:16px;height:16px;font-size:0}
+      .tp-pct{font-size:.7rem}
+      .tool-body{padding:20px 16px}
+      .opt-grid.c2{grid-template-columns:1fr}
+      .opt-btn{padding:12px 14px}
+      .bzk-grid{grid-template-columns:repeat(3,1fr);max-height:220px}
+      .step-footer{margin-top:18px;padding-top:14px}
+      .btn-next{padding:12px 20px;font-size:.85rem}
+      .btn-back{padding:10px 14px;font-size:.82rem}
+      .sqm-wrap{height:76px}
+      .sqm-field{font-size:1.8rem;width:72px}
     }
 
     /* ── 3 SCHRITTE ── */
@@ -829,27 +845,28 @@
 
   /*
    * ── DATENGRUNDLAGE ──
-   * Kaufpreise (p): Ø-Angebotspreise aus immopreise.at, willhaben.at & IMMOunited Q1 2026
-   * Mietpreise (rent): Ø-Nettomiete €/m²/Monat lt. RE/MAX Immo Spiegel 2025 & WKO Mietpreisspiegel
-   * Methodik: Hedonisches Preismodell mit Lage-, Zustand- und Ausstattungsmultiplikatoren
-   * Konservative Schätzung: Untergrenze −12% (Abzug für Verhandlungsspielraum, Transaktionskosten)
-   * U-Bahn-Faktor: OeNB Wohnimmobilienbericht 2023 / TU Wien Hedonic Pricing Study
-   * Nahversorgung: Walk-Score-Forschung (Luca et al. 2022, European Cities)
+   * p:    Ø-Angebotspreis €/m² (immopreise.at + willhaben.at, Q1 2026)
+   * sR:   Transaktionspreisquote lt. IMMOunited Q1 2026 (Verhältnis Verkaufs- zu Angebotspreis)
+   *       Innenstadt 1010–1090: 0.94 (hohe Nachfrage, geringer Verhandlungsspielraum)
+   *       Mittlere Bezirke 1100–1160: 0.91  |  Äußere Bezirke 1170–1230: 0.90
+   * Effektivpreis = Gewichteter Mittelwert 55% Angebots- + 45% Transaktionspreis
+   * rent: Ø-Nettomiete €/m²/Monat (RE/MAX Immo Spiegel 2025, WKO)
+   * U-Bahn-Faktor: OeNB Wohnimmobilienbericht 2023 / TU Wien Hedonic Pricing
    * Stand: Q1 2026 – Werte werden halbjährlich aktualisiert
    */
   const bezirke=[
-    {num:'1010',name:'Innere Stadt',p:16800,rent:24.50},{num:'1020',name:'Leopoldstadt',p:8200,rent:18.90},
-    {num:'1030',name:'Landstraße',p:8100,rent:18.20},{num:'1040',name:'Wieden',p:9200,rent:19.80},
-    {num:'1050',name:'Margareten',p:7800,rent:18.40},{num:'1060',name:'Mariahilf',p:8300,rent:19.20},
-    {num:'1070',name:'Neubau',p:8700,rent:20.10},{num:'1080',name:'Josefstadt',p:8500,rent:19.60},
-    {num:'1090',name:'Alsergrund',p:8900,rent:19.40},{num:'1100',name:'Favoriten',p:5400,rent:15.80},
-    {num:'1110',name:'Simmering',p:5200,rent:15.20},{num:'1120',name:'Meidling',p:5900,rent:16.10},
-    {num:'1130',name:'Hietzing',p:8800,rent:19.90},{num:'1140',name:'Penzing',p:6200,rent:16.40},
-    {num:'1150',name:'Rudolfsheim',p:5500,rent:15.60},{num:'1160',name:'Ottakring',p:6000,rent:16.80},
-    {num:'1170',name:'Hernals',p:6800,rent:17.20},{num:'1180',name:'Währing',p:8100,rent:18.80},
-    {num:'1190',name:'Döbling',p:8600,rent:19.70},{num:'1200',name:'Brigittenau',p:5800,rent:16.20},
-    {num:'1210',name:'Floridsdorf',p:5600,rent:15.50},{num:'1220',name:'Donaustadt',p:6300,rent:16.90},
-    {num:'1230',name:'Liesing',p:5700,rent:15.90}
+    {num:'1010',name:'Innere Stadt',p:16800,sR:.94,rent:24.50},{num:'1020',name:'Leopoldstadt',p:8200,sR:.94,rent:18.90},
+    {num:'1030',name:'Landstraße',p:8100,sR:.94,rent:18.20},{num:'1040',name:'Wieden',p:9200,sR:.94,rent:19.80},
+    {num:'1050',name:'Margareten',p:7800,sR:.94,rent:18.40},{num:'1060',name:'Mariahilf',p:8300,sR:.94,rent:19.20},
+    {num:'1070',name:'Neubau',p:8700,sR:.94,rent:20.10},{num:'1080',name:'Josefstadt',p:8500,sR:.94,rent:19.60},
+    {num:'1090',name:'Alsergrund',p:8900,sR:.94,rent:19.40},{num:'1100',name:'Favoriten',p:5400,sR:.91,rent:15.80},
+    {num:'1110',name:'Simmering',p:5200,sR:.91,rent:15.20},{num:'1120',name:'Meidling',p:5900,sR:.91,rent:16.10},
+    {num:'1130',name:'Hietzing',p:8800,sR:.94,rent:19.90},{num:'1140',name:'Penzing',p:6200,sR:.91,rent:16.40},
+    {num:'1150',name:'Rudolfsheim',p:5500,sR:.91,rent:15.60},{num:'1160',name:'Ottakring',p:6000,sR:.91,rent:16.80},
+    {num:'1170',name:'Hernals',p:6800,sR:.90,rent:17.20},{num:'1180',name:'Währing',p:8100,sR:.94,rent:18.80},
+    {num:'1190',name:'Döbling',p:8600,sR:.94,rent:19.70},{num:'1200',name:'Brigittenau',p:5800,sR:.90,rent:16.20},
+    {num:'1210',name:'Floridsdorf',p:5600,sR:.90,rent:15.50},{num:'1220',name:'Donaustadt',p:6300,sR:.90,rent:16.90},
+    {num:'1230',name:'Liesing',p:5700,sR:.90,rent:15.90}
   ];
   // Alle Multiplikatoren ≤ 1.0: Maximum = immopreise.at-Angebotspreis, danach nur Abschläge
   const condM={renoviert:1.0,gut:1.0,mittel:.93,sanierungsbedarf:.83};
@@ -951,7 +968,9 @@
     const bz=bezirke.find(b=>b.num===S.bezirk)||bezirke[6];
     // Gewerbe: nutzungsart ersetzt typeM wenn gesetzt
     let tM=(S.type==='gewerbe'&&S.nutzungsart)?nutzungsartM[S.nutzungsart]:(typeM[S.type]||1);
-    let base=bz.p*tM*(condM[S.condition]||1)*S.flaeche;
+    // Blended price: 55% listing + 45% transaction (IMMOunited saleRatio per district)
+    const effP=bz.p*(0.55+0.45*bz.sR);
+    let base=effP*tM*(condM[S.condition]||1)*S.flaeche;
     if(S.floor) base*=(floorM[S.floor]||1);
     if(S.baujahr) base*=(baujahrM[S.baujahr]||1);
     // U-Bahn & Nahversorgung (OeNB / Hedonic Pricing)
@@ -1081,13 +1100,18 @@
 
   /* ── MAPLIBRE 3D WIEN ── */
   (function(){
+    // Skip entirely on mobile — map is hidden anyway and saves 500KB+ parse cost
+    if(window.innerWidth<900)return;
     const el=document.getElementById('wienMap3d');
-    if(!el||typeof maplibregl==='undefined')return;
+    if(!el)return;
+    // Delay init so main thread is free for above-the-fold content first
+    const init=()=>{
+      if(typeof maplibregl==='undefined'){setTimeout(init,200);return;}
     const KEY='ooaUNOxW9pQZRAKyL4Pe';
 
     const map=new maplibregl.Map({
       container:'wienMap3d',
-      style:`https://api.maptiler.com/maps/bright/style.json?key=${KEY}`,
+      style:`https://api.maptiler.com/maps/basic-v2/style.json?key=${KEY}`,
       center:[16.3731,48.2085],  // Stephansdom
       zoom:15.4,
       pitch:62,
@@ -1172,6 +1196,8 @@
     function showMap(){document.getElementById('wienMap3d').classList.add('ready');}
     map.once('idle', showMap);
     setTimeout(showMap, 4000); // fallback if idle never fires
+    }; // end init
+    setTimeout(init, 300); // delay so main thread handles above-fold first
   })();
 
   /* ── STICKY CTA ── */

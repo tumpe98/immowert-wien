@@ -11,9 +11,9 @@
   <meta name="description" content="Immobilienpreise für alle 23 Wiener Bezirke – Preisentwicklung, Vermarktungsdauer, Transaktionen und optimaler Verkaufszeitpunkt.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'"/>
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     :root {
       --white:#ffffff; --off:#f7f8fc; --b900:#0a1628; --b800:#0d2045;
@@ -355,11 +355,23 @@ function getTimingText(bz) {
 
 function fmt(n) { return '€ ' + n.toLocaleString('de-AT'); }
 
-// ═══ MAP ═══
-const map = L.map('districtMap',{zoomControl:true,scrollWheelZoom:false}).setView([48.2082,16.3738],11);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
-  attribution:'© OpenStreetMap © CARTO',maxZoom:19
-}).addTo(map);
+// ═══ MAP — lazy init when scrolled into view ═══
+let map, mapInitialized = false;
+function initMap() {
+  if (mapInitialized) return;
+  if (typeof L === 'undefined') { setTimeout(initMap, 150); return; }
+  mapInitialized = true;
+  map = L.map('districtMap',{zoomControl:true,scrollWheelZoom:false}).setView([48.2082,16.3738],11);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{
+    attribution:'© OpenStreetMap © CARTO',maxZoom:19
+  }).addTo(map);
+  buildMap();
+}
+const mapObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) { initMap(); mapObserver.disconnect(); }
+}, { rootMargin: '200px' });
+const mapEl = document.getElementById('districtMap');
+if (mapEl) mapObserver.observe(mapEl);
 
 function priceColor(p) {
   if (p > 10000) return '#1e3a8a';
@@ -389,6 +401,7 @@ function popupHtml(bz) {
 const WFS_URL = 'https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0' +
   '&typeName=ogdwien:BEZIRKSGRENZEOGD&srsName=EPSG:4326&outputFormat=application/json';
 
+function buildMap() {
 fetch(WFS_URL)
   .then(r => { if (!r.ok) throw new Error('WFS failed'); return r.json(); })
   .then(geojson => {
@@ -440,6 +453,7 @@ fetch(WFS_URL)
       marker.on('click', () => selectDistrict(bz.num));
     });
   });
+} // end buildMap
 
 // ═══ SELECT + RENDER ═══
 let priceChart = null;
