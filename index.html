@@ -40,8 +40,8 @@
   }
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>immowertwien – Was weiß dein Käufer, das du nicht weißt?</title>
-  <meta name="description" content="Käufer haben Daten. Du auch? Kostenloser Marktüberblick für alle 23 Wiener Bezirke – damit du weißt, was der Markt wirklich zahlt, bevor du verkaufst.">
+  <title>immowertwien – Was ist deine Wohnung in Wien wirklich wert?</title>
+  <meta name="description" content="Erfahre in 2 Minuten, was deine Immobilie in Wien wirklich wert ist. Datenbasierte Bewertung für alle 23 Wiener Bezirke – kostenlos und unverbindlich.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://api.maptiler.com" crossorigin>
@@ -238,6 +238,20 @@
       .tool-body{padding:24px}
       .sqm-field{font-size:2rem;width:80px}
     }
+    /* ── RESULT LAYOUT ── */
+    .res-neg-margin{margin:-36px -40px;border-radius:0 0 20px 20px;overflow:hidden}
+    .res-layout{display:grid;grid-template-columns:1fr 260px}
+    .res-right{display:flex;flex-direction:column}
+    .res-mobile-cta{display:none}
+    @media(max-width:600px){
+      .res-layout{grid-template-columns:1fr}
+      .res-right{display:none}
+      .res-mobile-cta{display:block}
+    }
+    @media(max-width:520px){
+      .res-neg-margin{margin:-20px -16px}
+    }
+
     @media(max-width:520px){
       .tool-section{padding:48px 0 56px}
       .tool-card{margin:0 12px;border-radius:16px}
@@ -404,8 +418,8 @@
   <div class="hero">
     <div>
       <div class="eyebrow"><span class="dot"></span>Transparenter Immobilienmarkt Wien · Kostenlos</div>
-      <h1>Was weiß dein Käufer,<br>das du <span class="hl">nicht weißt?</span></h1>
-      <p class="hero-sub">Kaufinteressenten vergleichen täglich hunderte Angebote. Verkäufer verkaufen einmal. Unser Tool schließt diese Lücke – kostenlos, in 2 Minuten.</p>
+      <h1>Was ist deine Wohnung<br>in Wien <span class="hl">wirklich wert?</span></h1>
+      <p class="hero-sub">Die meisten Eigentümer schätzen ihren Wert um 15–30 % falsch ein – und lassen dadurch Geld liegen. Erfahre in 2 Minuten, was der Markt für deine Immobilie wirklich zahlt.</p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="scrollToTool()">
           Immobilie jetzt bewerten <span class="arr">→</span>
@@ -452,14 +466,14 @@
   <div class="section-inner">
     <div class="reveal">
       <div class="s-tag">Das Problem</div>
-      <h2 class="s-h2">Du verkaufst einmal im Leben. Dein Käufer verhandelt berufsmäßig.</h2>
-      <p class="s-p">Das ist keine Gleichung, die du gewinnen kannst – außer du hast dieselbe Datenbasis. Genau das geben wir dir.</p>
+      <h2 class="s-h2">Woher weißt du, ob dein Preis stimmt?</h2>
+      <p class="s-p">Die meisten Eigentümer entscheiden ohne belastbare Zahlen – und lassen dabei reales Geld liegen. Wir liefern die Datenbasis.</p>
     </div>
     <div class="problem-grid">
       <div class="problem-card reveal" style="transition-delay:.1s">
         <div class="pc-icon"><i data-lucide="target" class="lc"></i></div>
-        <div class="pc-title">Du tust das einmal. Er täglich.</div>
-        <div class="pc-text">Kaufinteressenten kennen jeden vergleichbaren Verkauf im Bezirk. Sie wissen genau, wo dein Preis zu hoch ist – und wo sie noch drücken können. Du weißt das nicht. Noch nicht.</div>
+        <div class="pc-title">Kein Eigentümer kennt seinen echten Marktwert</div>
+        <div class="pc-text">Ohne aktuelle Transaktionsdaten aus deinem Bezirk ist jede Preisvorstellung ein Bauchgefühl. Das kostet dich entweder Interessenten – oder bares Geld.</div>
       </div>
       <div class="problem-card reveal" style="transition-delay:.2s">
         <div class="pc-icon"><i data-lucide="banknote" class="lc"></i></div>
@@ -999,6 +1013,8 @@
     return{low,high,potL,potH,m2,bz,afBonus,rentYield};
   }
   function fmt(n){return '€\u202f'+Math.round(n).toLocaleString('de-AT')}
+  function fmtK(n){const k=Math.round(n/1000);return '+\u00a0€\u202f'+(k>=1?k+'k':n);}
+  const bzLonLat={'1010':[16.3720,48.2085],'1020':[16.4024,48.2190],'1030':[16.3897,48.1952],'1040':[16.3700,48.1930],'1050':[16.3559,48.1880],'1060':[16.3479,48.1958],'1070':[16.3492,48.2030],'1080':[16.3531,48.2130],'1090':[16.3596,48.2234],'1100':[16.3750,48.1716],'1110':[16.4250,48.1750],'1120':[16.3280,48.1770],'1130':[16.3020,48.1850],'1140':[16.2950,48.1960],'1150':[16.3270,48.1970],'1160':[16.3140,48.2100],'1170':[16.3000,48.2270],'1180':[16.3260,48.2338],'1190':[16.3530,48.2526],'1200':[16.3714,48.2422],'1210':[16.4000,48.2733],'1220':[16.4750,48.2250],'1230':[16.3200,48.1500]};
 
   /* ── SPARKLINE ── */
   const spk={'1010':[72,78,84,91,100,100],'1020':[68,74,81,88,97,100],'1030':[70,75,82,89,96,100],'1040':[71,77,83,90,98,100],'1050':[69,74,80,87,95,100],'1060':[70,76,82,89,96,100],'1070':[71,77,83,90,97,100],'1080':[70,75,81,88,96,100],'1090':[72,78,85,92,99,100],'1100':[65,70,76,83,92,100],'1110':[64,69,75,82,91,100],'1120':[66,71,77,84,93,100],'1130':[71,77,83,90,97,100],'1140':[65,70,76,83,92,100],'1150':[64,69,75,82,91,100],'1160':[66,71,77,84,93,100],'1170':[68,73,79,86,94,100],'1180':[70,76,82,89,96,100],'1190':[71,77,83,90,97,100],'1200':[65,70,76,83,92,100],'1210':[66,71,78,85,93,100],'1220':[67,72,79,86,94,100],'1230':[65,70,76,83,91,100]};
@@ -1016,52 +1032,64 @@
     const afLbl={keine:null,balkon:'Balkon',loggia:'Loggia',terrasse:'Terrasse',dachterrasse:'Dachterrasse',garten:'Garten'};
     const now=new Date();
     const datum=now.toLocaleDateString('de-AT',{day:'2-digit',month:'long',year:'numeric'});
-    const tags=[tLbl[S.type]||'Immobilie',S.flaeche+'\u202fm²',S.baujahr==='altbau'?'Altbau':S.baujahr==='neubau'?'Neubau':null,afLbl[S.aussenflaeche]||null].filter(Boolean).join(' · ');
-    const afLine=r.afBonus>0?`<div style="padding:12px 32px;background:#f0fdf4;border-bottom:1px solid #bbf7d0;display:flex;gap:10px;align-items:flex-start"><span style="flex-shrink:0">🌿</span><div style="font-size:.74rem;color:#166534;line-height:1.55"><strong style="color:#14532d">Außenflächen-Bonus:</strong> ${afLbl[S.aussenflaeche]||''} erhöht den Schätzwert um ca. ${fmt(r.afBonus)} – bereits enthalten.</div></div>`:'';
-    return `<div class="step-wrap" style="padding:0;margin:-36px -40px">
-      <div style="padding:16px 32px 12px;border-bottom:2.5px solid #0a1628;display:flex;align-items:flex-end;justify-content:space-between;gap:16px">
-        <span style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;color:#0a1628;letter-spacing:-.02em">ImmowertWien</span>
-        <span style="font-size:.68rem;color:#6b7280;text-align:right;line-height:1.7">Sofortbewertung · ${datum}<br>${r.bz.num} ${r.bz.name}</span>
+    const tags=[tLbl[S.type]||'Immobilie',S.flaeche+'\u202fm²',S.baujahr==='altbau'?'Altbau':S.baujahr==='neubau'?'Neubau':null].filter(Boolean).join(' · ');
+    const coords=bzLonLat[r.bz.num]||[16.3731,48.2085];
+    const mapUrl=`https://api.maptiler.com/maps/basic-v2/static/${coords[0]},${coords[1]},13/520x312.png?key=ooaUNOxW9pQZRAKyL4Pe`;
+    const potMid=Math.round((r.potL+r.potH)/2/500)*500;
+    const potDisplay=fmtK(potMid);
+    const trendColor=r.bz.growth5>=3?'#059669':r.bz.growth5>=0?'#d97706':'#dc2626';
+    const trendLabel=r.bz.growth5>=3?'steigend':r.bz.growth5>=0?'stabil':'rückläufig';
+    const checkSvg=(active)=>`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="${active?'#16a34a':'#9ca3af'}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+    const bullets=['Grundriss & Ausrichtung','Verhandlungsstrategie','Einstandspreis-Timing','Optimales Verkaufstiming'];
+    return `<div class="step-wrap res-neg-margin">
+      <div style="padding:11px 20px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;background:white">
+        <span style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:800;color:#0a1628;letter-spacing:-.01em">immowert<span style="color:#2563eb">wien</span></span>
+        <span style="font-size:.62rem;color:#9ca3af">${datum}</span>
       </div>
-      <div style="padding:20px 32px 16px;border-bottom:1px solid #e5e7eb;display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
-        <div style="flex:1;min-width:0">
-          <div style="font-size:.68rem;color:#9ca3af;margin-bottom:4px">${tags}</div>
-          <div style="font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin-bottom:3px">Geschätzter Marktwert</div>
-          <div style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#0a1628;line-height:1.05;margin-bottom:6px">${fmt(r.low)} – ${fmt(r.high)}</div>
-          <div style="font-size:.68rem;color:#9ca3af;margin-bottom:10px">Basis: Angebotspreise immopreise.at / willhaben.at · Transaktionsquote lt. OeNB + IMMOunited Marktbericht Q1 2026 · konservative Schätzung</div>
-          <div style="height:4px;background:#e5e7eb;border-radius:100px;overflow:hidden"><div id="rBar" style="height:100%;background:#0a1628;border-radius:100px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)"></div></div>
+      <div class="res-layout">
+        <div style="border-right:1px solid #e5e7eb">
+          <div style="height:156px;position:relative;overflow:hidden;background:#dbeafe">
+            <img src="${mapUrl}" alt="" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy" onerror="this.style.opacity=0">
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-90%);pointer-events:none"><svg width="26" height="34" viewBox="0 0 26 34" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 0C5.82 0 0 5.82 0 13c0 9.1 13 21 13 21s13-11.9 13-21C26 5.82 20.18 0 13 0z" fill="#2563eb"/><circle cx="13" cy="13" r="4.5" fill="white"/></svg></div>
+            <div style="position:absolute;bottom:8px;left:8px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:6px;padding:3px 9px;font-size:.68rem;font-weight:600;color:#0a1628">${r.bz.num} ${r.bz.name}</div>
+          </div>
+          <div style="padding:16px 18px 10px">
+            <div style="font-size:.58rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin-bottom:3px">Sofortbewertung · ${tags}</div>
+            <div style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,1.85rem);font-weight:800;color:#0a1628;line-height:1.05;margin-bottom:3px">${fmt(r.low)} – ${fmt(r.high)}</div>
+            <div style="font-size:.63rem;color:#9ca3af">Marktdaten 2026 · Angebotspreise + Transaktionsquote${r.afBonus>0?' · inkl. '+(afLbl[S.aussenflaeche]||''):''}</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid #f0f0f0">
+            <div style="padding:10px 14px;border-right:1px solid #f0f0f0"><div style="font-size:.54rem;color:#9ca3af;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px">Ø / m²</div><div style="font-family:'Playfair Display',serif;font-size:.92rem;font-weight:800;color:#0a1628">${fmt(r.m2)}</div></div>
+            <div style="padding:10px 14px;border-right:1px solid #f0f0f0"><div style="font-size:.54rem;color:#9ca3af;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px">Trend</div><div style="font-family:'Playfair Display',serif;font-size:.92rem;font-weight:800;color:${trendColor}">${trendLabel}</div></div>
+            <div style="padding:10px 14px"><div style="font-size:.54rem;color:#9ca3af;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px">Rendite</div><div style="font-family:'Playfair Display',serif;font-size:.92rem;font-weight:800;color:#0a1628">${r.rentYield.toFixed(1)} %</div></div>
+          </div>
         </div>
-        <div style="flex-shrink:0;text-align:right;padding-top:4px">
-          <div style="font-size:.6rem;color:#9ca3af;margin-bottom:2px;letter-spacing:.04em">PREISTREND 5 J.</div>
-          ${buildSparkline(r.bz.num)}
-          <div style="font-size:.6rem;color:#9ca3af;margin-top:2px">2021 – 2026</div>
+        <div class="res-right" style="background:#f9fafb;padding:16px;position:relative">
+          <div style="font-size:.57rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#9ca3af;margin-bottom:10px">Expertenanalyse</div>
+          <div style="background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:12px 14px;margin-bottom:12px">
+            <div style="font-size:.71rem;font-weight:500;color:#92400e;margin-bottom:3px">Mögliches Zusatzpotenzial</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;color:#78350f;line-height:1">${potDisplay}</div>
+          </div>
+          <div style="flex:1;position:relative;overflow:hidden;min-height:110px">
+            <div style="display:flex;flex-direction:column;gap:8px;padding:2px 0">
+              ${bullets.map((item,i)=>`<div style="display:flex;align-items:center;gap:7px${i>=2?';filter:blur(3.5px);user-select:none':''}"><div style="width:16px;height:16px;background:${i<2?'#dcfce7':'#f3f4f6'};border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">${checkSvg(i<2)}</div><span style="font-size:.75rem;color:#374151">${item}</span></div>`).join('')}
+            </div>
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(249,250,251,.97) 38%);padding-top:32px">
+              <button onclick="openModal()" style="width:100%;background:#0a1628;border:none;padding:11px 14px;border-radius:9px;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;color:white;cursor:pointer;margin-bottom:5px" onmouseover="this.style.background='#1a4fd6'" onmouseout="this.style.background='#0a1628'">Kostenlos prüfen →</button>
+              <div style="font-size:.62rem;color:#9ca3af;text-align:center">100% kostenlos · Unverbindlich · 24h</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;border-bottom:2.5px solid #0a1628" class="result-columns">
-        <div class="rc-col" style="padding:16px 24px"><div style="font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9ca3af;margin-bottom:6px">Ø BEZIRKSWERT / m²</div><div style="font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:800;color:#0a1628;margin-bottom:3px">${fmt(r.m2)}</div><div style="font-size:.73rem;color:#6b7280">${r.bz.num} ${r.bz.name}</div></div>
-        <div style="background:#e5e7eb" class="rc-div"></div>
-        <div class="rc-col" style="padding:16px 24px"><div style="font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9ca3af;margin-bottom:6px">MARKTTREND</div><div style="font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:800;color:#059669;margin-bottom:3px">↑ steigend</div><div style="font-size:.73rem;color:#6b7280">Bezirk ${r.bz.num} · 2021–2026</div></div>
-        <div style="background:#e5e7eb" class="rc-div"></div>
-        <div class="rc-col" style="padding:16px 24px"><div style="font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9ca3af;margin-bottom:6px">MIETRENDITE NETTO</div><div style="font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:800;color:#0a1628;margin-bottom:3px">${r.rentYield.toFixed(1)} %</div><div style="font-size:.73rem;color:#6b7280">Kauf vs. Vermietung</div></div>
+      <div class="res-mobile-cta" style="padding:14px 16px;border-top:1px solid #e5e7eb;background:white">
+        <button onclick="openModal()" style="width:100%;background:#0a1628;border:none;padding:13px;border-radius:10px;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:600;color:white;cursor:pointer">Expertenmeinung einholen →</button>
+        <div style="font-size:.65rem;color:#9ca3af;text-align:center;margin-top:6px">100% kostenlos · 24h Rückruf</div>
       </div>
-      ${afLine}
-      <div style="padding:16px 32px;background:#fffbeb;border-bottom:1px solid #fde68a;display:flex;gap:12px;align-items:flex-start">
-        <span style="font-size:1.1rem;flex-shrink:0;margin-top:2px">💰</span>
-        <div><div style="font-size:.78rem;font-weight:600;color:#0a1628;margin-bottom:2px">Mögliches Zusatzpotenzial</div><div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:800;color:#92400e;margin-bottom:4px">${fmt(r.potL)} – ${fmt(r.potH)}</div><div style="font-size:.72rem;color:#78350f;line-height:1.6">Viele Eigentümer lassen Geld liegen – durch falsches Timing, nicht optimierten Einstiegspreis oder fehlende Strategie. Ein Experte prüft das kostenlos.</div></div>
-      </div>
-      <div style="padding:11px 32px;background:#f9fafb;border-bottom:1px solid #e5e7eb;display:flex;gap:8px;align-items:flex-start">
-        <span style="font-size:.8rem;flex-shrink:0;margin-top:1px">⚠️</span>
-        <div style="font-size:.7rem;color:#6b7280;line-height:1.65"><strong style="color:#374151">Rechtlicher Hinweis:</strong> Automatisch berechnete Erstorientierung auf Basis öffentlicher Marktdaten (Angebotspreise: immopreise.at, willhaben.at; Transaktionsquote: OeNB Grundstückspreisspiegel 2024, AK Wien Wohnungspreisspiegel 2025; Methodik: hedonisches Preismodell). Kein Sachverständigengutachten gem. § 57a GewO. Tatsächlicher Marktwert kann individuell abweichen. U-Bahn-Faktor lt. OeNB Wohnimmobilienbericht 2023.</div>
-      </div>
-      <div style="border-top:2.5px solid #0a1628;display:grid;grid-template-columns:1fr auto;align-items:stretch">
-        <div style="padding:16px 24px 16px 32px;border-right:1px solid #e5e7eb"><div style="font-size:.85rem;font-weight:600;color:#0a1628;margin-bottom:3px">Wie viel mehr ist tatsächlich drin?</div><div style="font-size:.72rem;color:#6b7280">Kostenlose Expertenanalyse · Unverbindlich · 24h Rückmeldung</div></div>
-        <button onclick="openModal()" style="background:#0a1628;border:none;padding:0 28px;font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:white;cursor:pointer;white-space:nowrap;transition:background .2s" onmouseover="this.style.background='#1a4fd6'" onmouseout="this.style.background='#0a1628'">Jetzt prüfen →</button>
-      </div>
-      <div style="padding:10px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-        <div style="font-size:.68rem;color:#9ca3af">🔒 100% kostenlos & unverbindlich · Geprüfter Experte für ${r.bz.name}</div>
-        <div style="display:flex;gap:12px">
-          <button onclick="goBack()" style="background:none;border:1px solid #e5e7eb;border-radius:8px;color:#6b7280;font-size:.68rem;cursor:pointer;font-family:'Inter',sans-serif;padding:6px 12px">← Zurück</button>
-          <button onclick="resetTool()" style="background:none;border:none;color:#9ca3af;font-size:.68rem;cursor:pointer;font-family:'Inter',sans-serif">↺ Neue Bewertung</button>
+      <div style="padding:9px 18px;background:#f9fafb;border-top:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+        <div style="font-size:.61rem;color:#9ca3af;line-height:1.55;flex:1">Erstorientierung auf Basis öffentlicher Marktdaten (OeNB, immopreise.at, willhaben.at). Kein Gutachten gem. § 57a GewO.</div>
+        <div style="display:flex;gap:8px;flex-shrink:0">
+          <button onclick="goBack()" style="background:none;border:1px solid #e5e7eb;border-radius:7px;color:#6b7280;font-size:.62rem;cursor:pointer;font-family:'Inter',sans-serif;padding:4px 9px">← Zurück</button>
+          <button onclick="resetTool()" style="background:none;border:none;color:#9ca3af;font-size:.62rem;cursor:pointer;font-family:'Inter',sans-serif">↺ Neu</button>
         </div>
       </div>
     </div>`;
