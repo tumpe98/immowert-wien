@@ -869,7 +869,7 @@
    *       Innenstadt 1010–1090: 0.94 | Mittlere Bezirke: 0.91 | Äußere Bezirke: 0.90
    * Effektivpreis = Gewichteter Mittelwert 55% Angebots- + 45% Transaktionspreis
    * rent: Ø-Nettomiete €/m²/Monat (RE/MAX Immo Spiegel 2025, WKO)
-   * U-Bahn-Faktor: OeNB Wohnimmobilienbericht 2023 / TU Wien Hedonic Pricing
+   * U-Bahn-Faktor: OeNB Wohnimmobilienbericht 2023
    * Stand: Q1 2026 – Werte werden halbjährlich aktualisiert
    */
   const bezirke=[
@@ -892,7 +892,7 @@
   const typeM={wohnung:1.0,haus:1.0,villa:1.0,gewerbe:.88};
   const baujahrM={altbau:.97,neubau:1.0};
   const afM={keine:0,balkon:.025,loggia:.03,terrasse:.04,garten:.06,dachterrasse:.07};
-  // U-Bahn: Abschlag für schlechte Anbindung (OeNB Wohnimmobilienbericht 2023)
+  // U-Bahn: Abschlag für schlechte Anbindung (Quelle: OeNB Wohnimmobilienbericht 2023)
   const ubahnM={nahe:1.0,mittel:1.0,weit:.95};
   // Nahversorgung: Abschlag bei eingeschränkter Versorgung
   const nahversorgungM={sehr_gut:1.0,gut:1.0,mittel:.97};
@@ -1090,7 +1090,7 @@
         <div style="font-size:.65rem;color:#9ca3af;text-align:center;margin-top:6px">100% kostenlos · 24h Rückruf</div>
       </div>
       <div style="padding:9px 18px;background:#f9fafb;border-top:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
-        <div style="font-size:.61rem;color:#9ca3af;line-height:1.55;flex:1">Erstorientierung auf Basis öffentlicher Marktdaten (OeNB, immopreise.at, willhaben.at). Kein Gutachten gem. § 57a GewO.</div>
+        <div style="font-size:.61rem;color:#9ca3af;line-height:1.55;flex:1">Erstorientierung auf Basis öffentlicher Marktdaten (OeNB, immopreise.at, willhaben.at, IMMOunited). Kein Gutachten gem. § 57a GewO.</div>
         <div style="display:flex;gap:8px;flex-shrink:0">
           <button onclick="goBack()" style="background:none;border:1px solid #e5e7eb;border-radius:7px;color:#6b7280;font-size:.62rem;cursor:pointer;font-family:'Inter',sans-serif;padding:4px 9px">← Zurück</button>
           <button onclick="resetTool()" style="background:none;border:none;color:#9ca3af;font-size:.62rem;cursor:pointer;font-family:'Inter',sans-serif">↺ Neu</button>
