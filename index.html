@@ -690,7 +690,7 @@
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div id="modalContent">
       <div class="m-eyebrow">Kostenlose Expertenanalyse</div>
-      <div class="m-title">Prüfen, ob ich unter Wert verkaufe</div>
+      <div class="m-title">Ein Experte prüft deinen Verkaufspreis</div>
       <div class="m-sub">Ein geprüfter Immobilienexperte für deinen Bezirk meldet sich innerhalb von 24h – kostenlos und unverbindlich.</div>
       <div class="m-group"><label class="m-label">Dein Name *</label><input type="text" class="m-input" id="mName" placeholder="Max Mustermann"></div>
       <div class="m-group"><label class="m-label">E-Mail-Adresse *</label><input type="email" class="m-input" id="mEmail" placeholder="max@beispiel.at"></div>
@@ -702,7 +702,7 @@
         </label>
         <div class="m-consent-sub">Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO · Weitergabe ausschließlich an geprüfte lokale Partnerexperten · Mehr in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</div>
       </div>
-      <button class="m-submit" onclick="submitModal()">Prüfen, ob ich unter Wert verkaufe →</button>
+      <button class="m-submit" onclick="submitModal()">Kostenlos den maximalen Preis anfragen →</button>
       <div class="m-legal-note"><i data-lucide="lock" class="lc" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:6px"></i><strong>100% kostenlos & unverbindlich.</strong> Kein Vertrag, kein Maklerauftrag. Du entscheidest danach frei.</div>
     </div>
   </div>
@@ -1126,7 +1126,7 @@
       });
       if(!res.ok) throw new Error();
       document.getElementById('modalContent').innerHTML=`<div style="text-align:center;padding:20px 0"><div style="margin-bottom:16px;color:#10b981"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--g900);margin-bottom:8px">Anfrage erhalten!</div><p style="font-size:.88rem;color:var(--g500);line-height:1.65">Danke, ${d.name}.<br><br>Ein geprüfter Immobilienexperte für deinen Bezirk meldet sich innerhalb von 24 Stunden – kostenlos und unverbindlich.</p></div>`;
-    }catch(e){btn.textContent='Prüfen, ob ich unter Wert verkaufe →';btn.disabled=false;alert('Bitte nochmal versuchen.');}
+    }catch(e){btn.textContent='Kostenlos den maximalen Preis anfragen →';btn.disabled=false;alert('Bitte nochmal versuchen.');}
   }
   document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal()});
 
