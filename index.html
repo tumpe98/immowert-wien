@@ -1033,8 +1033,7 @@
     const potDisplay=fmtK(potMid);
     const trendColor=r.bz.growth5>=3?'#059669':r.bz.growth5>=0?'#d97706':'#dc2626';
     const trendLabel=r.bz.growth5>=3?'steigend':r.bz.growth5>=0?'stabil':'rückläufig';
-    const checkSvg=(active)=>`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="${active?'#16a34a':'#9ca3af'}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
-    const bullets=['Grundriss & Ausrichtung','Verhandlungsstrategie','Einstandspreis-Timing','Optimales Verkaufstiming'];
+    const checkSvg=`<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
     return `<div class="step-wrap res-neg-margin">
       <div style="padding:11px 20px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;background:white">
         <span style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:800;color:#0a1628;letter-spacing:-.01em">immowert<span style="color:#2563eb">wien</span></span>
@@ -1049,7 +1048,7 @@
           </div>
           <div style="padding:16px 18px 10px">
             <div style="font-size:.58rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin-bottom:3px">Sofortbewertung · ${tags}</div>
-            <div style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,1.85rem);font-weight:800;color:#0a1628;line-height:1.05;margin-bottom:3px">${fmt(r.low)}</div>
+            <div style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,1.85rem);font-weight:800;color:#0a1628;line-height:1.05;margin-bottom:3px">${fmt(r.low)} – <span style="filter:blur(5px);user-select:none;pointer-events:none">${fmt(r.high)}</span></div>
             <div style="font-size:.63rem;color:#9ca3af">Marktdaten 2026 · Angebotspreise + Transaktionsquote${r.afBonus>0?' · inkl. '+(afLbl[S.aussenflaeche]||''):''}</div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid #f0f0f0">
@@ -1059,20 +1058,35 @@
           </div>
         </div>
         <div class="res-right" style="background:#f9fafb;padding:16px;position:relative">
-          <div style="font-size:.57rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#9ca3af;margin-bottom:10px">Expertenanalyse</div>
-          <div style="flex:1;position:relative;overflow:hidden;min-height:110px">
-            <div style="display:flex;flex-direction:column;gap:8px;padding:2px 0">
-              ${bullets.map((item,i)=>`<div style="display:flex;align-items:center;gap:7px${i>=2?';filter:blur(3.5px);user-select:none':''}"><div style="width:16px;height:16px;background:${i<2?'#dcfce7':'#f3f4f6'};border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">${checkSvg(i<2)}</div><span style="font-size:.75rem;color:#374151">${item}</span></div>`).join('')}
+          <div style="font-size:.57rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#9ca3af;margin-bottom:8px">Expertenanalyse</div>
+          <div style="background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:10px 14px;margin-bottom:10px;filter:blur(4px);user-select:none;pointer-events:none">
+            <div style="font-size:.68rem;font-weight:500;color:#92400e;margin-bottom:2px">Mögliches Zusatzpotenzial</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;color:#78350f;line-height:1">${potDisplay}</div>
+          </div>
+          <div style="flex:1;position:relative;overflow:hidden">
+            <div style="display:flex;flex-direction:column;gap:9px;padding:2px 0 56px">
+              <div style="display:flex;align-items:flex-start;gap:9px">
+                <div style="width:20px;height:20px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">${checkSvg}</div>
+                <div><div style="font-size:.6rem;font-weight:700;color:#16a34a;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1px">Schritt 1</div><div style="font-size:.75rem;font-weight:600;color:#111827">Online Bewertung erhalten</div></div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:9px">
+                <div style="width:20px;height:20px;background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><span style="font-size:.6rem;font-weight:700;color:white">2</span></div>
+                <div><div style="font-size:.6rem;font-weight:700;color:#2563eb;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1px">Schritt 2</div><div style="font-size:.75rem;font-weight:600;color:#111827">Lokaler Experte analysiert</div></div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:9px;filter:blur(3px);user-select:none">
+                <div style="width:20px;height:20px;background:#f3f4f6;border:1.5px solid #e5e7eb;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><span style="font-size:.6rem;font-weight:700;color:#9ca3af">3</span></div>
+                <div><div style="font-size:.6rem;font-weight:700;color:#9ca3af;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1px">Schritt 3</div><div style="font-size:.75rem;font-weight:600;color:#374151">Zum Bestpreis verkauft – kein Euro verschenkt</div></div>
+              </div>
             </div>
-            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(249,250,251,.97) 38%);padding-top:32px">
-              <button onclick="openModal()" style="width:100%;background:#0a1628;border:none;padding:11px 14px;border-radius:9px;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;color:white;cursor:pointer;margin-bottom:5px" onmouseover="this.style.background='#1a4fd6'" onmouseout="this.style.background='#0a1628'">Jetzt maximalen Verkaufspreis sichern →</button>
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(249,250,251,.95) 35%);padding-top:28px">
+              <button onclick="openModal()" style="width:100%;background:#2563eb;border:none;padding:11px 14px;border-radius:9px;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;color:white;cursor:pointer;margin-bottom:5px" onmouseover="this.style.background='#1a4fd6'" onmouseout="this.style.background='#2563eb'">Jetzt maximalen Verkaufspreis sichern →</button>
               <div style="font-size:.62rem;color:#9ca3af;text-align:center">100% kostenlos · Unverbindlich · 24h</div>
             </div>
           </div>
         </div>
       </div>
       <div class="res-mobile-cta" style="padding:14px 16px;border-top:1px solid #e5e7eb;background:white">
-        <button onclick="openModal()" style="width:100%;background:#0a1628;border:none;padding:13px;border-radius:10px;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:600;color:white;cursor:pointer">Jetzt maximalen Verkaufspreis sichern →</button>
+        <button onclick="openModal()" style="width:100%;background:#2563eb;border:none;padding:13px;border-radius:10px;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:600;color:white;cursor:pointer" onmouseover="this.style.background='#1a4fd6'" onmouseout="this.style.background='#2563eb'">Jetzt maximalen Verkaufspreis sichern →</button>
         <div style="font-size:.65rem;color:#9ca3af;text-align:center;margin-top:6px">100% kostenlos · 24h Rückruf</div>
       </div>
       <div style="padding:9px 18px;background:#f9fafb;border-top:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
