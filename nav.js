@@ -43,7 +43,7 @@
 <div class="nav-overlay" id="navOverlay" onclick="closeNavDrawer()"></div>
 <div class="nav-drawer" id="navDrawer">
   ${drawerLinks}
-  <a href="index.html#tool" class="nav-drawer-pill">Jetzt bewerten →</a>
+  <a href="index.html#tool" class="nav-drawer-pill">Jetzt prüfen →</a>
 </div>
 <nav id="mainNav">
   <button class="nav-burger" id="navBurger" onclick="toggleNavDrawer()" aria-label="Menü öffnen">
@@ -51,7 +51,7 @@
   </button>
   <a href="index.html" class="nav-logo">immowert<span>wien</span></a>
   <div class="nav-links">${navLinks}</div>
-  <a href="index.html#tool" class="nav-pill-btn">Jetzt bewerten →</a>
+  <a href="index.html#tool" class="nav-pill-btn">Jetzt prüfen →</a>
 </nav>`;
 
   document.body.insertAdjacentHTML('afterbegin', html);
