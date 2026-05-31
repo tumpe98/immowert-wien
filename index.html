@@ -165,13 +165,13 @@
     /* ── NAV via nav.js ── */
 
     /* ── HERO ── */
-    .hero-wrap{padding-top:64px;background:#e8edf2;overflow:hidden;position:relative;min-height:680px;}
+    .hero-wrap{padding-top:64px;background:#f5f6f9;overflow:visible;position:relative;min-height:680px;}
     #wienMap3d{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;opacity:0;transition:opacity 1.2s ease;}
     #wienMap3d.ready{opacity:1;}
     #wienMap3d canvas{display:block!important;}
     .maplibregl-ctrl-bottom-left,.maplibregl-ctrl-bottom-right,.maplibregl-ctrl-top-left,.maplibregl-ctrl-top-right{display:none!important;}
-    .hero-gradient-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(232,237,242,.97) 0%,rgba(232,237,242,.90) 38%,rgba(232,237,242,.35) 65%,rgba(232,237,242,.0) 100%);pointer-events:none;}
-    .hero{padding:100px 5% 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1}
+    .hero-gradient-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(245,246,249,.98) 0%,rgba(245,246,249,.92) 38%,rgba(245,246,249,.3) 65%,rgba(245,246,249,.0) 100%);pointer-events:none;}
+    .hero{padding:100px 5% 80px;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:0.95fr 1.05fr;gap:48px;align-items:center;position:relative;z-index:1}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--b50);border:1px solid var(--b100);color:var(--b600);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:500;margin-bottom:24px}
     .eyebrow .dot{width:6px;height:6px;background:var(--b500);border-radius:50%;animation:pulse 2s infinite}
     @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
@@ -502,15 +502,15 @@
     .pdf-badge-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;font-size:.84rem;color:var(--g500)}
     .pdf-badge-row strong{color:var(--g900)}
     .pdf-vorschau{background:#111827;color:white;font-size:.65rem;font-weight:700;letter-spacing:.1em;padding:5px 12px;border-radius:100px;flex-shrink:0}
-    .fan-stage{position:relative;height:540px;perspective:1600px;display:flex;align-items:center;justify-content:center;overflow:visible}
-    .pdf-card{position:absolute;width:280px;aspect-ratio:210/297;background:white;border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(11,21,48,.04),0 20px 50px rgba(11,21,48,.18);transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .4s ease,box-shadow .4s ease,filter .4s ease;cursor:pointer;transform-origin:bottom center;will-change:transform}
+    .fan-stage{position:relative;height:640px;perspective:1600px;display:flex;align-items:center;justify-content:center;overflow:visible}
+    .pdf-card{position:absolute;width:340px;aspect-ratio:210/297;background:white;border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(11,21,48,.04),0 20px 50px rgba(11,21,48,.18);transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .4s ease,box-shadow .4s ease,filter .4s ease;cursor:pointer;transform-origin:bottom center;will-change:transform}
     .pdf-card.pos-center{transform:translateX(0) translateY(0) rotate(0deg) scale(1.08);z-index:5;box-shadow:0 1px 2px rgba(11,21,48,.06),0 30px 70px rgba(11,21,48,.28)}
-    .pdf-card.pos-left{transform:translateX(-150px) translateY(20px) rotate(-9deg) scale(0.9);z-index:3;filter:brightness(.96)}
-    .pdf-card.pos-right{transform:translateX(150px) translateY(20px) rotate(9deg) scale(0.9);z-index:3;filter:brightness(.96)}
-    .pdf-card.pos-far-right-visible{transform:translateX(245px) translateY(50px) rotate(15deg) scale(0.78);z-index:2;filter:brightness(.92);opacity:1}
-    .pdf-card.pos-far-left-visible{transform:translateX(-245px) translateY(50px) rotate(-15deg) scale(0.78);z-index:2;filter:brightness(.92);opacity:1}
-    .pdf-card.pos-far-left{transform:translateX(-330px) translateY(40px) rotate(-15deg) scale(0.8);z-index:1;opacity:0;filter:brightness(.9)}
-    .pdf-card.pos-far-right{transform:translateX(330px) translateY(40px) rotate(15deg) scale(0.8);z-index:1;opacity:0;filter:brightness(.9)}
+    .pdf-card.pos-left{transform:translateX(-170px) translateY(20px) rotate(-9deg) scale(0.9);z-index:3;filter:brightness(.96)}
+    .pdf-card.pos-right{transform:translateX(170px) translateY(20px) rotate(9deg) scale(0.9);z-index:3;filter:brightness(.96)}
+    .pdf-card.pos-far-right-visible{transform:translateX(290px) translateY(50px) rotate(15deg) scale(0.8);z-index:2;filter:brightness(.92);opacity:1}
+    .pdf-card.pos-far-left-visible{transform:translateX(-290px) translateY(50px) rotate(-15deg) scale(0.8);z-index:2;filter:brightness(.92);opacity:1}
+    .pdf-card.pos-far-left{transform:translateX(-360px) translateY(40px) rotate(-15deg) scale(0.8);z-index:1;opacity:0;filter:brightness(.9)}
+    .pdf-card.pos-far-right{transform:translateX(360px) translateY(40px) rotate(15deg) scale(0.8);z-index:1;opacity:0;filter:brightness(.9)}
     .pdf-card:not(.pos-center):hover{filter:brightness(1)}
     .pdf-card img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;pointer-events:none}
     .page-badge{position:absolute;top:14px;right:14px;background:rgba(11,21,48,.85);color:#fff;backdrop-filter:blur(8px);font-size:10px;font-weight:600;letter-spacing:.4px;padding:4px 9px;border-radius:999px;pointer-events:none;z-index:2}
