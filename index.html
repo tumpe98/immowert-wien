@@ -512,6 +512,8 @@
     .pdf-card.pos-far-left{transform:translateX(-330px) translateY(40px) rotate(-15deg) scale(0.8);z-index:1;opacity:0;filter:brightness(.9)}
     .pdf-card.pos-far-right{transform:translateX(330px) translateY(40px) rotate(15deg) scale(0.8);z-index:1;opacity:0;filter:brightness(.9)}
     .pdf-card:not(.pos-center):hover{filter:brightness(1)}
+    .pdf-card img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;pointer-events:none}
+    .page-badge{position:absolute;top:14px;right:14px;background:rgba(11,21,48,.85);color:#fff;backdrop-filter:blur(8px);font-size:10px;font-weight:600;letter-spacing:.4px;padding:4px 9px;border-radius:999px;pointer-events:none;z-index:2}
     .pdf-card.locked::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,0) 40%,rgba(255,255,255,.6) 70%,rgba(255,255,255,.95) 100%);pointer-events:none}
     .lock-cta{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:3;background:#2563eb;color:#fff;padding:9px 15px;border-radius:999px;font-size:10px;font-weight:600;box-shadow:0 8px 20px rgba(37,99,235,.4);display:inline-flex;align-items:center;gap:7px;white-space:nowrap;pointer-events:none}
     .pdf-inner{padding:14px 16px;height:100%;overflow:hidden;font-size:8.5px;font-family:'Inter',sans-serif;color:#374151;line-height:1.45}
@@ -688,122 +690,23 @@
       </div>
       <div class="fan-stage" id="fanStage">
 
-        <!-- PAGE 1: Objektdaten -->
+        <!-- PAGE 1: Marktwert -->
         <div class="pdf-card" data-idx="0">
-          <div class="pdf-inner">
-            <div class="pdf-hdr"><span class="pdf-logo-txt">IW IMMOBILIENWERT WIEN</span><span class="pdf-pg-lbl">Seite 1 · Objektdaten</span></div>
-            <div class="pdf-top-bar"></div>
-            <div class="pdf-sec">
-              <div class="pdf-sec-hd"><span class="pdf-sec-n">02</span><div><div class="pdf-sec-t">OBJEKTDATEN</div><div class="pdf-sec-s">Eckdaten zur Liegenschaft</div></div></div>
-              <div class="pdf-addr">Rechgasse 12, 1120 Wien</div>
-              <div class="pdf-dg">
-                <div class="pdf-di"><span class="pdf-dk">Typ</span><span class="pdf-dv">Wohnung</span></div>
-                <div class="pdf-di"><span class="pdf-dk">Eigentümerstr.</span><span class="pdf-dv">Eigennutzung</span></div>
-                <div class="pdf-di"><span class="pdf-dk">Fläche</span><span class="pdf-dv">78,4 m²</span></div>
-                <div class="pdf-di"><span class="pdf-dk">Zimmer</span><span class="pdf-dv">3</span></div>
-                <div class="pdf-di"><span class="pdf-dk">Zustand</span><span class="pdf-dv">Gepflegt · saniert</span></div>
-                <div class="pdf-di"><span class="pdf-dk">Baujahr</span><span class="pdf-dv">Altbau · Klasse II</span></div>
-              </div>
-            </div>
-            <div class="pdf-sec">
-              <div class="pdf-sec-hd"><span class="pdf-sec-n">03</span><div><div class="pdf-sec-t">BEWERTUNGSÜBERSICHT</div><div class="pdf-sec-s">Drei Methoden im Vergleich</div></div></div>
-              <div class="pdf-methods">
-                <div class="pdf-method primary"><div class="pdf-mth-l">Vergleichswert</div><div class="pdf-mth-p">€ 553.000</div><div class="pdf-mth-tag">Marktbasiert</div></div>
-                <div class="pdf-method"><div class="pdf-mth-l">Ertragswert</div><div class="pdf-mth-p">€ 539.000</div><div class="pdf-mth-tag">Renditebasis</div></div>
-                <div class="pdf-method locked"><div class="pdf-mth-l">Sachwert</div><div class="pdf-mth-p pdf-blur">€ 561.000</div><div class="pdf-mth-tag">Nach Beratung</div></div>
-              </div>
-            </div>
-            <div class="pdf-sec">
-              <div class="pdf-sec-hd"><span class="pdf-sec-n">04</span><div><div class="pdf-sec-t">VERGLEICHSOBJEKTE</div><div class="pdf-sec-s">Aktueller Marktspiegel · 1120 Wien</div></div></div>
-              <div class="pdf-tbl">
-                <div class="pdf-tr pdf-th"><span>Adresse</span><span>m²</span><span>€/m²</span><span>Preis</span></div>
-                <div class="pdf-tr"><span>Niederhofstr. 16</span><span>71</span><span>7.420</span><span>€ 527k</span></div>
-                <div class="pdf-tr"><span>Eichenstr. 3</span><span>84</span><span>7.190</span><span>€ 604k</span></div>
-                <div class="pdf-tr pdf-tr-blur"><span>Schönbrunner Str.</span><span>77</span><span>████</span><span>███ k</span></div>
-              </div>
-            </div>
-          </div>
+          <span class="page-badge">Seite 1 · Marktwert</span>
+          <img src="/pdf-preview-1.png" alt="Seite 1 · Marktwert" draggable="false">
         </div>
 
-        <!-- PAGE 2: Lageanalyse -->
+        <!-- PAGE 2: Analyse -->
         <div class="pdf-card locked" data-idx="1">
-          <div class="pdf-inner">
-            <div class="pdf-hdr"><span class="pdf-logo-txt">IW IMMOBILIENWERT WIEN</span><span class="pdf-pg-lbl">Seite 2 · Lageanalyse</span></div>
-            <div class="pdf-top-bar"></div>
-            <div class="pdf-sec">
-              <div class="pdf-sec-hd"><span class="pdf-sec-n">04</span><div><div class="pdf-sec-t">LAGEANALYSE</div><div class="pdf-sec-s">Mikrolage Meidlinger Markt</div></div></div>
-              <p class="pdf-p">Die Rechgasse zählt zu den begehrten Wohnlagen im 12. Bezirk. Direkt am Meidlinger Markt gelegen, profitiert das Objekt von gewachsener Infrastruktur, hervorragender öffentlicher Anbindung und steigender Nachfrage durch junge Familien und Investoren.</p>
-              <div class="pdf-bars">
-                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Öffentliche</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:92%"></div></div><span class="pdf-bar-val">9,2</span></div>
-                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Nahversorgung</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:95%"></div></div><span class="pdf-bar-val">9,5</span></div>
-                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Gastronomie</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:88%"></div></div><span class="pdf-bar-val">8,8</span></div>
-                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Grünflächen</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:76%"></div></div><span class="pdf-bar-val">7,6</span></div>
-                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Bildung</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:84%"></div></div><span class="pdf-bar-val">8,4</span></div>
-                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Ruhe / Wohnqual.</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:72%"></div></div><span class="pdf-bar-val">7,2</span></div>
-                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Sicherheit</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:80%"></div></div><span class="pdf-bar-val">8,0</span></div>
-              </div>
-            </div>
-            <div class="pdf-sec">
-              <div class="pdf-sec-hd"><span class="pdf-sec-n">05</span><div><div class="pdf-sec-t">MARKTENTWICKLUNG</div><div class="pdf-sec-s">Preisentwicklung Meidling</div></div></div>
-              <div class="pdf-trend-box">
-                <div class="pdf-trend-lbl">Ø Preis je m² · Altbau 1120</div>
-                <div class="pdf-trend-val">+16,4% <span>/ 5 Jahre</span></div>
-                <div class="pdf-mini-chart">
-                  <div class="pdf-mc-bar" style="height:42%"></div>
-                  <div class="pdf-mc-bar" style="height:50%"></div>
-                  <div class="pdf-mc-bar" style="height:57%"></div>
-                  <div class="pdf-mc-bar" style="height:63%"></div>
-                  <div class="pdf-mc-bar" style="height:72%"></div>
-                  <div class="pdf-mc-bar" style="height:79%"></div>
-                  <div class="pdf-mc-bar" style="height:86%"></div>
-                  <div class="pdf-mc-bar" style="height:93%"></div>
-                  <div class="pdf-mc-bar active" style="height:100%"></div>
-                </div>
-              </div>
-            </div>
-            <div class="pdf-idn"><strong>IN DER NÄHE</strong>&nbsp;&nbsp;2 Min. Meidlinger Markt · 4 Min. U6 Niederhofstraße · 7 Min. Bhf. Wien Meidling · 8 Min. Schloss Schönbrunn</div>
-          </div>
+          <span class="page-badge">Seite 2 · Analyse</span>
+          <img src="/pdf-preview-2.png" alt="Seite 2 · Analyse" draggable="false">
           <div class="lock-cta">🔒 Nach Bewertung</div>
         </div>
 
-        <!-- PAGE 3: Empfehlung -->
+        <!-- PAGE 3: Markt & Lage -->
         <div class="pdf-card locked" data-idx="2">
-          <div class="pdf-inner">
-            <div class="pdf-hdr"><span class="pdf-logo-txt">IW IMMOBILIENWERT WIEN</span><span class="pdf-pg-lbl">Seite 3 · Markt &amp; Lage</span></div>
-            <div class="pdf-top-bar"></div>
-            <div class="pdf-sec">
-              <div class="pdf-sec-hd"><span class="pdf-sec-n">06</span><div><div class="pdf-sec-t">EMPFEHLUNG</div><div class="pdf-sec-s">Optimaler Verkaufszeitpunkt</div></div></div>
-              <div class="pdf-rec-tags">
-                <span class="pdf-tag">Nachfrage: <strong>hoch</strong></span>
-                <span class="pdf-tag">Ø Vermarktung: <strong>47 Tage</strong></span>
-                <span class="pdf-tag pdf-tag-green">+15% Net · Str. Nahversorgung</span>
-              </div>
-              <p class="pdf-p">Die Kombination aus stabiler Nachfrage, sinkenden Bauzinsen und begrenztem Altbau-Angebot in Meidling spricht für ein <strong>starkes Verkaufsfenster im 2.–3. Quartal 2026</strong>. Wir erwarten in diesem Zeitraum erzielbare Typpreise oberhalb des Median-Werts.</p>
-            </div>
-            <div class="pdf-sec">
-              <div class="pdf-sec-hd"><span class="pdf-sec-n">05</span><div><div class="pdf-sec-t">MARKTENTWICKLUNG</div><div class="pdf-sec-s">Preisentwicklung Meidling</div></div></div>
-              <div class="pdf-trend-box">
-                <div class="pdf-trend-lbl">Ø Preis je m² · Altbau 1120</div>
-                <div class="pdf-trend-val">+16,4% <span>/ 5 Jahre</span></div>
-                <div class="pdf-mini-chart">
-                  <div class="pdf-mc-bar" style="height:42%"></div>
-                  <div class="pdf-mc-bar" style="height:52%"></div>
-                  <div class="pdf-mc-bar" style="height:61%"></div>
-                  <div class="pdf-mc-bar" style="height:70%"></div>
-                  <div class="pdf-mc-bar" style="height:78%"></div>
-                  <div class="pdf-mc-bar" style="height:85%"></div>
-                  <div class="pdf-mc-bar" style="height:92%"></div>
-                  <div class="pdf-mc-bar active" style="height:100%"></div>
-                </div>
-              </div>
-            </div>
-            <div class="pdf-cta-box">
-              <div class="pdf-cta-title">NÄCHSTER SCHRITT</div>
-              <div class="pdf-cta-sub">Persönliche Verkaufsberatung – kostenfrei &amp; unverbindlich</div>
-              <p class="pdf-p">Ein Experte meldet sich innerhalb von 24 Stunden bei dir – per Telefon, E-Mail oder SMS.</p>
-              <button class="pdf-cta-btn">Termin vereinbaren →</button>
-            </div>
-          </div>
+          <span class="page-badge">Seite 3 · Markt &amp; Lage</span>
+          <img src="/pdf-preview-3.png" alt="Seite 3 · Markt & Lage" draggable="false">
           <div class="lock-cta">🔒 Nach Bewertung</div>
         </div>
 
