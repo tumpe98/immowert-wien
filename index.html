@@ -39,6 +39,94 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Wie läuft der kostenlose Experten-Call ab?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Der Call dauert ca. 30 Minuten – per Telefon oder Zoom. Der Experte analysiert Lage, aktuelle Nachfrage- und Preislage im Bezirk, Zustand und besondere Merkmale der Immobilie sowie optimalen Einstiegspreis und Verhandlungsspielraum. Am Ende hast du eine klare Empfehlung – ohne Vertrag, ohne Druck."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was bestimmt den Preis meiner Immobilie?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Der Marktwert entsteht aus Lage (Bezirk, Straße, U-Bahn-Nähe), Zustand und Ausstattung (Renovierung kann bis zu 25% beeinflussen), Stockwerk und Ausrichtung, aktueller Marktlage (Angebot vs. Nachfrage), Timing (Frühjahr und Herbst erzielen bis zu 12% mehr) und der Vermarktungsstrategie."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ist die Bewertung wirklich kostenlos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja – zu 100%. Das Online-Tool, die Sofortbewertung und der persönliche Experten-Call kosten nichts. Es gibt keinerlei Verpflichtung."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie genau ist die Online-Bewertung?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Die Sofortbewertung basiert auf aktuellen Marktdaten von immopreise.at, dem OeNB-Wohnimmobilienpreisindex und Zustandsfaktoren. Sie gibt eine solide Erstorientierung mit einer Bandbreite von ca. ±10–15%. Die genaue Einschätzung liefert der persönliche Experten-Call."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie unterscheidet sich Wien Bezirk für Bezirk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enorm. Eine 70m²-Wohnung in der Inneren Stadt (1010) kann € 1,28 Mio. wert sein – dieselbe Wohnung in Favoriten (1100) liegt bei ca. € 386.000. Auch innerhalb eines Bezirks machen Straßenseite, U-Bahn-Nähe und Grünflächen Zehntausende Euro Unterschied."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was passiert nach dem Experten-Call?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Du entscheidest: Vor-Ort-Besichtigung für eine präzise Bewertung, Erstellung eines professionellen Verkaufsexposés, gezielter Zugang zu vorgemerkten Käufern im Bezirk – oder du nimmst die Einschätzung mit und entscheidest später. Kein Vertrag, kein Druck."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Immobilienwert Wien kostenlos ermitteln",
+    "description": "In 3 Schritten vom Marktwert zur fundierten Verkaufsentscheidung – kostenlos und unverbindlich.",
+    "totalTime": "PT31M",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Marktüberblick holen",
+        "text": "Beantworte 6 kurze Fragen zu deiner Immobilie. Du siehst sofort den Marktwert, aktuelle Preistrends und wo deine Immobilie im Bezirksvergleich steht – kostenlos, ohne Registrierung.",
+        "url": "https://immobilienwert-wien.at/#tool-section"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Tiefenanalyse mit Experten",
+        "text": "Ein geprüfter Wiener Immobilienexperte erklärt dir kostenlos, was deinen spezifischen Preis wirklich bestimmt – Lage, Zeitpunkt, Strategie. Der Call dauert ca. 30 Minuten.",
+        "url": "https://immobilienwert-wien.at/#tool-section"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Auf Augenhöhe verhandeln",
+        "text": "Mit echtem Marktwissen, der richtigen Preisstrategie und Zugang zu qualifizierten Käufern verhandelst du auf Augenhöhe – statt blind in eine Verhandlung zu gehen.",
+        "url": "https://immobilienwert-wien.at/#tool-section"
+      }
+    ]
+  }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>immowertwien – Was ist deine Wohnung in Wien wirklich wert?</title>
   <meta property="og:type" content="website">
@@ -59,7 +147,7 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://api.maptiler.com">
   <link href="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" media="(min-width:900px)">
-  <script defer src="https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+  <script>if(window.innerWidth>=900){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/maplibre-gl@3.6.2/dist/maplibre-gl.js';document.head.appendChild(s);}</script>
   <style>
     :root {
       --white:#ffffff; --off:#f7f8fc; --b900:#0a1628; --b800:#0d2045;
@@ -185,7 +273,7 @@
     .tp-line{flex:1;height:2px;background:var(--g200);transition:background .3s}
     .tp-line.done{background:var(--b500)}
     .tp-pct{font-size:.75rem;font-weight:600;color:var(--b500);white-space:nowrap}
-    .tool-body{padding:36px 40px;border-radius:0 0 20px 20px;overflow:hidden}
+    .tool-body{padding:36px 40px;border-radius:0 0 20px 20px;overflow:visible}
     @keyframes stepIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
     .step-wrap{animation:stepIn .28s cubic-bezier(.4,0,.2,1)}
     .step-eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--b500);margin-bottom:6px}
@@ -408,8 +496,160 @@
     nav,section,.hero-wrap,.trust-strip,.problem-section,.tool-section,.schritte-section,
     .experten-section,.markt-preview,.final-section,footer,.sticky-cta{position:relative;z-index:1}
 
+
+    /* ── PDF PREVIEW SLIDER ── */
+    .pdf-preview-outer{position:relative}
+    .pdf-badge-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;font-size:.84rem;color:var(--g500)}
+    .pdf-badge-row strong{color:var(--g900)}
+    .pdf-vorschau{background:#111827;color:white;font-size:.65rem;font-weight:700;letter-spacing:.1em;padding:5px 12px;border-radius:100px;flex-shrink:0}
+    .fan-stage{position:relative;height:540px;perspective:1600px;display:flex;align-items:center;justify-content:center;overflow:visible}
+    .pdf-card{position:absolute;width:280px;aspect-ratio:210/297;background:white;border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(11,21,48,.04),0 20px 50px rgba(11,21,48,.18);transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .4s ease,box-shadow .4s ease,filter .4s ease;cursor:pointer;transform-origin:bottom center;will-change:transform}
+    .pdf-card.pos-center{transform:translateX(0) translateY(0) rotate(0deg) scale(1.08);z-index:5;box-shadow:0 1px 2px rgba(11,21,48,.06),0 30px 70px rgba(11,21,48,.28)}
+    .pdf-card.pos-left{transform:translateX(-150px) translateY(20px) rotate(-9deg) scale(0.9);z-index:3;filter:brightness(.96)}
+    .pdf-card.pos-right{transform:translateX(150px) translateY(20px) rotate(9deg) scale(0.9);z-index:3;filter:brightness(.96)}
+    .pdf-card.pos-far-right-visible{transform:translateX(245px) translateY(50px) rotate(15deg) scale(0.78);z-index:2;filter:brightness(.92);opacity:1}
+    .pdf-card.pos-far-left-visible{transform:translateX(-245px) translateY(50px) rotate(-15deg) scale(0.78);z-index:2;filter:brightness(.92);opacity:1}
+    .pdf-card.pos-far-left{transform:translateX(-330px) translateY(40px) rotate(-15deg) scale(0.8);z-index:1;opacity:0;filter:brightness(.9)}
+    .pdf-card.pos-far-right{transform:translateX(330px) translateY(40px) rotate(15deg) scale(0.8);z-index:1;opacity:0;filter:brightness(.9)}
+    .pdf-card:not(.pos-center):hover{filter:brightness(1)}
+    .pdf-card.locked::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,0) 40%,rgba(255,255,255,.6) 70%,rgba(255,255,255,.95) 100%);pointer-events:none}
+    .lock-cta{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:3;background:#2563eb;color:#fff;padding:9px 15px;border-radius:999px;font-size:10px;font-weight:600;box-shadow:0 8px 20px rgba(37,99,235,.4);display:inline-flex;align-items:center;gap:7px;white-space:nowrap;pointer-events:none}
+    .pdf-inner{padding:14px 16px;height:100%;overflow:hidden;font-size:8.5px;font-family:'Inter',sans-serif;color:#374151;line-height:1.45}
+    .pdf-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+    .pdf-logo-txt{font-size:7px;font-weight:700;letter-spacing:.06em;color:#1a4fd6}
+    .pdf-pg-lbl{font-size:7px;font-weight:600;color:#6b7280;letter-spacing:.04em}
+    .pdf-top-bar{height:2px;background:linear-gradient(90deg,#2563eb,#1a4fd6);margin-bottom:10px;border-radius:1px}
+    .pdf-sec{margin-bottom:10px}
+    .pdf-sec-hd{display:flex;align-items:flex-start;gap:7px;margin-bottom:5px}
+    .pdf-sec-n{font-size:7px;font-weight:800;color:#2563eb;background:#eff6ff;border-radius:3px;padding:2px 5px;flex-shrink:0;margin-top:1px}
+    .pdf-sec-t{font-size:7px;font-weight:700;letter-spacing:.08em;color:#111827;text-transform:uppercase}
+    .pdf-sec-s{font-size:8px;font-weight:600;color:#111827;margin-top:1px}
+    .pdf-addr{font-size:9px;font-weight:600;color:#1a4fd6;margin-bottom:6px;padding:4px 7px;background:#eff6ff;border-radius:4px}
+    .pdf-dg{display:grid;grid-template-columns:1fr 1fr;gap:3px 12px;margin-bottom:4px}
+    .pdf-di{display:flex;gap:4px;align-items:baseline}
+    .pdf-dk{font-size:7px;color:#9ca3af;flex-shrink:0;min-width:58px}
+    .pdf-dv{font-size:8px;font-weight:600;color:#111827}
+    .pdf-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:4px}
+    .pdf-method{background:#f3f4f6;border-radius:5px;padding:6px 7px;text-align:center}
+    .pdf-method.primary{background:#eff6ff;border:1px solid #bfdbfe}
+    .pdf-method.locked{opacity:.7}
+    .pdf-mth-l{font-size:7px;color:#6b7280;margin-bottom:2px}
+    .pdf-mth-p{font-size:11px;font-weight:800;color:#111827;font-family:'Playfair Display',serif}
+    .pdf-method.primary .pdf-mth-p{color:#1a4fd6}
+    .pdf-mth-tag{font-size:6px;color:#6b7280;margin-top:2px;background:rgba(0,0,0,.05);border-radius:3px;padding:1px 4px;display:inline-block}
+    .pdf-blur{filter:blur(4px);user-select:none}
+    .pdf-tbl{border:1px solid #e5e7eb;border-radius:4px;overflow:hidden;margin-top:4px}
+    .pdf-tr{display:grid;grid-template-columns:2fr .6fr .8fr .8fr;gap:4px;padding:3px 6px;font-size:7.5px;border-bottom:1px solid #f3f4f6}
+    .pdf-tr:last-child{border-bottom:none}
+    .pdf-th{background:#f3f4f6;font-weight:700;color:#6b7280;font-size:6.5px}
+    .pdf-tr-blur span{filter:blur(3px);user-select:none;color:#d1d5db}
+    .pdf-bars{display:flex;flex-direction:column;gap:4px;margin-top:5px}
+    .pdf-bar-row{display:flex;align-items:center;gap:5px}
+    .pdf-bar-lbl{font-size:7px;color:#6b7280;width:72px;flex-shrink:0}
+    .pdf-bar-bg{flex:1;height:4px;background:#e5e7eb;border-radius:2px;overflow:hidden}
+    .pdf-bar-fill{height:100%;background:linear-gradient(90deg,#93c5fd,#2563eb);border-radius:2px}
+    .pdf-bar-val{font-size:7px;font-weight:700;color:#2563eb;width:20px;text-align:right;flex-shrink:0}
+    .pdf-trend-box{background:#f3f4f6;border-radius:5px;padding:7px 8px;margin-top:4px}
+    .pdf-trend-lbl{font-size:7px;color:#6b7280;margin-bottom:2px}
+    .pdf-trend-val{font-size:13px;font-weight:800;color:#059669;font-family:'Playfair Display',serif}
+    .pdf-trend-val span{font-size:7px;font-weight:500;color:#6b7280;font-family:'Inter',sans-serif}
+    .pdf-mini-chart{display:flex;align-items:flex-end;gap:3px;height:32px;margin-top:5px}
+    .pdf-mc-bar{flex:1;background:#bfdbfe;border-radius:1px 1px 0 0}
+    .pdf-mc-bar.active{background:#2563eb}
+    .pdf-idn{background:#f3f4f6;border-radius:4px;padding:5px 7px;margin-top:6px;font-size:7px;color:#6b7280;line-height:1.6}
+    .pdf-idn strong{color:#374151}
+    .pdf-p{font-size:8px;color:#6b7280;line-height:1.6;margin-top:4px}
+    .pdf-rec-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+    .pdf-tag{font-size:7px;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:3px;padding:2px 6px;color:#6b7280}
+    .pdf-tag strong{color:#111827}
+    .pdf-tag-green{background:#ecfdf5;border-color:#a7f3d0;color:#059669}
+    .pdf-cta-box{background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:9px 10px;margin-top:8px}
+    .pdf-cta-title{font-size:7px;font-weight:700;letter-spacing:.08em;color:#6b7280;text-transform:uppercase;margin-bottom:2px}
+    .pdf-cta-sub{font-size:9px;font-weight:600;color:#111827}
+    .pdf-cta-btn{margin-top:7px;background:#2563eb;color:white;border:none;border-radius:5px;padding:5px 12px;font-size:8px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;width:100%;filter:blur(2px);pointer-events:none}
+    .fan-controls{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:14px}
+    .fan-nav-btn{width:40px;height:40px;border-radius:50%;background:white;border:1.5px solid var(--g200);color:var(--g700);font-size:1rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .2s ease}
+    .fan-nav-btn:hover{border-color:var(--b400);color:var(--b500);transform:scale(1.05)}
+    .fan-page-pills{display:flex;gap:8px;align-items:center}
+    .fan-pill{background:transparent;border:1.5px solid var(--g200);color:var(--g400);height:10px;width:10px;border-radius:50%;cursor:pointer;transition:all .25s ease;padding:0}
+    .fan-pill.active{background:var(--b500);border-color:var(--b500);width:32px;border-radius:5px}
+    .fan-pill:hover:not(.active){border-color:var(--b400);background:#eff6ff}
+    .fan-page-title{text-align:center;margin-top:12px;font-size:.76rem;color:var(--g400)}
+    .fan-page-title b{color:var(--g900);font-weight:600}
     @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:80px;gap:40px}.hero-vis{display:none}}
     @media(max-width:700px){.tool-body,.result-header,.potential-box,.result-cta-block{padding-left:24px;padding-right:24px}.tool-progress{padding:16px 24px}.opt-grid.c3{grid-template-columns:1fr 1fr}.r-range{font-size:1.8rem}}
+
+  /* ── ADDRESS WIDGET ── */
+  .addr-wrap{position:relative;margin-top:8px}
+  .addr-input{width:100%;padding:14px 48px 14px 16px;font-size:1rem;border:2px solid var(--g200);border-radius:12px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;background:#fff;color:var(--g900)}
+  .addr-input:focus{border-color:var(--b500)}
+  .addr-flag{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:1.2rem;pointer-events:none}
+  .addr-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:white;border:1px solid var(--g200);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.10);z-index:999;overflow:hidden;display:none}
+  .addr-dropdown.open{display:block}
+  .addr-option{padding:12px 16px;cursor:pointer;font-size:.85rem;color:var(--g700);transition:background .15s;border-bottom:1px solid var(--g100)}
+  .addr-option:last-child{border-bottom:none}
+  .addr-option:hover{background:var(--g100)}
+  .addr-preview{margin-top:14px;border-radius:12px;overflow:hidden;position:relative;background:var(--g100)}
+  .addr-preview img{width:100%;display:block;height:180px;object-fit:cover}
+  .addr-preview-pin{position:absolute;top:50%;left:50%;transform:translate(-50%,-100%);font-size:2rem;pointer-events:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+  .addr-preview-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.6));padding:10px 14px 12px;color:white;font-size:.82rem;font-weight:500;line-height:1.4}
+  .addr-change{font-size:.8rem;color:var(--b500);cursor:pointer;margin-top:8px;display:inline-block}
+  .addr-change:hover{text-decoration:underline}
+  /* ── NEXT BTN ── */
+  .next-btn{background:var(--b500);color:white;border:none;padding:14px 32px;border-radius:12px;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;display:inline-block}
+  .next-btn:hover{background:var(--b600);transform:translateY(-1px);box-shadow:var(--sh-blue)}
+  /* ── PDF LOADING ── */
+  .pdf-loading{text-align:center;padding:24px 8px}
+  .pdf-icon{font-size:2.5rem;margin-bottom:12px}
+  .pdf-title{font-size:1.05rem;font-weight:700;color:var(--g900);margin-bottom:6px}
+  .pdf-sub{font-size:.84rem;color:var(--g500);margin-bottom:24px}
+  .pdf-track{background:var(--g200);border-radius:100px;height:8px;overflow:hidden;margin-bottom:10px}
+  .pdf-fill{height:100%;background:linear-gradient(90deg,var(--b400),var(--b500));border-radius:100px;width:0%;transition:width .25s ease}
+  .pdf-pct-row{font-size:.78rem;color:var(--g400);margin-bottom:20px;text-align:right}
+  .pdf-checks{text-align:left;max-width:280px;margin:0 auto}
+  .pdf-check{font-size:.85rem;color:var(--g400);margin-bottom:10px;opacity:0;transition:opacity .5s,color .5s;padding-left:20px;position:relative}
+  .pdf-check::before{content:'✓';position:absolute;left:0;color:var(--b500);font-weight:700;opacity:0;transition:opacity .5s}
+  .pdf-check.vis{opacity:1;color:var(--g700)}
+  .pdf-check.vis::before{opacity:1}
+  /* ── LEAD FORM ── */
+  .lead-form-wrap{text-align:left}
+  .lead-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--g900);margin-bottom:6px}
+  .lead-sub{font-size:.84rem;color:var(--g500);margin-bottom:20px;line-height:1.55}
+  .lf-field{margin-bottom:13px}
+  .lf-field label{display:block;font-size:.76rem;font-weight:600;color:var(--g700);margin-bottom:5px;letter-spacing:.03em;text-transform:uppercase}
+  .lf-field input{width:100%;padding:12px 14px;border:2px solid var(--g200);border-radius:10px;font-size:.9rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;color:var(--g900)}
+  .lf-field input:focus{border-color:var(--b500)}
+  .lf-consent{display:flex;gap:10px;align-items:flex-start;margin:16px 0}
+  .lf-consent input[type=checkbox]{margin-top:3px;width:16px;height:16px;flex-shrink:0;cursor:pointer;accent-color:var(--b500)}
+  .lf-consent label{font-size:.77rem;color:var(--g500);line-height:1.5;cursor:pointer}
+  .lf-consent a{color:var(--b500)}
+  .lf-submit{width:100%;background:var(--b500);color:white;border:none;padding:16px 24px;border-radius:12px;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:4px}
+  .lf-submit:hover:not(:disabled){background:var(--b600);transform:translateY(-1px);box-shadow:var(--sh-blue)}
+  .lf-submit:disabled{opacity:.6;cursor:not-allowed}
+  .lf-error{color:#dc2626;font-size:.78rem;margin-top:8px;display:none}
+  /* ── SEASON BOX ── */
+  .season-box{background:var(--g100);border-radius:12px;padding:14px 16px;margin-top:18px}
+  .season-box-title{font-size:.78rem;font-weight:600;color:var(--g700);margin-bottom:10px}
+  .season-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+  .season-badge{padding:4px 10px;border-radius:100px;font-size:.73rem;font-weight:600}
+  .sb-spring{background:#d1fae5;color:#065f46}
+  .sb-summer{background:#fef9c3;color:#92400e}
+  .sb-fall{background:#ffedd5;color:#9a3412}
+  .sb-winter{background:#e0f2fe;color:#075985}
+  .season-note{font-size:.74rem;color:var(--g500);line-height:1.5}
+  /* ── FACT CARD ── */
+  .fact-card{background:linear-gradient(135deg,#eff6ff 0%,#f0fdf4 100%);border:1px solid #bfdbfe;border-radius:14px;padding:18px 20px;margin-top:20px}
+  .fact-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .fact-icon{font-size:1rem}
+  .fact-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--b500)}
+  .fact-text{font-size:.85rem;color:var(--g700);line-height:1.7;margin-bottom:10px}
+  .fact-text strong{color:var(--g900)}
+  .fact-source{font-size:.71rem;color:var(--g400)}
+  /* ── DANKE ── */
+  .danke-wrap{text-align:center;padding:24px 0}
+  .danke-icon{font-size:3rem;margin-bottom:14px}
+  .danke-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--g900);margin-bottom:10px}
+  .danke-sub{font-size:.88rem;color:var(--g500);line-height:1.65;margin-bottom:24px}
   </style>
 </head>
 <body>
@@ -441,11 +681,144 @@
         </div>
       </div>
     </div>
-    <div class="hero-vis" id="heroVis">
-      <div class="price-card" id="heroPriceCard" style="transition:opacity .22s ease,transform .22s ease;min-height:260px"></div>
-      <div class="float1" id="heroF1"></div>
-      <div class="float2" id="heroF2"></div>
-      <div class="hero-dots" id="heroDots"></div>
+    <div class="hero-vis pdf-preview-outer" id="heroVis">
+      <div class="pdf-badge-row">
+        <span class="pdf-vorschau">VORSCHAU</span>
+        So sieht <strong>deine persönliche Bewertung</strong> aus
+      </div>
+      <div class="fan-stage" id="fanStage">
+
+        <!-- PAGE 1: Objektdaten -->
+        <div class="pdf-card" data-idx="0">
+          <div class="pdf-inner">
+            <div class="pdf-hdr"><span class="pdf-logo-txt">IW IMMOBILIENWERT WIEN</span><span class="pdf-pg-lbl">Seite 1 · Objektdaten</span></div>
+            <div class="pdf-top-bar"></div>
+            <div class="pdf-sec">
+              <div class="pdf-sec-hd"><span class="pdf-sec-n">02</span><div><div class="pdf-sec-t">OBJEKTDATEN</div><div class="pdf-sec-s">Eckdaten zur Liegenschaft</div></div></div>
+              <div class="pdf-addr">Rechgasse 12, 1120 Wien</div>
+              <div class="pdf-dg">
+                <div class="pdf-di"><span class="pdf-dk">Typ</span><span class="pdf-dv">Wohnung</span></div>
+                <div class="pdf-di"><span class="pdf-dk">Eigentümerstr.</span><span class="pdf-dv">Eigennutzung</span></div>
+                <div class="pdf-di"><span class="pdf-dk">Fläche</span><span class="pdf-dv">78,4 m²</span></div>
+                <div class="pdf-di"><span class="pdf-dk">Zimmer</span><span class="pdf-dv">3</span></div>
+                <div class="pdf-di"><span class="pdf-dk">Zustand</span><span class="pdf-dv">Gepflegt · saniert</span></div>
+                <div class="pdf-di"><span class="pdf-dk">Baujahr</span><span class="pdf-dv">Altbau · Klasse II</span></div>
+              </div>
+            </div>
+            <div class="pdf-sec">
+              <div class="pdf-sec-hd"><span class="pdf-sec-n">03</span><div><div class="pdf-sec-t">BEWERTUNGSÜBERSICHT</div><div class="pdf-sec-s">Drei Methoden im Vergleich</div></div></div>
+              <div class="pdf-methods">
+                <div class="pdf-method primary"><div class="pdf-mth-l">Vergleichswert</div><div class="pdf-mth-p">€ 553.000</div><div class="pdf-mth-tag">Marktbasiert</div></div>
+                <div class="pdf-method"><div class="pdf-mth-l">Ertragswert</div><div class="pdf-mth-p">€ 539.000</div><div class="pdf-mth-tag">Renditebasis</div></div>
+                <div class="pdf-method locked"><div class="pdf-mth-l">Sachwert</div><div class="pdf-mth-p pdf-blur">€ 561.000</div><div class="pdf-mth-tag">Nach Beratung</div></div>
+              </div>
+            </div>
+            <div class="pdf-sec">
+              <div class="pdf-sec-hd"><span class="pdf-sec-n">04</span><div><div class="pdf-sec-t">VERGLEICHSOBJEKTE</div><div class="pdf-sec-s">Aktueller Marktspiegel · 1120 Wien</div></div></div>
+              <div class="pdf-tbl">
+                <div class="pdf-tr pdf-th"><span>Adresse</span><span>m²</span><span>€/m²</span><span>Preis</span></div>
+                <div class="pdf-tr"><span>Niederhofstr. 16</span><span>71</span><span>7.420</span><span>€ 527k</span></div>
+                <div class="pdf-tr"><span>Eichenstr. 3</span><span>84</span><span>7.190</span><span>€ 604k</span></div>
+                <div class="pdf-tr pdf-tr-blur"><span>Schönbrunner Str.</span><span>77</span><span>████</span><span>███ k</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAGE 2: Lageanalyse -->
+        <div class="pdf-card locked" data-idx="1">
+          <div class="pdf-inner">
+            <div class="pdf-hdr"><span class="pdf-logo-txt">IW IMMOBILIENWERT WIEN</span><span class="pdf-pg-lbl">Seite 2 · Lageanalyse</span></div>
+            <div class="pdf-top-bar"></div>
+            <div class="pdf-sec">
+              <div class="pdf-sec-hd"><span class="pdf-sec-n">04</span><div><div class="pdf-sec-t">LAGEANALYSE</div><div class="pdf-sec-s">Mikrolage Meidlinger Markt</div></div></div>
+              <p class="pdf-p">Die Rechgasse zählt zu den begehrten Wohnlagen im 12. Bezirk. Direkt am Meidlinger Markt gelegen, profitiert das Objekt von gewachsener Infrastruktur, hervorragender öffentlicher Anbindung und steigender Nachfrage durch junge Familien und Investoren.</p>
+              <div class="pdf-bars">
+                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Öffentliche</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:92%"></div></div><span class="pdf-bar-val">9,2</span></div>
+                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Nahversorgung</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:95%"></div></div><span class="pdf-bar-val">9,5</span></div>
+                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Gastronomie</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:88%"></div></div><span class="pdf-bar-val">8,8</span></div>
+                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Grünflächen</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:76%"></div></div><span class="pdf-bar-val">7,6</span></div>
+                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Bildung</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:84%"></div></div><span class="pdf-bar-val">8,4</span></div>
+                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Ruhe / Wohnqual.</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:72%"></div></div><span class="pdf-bar-val">7,2</span></div>
+                <div class="pdf-bar-row"><span class="pdf-bar-lbl">Sicherheit</span><div class="pdf-bar-bg"><div class="pdf-bar-fill" style="width:80%"></div></div><span class="pdf-bar-val">8,0</span></div>
+              </div>
+            </div>
+            <div class="pdf-sec">
+              <div class="pdf-sec-hd"><span class="pdf-sec-n">05</span><div><div class="pdf-sec-t">MARKTENTWICKLUNG</div><div class="pdf-sec-s">Preisentwicklung Meidling</div></div></div>
+              <div class="pdf-trend-box">
+                <div class="pdf-trend-lbl">Ø Preis je m² · Altbau 1120</div>
+                <div class="pdf-trend-val">+16,4% <span>/ 5 Jahre</span></div>
+                <div class="pdf-mini-chart">
+                  <div class="pdf-mc-bar" style="height:42%"></div>
+                  <div class="pdf-mc-bar" style="height:50%"></div>
+                  <div class="pdf-mc-bar" style="height:57%"></div>
+                  <div class="pdf-mc-bar" style="height:63%"></div>
+                  <div class="pdf-mc-bar" style="height:72%"></div>
+                  <div class="pdf-mc-bar" style="height:79%"></div>
+                  <div class="pdf-mc-bar" style="height:86%"></div>
+                  <div class="pdf-mc-bar" style="height:93%"></div>
+                  <div class="pdf-mc-bar active" style="height:100%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="pdf-idn"><strong>IN DER NÄHE</strong>&nbsp;&nbsp;2 Min. Meidlinger Markt · 4 Min. U6 Niederhofstraße · 7 Min. Bhf. Wien Meidling · 8 Min. Schloss Schönbrunn</div>
+          </div>
+          <div class="lock-cta">🔒 Nach Bewertung</div>
+        </div>
+
+        <!-- PAGE 3: Empfehlung -->
+        <div class="pdf-card locked" data-idx="2">
+          <div class="pdf-inner">
+            <div class="pdf-hdr"><span class="pdf-logo-txt">IW IMMOBILIENWERT WIEN</span><span class="pdf-pg-lbl">Seite 3 · Markt &amp; Lage</span></div>
+            <div class="pdf-top-bar"></div>
+            <div class="pdf-sec">
+              <div class="pdf-sec-hd"><span class="pdf-sec-n">06</span><div><div class="pdf-sec-t">EMPFEHLUNG</div><div class="pdf-sec-s">Optimaler Verkaufszeitpunkt</div></div></div>
+              <div class="pdf-rec-tags">
+                <span class="pdf-tag">Nachfrage: <strong>hoch</strong></span>
+                <span class="pdf-tag">Ø Vermarktung: <strong>47 Tage</strong></span>
+                <span class="pdf-tag pdf-tag-green">+15% Net · Str. Nahversorgung</span>
+              </div>
+              <p class="pdf-p">Die Kombination aus stabiler Nachfrage, sinkenden Bauzinsen und begrenztem Altbau-Angebot in Meidling spricht für ein <strong>starkes Verkaufsfenster im 2.–3. Quartal 2026</strong>. Wir erwarten in diesem Zeitraum erzielbare Typpreise oberhalb des Median-Werts.</p>
+            </div>
+            <div class="pdf-sec">
+              <div class="pdf-sec-hd"><span class="pdf-sec-n">05</span><div><div class="pdf-sec-t">MARKTENTWICKLUNG</div><div class="pdf-sec-s">Preisentwicklung Meidling</div></div></div>
+              <div class="pdf-trend-box">
+                <div class="pdf-trend-lbl">Ø Preis je m² · Altbau 1120</div>
+                <div class="pdf-trend-val">+16,4% <span>/ 5 Jahre</span></div>
+                <div class="pdf-mini-chart">
+                  <div class="pdf-mc-bar" style="height:42%"></div>
+                  <div class="pdf-mc-bar" style="height:52%"></div>
+                  <div class="pdf-mc-bar" style="height:61%"></div>
+                  <div class="pdf-mc-bar" style="height:70%"></div>
+                  <div class="pdf-mc-bar" style="height:78%"></div>
+                  <div class="pdf-mc-bar" style="height:85%"></div>
+                  <div class="pdf-mc-bar" style="height:92%"></div>
+                  <div class="pdf-mc-bar active" style="height:100%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="pdf-cta-box">
+              <div class="pdf-cta-title">NÄCHSTER SCHRITT</div>
+              <div class="pdf-cta-sub">Persönliche Verkaufsberatung – kostenfrei &amp; unverbindlich</div>
+              <p class="pdf-p">Ein Experte meldet sich innerhalb von 24 Stunden bei dir – per Telefon, E-Mail oder SMS.</p>
+              <button class="pdf-cta-btn">Termin vereinbaren →</button>
+            </div>
+          </div>
+          <div class="lock-cta">🔒 Nach Bewertung</div>
+        </div>
+
+      </div>
+
+      <div class="fan-controls">
+        <button class="fan-nav-btn" id="fanPrev" aria-label="Zurück">&#8592;</button>
+        <div class="fan-page-pills" id="fanPills">
+          <button class="fan-pill active" data-page="0" aria-label="Seite 1"></button>
+          <button class="fan-pill" data-page="1" aria-label="Seite 2"></button>
+          <button class="fan-pill" data-page="2" aria-label="Seite 3"></button>
+        </div>
+        <button class="fan-nav-btn" id="fanNext" aria-label="Weiter">&#8594;</button>
+      </div>
+      <div class="fan-page-title" id="fanPageTitle"></div>
     </div>
   </div>
 </div>
@@ -496,9 +869,9 @@
 <section class="tool-section" id="tool-section">
   <div class="section-inner">
     <div class="tool-header reveal">
-      <div class="s-tag" style="color:var(--b500)">Dein kostenloser Marktüberblick</div>
-      <h2 class="s-h2 dark">Versteh den Markt – bevor du verkaufst</h2>
-      <p class="s-p dark" style="margin:0 auto">6 Fragen. Sofortiger Einblick in Marktwert, Preistrends und wo deine Immobilie im Bezirksvergleich wirklich steht.</p>
+      <div class="s-tag" style="color:var(--b500)">Kostenloser Marktbericht</div>
+      <h2 class="s-h2 dark">Was ist deine Immobilie wirklich wert?</h2>
+      <p class="s-p dark" style="margin:0 auto">7 Fragen – dein persönlicher Marktbericht in 60 Sekunden. Kostenlos, unverbindlich, sofort.</p>
     </div>
     <div class="tool-card" id="toolCard">
       <div class="tool-progress" id="toolProgress">
@@ -684,13 +1057,13 @@
 <footer>
   <div class="foot-logo">immowert<span style="color:rgba(255,255,255,.3)">wien</span></div>
   <div class="foot-nav">
-    <a href="index.html">Immobilie bewerten</a>
-    <a href="bezirke.html">Bezirksanalyse</a>
-    <a href="blog.html">Blog</a>
-    <a href="kontakt.html">Über uns</a>
-    <a href="impressum.html">Impressum</a>
-    <a href="datenschutz.html">Datenschutz</a>
-    <a href="agb.html">AGB</a>
+    <a href="/">Immobilie bewerten</a>
+    <a href="/bezirke">Bezirksanalyse</a>
+    <a href="/blog">Blog</a>
+    <a href="/kontakt">Über uns</a>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="/agb">AGB</a>
   </div>
   <div class="foot-copy">© 2026 immowertwien · Daten: immopreise.at, OeNB, Statistik Austria</div>
 </footer>
@@ -711,7 +1084,7 @@
           <input type="checkbox" id="mConsent">
           <span>Ich stimme zu, dass ImmowertWien meine Kontaktdaten an einen lokalen Immobilienexperten (Partnermaklern) für ein kostenloses Beratungsgespräch weitergibt. <strong>Freiwillig & jederzeit widerrufbar.</strong></span>
         </label>
-        <div class="m-consent-sub">Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO · Weitergabe ausschließlich an geprüfte lokale Partnerexperten · Mehr in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</div>
+        <div class="m-consent-sub">Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO · Weitergabe ausschließlich an geprüfte lokale Partnerexperten · Mehr in unserer <a href="/datenschutz">Datenschutzerklärung</a>.</div>
       </div>
       <button class="m-submit" onclick="submitModal()">Kostenlos den maximalen Preis anfragen →</button>
       <div class="m-legal-note"><i data-lucide="lock" class="lc" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:6px"></i><strong>100% kostenlos & unverbindlich.</strong> Kein Vertrag, kein Maklerauftrag. Du entscheidest danach frei.</div>
@@ -720,150 +1093,64 @@
 </div>
 
 <script>
-  /* ── HERO CAROUSEL ── */
+  /* ── PDF FAN SLIDER ── */
   (function(){
-    // Factors model what a broker actually discusses in a valuation call.
-    // Showing scores + market facts = credibility. Locking the "so what" = drives sign-up.
-    const CARDS = [
-      {
-        live: true,
-        addr: 'Radetzkystraße 12, 1030 Wien',
-        factors: [
-          { label: 'Lage-Score',      pct: 92, chip: null },
-          { label: 'Markt-Timing',    pct: 88, chip: '↑ Frühjahrsfenster Apr–Mai' },
-          { label: 'Zustandsfaktor',  pct: 74, chip: null },
-        ],
-        min: '490.000 €', max: null,
-        insight: { style: 'green', txt: '<i data-lucide="map-pin" class="lc" style="width:11px;height:11px;display:inline-block;vertical-align:middle;margin-right:3px"></i>U-Bahn-Nähe &lt;400m · +12% Lageaufschlag' },
-        locked: 'Maximales Verkaufspreis-Potenzial wird berechnet …',
-        f1t:'Bezirk 1030 · Landstraße', f1s:'€ 7.938/m² Ø · immopreise.at',
-        f2i:'<i data-lucide="zap" class="lc" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i>', f2t:'Analyse läuft', f2s:'Ergebnis in Kürze',
-      },
-      {
-        live: false,
-        addr: 'Pragerstraße 80, 1210 Wien',
-        factors: [
-          { label: 'Lage-Score',           pct: 64, chip: null },
-          { label: 'Sanierungspotenzial',   pct: 81, chip: 'Hebel erkannt' },
-          { label: 'Markt-Nachfrage',       pct: 70, chip: null },
-        ],
-        min: '285.000 €', max: null,
-        insight: { style: 'blue', txt: '<i data-lucide="train-front" class="lc" style="width:11px;height:11px;display:inline-block;vertical-align:middle;margin-right:3px"></i>Wohnungen mit U-Bahn-Nähe: Ø +12% besser' },
-        locked: 'Preisspanne nach Sanierung · Verkaufsstrategie',
-        f1t:'Bezirk 1210 · Floridsdorf', f1s:'€ 4.340/m² Ø · immopreise.at',
-        f2i:'<i data-lucide="bar-chart-2" class="lc" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i>', f2t:'1 Hebel erkannt', f2s:'Details gesperrt',
-      },
-      {
-        live: false,
-        addr: 'Gersthofer Str. 22, 1180 Wien',
-        factors: [
-          { label: 'Lage-Score',      pct: 84, chip: null },
-          { label: 'Grünlage-Bonus',  pct: 78, chip: '+8% Aufschlag' },
-          { label: 'Markt-Timing',    pct: 86, chip: null },
-        ],
-        min: '380.000 €', max: '445.000 €',
-        insight: { style: 'green', txt: '<i data-lucide="trending-up" class="lc" style="width:11px;height:11px;display:inline-block;vertical-align:middle;margin-right:3px"></i>Vergleichsobj. in 1180: Ø 34 Tage bis Abschluss' },
-        locked: 'Individuelle Preisstrategie · 12 Vergleichsobjekte',
-        f1t:'Bezirk 1180 · Währing', f1s:'€ 6.127/m² Ø · immopreise.at',
-        f2i:'<i data-lucide="trending-up" class="lc" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i>', f2t:'+€ 38.000', f2s:'Ø Potenzial erkannt',
-      },
-      {
-        live: false,
-        addr: 'Längenfeldgasse 14, 1120 Wien',
-        factors: [
-          { label: 'Lage-Score',       pct: 69, chip: null },
-          { label: 'U4-Aufschlag',     pct: 77, chip: '+12% Bonus' },
-          { label: 'Markt-Nachfrage',  pct: 66, chip: null },
-        ],
-        min: null, max: null,
-        insight: { style: 'blue', txt: '<i data-lucide="bar-chart-2" class="lc" style="width:11px;height:11px;display:inline-block;vertical-align:middle;margin-right:3px"></i>Meidling: Preise +6% ggü. Vorjahr · Aufwind' },
-        locked: 'Verkaufswert + Strategie · Jetzt kostenlos freischalten',
-        f1t:'Bezirk 1120 · Meidling', f1s:'€ 4.810/m² Ø · immopreise.at',
-        f2i:'<i data-lucide="lock" class="lc" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i>', f2t:'Ergebnis bereit', f2s:'Jetzt ansehen →',
-      },
+    const TITLES = [
+      '<b>Marktwert &amp; Eckdaten</b> · Seite 1 von 3',
+      '<b>Lageanalyse &amp; Infrastruktur</b> · Seite 2 von 3',
+      '<b>Empfehlung &amp; Strategie</b> · Seite 3 von 3'
     ];
-    let cur = 0, timer = null;
+    let active = 0;
 
-    function renderCard(idx) {
-      const c = CARDS[idx];
-      const el = document.getElementById('heroPriceCard');
-      const f1 = document.getElementById('heroF1');
-      const f2 = document.getElementById('heroF2');
-      if (!el) return;
-
-      const factorsHtml = c.factors.map((f, i) => `
-        <div class="factor-row" style="animation:fadeUp .3s ${.08+i*.09}s both">
-          <div class="factor-label">${f.label}</div>
-          <div class="factor-bar-wrap">
-            <div class="factor-bar" style="width:${f.pct}%;animation:barGrowX .5s ${.1+i*.1}s both"></div>
-          </div>
-          <div class="factor-score">${f.pct}</div>
-          ${f.chip ? `<span class="factor-chip">${f.chip}</span>` : ''}
-        </div>`).join('');
-
-      const minH = c.min
-        ? `<span class="pv-num" style="font-size:1.2rem">${c.min}</span>`
-        : `<span class="pv-num blur-val" style="font-size:1.2rem">••••• €</span>`;
-      const maxH = c.max
-        ? `<span class="pv-num hi" style="font-size:1.2rem">${c.max}</span>`
-        : `<span class="pv-num blur-val" style="font-size:1.2rem;color:var(--b500)">••••• €</span>`;
-
-      const iStyle = c.insight.style === 'green'
-        ? 'background:#ecfdf5;color:#059669;border:1px solid #a7f3d0'
-        : 'background:var(--b50);color:var(--b600);border:1px solid var(--b100)';
-
-      const statusHtml = c.live
-        ? `<div class="pc-status"><span class="pulse-dot"></span>Bewertung läuft…</div>`
-        : `<div class="pc-status done"><span class="pulse-dot"></span>Analyse abgeschlossen</div>`;
-
-      el.innerHTML = `
-        ${statusHtml}
-        <div class="pc-addr" style="margin-bottom:2px">${c.addr}</div>
-        <div class="factor-list">${factorsHtml}</div>
-        <div class="pc-price-block">
-          <div class="pc-price-lbl">Geschätzter Marktwert</div>
-          <div class="pc-price-vals">${minH}<span class="pc-price-dash">–</span>${maxH}</div>
-        </div>
-        <div style="margin:8px 0"><span class="price-badge" style="font-size:.74rem;${iStyle}">${c.insight.txt}</span></div>
-        <div class="locked-row"><span class="li"><i data-lucide="lock" class="lc" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i></span><span>${c.locked}</span></div>
-      `;
-
-      f1.innerHTML = `<span><i data-lucide="map-pin" class="lc" style="width:14px;height:14px;display:inline-block;vertical-align:middle"></i></span><div><div style="font-weight:600;font-size:.8rem;color:var(--g900)">${c.f1t}</div><div style="color:var(--g500);font-size:.72rem">${c.f1s}</div></div>`;
-      f2.innerHTML = `<span>${c.f2i}</span><div><div style="font-weight:600;font-size:.8rem">${c.f2t}</div><div style="font-size:.72rem;opacity:.8">${c.f2s}</div></div>`;
-      document.querySelectorAll('.h-dot').forEach((d,i) => d.classList.toggle('on', i===idx));
-      if(typeof lucide!=='undefined')lucide.createIcons();
+    function positionFor(cardIdx, activeIdx) {
+      const N = 3;
+      let diff = cardIdx - activeIdx;
+      if (diff === 0) return 'pos-center';
+      if (activeIdx === 0) {
+        if (diff === 1) return 'pos-right';
+        if (diff === 2) return 'pos-far-right-visible';
+      }
+      if (activeIdx === N - 1) {
+        if (diff === -1) return 'pos-left';
+        if (diff === -2) return 'pos-far-left-visible';
+      }
+      if (diff === -1) return 'pos-left';
+      if (diff ===  1) return 'pos-right';
+      if (diff <  -1) return 'pos-far-left';
+      return 'pos-far-right';
     }
 
-    function go(idx) {
-      cur = ((idx % CARDS.length) + CARDS.length) % CARDS.length;
-      const el = document.getElementById('heroPriceCard');
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(10px) scale(0.98)';
-      setTimeout(() => {
-        renderCard(cur);
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          el.style.opacity = '1';
-          el.style.transform = 'none';
-        }));
-      }, 280);
+    function render() {
+      const cards = document.querySelectorAll('#fanStage .pdf-card');
+      const pills = document.querySelectorAll('#fanPills .fan-pill');
+      const titleEl = document.getElementById('fanPageTitle');
+      cards.forEach((c, i) => {
+        c.classList.remove('pos-center','pos-left','pos-right','pos-far-left','pos-far-right','pos-far-left-visible','pos-far-right-visible');
+        c.classList.add(positionFor(i, active));
+      });
+      pills.forEach((p, i) => p.classList.toggle('active', i === active));
+      if (titleEl) titleEl.innerHTML = TITLES[active];
     }
 
-    window.heroGo = function(i) {
-      clearInterval(timer);
-      go(i);
-      timer = setInterval(() => go(cur + 1), 6000);
-    };
+    function go(n) { active = ((n % 3) + 3) % 3; render(); }
 
     function init() {
-      const dots = document.getElementById('heroDots');
-      if (!dots) return;
-      const el = document.getElementById('heroPriceCard');
-      if (el) el.style.transition = 'opacity .35s cubic-bezier(.4,0,.2,1), transform .35s cubic-bezier(.4,0,.2,1)';
-      dots.innerHTML = CARDS.map((_,i) =>
-        `<button class="h-dot${i===0?' on':''}" onclick="heroGo(${i})" aria-label="Beispiel ${i+1}"></button>`
-      ).join('');
-      renderCard(0);
-      timer = setInterval(() => go(cur + 1), 6000);
+      const prev = document.getElementById('fanPrev');
+      const next = document.getElementById('fanNext');
+      if (prev) prev.addEventListener('click', () => go(active - 1));
+      if (next) next.addEventListener('click', () => go(active + 1));
+      document.querySelectorAll('#fanPills .fan-pill').forEach((p, i) =>
+        p.addEventListener('click', () => go(i))
+      );
+      document.querySelectorAll('#fanStage .pdf-card').forEach((c, i) =>
+        c.addEventListener('click', () => { if (i !== active) go(i); })
+      );
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') go(active - 1);
+        if (e.key === 'ArrowRight') go(active + 1);
+      });
+      render();
+      setInterval(() => go(active + 1), 5500);
     }
 
     document.readyState === 'loading'
@@ -897,256 +1184,349 @@
     {num:'1210',name:'Floridsdorf',p:5600,sR:.90,rent:15.50},{num:'1220',name:'Donaustadt',p:6300,sR:.90,rent:16.90},
     {num:'1230',name:'Liesing',p:5700,sR:.90,rent:15.90}
   ];
-  // Alle Multiplikatoren ≤ 1.0: Maximum = immopreise.at-Angebotspreis, danach nur Abschläge
-  const condM={renoviert:1.0,gut:1.0,mittel:.93,sanierungsbedarf:.83};
-  const floorM={eg:.95,mitte:1.0,hoch:1.0,dg:1.0};
-  const typeM={wohnung:1.0,haus:1.0,villa:1.0,gewerbe:.88};
-  const baujahrM={altbau:.97,neubau:1.0};
-  const afM={keine:0,balkon:.025,loggia:.03,terrasse:.04,garten:.06,dachterrasse:.07};
-  // U-Bahn: Abschlag für schlechte Anbindung (Quelle: OeNB Wohnimmobilienbericht 2023)
-  const ubahnM={nahe:1.0,mittel:1.0,weit:.95};
-  // Nahversorgung: Abschlag bei eingeschränkter Versorgung
-  const nahversorgungM={sehr_gut:1.0,gut:1.0,mittel:.97};
-  // Gewerbe-Nutzungsart
-  const nutzungsartM={buero:.92,einzelhandel:.96,gastro:.87,lager:.80};
-  const S={cur:0,type:null,bezirk:null,flaeche:80,zimmer:null,condition:null,floor:null,baujahr:null,aussenflaeche:null,ubahn:null,nahversorgung:null,nutzungsart:null};
-
-  function getSteps(){
-    if(S.type==='haus'||S.type==='villa') return['type','bezirk','flaeche','zimmer','aussenflaeche','condition','ubahn','nahversorgung'];
-    if(S.type==='gewerbe') return['type','bezirk','flaeche','nutzungsart','condition','ubahn','nahversorgung'];
-    return['type','bezirk','flaeche','zimmer','baujahr','aussenflaeche','condition','floor','ubahn','nahversorgung'];
-  }
+  /* ── NEW TOOL STATE ── */
+  const S={cur:0,address:null,addressLat:null,addressLon:null,bezirk:null,flaeche:80,zimmer:null,baujahr:null,zustand:null,balkon:null};
+  const STEPS=['adresse','flaeche','zimmer','baujahr','zustand','balkon'];
+  // cur 0-5 = data steps, 6 = pdf loading, 7 = lead form, 8 = danke
 
   /* ── RENDER ── */
   function render(){
-    const steps=getSteps(),total=steps.length,atResult=S.cur>=total;
-    let dots='';
-    for(let i=0;i<total;i++){
-      const cls=i<S.cur?'done':i===S.cur?'active':'';
-      dots+=`<div class="tp-dot ${cls}">${i+1}</div>`;
-      if(i<total-1) dots+=`<div class="tp-line ${i<S.cur?'done':''}"></div>`;
+    const total=STEPS.length;
+    const inData=S.cur<total;
+    const prog=document.getElementById('toolProgress');
+    prog.style.display=inData?'':'none';
+    if(inData){
+      let dots='';
+      for(let i=0;i<total;i++){
+        const cls=i<S.cur?'done':i===S.cur?'active':'';
+        dots+=`<div class="tp-dot ${cls}">${i+1}</div>`;
+        if(i<total-1)dots+=`<div class="tp-line ${i<S.cur?'done':''}"></div>`;
+      }
+      document.getElementById('tpSteps').innerHTML=dots;
+      const pct=Math.round((S.cur/total)*100);
+      document.getElementById('tpPct').textContent=pct+'%';
     }
-    document.getElementById('toolProgress').style.display=atResult?'none':'';
-    const ts=document.getElementById('tpSteps');if(ts)ts.innerHTML=dots;
-    const pct=document.getElementById('tpPct');if(pct)pct.textContent=atResult?'Fertig!':Math.round(((S.cur+1)/total)*100)+'%';
-    const body=document.getElementById('toolBody');
-    body.innerHTML='';
-    body.insertAdjacentHTML('beforeend',atResult?buildResult():buildStep(steps[S.cur]));
+    document.getElementById('toolBody').innerHTML=buildStep();
     if(typeof lucide!=='undefined')lucide.createIcons();
-    const bar=document.getElementById('rBar');
-    if(bar) setTimeout(()=>bar.style.width='72%',120);
-    if(atResult) setTimeout(()=>document.getElementById('toolCard').scrollIntoView({behavior:'smooth',block:'start'}),80);
+    if(S.cur===6)startPdfAnimation();
+    if(S.cur===0&&S.address&&S.addressLat)setTimeout(()=>renderSatTiles(S.addressLat,S.addressLon,'satMap'),0);
   }
 
-  /* ── SQM helpers ── */
-  function sqmSync(){const f=document.getElementById('sqmField');if(f)f.value=S.flaeche;}
-  function sqmChange(delta){
-    let step=S.flaeche<100?5:S.flaeche<200?10:20;
-    S.flaeche=Math.max(20,Math.min(500,S.flaeche+(delta>0?step:-step)));
-    sqmSync();
-  }
-  function sqmSet(v){S.flaeche=v;sqmSync();}
-  function sqmInput(v){const n=parseInt(v);if(!isNaN(n)&&n>=20&&n<=500)S.flaeche=n;}
-
-  /* ── STEPS ── */
-  function buildStep(step){
-    if(step==='type') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Was möchtest du bewerten?</div><div class="step-sub">Wähle den Typ deiner Immobilie.</div><div class="opt-grid c2">${opt('type','wohnung','<i data-lucide="building-2" class="lc" style="width:20px;height:20px"></i>','Wohnung','Eigentumswohnung')}${opt('type','haus','<i data-lucide="home" class="lc" style="width:20px;height:20px"></i>','Haus','Einfamilienhaus')}${opt('type','villa','<i data-lucide="castle" class="lc" style="width:20px;height:20px"></i>','Villa / Luxus','Premium-Objekt')}${opt('type','gewerbe','<i data-lucide="store" class="lc" style="width:20px;height:20px"></i>','Gewerbe','Büro, Geschäft')}</div>${foot(false,!!S.type)}</div>`;
-    if(step==='bezirk') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">In welchem Bezirk?</div><div class="step-sub">Die Lage ist der wichtigste Preisfaktor in Wien.</div><div class="bzk-grid">${bezirke.map(b=>`<button class="bzk-btn${S.bezirk===b.num?' sel':''}" onclick="pickBzk('${b.num}')"><span class="bzk-num">${b.num}</span><span class="bzk-name">${b.name}</span></button>`).join('')}</div>${foot(true,!!S.bezirk)}</div>`;
-    if(step==='flaeche') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">${S.type==='haus'||S.type==='villa'?'Wie groß ist das Haus?':'Wie groß ist die Wohnung?'}</div><div class="step-sub">Wohnfläche in m² – ohne Keller und Außenflächen.</div><div class="sqm-wrap"><button class="sqm-side-btn" type="button" onclick="sqmChange(-1)">−</button><div class="sqm-mid"><input id="sqmField" type="number" class="sqm-field" value="${S.flaeche}" min="20" max="500" oninput="sqmInput(this.value)" onblur="this.value=S.flaeche"><span class="sqm-unit">m²</span></div><button class="sqm-side-btn" type="button" onclick="sqmChange(1)">+</button></div><div class="sqm-pills">${[40,60,80,100,120,150,200].map(v=>`<button type="button" class="sqm-pill${S.flaeche===v?' sel':''}" onclick="sqmSet(${v})">${v}</button>`).join('')}</div>${foot(true,true)}</div>`;
-    if(step==='zimmer') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Wie viele Zimmer?</div><div class="step-sub">Anzahl Zimmer ohne Küche und Bad.</div><div class="opt-grid c3">${['1','2','3','4','5+'].map(z=>`<button class="opt-simple${S.zimmer===z?' sel':''}" onclick="pickSimple('zimmer','${z}')"><span style="font-size:1.7rem;font-family:'Playfair Display',serif;font-weight:700;color:var(--g900)">${z}</span><span class="opt-desc">Zimmer</span></button>`).join('')}</div>${foot(true,!!S.zimmer)}</div>`;
-    if(step==='baujahr') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Altbau oder Neubau?</div><div class="step-sub">Altbau = vor 1945 (Gründerzeit). Neubau = ab 1945.</div><div class="opt-grid c2">${opt('baujahr','altbau','<i data-lucide="landmark" class="lc" style="width:20px;height:20px"></i>','Altbau','Errichtet vor 1945')}${opt('baujahr','neubau','<i data-lucide="hard-hat" class="lc" style="width:20px;height:20px"></i>','Neubau','Errichtet ab 1945')}</div>${foot(true,!!S.baujahr)}</div>`;
-    if(step==='aussenflaeche') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Gibt es eine Außenfläche?</div><div class="step-sub">Freiflächen steigern den Wert um 3–8%.</div><div class="opt-grid c2">${opt('aussenflaeche','keine','<i data-lucide="x-circle" class="lc" style="width:20px;height:20px"></i>','Keine Außenfläche','Ohne Freifläche')}${opt('aussenflaeche','balkon','<i data-lucide="flower-2" class="lc" style="width:20px;height:20px"></i>','Balkon','Kleiner Außenbereich')}${opt('aussenflaeche','loggia','<i data-lucide="sofa" class="lc" style="width:20px;height:20px"></i>','Loggia','Überdachter Balkon')}${opt('aussenflaeche','terrasse','<i data-lucide="sun" class="lc" style="width:20px;height:20px"></i>','Terrasse','Größerer Außenbereich')}${opt('aussenflaeche','dachterrasse','<i data-lucide="building" class="lc" style="width:20px;height:20px"></i>','Dachterrasse','Oberste Etage, exklusiv')}${opt('aussenflaeche','garten','<i data-lucide="tree-pine" class="lc" style="width:20px;height:20px"></i>','Garten','Eigener Gartenanteil')}</div>${foot(true,!!S.aussenflaeche)}</div>`;
-    if(step==='condition') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Welchen Zustand hat die Immobilie?</div><div class="step-sub">Der Zustand beeinflusst den Wert um bis zu 25%.</div><div class="opt-grid">${opt('condition','renoviert','<i data-lucide="sparkles" class="lc" style="width:20px;height:20px"></i>','Vollständig renoviert','Moderne Ausstattung, top Zustand')}${opt('condition','gut','<i data-lucide="thumbs-up" class="lc" style="width:20px;height:20px"></i>','Guter Zustand','Gepflegt, keine nennenswerten Mängel')}${opt('condition','mittel','<i data-lucide="wrench" class="lc" style="width:20px;height:20px"></i>','Mittlerer Zustand','Leichter Renovierungsbedarf')}${opt('condition','sanierungsbedarf','<i data-lucide="hard-hat" class="lc" style="width:20px;height:20px"></i>','Sanierungsbedarf','Größere Renovierung erforderlich')}</div>${foot(true,!!S.condition)}</div>`;
-    if(step==='floor') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">In welchem Stockwerk?</div><div class="step-sub">Die Etage beeinflusst Licht, Lärm und Preis.</div><div class="opt-grid c2">${opt('floor','eg','<i data-lucide="door-open" class="lc" style="width:20px;height:20px"></i>','Erdgeschoss','Parterre')}${opt('floor','mitte','<i data-lucide="building-2" class="lc" style="width:20px;height:20px"></i>','Mittelgeschoss','1.–4. Stock')}${opt('floor','hoch','<i data-lucide="arrow-up" class="lc" style="width:20px;height:20px"></i>','Obere Etage','Ab dem 5. Stock')}${opt('floor','dg','<i data-lucide="star" class="lc" style="width:20px;height:20px"></i>','Dachgeschoss','Loft oder Penthouse')}</div>${foot(true,!!S.floor)}</div>`;
-    if(step==='ubahn') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Wie weit zur nächsten U-Bahn?</div><div class="step-sub">U-Bahn-Nähe erhöht den Wert um bis zu 6% (Quelle: OeNB Wohnimmobilienbericht 2023).</div><div class="opt-grid">${opt('ubahn','nahe','<i data-lucide="train-front" class="lc" style="width:20px;height:20px"></i>','Unter 5 Minuten','< 500m – starker Lageaufschlag')}${opt('ubahn','mittel','<i data-lucide="footprints" class="lc" style="width:20px;height:20px"></i>','5–10 Minuten','500m–1km – moderater Bonus')}${opt('ubahn','weit','<i data-lucide="bus" class="lc" style="width:20px;height:20px"></i>','Über 10 Minuten','> 1km – kein U-Bahn-Bonus')}</div>${foot(true,!!S.ubahn)}</div>`;
-    if(step==='nahversorgung') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Wie gut ist die Nahversorgung?</div><div class="step-sub">Supermarkt, Apotheke & Co. in der Nähe steigern den Wert um bis zu 3%.</div><div class="opt-grid">${opt('nahversorgung','sehr_gut','<i data-lucide="shopping-cart" class="lc" style="width:20px;height:20px"></i>','Sehr gut','Supermarkt < 5 Min. zu Fuß')}${opt('nahversorgung','gut','<i data-lucide="store" class="lc" style="width:20px;height:20px"></i>','Gut','5–10 Min. zu Fuß')}${opt('nahversorgung','mittel','<i data-lucide="car" class="lc" style="width:20px;height:20px"></i>','Eingeschränkt','> 10 Min. oder nur mit Auto')}</div>${foot(true,!!S.nahversorgung)}</div>`;
-    if(step==='nutzungsart') return `<div class="step-wrap"><div class="step-eyebrow">Immobilienbewertung Wien</div><div class="step-title">Welche Nutzungsart?</div><div class="step-sub">Die Nutzung beeinflusst Renditeerwartung und Marktwert erheblich.</div><div class="opt-grid c2">${opt('nutzungsart','buero','<i data-lucide="briefcase" class="lc" style="width:20px;height:20px"></i>','Büro / Praxis','Verwaltung, Freie Berufe')}${opt('nutzungsart','einzelhandel','<i data-lucide="store" class="lc" style="width:20px;height:20px"></i>','Einzelhandel','Geschäftslokal, Retail')}${opt('nutzungsart','gastro','<i data-lucide="utensils" class="lc" style="width:20px;height:20px"></i>','Gastronomie','Restaurant, Café, Bar')}${opt('nutzungsart','lager','<i data-lucide="package" class="lc" style="width:20px;height:20px"></i>','Lager / Produktion','Gewerbehalle, Depot')}</div>${foot(true,!!S.nutzungsart)}</div>`;
+  function simpleOpt(label,val,field,sub){
+    const sel=S[field]===val;
+    return `<button class="opt-btn${sel?' sel':''}" onclick="pick('${field}','${val}')"><div class="opt-txt"><span class="opt-lbl">${label}</span>${sub?`<span class="opt-desc">${sub}</span>`:''}</div><div class="opt-check"></div></button>`;
   }
 
-  function opt(field,val,icon,lbl,desc){
-    return `<button class="opt-btn${S[field]===val?' sel':''}" onclick="pickOpt('${field}','${val}',this)"><div class="opt-icon-box">${icon}</div><div class="opt-txt"><span class="opt-lbl">${lbl}</span>${desc?`<span class="opt-desc">${desc}</span>`:''}</div><div class="opt-check"></div></button>`;
-  }
-  function foot(back,on){
-    return `<div class="step-footer">${back?`<button class="btn-back" onclick="goBack()">← Zurück</button>`:'<div></div>'}<button class="btn-next" id="btnNext" onclick="goNext()" ${on?'':'disabled'}>Weiter →</button></div>`;
-  }
-
-  /* ── INTERACTIONS ── */
-  function pickOpt(field,val,el){
+  function pick(field,val){
     S[field]=val;
-    document.querySelectorAll('#toolBody .opt-btn').forEach(b=>b.classList.remove('sel'));
-    el.classList.add('sel');
-    const btn=document.getElementById('btnNext');if(btn)btn.disabled=false;
-    setTimeout(goNext,300);
-  }
-  function pickSimple(field,val){
-    S[field]=val;
-    document.querySelectorAll('#toolBody .opt-simple').forEach(b=>b.classList.remove('sel'));
-    event.currentTarget.classList.add('sel');
-    setTimeout(goNext,300);
-  }
-  function pickBzk(num){
-    S.bezirk=num;
-    document.querySelectorAll('#toolBody .bzk-btn').forEach(b=>b.classList.remove('sel'));
-    event.currentTarget.classList.add('sel');
-    const btn=document.getElementById('btnNext');if(btn)btn.disabled=false;
-  }
-  function goNext(){const s=getSteps();if(S.cur<s.length-1){S.cur++;render();}else{S.cur=s.length;render();}}
-  function goBack(){if(S.cur>0){S.cur--;render();}}
-
-  /* ── CALC ── */
-  function calc(){
-    const bz=bezirke.find(b=>b.num===S.bezirk)||bezirke[6];
-    // Gewerbe: nutzungsart ersetzt typeM wenn gesetzt
-    let tM=(S.type==='gewerbe'&&S.nutzungsart)?nutzungsartM[S.nutzungsart]:(typeM[S.type]||1);
-    // Blended price: 55% listing (immopreise.at) + 45% transaction (saleRatio per OeNB/AK Wien)
-    const effP=bz.p*(0.55+0.45*bz.sR);
-    let base=effP*tM*(condM[S.condition]||1)*S.flaeche;
-    if(S.floor) base*=(floorM[S.floor]||1);
-    if(S.baujahr) base*=(baujahrM[S.baujahr]||1);
-    // U-Bahn & Nahversorgung (OeNB / Hedonic Pricing)
-    if(S.ubahn) base*=(ubahnM[S.ubahn]||1);
-    if(S.nahversorgung) base*=(nahversorgungM[S.nahversorgung]||1);
-    const afBonus=Math.round((afM[S.aussenflaeche]||0)*base);
-    const total=base+afBonus;
-    // Konservativ: high = -7% vs immopreise.at, low = -17% (Transaktionsabschlag)
-    const high=Math.round(total*.93/5000)*5000;
-    const low=Math.round(total*.83/5000)*5000;
-    const potL=Math.round(low*.05/1000)*1000;
-    const potH=Math.round(low*.12/1000)*1000;
-    const m2=Math.round((low+high)/2/S.flaeche/100)*100;
-    const rentYield=((bz.rent*12)/((low+high)/2)*100);
-    return{low,high,potL,potH,m2,bz,afBonus,rentYield};
-  }
-  function fmt(n){return '€\u202f'+Math.round(n).toLocaleString('de-AT')}
-  function fmtK(n){const k=Math.round(n/1000);return '+\u00a0€\u202f'+(k>=1?k+'k':n);}
-  const bzLonLat={'1010':[16.3720,48.2085],'1020':[16.4024,48.2190],'1030':[16.3897,48.1952],'1040':[16.3700,48.1930],'1050':[16.3559,48.1880],'1060':[16.3479,48.1958],'1070':[16.3492,48.2030],'1080':[16.3531,48.2130],'1090':[16.3596,48.2234],'1100':[16.3750,48.1716],'1110':[16.4250,48.1750],'1120':[16.3280,48.1770],'1130':[16.3020,48.1850],'1140':[16.2950,48.1960],'1150':[16.3270,48.1970],'1160':[16.3140,48.2100],'1170':[16.3000,48.2270],'1180':[16.3260,48.2338],'1190':[16.3530,48.2526],'1200':[16.3714,48.2422],'1210':[16.4000,48.2733],'1220':[16.4750,48.2250],'1230':[16.3200,48.1500]};
-
-  /* ── SPARKLINE ── */
-  const spk={'1010':[72,78,84,91,100,100],'1020':[68,74,81,88,97,100],'1030':[70,75,82,89,96,100],'1040':[71,77,83,90,98,100],'1050':[69,74,80,87,95,100],'1060':[70,76,82,89,96,100],'1070':[71,77,83,90,97,100],'1080':[70,75,81,88,96,100],'1090':[72,78,85,92,99,100],'1100':[65,70,76,83,92,100],'1110':[64,69,75,82,91,100],'1120':[66,71,77,84,93,100],'1130':[71,77,83,90,97,100],'1140':[65,70,76,83,92,100],'1150':[64,69,75,82,91,100],'1160':[66,71,77,84,93,100],'1170':[68,73,79,86,94,100],'1180':[70,76,82,89,96,100],'1190':[71,77,83,90,97,100],'1200':[65,70,76,83,92,100],'1210':[66,71,78,85,93,100],'1220':[67,72,79,86,94,100],'1230':[65,70,76,83,91,100]};
-  function buildSparkline(bz){
-    const pts=spk[bz]||spk['1070'],W=96,H=28,pad=2;
-    const xs=pts.map((_,i)=>pad+i*(W-2*pad)/5);
-    const ys=pts.map(v=>H-pad-(v/100)*(H-2*pad));
-    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><path d="M${xs.map((x,i)=>x+','+ys[i]).join('L')}" fill="none" stroke="var(--b400)" stroke-width="1.8" stroke-linejoin="round"/><circle cx="${xs[5]}" cy="${ys[5]}" r="3" fill="var(--b500)"/></svg>`;
+    const step=STEPS[S.cur];
+    if(step!=='flaeche')advance();
+    else render();
   }
 
-  /* ── RESULT (Broadsheet Design) ── */
-  function buildResult(){
-    const r=calc();
-    const tLbl={wohnung:'Wohnung',haus:'Haus',villa:'Villa',gewerbe:'Gewerbe'};
-    const afLbl={keine:null,balkon:'Balkon',loggia:'Loggia',terrasse:'Terrasse',dachterrasse:'Dachterrasse',garten:'Garten'};
-    const now=new Date();
-    const datum=now.toLocaleDateString('de-AT',{day:'2-digit',month:'long',year:'numeric'});
-    const tags=[tLbl[S.type]||'Immobilie',S.flaeche+'\u202fm²',S.baujahr==='altbau'?'Altbau':S.baujahr==='neubau'?'Neubau':null].filter(Boolean).join(' · ');
-    const coords=bzLonLat[r.bz.num]||[16.3731,48.2085];
-    const mapUrl=`https://api.maptiler.com/maps/basic-v2/static/${coords[0]},${coords[1]},13/520x312.png?key=ooaUNOxW9pQZRAKyL4Pe`;
-    const potMid=Math.round((r.potL+r.potH)/2/500)*500;
-    const potDisplay=fmtK(potMid);
-    const trendColor=r.bz.growth5>=3?'#059669':r.bz.growth5>=0?'#d97706':'#dc2626';
-    const trendLabel=r.bz.growth5>=3?'steigend':r.bz.growth5>=0?'stabil':'rückläufig';
-    const checkSvg=`<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
-    return `<div class="step-wrap res-neg-margin">
-      <div style="padding:11px 20px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;background:white">
-        <span style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:800;color:#0a1628;letter-spacing:-.01em">immowert<span style="color:#2563eb">wien</span></span>
-        <span style="font-size:.62rem;color:#9ca3af">${datum}</span>
-      </div>
-      <div class="res-layout">
-        <div style="border-right:1px solid #e5e7eb">
-          <div style="height:156px;position:relative;overflow:hidden;background:#dbeafe">
-            <img src="${mapUrl}" alt="" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy" onerror="this.style.opacity=0">
-            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-90%);pointer-events:none"><svg width="26" height="34" viewBox="0 0 26 34" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 0C5.82 0 0 5.82 0 13c0 9.1 13 21 13 21s13-11.9 13-21C26 5.82 20.18 0 13 0z" fill="#2563eb"/><circle cx="13" cy="13" r="4.5" fill="white"/></svg></div>
-            <div style="position:absolute;bottom:8px;left:8px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:6px;padding:3px 9px;font-size:.68rem;font-weight:600;color:#0a1628">${r.bz.num} ${r.bz.name}</div>
+  function advance(){
+    S.cur++;
+    render();
+    document.getElementById('tool-section').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  function buildStep(){
+    if(S.cur===6)return buildPdfStep();
+    if(S.cur===7)return buildLeadStep();
+    if(S.cur===8)return buildDankeStep();
+    const step=STEPS[S.cur];
+    switch(step){
+      case'adresse': return buildAdresseStep();
+      case'flaeche': return buildFlaecheStep();
+      case'zimmer':  return buildZimmerStep();
+      case'baujahr': return buildBaujahrStep();
+      case'zustand': return buildZustandStep();
+      case'balkon':  return buildBalkonStep();
+    }
+    return '';
+  }
+
+  /* ── SATELLITE TILES (Esri World Imagery, no key needed) ── */
+  function renderSatTiles(lat,lon,containerId){
+    const z=17,ts=256;
+    const container=document.getElementById(containerId);
+    if(!container)return;
+    const W=container.offsetWidth||500,H=container.offsetHeight||200;
+    const exactTX=(lon+180)/360*(1<<z);
+    const latR=lat*Math.PI/180;
+    const exactTY=(1-Math.log(Math.tan(latR)+1/Math.cos(latR))/Math.PI)/2*(1<<z);
+    const tx=Math.floor(exactTX),ty=Math.floor(exactTY);
+    const offX=(exactTX-tx)*ts,offY=(exactTY-ty)*ts;
+    const cL=W/2-offX,cT=H/2-offY;
+    let html='';
+    for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+      const l=Math.round(cL+dx*ts),t=Math.round(cT+dy*ts);
+      html+=`<img src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${ty+dy}/${tx+dx}" style="position:absolute;left:${l}px;top:${t}px;width:${ts}px;height:${ts}px;display:block;pointer-events:none" draggable="false">`;
+    }
+    container.innerHTML=html;
+  }
+
+  /* ── STEP 0: ADRESSE ── */
+  function ey(n){return `<div class="step-eyebrow">Schritt ${n} von ${STEPS.length}</div>`;}
+  function buildAdresseStep(){
+    if(S.address){
+      return `<div class="step-wrap">
+        ${ey(1)}
+        <div class="step-title">Deine Immobilie</div>
+        <div class="addr-wrap">
+          <div class="addr-preview" style="height:200px">
+            <div id="satMap" style="position:absolute;inset:0"></div>
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-100%);z-index:5;pointer-events:none;color:#ef4444;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))"><i data-lucide="map-pin" style="width:28px;height:28px"></i></div>
+            <div class="addr-preview-info">${S.address}</div>
           </div>
-          <div style="padding:16px 18px 10px">
-            <div style="font-size:.58rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin-bottom:3px">Sofortbewertung · ${tags}</div>
-            <div style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,1.85rem);font-weight:800;color:#0a1628;line-height:1.05;margin-bottom:3px">${fmt(r.low)} – <span style="filter:blur(5px);user-select:none;pointer-events:none">${fmt(r.high)}</span></div>
-            <div style="font-size:.63rem;color:#9ca3af">Marktdaten 2026 · Angebotspreise + Transaktionsquote${r.afBonus>0?' · inkl. '+(afLbl[S.aussenflaeche]||''):''}</div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid #f0f0f0">
-            <div style="padding:10px 14px;border-right:1px solid #f0f0f0"><div style="font-size:.54rem;color:#9ca3af;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px">Ø / m²</div><div style="font-family:'Playfair Display',serif;font-size:.92rem;font-weight:800;color:#0a1628">${fmt(r.m2)}</div></div>
-            <div style="padding:10px 14px;border-right:1px solid #f0f0f0"><div style="font-size:.54rem;color:#9ca3af;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px">Trend</div><div style="font-family:'Playfair Display',serif;font-size:.92rem;font-weight:800;color:${trendColor}">${trendLabel}</div></div>
-            <div style="padding:10px 14px"><div style="font-size:.54rem;color:#9ca3af;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px">Rendite</div><div style="font-family:'Playfair Display',serif;font-size:.92rem;font-weight:800;color:#0a1628">${r.rentYield.toFixed(1)} %</div></div>
-          </div>
+          <span class="addr-change" onclick="S.address=null;S.addressLat=null;S.addressLon=null;S.bezirk=null;render()">Adresse ändern</span>
         </div>
-        <div class="res-right" style="background:#f9fafb;padding:16px;position:relative">
-          <div style="font-size:.57rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#9ca3af;margin-bottom:8px">Expertenanalyse</div>
-          <div style="background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:10px 14px;margin-bottom:10px">
-            <div style="font-size:.68rem;font-weight:500;color:#92400e;margin-bottom:2px">Mögliches Zusatzpotenzial</div>
-            <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;color:#78350f;line-height:1;filter:blur(5px);user-select:none;pointer-events:none">${potDisplay}</div>
-          </div>
-          <div style="flex:1;position:relative;overflow:hidden">
-            <div style="display:flex;flex-direction:column;gap:9px;padding:2px 0 56px">
-              <div style="display:flex;align-items:flex-start;gap:9px">
-                <div style="width:20px;height:20px;background:#dcfce7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">${checkSvg}</div>
-                <div><div style="font-size:.6rem;font-weight:700;color:#16a34a;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1px">Schritt 1</div><div style="font-size:.75rem;font-weight:600;color:#111827">Online Bewertung erhalten</div></div>
-              </div>
-              <div style="display:flex;align-items:flex-start;gap:9px">
-                <div style="width:20px;height:20px;background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><span style="font-size:.6rem;font-weight:700;color:white">2</span></div>
-                <div><div style="font-size:.6rem;font-weight:700;color:#2563eb;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1px">Schritt 2</div><div style="font-size:.75rem;font-weight:600;color:#111827">Lokaler Experte analysiert</div></div>
-              </div>
-              <div style="display:flex;align-items:flex-start;gap:9px">
-                <div style="width:20px;height:20px;background:#f3f4f6;border:1.5px solid #e5e7eb;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><span style="font-size:.6rem;font-weight:700;color:#9ca3af">3</span></div>
-                <div><div style="font-size:.6rem;font-weight:700;color:#9ca3af;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1px">Schritt 3</div><div style="font-size:.75rem;font-weight:600;color:#374151">Zum Bestpreis verkauft – kein Euro verschenkt</div></div>
-              </div>
-            </div>
-            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(249,250,251,.95) 35%);padding-top:28px">
-              <button onclick="openModal()" style="width:100%;background:#2563eb;border:none;padding:11px 14px;border-radius:9px;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;color:white;cursor:pointer;margin-bottom:5px" onmouseover="this.style.background='#1a4fd6'" onmouseout="this.style.background='#2563eb'">Jetzt maximalen Verkaufspreis sichern →</button>
-              <div style="font-size:.62rem;color:#9ca3af;text-align:center">100% kostenlos · Unverbindlich · 24h</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="res-mobile-cta" style="padding:14px 16px;border-top:1px solid #e5e7eb;background:white">
-        <button onclick="openModal()" style="width:100%;background:#2563eb;border:none;padding:13px;border-radius:10px;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:600;color:white;cursor:pointer" onmouseover="this.style.background='#1a4fd6'" onmouseout="this.style.background='#2563eb'">Jetzt maximalen Verkaufspreis sichern →</button>
-        <div style="font-size:.65rem;color:#9ca3af;text-align:center;margin-top:6px">100% kostenlos · 24h Rückruf</div>
-      </div>
-      <div style="padding:9px 18px;background:#f9fafb;border-top:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
-        <div style="font-size:.61rem;color:#9ca3af;line-height:1.55;flex:1">Erstorientierung auf Basis öffentlicher Marktdaten (OeNB, immopreise.at, willhaben.at, IMMOunited). Kein Gutachten gem. § 57a GewO.</div>
-        <div style="display:flex;gap:8px;flex-shrink:0">
-          <button onclick="goBack()" style="background:none;border:1px solid #e5e7eb;border-radius:7px;color:#6b7280;font-size:.62rem;cursor:pointer;font-family:'Inter',sans-serif;padding:4px 9px">← Zurück</button>
-          <button onclick="resetTool()" style="background:none;border:none;color:#9ca3af;font-size:.62rem;cursor:pointer;font-family:'Inter',sans-serif">↺ Neu</button>
-        </div>
+        <div style="margin-top:20px"><button class="next-btn" onclick="advance()">Weiter</button></div>
+      </div>`;
+    }
+    return `<div class="step-wrap">
+      ${ey(1)}
+      <div class="step-title">Wie lautet die Adresse?</div>
+      <div class="step-sub">Gib Straße und Hausnummer ein – wir zeigen dir ein Luftbild.</div>
+      <div class="addr-wrap" id="addrWrap">
+        <input class="addr-input" id="addrInput" type="text" placeholder="z.B. Mariahilfer Straße 10, 1060 Wien" autocomplete="off"
+          oninput="onAddrInput(this.value)"
+          onblur="setTimeout(()=>closeAddrDropdown(),200)">
+        <div class="addr-flag"><i data-lucide="map-pin" style="width:16px;height:16px;color:var(--g400)"></i></div>
+        <div class="addr-dropdown" id="addrDropdown"></div>
       </div>
     </div>`;
   }
 
-  /* ── MODAL ── */
-  function openModal(){document.getElementById('overlay').classList.add('on');document.body.style.overflow='hidden'}
-  function closeModal(){document.getElementById('overlay').classList.remove('on');document.body.style.overflow=''}
-  function submitModal(){
-    const name=document.getElementById('mName').value.trim();
-    const email=document.getElementById('mEmail').value.trim();
-    const phone=document.getElementById('mPhone').value.trim();
-    const consent=document.getElementById('mConsent').checked;
-    if(!name||!email){alert('Bitte Name und E-Mail angeben.');return}
-    if(!consent){alert('Bitte die Einwilligung zur Kontaktaufnahme bestätigen.');return}
-    submitLead({name,email,phone,...S});
+  let _addrTimer=null,_addrResults=[];
+  function onAddrInput(val){
+    clearTimeout(_addrTimer);
+    if(val.length<3){closeAddrDropdown();return;}
+    _addrTimer=setTimeout(()=>fetchAddr(val),350);
+  }
+  function closeAddrDropdown(){
+    const d=document.getElementById('addrDropdown');
+    if(d)d.classList.remove('open');
+  }
+  async function fetchAddr(q){
+    try{
+      const url=`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q+' Wien')}&countrycodes=at&format=json&addressdetails=1&limit=6`;
+      const data=await(await fetch(url,{headers:{'Accept-Language':'de'}})).json();
+      const dd=document.getElementById('addrDropdown');
+      if(!dd)return;
+      _addrResults=data;
+      if(!data.length){dd.innerHTML='<div class="addr-option" style="color:var(--g500);cursor:default">Keine Treffer – bitte Adresse präzisieren</div>';dd.classList.add('open');return;}
+      dd.innerHTML=data.map((r,i)=>`<div class="addr-option" onclick="selectAddrByIdx(${i})">${r.display_name}</div>`).join('');
+      dd.classList.add('open');
+    }catch(e){}
+  }
+  function selectAddrByIdx(i){
+    const r=_addrResults[i];
+    if(!r)return;
+    S.address=r.display_name;
+    S.addressLat=parseFloat(r.lat);
+    S.addressLon=parseFloat(r.lon);
+    const pc=r.address?.postcode||'';
+    if(pc&&/^1[0-2][0-9]0$/.test(pc))S.bezirk=pc;
+    else{const b=bezirke.find(x=>r.display_name.includes(x.name));if(b)S.bezirk=b.num;}
+    render();
   }
 
-  /* ── SUPABASE ── */
+  /* ── STEP 1: WOHNFLÄCHE ── */
+  function buildFlaecheStep(){
+    return `<div class="step-wrap">
+      ${ey(2)}
+      <div class="step-title">Wie groß ist die Wohnfläche?</div>
+      <div class="step-sub">Wohnnutzfläche in m² – ohne Keller und Außenflächen.</div>
+      <div style="display:flex;align-items:center;gap:16px;margin:24px 0 28px">
+        <input type="number" id="flaecheIn" value="${S.flaeche}" min="20" max="500" step="1"
+          style="width:130px;font-size:1.8rem;font-weight:700;text-align:center;border:2px solid var(--g200);border-radius:12px;padding:14px 8px;font-family:'Inter',sans-serif;outline:none;color:var(--g900)"
+          oninput="S.flaeche=Math.max(20,Math.min(500,parseInt(this.value)||20));this.style.borderColor='var(--b500)'">
+        <span style="font-size:1.1rem;color:var(--g500);font-weight:500">m²</span>
+      </div>
+      <button class="next-btn" onclick="S.flaeche=parseInt(document.getElementById('flaecheIn').value)||S.flaeche;advance()">Weiter</button>
+    </div>`;
+  }
+
+  /* ── STEP 2: ZIMMER ── */
+  function buildZimmerStep(){
+    return `<div class="step-wrap">
+      ${ey(3)}
+      <div class="step-title">Wie viele Zimmer?</div>
+      <div class="step-sub">Wohnzimmer, Schlafzimmer – ohne Küche und Bad.</div>
+      <div class="opt-grid c3" style="margin-top:16px">
+        ${['1','2','3','4','5+'].map(z=>`<button class="opt-simple${S.zimmer===z?' sel':''}" onclick="pick('zimmer','${z}')"><span style="font-size:1.6rem;font-family:'Playfair Display',serif;font-weight:700;color:var(--g900)">${z}</span><span class="opt-desc">Zimmer</span></button>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  /* ── STEP 3: BAUJAHR ── */
+  function buildBaujahrStep(){
+    return `<div class="step-wrap">
+      ${ey(4)}
+      <div class="step-title">Altbau oder Neubau?</div>
+      <div class="step-sub">Altbau = vor 1945 (Gründerzeit). Neubau = ab 1945.</div>
+      <div class="opt-grid c2" style="margin-top:16px">
+        <button class="opt-btn${S.baujahr==='altbau'?' sel':''}" onclick="pick('baujahr','altbau')"><div class="opt-icon-box"><i data-lucide="landmark" style="width:18px;height:18px"></i></div><div class="opt-txt"><span class="opt-lbl">Altbau</span><span class="opt-desc">Errichtet vor 1945</span></div><div class="opt-check"></div></button>
+        <button class="opt-btn${S.baujahr==='neubau'?' sel':''}" onclick="pick('baujahr','neubau')"><div class="opt-icon-box"><i data-lucide="building-2" style="width:18px;height:18px"></i></div><div class="opt-txt"><span class="opt-lbl">Neubau</span><span class="opt-desc">Errichtet ab 1945</span></div><div class="opt-check"></div></button>
+      </div>
+    </div>`;
+  }
+
+  /* ── STEP 4: ZUSTAND ── */
+  function buildZustandStep(){
+    const opts=[
+      ['renoviert','Renoviert','Vollständig saniert'],
+      ['gut','Guter Zustand','Gepflegt, kein Bedarf'],
+      ['mittel','Mittlerer Zustand','Kleinere Mängel'],
+      ['sanierungsbedarf','Sanierungs­bedarf','Größere Arbeiten nötig']
+    ];
+    return `<div class="step-wrap">
+      ${ey(5)}
+      <div class="step-title">Welchen Zustand hat die Immobilie?</div>
+      <div class="step-sub">Allgemeiner Eindruck von Küche, Bad und Böden.</div>
+      <div class="opt-grid" style="grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
+        ${opts.map(([v,l,s])=>`<button class="opt-btn${S.zustand===v?' sel':''}" onclick="pick('zustand','${v}')" style="flex-direction:column;align-items:flex-start;gap:3px;padding:14px 16px"><span class="opt-lbl" style="font-weight:600">${l}</span><span class="opt-desc" style="font-size:.76rem">${s}</span></button>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  /* ── STEP 5: BALKON ── */
+  function buildBalkonStep(){
+    return `<div class="step-wrap">
+      ${ey(6)}
+      <div class="step-title">Gibt es einen Balkon, eine Loggia oder Terrasse?</div>
+      <div class="opt-grid c2" style="margin-top:20px">
+        <button class="opt-btn${S.balkon==='ja'?' sel':''}" onclick="pick('balkon','ja')"><div class="opt-icon-box"><i data-lucide="sun" style="width:18px;height:18px"></i></div><div class="opt-txt"><span class="opt-lbl">Ja</span></div><div class="opt-check"></div></button>
+        <button class="opt-btn${S.balkon==='nein'?' sel':''}" onclick="pick('balkon','nein')"><div class="opt-icon-box"><i data-lucide="x" style="width:18px;height:18px"></i></div><div class="opt-txt"><span class="opt-lbl">Nein</span></div><div class="opt-check"></div></button>
+      </div>
+    </div>`;
+  }
+
+  /* ── STEP 6: PDF LOADING ── */
+  function buildPdfStep(){
+    return `<div class="pdf-loading">
+      <div class="pdf-icon"><i data-lucide="file-bar-chart" style="width:40px;height:40px;color:var(--b500)"></i></div>
+      <div class="pdf-title">Dein persönlicher Marktbericht wird erstellt…</div>
+      <div class="pdf-sub">Wir analysieren aktuelle Bezirksdaten und Preistrends für deine Immobilie.</div>
+      <div class="pdf-track"><div class="pdf-fill" id="pdfFill"></div></div>
+      <div class="pdf-pct-row" id="pdfPct">0%</div>
+      <div class="pdf-checks">
+        <div class="pdf-check" id="chk1">Marktdaten für deinen Bezirk geladen</div>
+        <div class="pdf-check" id="chk2">Vergleichswerte berechnet</div>
+        <div class="pdf-check" id="chk3">Bericht personalisiert</div>
+      </div>
+    </div>`;
+  }
+
+  function startPdfAnimation(){
+    let pct=0;
+    const fill=document.getElementById('pdfFill');
+    const pctEl=document.getElementById('pdfPct');
+    const c1=document.getElementById('chk1');
+    const c2=document.getElementById('chk2');
+    const c3=document.getElementById('chk3');
+    const iv=setInterval(()=>{
+      pct+=Math.random()*2.8+0.8;
+      if(pct>100)pct=100;
+      if(fill)fill.style.width=pct+'%';
+      if(pctEl)pctEl.textContent=Math.round(pct)+'%';
+      if(pct>=28&&c1)c1.classList.add('vis');
+      if(pct>=62&&c2)c2.classList.add('vis');
+      if(pct>=88&&c3)c3.classList.add('vis');
+      if(pct>=100){
+        clearInterval(iv);
+        setTimeout(()=>{S.cur=7;render();document.getElementById('tool-section').scrollIntoView({behavior:'smooth',block:'start'});},600);
+      }
+    },85);
+  }
+
+  /* ── STEP 7: LEAD FORM ── */
+  function buildLeadStep(){
+    return `<div class="lead-form-wrap">
+      <div class="lead-title">Dein kostenloser Marktbericht ist fertig</div>
+      <div class="lead-sub">Gib deine Kontaktdaten ein – wir senden dir deinen persönlichen Bericht und melden uns innerhalb von 24 Stunden.</div>
+      <div class="lf-field">
+        <label>Vorname *</label>
+        <input type="text" id="lfName" placeholder="Dein Vorname" autocomplete="given-name">
+      </div>
+      <div class="lf-field">
+        <label>E-Mail-Adresse *</label>
+        <input type="email" id="lfEmail" placeholder="deine@email.at" autocomplete="email">
+      </div>
+      <div class="lf-field">
+        <label>Telefon *</label>
+        <input type="tel" id="lfPhone" placeholder="+43 664 123 45 67" autocomplete="tel">
+      </div>
+      <div class="lf-consent">
+        <input type="checkbox" id="lfConsent">
+        <label for="lfConsent">Ich stimme zu, dass meine Daten zur Kontaktaufnahme und zur optionalen Weitergabe an einen lokalen Immobilienexperten verwendet werden. Einwilligung kann jederzeit widerrufen werden. <a href="/datenschutz" target="_blank">Datenschutz</a></label>
+      </div>
+      <div id="lfError" class="lf-error"></div>
+      <button class="lf-submit" id="lfBtn" onclick="submitLead()">Bericht kostenlos erhalten</button>
+    </div>`;
+  }
+
   const SUPABASE_URL='https://gxpzbhwgnsczikggdqvz.supabase.co';
   const SUPABASE_KEY='sb_publishable_Ef3Rz4GQgYTyMoEBJ-hNLA_gv3KVySw';
-  async function submitLead(d){
-    const btn=document.querySelector('.m-submit');
-    btn.textContent='Wird gesendet…';btn.disabled=true;
+
+  async function submitLead(){
+    const name=document.getElementById('lfName').value.trim();
+    const email=document.getElementById('lfEmail').value.trim();
+    const phone=document.getElementById('lfPhone').value.trim();
+    const consent=document.getElementById('lfConsent').checked;
+    const errEl=document.getElementById('lfError');
+    const btn=document.getElementById('lfBtn');
+    errEl.style.display='none';
+    if(!name){errEl.textContent='Bitte gib deinen Vornamen ein.';errEl.style.display='block';return;}
+    if(!email||!email.includes('@')){errEl.textContent='Bitte gib eine gültige E-Mail-Adresse ein.';errEl.style.display='block';return;}
+    if(!phone||phone.replace(/[\s\-\(\)]/g,'').length<7){errEl.textContent='Bitte gib eine gültige Telefonnummer ein.';errEl.style.display='block';return;}
+    if(!consent){errEl.textContent='Bitte stimme der Datenschutzerklärung zu.';errEl.style.display='block';return;}
+    btn.disabled=true;btn.textContent='Wird gesendet…';
+    const bez=bezirke.find(b=>b.num===S.bezirk);
     try{
-      const res=await fetch(`${SUPABASE_URL}/rest/v1/leads`,{
+      const r=await fetch(`${SUPABASE_URL}/rest/v1/leads`,{
         method:'POST',
         headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Prefer':'return=minimal'},
-        body:JSON.stringify({name:d.name,email:d.email,phone:d.phone,type:d.type,bezirk:d.bezirk,flaeche:d.flaeche,zimmer:d.zimmer,condition:d.condition,baujahr:d.baujahr,aussenflaeche:d.aussenflaeche,ubahn:d.ubahn,nahversorgung:d.nahversorgung,nutzungsart:d.nutzungsart})
+        body:JSON.stringify({
+          name,email,phone,
+          type:'wohnung',
+          bezirk:bez?bez.name:(S.bezirk||null),
+          flaeche:S.flaeche||null,
+          zimmer:S.zimmer||null,
+          baujahr:S.baujahr||null,
+          condition:S.zustand||null,
+          aussenflaeche:S.balkon==='ja'?'balkon':'keine',
+          address:S.address||null,
+          nutzungsart:null,
+          ubahn:null,nahversorgung:null
+        })
       });
-      if(!res.ok) throw new Error();
-      document.getElementById('modalContent').innerHTML=`<div style="text-align:center;padding:20px 0"><div style="margin-bottom:16px;color:#10b981"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--g900);margin-bottom:8px">Anfrage erhalten!</div><p style="font-size:.88rem;color:var(--g500);line-height:1.65">Danke, ${d.name}.<br><br>Ein geprüfter Immobilienexperte für deinen Bezirk meldet sich innerhalb von 24 Stunden – kostenlos und unverbindlich.</p></div>`;
-    }catch(e){btn.textContent='Kostenlos den maximalen Preis anfragen →';btn.disabled=false;alert('Bitte nochmal versuchen.');}
+      if(r.ok){S.cur=8;render();document.getElementById('tool-section').scrollIntoView({behavior:'smooth',block:'start'});}
+      else{const msg=await r.text().catch(()=>'');console.error('Supabase error:',r.status,msg);throw new Error(msg);}
+    }catch(e){
+      btn.disabled=false;btn.textContent='Bericht kostenlos erhalten';
+      errEl.textContent='Etwas ist schiefgelaufen. Bitte versuche es erneut.';errEl.style.display='block';
+    }
   }
-  document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal()});
 
-  /* ── FAQ ── */
-  function toggleFaq(btn){const i=btn.closest('.faq-item'),o=i.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(x=>x.classList.remove('open'));if(!o)i.classList.add('open');}
+  /* ── STEP 8: DANKE ── */
+  function buildDankeStep(){
+    return `<div class="danke-wrap">
+      <div class="danke-icon"><i data-lucide="check-circle" style="width:48px;height:48px;color:var(--b500)"></i></div>
+      <div class="danke-title">Vielen Dank!</div>
+      <div class="danke-sub">Wir haben deine Anfrage erhalten und melden uns innerhalb von 24 Stunden bei dir. Ein lokaler Immobilienexperte wird sich persönlich bei dir melden.</div>
+      <button class="opt-btn" style="margin:0 auto;display:inline-flex" onclick="resetTool()">Neue Bewertung starten</button>
+    </div>`;
+  }
+
+  /* ── MODAL STUBS ── */
+  function openModal(){}
+  function closeModal(){}
 
   /* ── UTILS ── */
-  function scrollToTool(){document.getElementById('tool-section').scrollIntoView({behavior:'smooth',block:'start'})}
-  function resetTool(){Object.assign(S,{cur:0,type:null,bezirk:null,flaeche:80,zimmer:null,condition:null,floor:null,baujahr:null,aussenflaeche:null,ubahn:null,nahversorgung:null,nutzungsart:null});render();scrollToTool();}
+  function scrollToTool(){document.getElementById('tool-section').scrollIntoView({behavior:'smooth',block:'start'});}
+  function resetTool(){Object.assign(S,{cur:0,address:null,addressLat:null,addressLon:null,bezirk:null,flaeche:80,zimmer:null,baujahr:null,zustand:null,balkon:null});render();scrollToTool();}
 
   /* ── SCROLL REVEAL ── */
   const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
