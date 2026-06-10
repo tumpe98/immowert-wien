@@ -35,7 +35,7 @@
     html{scroll-behavior:smooth;}
     body{font-family:'Inter',sans-serif;background:var(--white);color:var(--g900);line-height:1.6;overflow-x:hidden;}
 
-    .page-hero{padding:100px 5% 56px;max-width:1200px;margin:0 auto;text-align:center;}
+    .page-hero{padding:72px 5% 56px;max-width:1200px;margin:0 auto;text-align:center;}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--b50);border:1px solid var(--b100);color:var(--b600);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:500;margin-bottom:20px;}
     .eyebrow .dot{width:6px;height:6px;background:var(--b500);border-radius:50%;}
     .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.15;letter-spacing:-.01em;color:var(--g900);margin-bottom:16px;}
@@ -67,6 +67,7 @@
     @media(max-width:500px){.values-grid{grid-template-columns:1fr;}}
     .value-card{background:white;border:1.5px solid var(--g100);border-radius:20px;padding:28px;box-shadow:var(--sh-sm);transition:all .2s;}
     .value-card:hover{border-color:var(--b300);box-shadow:var(--sh-md);transform:translateY(-2px);}
+    .lc{display:block;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
     .val-icon{font-size:1.8rem;margin-bottom:14px;line-height:1;}
     .val-icon .lc{width:28px;height:28px;color:#2563eb;}
     .val-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--g900);margin-bottom:8px;}
@@ -134,106 +135,79 @@
 <div style="padding-top:64px;">
   <div class="page-hero reveal">
     <div class="eyebrow"><span class="dot"></span>Über immowertwien</div>
-    <h1>Transparenz für den<br><span class="hl">Wiener Immobilienmarkt</span>.</h1>
-    <p>Wir glauben, dass jeder Eigentümer das Recht auf eine ehrliche, datenbasierte Einschätzung seines Immobilienwerts hat – unabhängig und kostenlos.</p>
+    <h1>Gegründet aus einer<br><span class="hl">einfachen Überzeugung</span>.</h1>
+    <p>Wer eine Immobilie verkauft, sollte vorher wissen, was sie wert ist – ohne Maklerinteresse, ohne Raterei, ohne Vertrag.</p>
   </div>
 </div>
 
 <div class="content-wrap">
 
-  <!-- MISSION -->
+  <!-- STORY -->
   <div class="mission-section reveal">
-    <div class="mission-visual">
-      <div class="mission-stat">
-        <div class="ms-val">23</div>
-        <div class="ms-lbl">Wiener Bezirke vollständig analysiert</div>
+    <div class="mission-visual" style="justify-content:flex-start;">
+      <div class="mission-quote-big" style="font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:white;line-height:1.55;margin-bottom:24px;opacity:.95;">
+        „Der Makler kennt den Markt.<br>Der Eigentümer soll <em>auch</em> den Markt kennen."
       </div>
       <div class="mission-divider"></div>
-      <div class="mission-stat">
-        <div class="ms-val">1 Min.</div>
-        <div class="ms-lbl">bis zur ersten datenbasierten Einschätzung</div>
-      </div>
-      <div class="mission-divider"></div>
-      <div class="mission-stat">
-        <div class="ms-val">100%</div>
-        <div class="ms-lbl">kostenlos & unverbindlich für Eigentümer</div>
-      </div>
-      <div class="mission-divider"></div>
-      <div class="mission-stat">
-        <div class="ms-val">24h</div>
-        <div class="ms-lbl">bis zum Rückruf durch den Experten</div>
+      <div style="margin-top:24px;font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.7;">
+        immowertwien ist kein Makler. Wir sind kein Bewertungsinstitut. Wir sind eine Informationsplattform – damit du in ein Gespräch gehst und nicht in eine Verhandlung reinrätst.
       </div>
     </div>
     <div class="mission-text">
-      <h2>Der Wiener Immobilienmarkt ist komplex. Wir machen ihn <span class="hl">lesbar</span>.</h2>
-      <p>Wer in Wien eine Immobilie besitzt, steht vor einer schwierigen Frage: Was ist sie wirklich wert? Nicht was der Nachbar sagt. Nicht was der Makler schätzt, der ein Mandat möchte. Sondern was der Markt tatsächlich zahlt.</p>
-      <p>immowertwien entstand aus der Überzeugung, dass diese Information zugänglich und kostenlos sein muss. Auf Basis öffentlicher Marktdaten, bezirksspezifisch, in unter 1 Minute. Kein Verkaufsinteresse. Keine versteckten Kosten. Keine Verpflichtung.</p>
-      <div class="mission-quote">„Der Makler kennt den Markt. Der Eigentümer soll <strong>auch</strong> den Markt kennen."</div>
+      <h2>Woher <span class="hl">immowertwien</span> kommt</h2>
+      <p>Der Wiener Immobilienmarkt ist ungewöhnlich undurchsichtig. Tatsächlich erzielte Kaufpreise sind in Österreich nicht öffentlich einsehbar. Makler haben ein Interesse an einem bestimmten Preis. Online-Tools zeigen Angebotspreise – die in Wien im Schnitt 6–10&nbsp;% über dem liegen, was wirklich bezahlt wird.</p>
+      <p>Wer seine Wohnung verkauft, steht damit vor einer strukturellen Informationsasymmetrie. Die eine Seite – Makler, Investoren, Institutionen – hat die Daten. Die andere Seite – Eigentümer – muss raten oder vertrauen.</p>
+      <p>immowertwien entstand aus der Überzeugung, dass das nicht sein muss. Auf Basis öffentlicher Marktdaten, bezirksspezifisch, in unter 1 Minute. Kein Verkaufsinteresse. Keine versteckten Kosten. Keine Verpflichtung.</p>
     </div>
   </div>
 
-  <!-- VALUES -->
+  <!-- BELIEFS -->
   <div class="values-section reveal">
-    <div class="section-label">Unsere Grundsätze</div>
-    <h2 class="section-h2">Was uns von einer einfachen Preisschätzung unterscheidet</h2>
-    <div class="values-grid">
+    <div class="section-label">Was wir glauben</div>
+    <h2 class="section-h2">Drei Grundsätze, die alles bestimmen</h2>
+    <div class="values-grid" style="grid-template-columns:repeat(3,1fr)">
       <div class="value-card">
-        <div class="val-icon"><i data-lucide="bar-chart-2" class="lc"></i></div>
-        <div class="val-title">Daten statt Bauchgefühl</div>
-        <div class="val-text">Jede Bewertung basiert auf öffentlichen Marktdaten (Angebotspreise + Transaktionsquote) aus dem Wiener Markt – nicht auf Schätzungen oder Verkaufsinteressen.</div>
+        <div class="val-icon"><i data-lucide="eye" class="lc"></i></div>
+        <div class="val-title">Transparenz ist das Produkt</div>
+        <div class="val-text">Wir geben dir Daten, die sonst nur Institutionen zugänglich sind. Das ist kein Marketingversprechen – es ist der einzige Grund, warum dieses Tool existiert.</div>
       </div>
       <div class="value-card">
-        <div class="val-icon"><i data-lucide="map-pin" class="lc"></i></div>
-        <div class="val-title">Wien-spezifisch bis zum Bezirk</div>
-        <div class="val-text">Alle 23 Bezirke separat analysiert. Weil eine Wohnung in Neubau andere Marktgesetze hat als eine in Favoriten – und diese Unterschiede zählen.</div>
-      </div>
-      <div class="value-card">
-        <div class="val-icon"><i data-lucide="lock" class="lc"></i></div>
-        <div class="val-title">Unverbindlich & vertraulich</div>
-        <div class="val-text">Die Bewertung verpflichtet zu nichts. Deine Daten werden nicht an mehrere Makler weitergegeben. Transparenz ist kein Versprechen – es ist unser Modell.</div>
-      </div>
-      <div class="value-card">
-        <div class="val-icon"><i data-lucide="zap" class="lc"></i></div>
-        <div class="val-title">Sofort – nicht irgendwann</div>
-        <div class="val-text">In unter 1 Minute erhältst du eine fundierte Ersteinschätzung. Weil deine Zeit wertvoller ist als ein langes Erstgespräch ohne Grundlage.</div>
+        <div class="val-icon"><i data-lucide="scale" class="lc"></i></div>
+        <div class="val-title">Entscheidungen brauchen eine Basis</div>
+        <div class="val-text">Ein Eigentümer, der seinen Marktwert kennt, setzt einen realistischen Preis, vermeidet Zeitverluste durch falsche Angebote und weiß, wann er nachgeben kann – und wann nicht.</div>
       </div>
       <div class="value-card">
         <div class="val-icon"><i data-lucide="handshake" class="lc"></i></div>
-        <div class="val-title">Ausgewählte Experten</div>
-        <div class="val-text">Wir arbeiten nur mit geprüften, lokal erfahrenen Maklern zusammen – die deine Immobilie kennen und nicht bloß kennenlernen wollen.</div>
-      </div>
-      <div class="value-card">
-        <div class="val-icon"><i data-lucide="target" class="lc"></i></div>
-        <div class="val-title">100% kostenlos für Eigentümer</div>
-        <div class="val-text">Das Tool, die Bewertung, das Erstgespräch – alles ohne Kosten. Wir werden nur dann vergütet, wenn ein Verkauf erfolgreich abgeschlossen wird.</div>
+        <div class="val-title">Wir verdienen nur, wenn du erfolgreich bist</div>
+        <div class="val-text">Das Tool, der Bericht, der Experten-Call – alles kostenlos für dich. Wir werden ausschließlich bei erfolgreichem Abschluss mit einem unserer Partnerexperten vergütet.</div>
       </div>
     </div>
   </div>
 
-  <!-- HOW WE WORK -->
+  <!-- OUR MODEL -->
   <div class="process-section reveal">
-    <div class="section-label">Wie wir arbeiten</div>
-    <h2 class="section-h2">Drei Schritte. Keine Überraschungen.</h2>
+    <div class="section-label">Unser Modell</div>
+    <h2 class="section-h2">Transparent über das, womit wir Geld verdienen</h2>
     <div class="process-grid">
       <div class="process-card">
         <div class="process-num">01</div>
         <div>
-          <div class="process-title">Daten erheben, nicht erfinden</div>
-          <div class="process-text">Unsere Preisdaten kombinieren Angebotspreise (immopreise.at) mit der Transaktionspreisquote aus dem OeNB Grundstückspreisspiegel. Bezirksspezifisch. Keine gesamtösterreichischen Pauschalwerte.</div>
+          <div class="process-title">Für Eigentümer: kostenlos</div>
+          <div class="process-text">Das Bewertungstool, der persönliche Marktbericht und der Experten-Call kosten dich nichts. Keine versteckten Gebühren, kein Mehrfachverkauf deiner Kontaktdaten an konkurrierende Makler.</div>
         </div>
       </div>
       <div class="process-card">
         <div class="process-num">02</div>
         <div>
-          <div class="process-title">Nur vorbereitete Experten</div>
-          <div class="process-text">Wenn ein Makler den Kontakt aufnimmt, kennt er deine Immobilie bereits. Bezirk, Größe, Zustand, deine Präferenz. Kein Kaltstart, kein Zeitverlust.</div>
+          <div class="process-title">Für Partnerexperten: Erfolgsprovision</div>
+          <div class="process-text">Wir arbeiten mit ausgewählten, lokal erfahrenen Maklern zusammen. Diese zahlen uns ausschließlich dann eine Provision, wenn der Verkauf erfolgreich abgeschlossen wird.</div>
         </div>
       </div>
       <div class="process-card">
         <div class="process-num">03</div>
         <div>
-          <div class="process-title">Du behältst die Kontrolle</div>
-          <div class="process-text">Nach der Bewertung und dem Experten-Call entscheidest du – ohne Druck, ohne Frist, ohne Vertrag. Unsere Aufgabe endet, wenn deine Entscheidung beginnt.</div>
+          <div class="process-title">Dein Entscheidungsrecht bleibt bei dir</div>
+          <div class="process-text">Nach dem Bericht und dem optionalen Experten-Call entscheidest du – ohne Frist, ohne Druck, ohne Vertrag. Unser Interesse ist eine fundierte Entscheidung, nicht eine erzwungene.</div>
         </div>
       </div>
     </div>

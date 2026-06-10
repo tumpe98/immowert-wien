@@ -186,7 +186,7 @@
     .hero-meta{font-size:.82rem;color:var(--g400);margin-top:14px;display:flex;align-items:center;gap:6px}
 
     /* hero visual */
-    .hero-vis{opacity:0;animation:fadeIn .8s .4s forwards;position:relative;padding:20px 0}
+    .hero-vis{opacity:0;animation:fadeIn .8s .4s forwards;position:relative;padding:20px 0;overflow:hidden}
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
     .price-card{background:white;border:1px solid var(--g100);border-radius:24px;padding:32px;box-shadow:var(--sh-lg);position:relative;overflow:hidden}
@@ -798,22 +798,22 @@
       <div class="step-card reveal" style="transition-delay:.1s">
         <div class="step-num">1</div>
         <div class="step-card-icon"><i data-lucide="bar-chart-2" class="lc"></i></div>
-        <div class="step-card-title">Marktüberblick holen</div>
-        <div class="step-card-text">Beantworte 6 kurze Fragen. Du siehst sofort den Marktwert, aktuelle Preistrends und wo deine Immobilie im Bezirksvergleich steht – kostenlos, ohne Registrierung.</div>
+        <div class="step-card-title">Marktbericht holen</div>
+        <div class="step-card-text">Beantworte 6 kurze Fragen. Du siehst sofort deinen Marktwert, die Preisspanne für deinen Bezirk und wo deine Immobilie im Vergleich steht – kostenlos, ohne Registrierung.</div>
         <span class="step-card-time"><i data-lucide="clock" class="lc" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px"></i>1 Minute</span>
       </div>
       <div class="step-card reveal" style="transition-delay:.2s">
         <div class="step-num">2</div>
-        <div class="step-card-icon"><i data-lucide="phone" class="lc"></i></div>
-        <div class="step-card-title">Tiefenanalyse mit Experten</div>
-        <div class="step-card-text">Ein geprüfter Wiener Immobilienexperte erklärt dir kostenlos, was deinen spezifischen Preis wirklich bestimmt – Lage, Zeitpunkt, Strategie.</div>
-        <span class="step-card-time"><i data-lucide="clock" class="lc" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px"></i>30 Minuten · kostenlos</span>
+        <div class="step-card-icon"><i data-lucide="search" class="lc"></i></div>
+        <div class="step-card-title">Tiefe Einschätzung auf Wunsch</div>
+        <div class="step-card-text">Der Bericht zeigt dir die Datenlage. Wer mehr braucht – Mikrolage, optimales Timing, Verhandlungsspielraum – bucht den kostenlosen Experten-Call. Kein Kaltanruf. Nur wenn du willst.</div>
+        <span class="step-card-time"><i data-lucide="clock" class="lc" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px"></i>30 Minuten · optional</span>
       </div>
       <div class="step-card reveal" style="transition-delay:.3s">
         <div class="step-num">3</div>
         <div class="step-card-icon"><i data-lucide="handshake" class="lc"></i></div>
-        <div class="step-card-title">Auf Augenhöhe verhandeln</div>
-        <div class="step-card-text">Mit echtem Marktwissen, der richtigen Preisstrategie und Zugang zu qualifizierten Käufern verhandelst du auf Augenhöhe – statt blind in eine Verhandlung zu gehen.</div>
+        <div class="step-card-title">Mit Klarheit verhandeln</div>
+        <div class="step-card-text">Mit einem vollständigen Marktbild und einer klaren Preisstrategie verhandelst du auf Augenhöhe – statt dich auf Zahlen verlassen zu müssen, die ein Makler mit Mandat gesetzt hat.</div>
         <span class="step-card-time"><i data-lucide="trending-up" class="lc" style="width:13px;height:13px;display:inline-block;vertical-align:middle;margin-right:4px"></i>Fundiert statt geraten</span>
       </div>
     </div>
@@ -828,20 +828,20 @@
       <h2 class="s-h2 dark">Was Marktkenntnis dir im Verkauf konkret bringt</h2>
       <div class="experten-list">
         <div class="e-item">
+          <div class="e-icon"><i data-lucide="eye-off" class="lc"></i></div>
+          <div><div class="e-title">Was Makler selten ungefragt sagen</div><div class="e-text">Viele Makler nennen zunächst einen Preis, der ein Mandat sichert – nicht den, den der Markt tatsächlich hergibt. Wir haben kein Mandat und kein Interesse an einem bestimmten Ergebnis.</div></div>
+        </div>
+        <div class="e-item">
           <div class="e-icon"><i data-lucide="bar-chart-2" class="lc"></i></div>
-          <div><div class="e-title">Angebotspreise + Transaktionsquote kombiniert</div><div class="e-text">Unser Tool kombiniert Angebotspreise (immopreise.at) mit der durchschnittlichen Transaktionspreisquote aus dem OeNB Grundstückspreisspiegel – näher an der Realität als reine Inseratspreise.</div></div>
+          <div><div class="e-title">Transaktionspreise – nicht nur Inserate</div><div class="e-text">Angebotspreise in Wien liegen im Schnitt 6–10 % über tatsächlichen Kaufpreisen. Unser Tool kombiniert beides: Angebotspreise und die OeNB-Transaktionsquote – für eine realistische Einschätzung.</div></div>
         </div>
         <div class="e-item">
           <div class="e-icon"><i data-lucide="map-pin" class="lc"></i></div>
-          <div><div class="e-title">Bezirkstiefe: Was in deiner Straße gilt</div><div class="e-text">Preisunterschiede zwischen Straßenseiten, U-Bahn-Nähe und Grünflächen können Zehntausende Euro bedeuten. Der Experten-Call liefert das hyperlokale Wissen für deinen Bezirk.</div></div>
+          <div><div class="e-title">Mikrolage – was kein Online-Rechner kennt</div><div class="e-text">U-Bahn-Nähe, Straßenseite, Blick, Stockwerk: diese Details bedeuten Zehntausende Euro Unterschied und tauchen in keinem pauschalen Online-Tool auf. Der Experten-Call bringt dieses hyperlokale Wissen.</div></div>
         </div>
         <div class="e-item">
-          <div class="e-icon"><i data-lucide="crosshair" class="lc"></i></div>
-          <div><div class="e-title">Dein Preispotenzial – nicht der Durchschnitt</div><div class="e-text">Der Marktdurchschnitt ist ein Orientierungspunkt. Was zählt, ist was deine spezifische Immobilie in Zustand, Lage und zum richtigen Zeitpunkt erzielen kann.</div></div>
-        </div>
-        <div class="e-item">
-          <div class="e-icon"><i data-lucide="zap" class="lc"></i></div>
-          <div><div class="e-title">Kein Vertrag, kein Druck</div><div class="e-text">Das Tool ist kostenlos. Der Experten-Call ist kostenlos. Du entscheidest danach frei, ob und wie du weitermachst – Transparenz bedeutet auch: keine versteckten Verpflichtungen.</div></div>
+          <div class="e-icon"><i data-lucide="scale" class="lc"></i></div>
+          <div><div class="e-title">Emotionslos, weil datenbasiert</div><div class="e-text">Eigentümer überschätzen den Wert ihrer Immobilie im Schnitt um 15–30 %. Unsere Bewertung hängt nicht von Erinnerungen, Renovierungen oder Erwartungen ab – nur von dem, was Käufer tatsächlich zahlen.</div></div>
         </div>
       </div>
     </div>
@@ -853,7 +853,7 @@
           <div><span class="exp-stat-val">€ 0</span><span class="exp-stat-lbl">Kosten für dich</span></div>
           <div><span class="exp-stat-val">24h</span><span class="exp-stat-lbl">Rückmeldung</span></div>
           <div><span class="exp-stat-val">100%</span><span class="exp-stat-lbl">Kostenlos</span></div>
-          <div><span class="exp-stat-val">23</span><span class="exp-stat-lbl">Bezirke</span></div>
+          <div><span class="exp-stat-val">0</span><span class="exp-stat-lbl">Interessenskonflikt</span></div>
         </div>
       </div>
     </div>
