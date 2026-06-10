@@ -3,7 +3,6 @@
 <head>
   <script src="cookie-consent.js"></script>
   <meta charset="UTF-8">
-
   <link rel="canonical" href="https://immobilienwert-wien.at/kontakt">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Über uns | immowertwien – Immobilienbewertung Wien</title>
@@ -15,291 +14,299 @@
   <meta property="og:image" content="https://immobilienwert-wien.at/og-image.jpg">
   <meta property="og:locale" content="de_AT">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Über uns – immowertwien | Immobilienbewertung Wien">
-  <meta name="twitter:description" content="immowertwien ist Wiens transparenteste Plattform für datenbasierte Immobilienbewertungen – kostenlos und unverbindlich.">
-  <meta name="twitter:image" content="https://immobilienwert-wien.at/og-image.jpg">
-  <meta name="description" content="immowertwien ist Österreichs präziseste Immobilienbewertungsplattform – spezialisiert auf alle 23 Wiener Bezirke. Datenbasiert, unabhängig, kostenlos.">
+  <meta name="description" content="immowertwien: Warum wir existieren, wie wir arbeiten und womit wir Geld verdienen – transparent erklärt.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --white:#ffffff; --off:#f7f8fc; --b900:#0a1628; --b800:#0d2045;
-      --b600:#1a4fd6; --b500:#2563eb; --b400:#3b82f6; --b300:#93c5fd;
-      --b100:#dbeafe; --b50:#eff6ff; --g900:#111827; --g700:#374151;
-      --g500:#6b7280; --g400:#9ca3af; --g300:#d1d5db; --g200:#e5e7eb;
-      --g100:#f3f4f6; --green:#10b981;
-      --sh-sm:0 1px 3px rgba(0,0,0,.06); --sh-md:0 4px 24px rgba(0,0,0,.08);
+    :root{
+      --white:#ffffff;--off:#f7f8fc;--b900:#0a1628;--b800:#0d2045;
+      --b600:#1a4fd6;--b500:#2563eb;--b400:#3b82f6;--b300:#93c5fd;
+      --b100:#dbeafe;--b50:#eff6ff;--g900:#111827;--g700:#374151;
+      --g500:#6b7280;--g400:#9ca3af;--g300:#d1d5db;--g200:#e5e7eb;
+      --g100:#f3f4f6;--green:#10b981;
+      --sh-sm:0 1px 3px rgba(0,0,0,.06);--sh-md:0 4px 24px rgba(0,0,0,.08);
       --sh-blue:0 8px 32px rgba(37,99,235,.2);
     }
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    body{font-family:'Inter',sans-serif;background:var(--white);color:var(--g900);line-height:1.6;overflow-x:hidden;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--white);color:var(--g900);line-height:1.6;overflow-x:hidden}
+    .lc{display:block;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
-    .page-hero{padding:72px 5% 56px;max-width:1200px;margin:0 auto;text-align:center;}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--b50);border:1px solid var(--b100);color:var(--b600);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:500;margin-bottom:20px;}
-    .eyebrow .dot{width:6px;height:6px;background:var(--b500);border-radius:50%;}
-    .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.15;letter-spacing:-.01em;color:var(--g900);margin-bottom:16px;}
-    .page-hero h1 .hl{color:var(--b500);}
-    .page-hero p{font-size:1rem;color:var(--g500);line-height:1.75;max-width:580px;margin:0 auto;}
+    /* ── HERO ── */
+    .about-hero{padding-top:64px;background:var(--b900);color:white}
+    .about-hero-inner{max-width:1100px;margin:0 auto;padding:80px 5% 88px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    @media(max-width:860px){.about-hero-inner{grid-template-columns:1fr;gap:48px;padding:64px 5%}}
+    .hero-tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--b300);margin-bottom:16px}
+    .about-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:800;line-height:1.12;letter-spacing:-.01em;color:white;margin-bottom:20px}
+    .about-hero h1 .hl{color:var(--b300)}
+    .about-hero-lead{font-size:1.05rem;color:rgba(255,255,255,.55);line-height:1.75;max-width:460px}
+    .hero-facts{display:flex;flex-direction:column;gap:0}
+    .hf-item{padding:24px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+    .hf-item:first-child{padding-top:0}
+    .hf-item:last-child{border-bottom:none;padding-bottom:0}
+    .hf-val{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:800;color:white;line-height:1}
+    .hf-lbl{font-size:.8rem;color:rgba(255,255,255,.4);margin-top:4px;line-height:1.4}
 
-    .content-wrap{max-width:1200px;margin:0 auto;padding:0 5% 80px;}
+    /* ── CONTENT ── */
+    .content{max-width:1100px;margin:0 auto;padding:0 5%}
 
-    .section-label{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--b500);margin-bottom:10px;}
-    .section-h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--g900);margin-bottom:40px;line-height:1.15;}
+    /* ── STORY ── */
+    .story-section{padding:80px 0 72px}
+    .story-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.2rem);font-weight:800;color:var(--g900);margin-bottom:24px;line-height:1.15;max-width:600px}
+    .story-section h2 .hl{color:var(--b500)}
+    .story-body{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+    @media(max-width:800px){.story-body{grid-template-columns:1fr;gap:32px}}
+    .story-text p{font-size:.95rem;color:var(--g500);line-height:1.85;margin-bottom:18px}
+    .story-text p:last-child{margin-bottom:0}
+    .story-text strong{color:var(--g700);font-weight:600}
+    .insight-box{background:var(--g100);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;gap:24px}
+    .ib-item{}
+    .ib-val{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;color:var(--g900);margin-bottom:4px}
+    .ib-lbl{font-size:.82rem;color:var(--g500);line-height:1.5}
+    .ib-div{height:1px;background:var(--g200)}
 
-    /* MISSION */
-    .mission-section{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-bottom:80px;}
-    @media(max-width:800px){.mission-section{grid-template-columns:1fr;gap:32px;}}
-    .mission-visual{background:linear-gradient(135deg,var(--b900) 0%,var(--b800) 100%);border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:24px;}
-    .mission-stat{text-align:center;}
-    .ms-val{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:800;color:white;}
-    .ms-lbl{font-size:.78rem;color:rgba(255,255,255,.45);margin-top:4px;}
-    .mission-divider{height:1px;background:rgba(255,255,255,.08);}
-    .mission-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--g900);margin-bottom:16px;line-height:1.15;}
-    .mission-text h2 .hl{color:var(--b500);}
-    .mission-text p{font-size:.93rem;color:var(--g500);line-height:1.8;margin-bottom:16px;}
-    .mission-quote{background:var(--b50);border-left:3px solid var(--b500);border-radius:0 12px 12px 0;padding:20px 24px;margin-top:24px;font-size:.95rem;font-weight:500;color:var(--b900);line-height:1.6;font-style:italic;}
+    /* ── APPROACH ── */
+    .approach-section{padding:72px 0;border-top:1px solid var(--g100)}
+    .section-tag{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--b500);margin-bottom:10px}
+    .approach-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;color:var(--g900);margin-bottom:48px;line-height:1.15}
+    .approach-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+    @media(max-width:700px){.approach-grid{grid-template-columns:1fr}}
+    .ap-card{padding:32px;background:white;border:1.5px solid var(--g100);border-radius:20px}
+    .ap-card:hover{border-color:var(--b300)}
+    .ap-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:800;color:var(--g200);margin-bottom:14px;line-height:1}
+    .ap-title{font-weight:700;font-size:1rem;color:var(--g900);margin-bottom:10px}
+    .ap-text{font-size:.87rem;color:var(--g500);line-height:1.7}
 
-    /* VALUES */
-    .values-section{margin-bottom:80px;}
-    .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-    @media(max-width:800px){.values-grid{grid-template-columns:1fr 1fr;}}
-    @media(max-width:500px){.values-grid{grid-template-columns:1fr;}}
-    .value-card{background:white;border:1.5px solid var(--g100);border-radius:20px;padding:28px;box-shadow:var(--sh-sm);transition:all .2s;}
-    .value-card:hover{border-color:var(--b300);box-shadow:var(--sh-md);transform:translateY(-2px);}
-    .lc{display:block;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
-    .val-icon{font-size:1.8rem;margin-bottom:14px;line-height:1;}
-    .val-icon .lc{width:28px;height:28px;color:#2563eb;}
-    .val-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--g900);margin-bottom:8px;}
-    .val-text{font-size:.83rem;color:var(--g500);line-height:1.65;}
+    /* ── MODEL ── */
+    .model-section{padding:72px 0;border-top:1px solid var(--g100)}
+    .model-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;color:var(--g900);margin-bottom:16px;line-height:1.15}
+    .model-section .lead{font-size:.95rem;color:var(--g500);line-height:1.75;max-width:640px;margin-bottom:36px}
+    .model-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+    @media(max-width:700px){.model-row{grid-template-columns:1fr}}
+    .model-item{background:var(--off);border-radius:16px;padding:24px 20px}
+    .mi-label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--b500);margin-bottom:8px}
+    .mi-text{font-size:.87rem;color:var(--g700);line-height:1.65}
 
-    /* STATS */
-    .stats-strip{background:var(--b900);border-radius:20px;padding:40px 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:80px;text-align:center;}
-    @media(max-width:700px){.stats-strip{grid-template-columns:1fr 1fr;padding:28px;}}
-    .stat-val{font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;color:white;}
-    .stat-lbl{font-size:.73rem;color:rgba(255,255,255,.4);margin-top:4px;line-height:1.4;}
+    /* ── SOURCES ── */
+    .sources-section{padding:72px 0;border-top:1px solid var(--g100)}
+    .sources-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;color:var(--g900);margin-bottom:16px;line-height:1.15}
+    .sources-section .lead{font-size:.95rem;color:var(--g500);line-height:1.75;max-width:640px;margin-bottom:36px}
+    .sources-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+    @media(max-width:600px){.sources-grid{grid-template-columns:1fr}}
+    .src-card{background:var(--off);border:1.5px solid var(--g100);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start}
+    .src-icon .lc{width:18px;height:18px;color:var(--b500)}
+    .src-title{font-weight:600;font-size:.88rem;color:var(--g900);margin-bottom:3px}
+    .src-text{font-size:.8rem;color:var(--g500);line-height:1.55}
+    .src-note{font-size:.8rem;color:var(--g400);line-height:1.65}
 
-    /* PROCESS */
-    .process-section{margin-bottom:80px;}
-    .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-    @media(max-width:800px){.process-grid{grid-template-columns:1fr;}}
-    .process-card{background:var(--off);border:1.5px solid var(--g200);border-radius:20px;padding:32px 28px;display:flex;gap:20px;align-items:flex-start;}
-    .process-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:800;color:var(--g300);line-height:1;flex-shrink:0;}
-    .process-title{font-weight:600;font-size:.95rem;color:var(--g900);margin-bottom:8px;}
-    .process-text{font-size:.83rem;color:var(--g500);line-height:1.65;}
+    /* ── FAQ ── */
+    .faq-section{padding:72px 0;border-top:1px solid var(--g100)}
+    .faq-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;color:var(--g900);margin-bottom:40px;line-height:1.15}
+    .faq-item{border-bottom:1px solid var(--g200)}
+    .faq-btn{width:100%;text-align:left;background:none;border:none;padding:20px 0;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;color:var(--g900);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .faq-btn:hover{color:var(--b500)}
+    .faq-arrow{font-size:.75rem;color:var(--b500);transition:transform .25s;flex-shrink:0}
+    .faq-item.open .faq-arrow{transform:rotate(180deg)}
+    .faq-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .faq-item.open .faq-body{max-height:300px}
+    .faq-body p{padding-bottom:20px;font-size:.9rem;color:var(--g500);line-height:1.75}
 
-    /* FAQ */
-    .faq-section{margin-bottom:80px;}
-    .faq-item{border-bottom:1px solid var(--g200);}
-    .faq-btn{width:100%;text-align:left;background:none;border:none;padding:20px 0;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;color:var(--g900);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;}
-    .faq-btn:hover{color:var(--b500);}
-    .faq-arrow{font-size:.75rem;color:var(--b500);transition:transform .25s;flex-shrink:0;}
-    .faq-item.open .faq-arrow{transform:rotate(180deg);}
-    .faq-body{max-height:0;overflow:hidden;transition:max-height .3s ease;}
-    .faq-item.open .faq-body{max-height:300px;}
-    .faq-body p{padding-bottom:20px;font-size:.9rem;color:var(--g500);line-height:1.75;}
+    /* ── CTA ── */
+    .cta-section{padding:72px 0 88px}
+    .cta-inner{background:var(--b900);border-radius:24px;padding:56px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+    @media(max-width:700px){.cta-inner{padding:36px 28px}}
+    .cta-inner h2{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:800;color:white;line-height:1.2;max-width:400px}
+    .cta-btn{flex-shrink:0;display:inline-block;background:white;color:var(--b600);padding:16px 32px;border-radius:100px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .2s;white-space:nowrap}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,255,255,.15)}
 
-    /* DATA SOURCES */
-    .sources-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
-    @media(max-width:600px){.sources-grid{grid-template-columns:1fr;}}
-    .source-card{background:var(--off);border:1.5px solid var(--g100);border-radius:16px;padding:20px;display:flex;gap:14px;align-items:flex-start;}
-    .source-icon{font-size:1.3rem;flex-shrink:0;line-height:1;}
-    .source-icon .lc{width:20px;height:20px;color:#2563eb;}
-    .source-title{font-weight:600;font-size:.88rem;color:var(--g900);margin-bottom:4px;}
-    .source-text{font-size:.8rem;color:var(--g500);line-height:1.6;}
+    /* ── FOOTER ── */
+    footer{background:var(--b900);padding:36px 5%;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+    .foot-logo{font-family:'Playfair Display',serif;font-weight:800;color:white;font-size:1rem}
+    .foot-logo span{color:var(--b300)}
+    .foot-nav{display:flex;gap:20px;flex-wrap:wrap}
+    .foot-nav a{font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .18s}
+    .foot-nav a:hover{color:rgba(255,255,255,.8)}
+    .foot-copy{font-size:.72rem;color:rgba(255,255,255,.2)}
 
-    /* CTA */
-    .cta-section{background:var(--b50);border:1.5px solid var(--b100);border-radius:20px;padding:48px 40px;text-align:center;margin-bottom:56px;}
-    .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;color:var(--g900);margin-bottom:12px;}
-    .cta-section p{font-size:.95rem;color:var(--g500);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;}
-    .cta-btn{display:inline-block;background:var(--b500);color:white;padding:16px 36px;border-radius:100px;font-weight:600;font-size:1rem;text-decoration:none;transition:all .2s;box-shadow:var(--sh-blue);}
-    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,99,235,.3);}
-
-    footer{background:var(--b900);padding:36px 5%;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-    .foot-logo{font-family:'Playfair Display',serif;font-weight:800;color:white;font-size:1rem;}
-    .foot-logo span{color:var(--b300);}
-    .foot-nav{display:flex;gap:20px;flex-wrap:wrap;}
-    .foot-nav a{font-size:.82rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .18s;}
-    .foot-nav a:hover{color:rgba(255,255,255,.8);}
-    .foot-copy{font-size:.72rem;color:rgba(255,255,255,.2);}
-
-    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
-    .reveal.vis{opacity:1;transform:translateY(0);}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+    .reveal.vis{opacity:1;transform:translateY(0)}
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <script src="nav.js"></script>
 
-<div style="padding-top:64px;">
-  <div class="page-hero reveal">
-    <div class="eyebrow"><span class="dot"></span>Über immowertwien</div>
-    <h1>Gegründet aus einer<br><span class="hl">einfachen Überzeugung</span>.</h1>
-    <p>Wer eine Immobilie verkauft, sollte vorher wissen, was sie wert ist – ohne Maklerinteresse, ohne Raterei, ohne Vertrag.</p>
+<!-- HERO -->
+<div class="about-hero">
+  <div class="about-hero-inner">
+    <div class="reveal">
+      <div class="hero-tag">Über immowertwien</div>
+      <h1>Marktdaten.<br><span class="hl">Für alle.</span></h1>
+      <p class="about-hero-lead">In Österreich wissen Makler, Investoren und Institutionen, was Immobilien wirklich wert sind. Eigentümer meist nicht. Das ändern wir.</p>
+    </div>
+    <div class="hero-facts reveal" style="transition-delay:.15s">
+      <div class="hf-item">
+        <div class="hf-val">6–10 %</div>
+        <div class="hf-lbl">liegen Angebotspreise in Wien über tatsächlichen Kaufpreisen</div>
+      </div>
+      <div class="hf-item">
+        <div class="hf-val">15–30 %</div>
+        <div class="hf-lbl">überschätzen Eigentümer ihren Immobilienwert im Schnitt</div>
+      </div>
+      <div class="hf-item">
+        <div class="hf-val">nicht öffentlich</div>
+        <div class="hf-lbl">sind tatsächlich erzielte Kaufpreise in Österreich</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="content-wrap">
-
-  <!-- STORY -->
-  <div class="mission-section reveal">
-    <div class="mission-visual" style="justify-content:flex-start;gap:16px;">
-      <div class="mission-stat">
-        <div class="ms-val">6–10%</div>
-        <div class="ms-lbl">Angebotspreise über tatsächlichen Kaufpreisen in Wien</div>
+<!-- STORY -->
+<div class="content">
+  <div class="story-section reveal">
+    <h2>Das <span class="hl">Informationsproblem</span>,<br>das wir lösen</h2>
+    <div class="story-body">
+      <div class="story-text">
+        <p>Wer eine Wohnung in Wien verkauft, steht vor einem strukturellen Problem: Die Gegenseite – Makler, Investoren, Käufer – hat Zugang zu Transaktionsdaten. Eigentümer nicht. Tatsächlich erzielte Kaufpreise sind in Österreich nicht öffentlich einsehbar. Was bleibt, sind Angebotspreise aus Inseraten – die in Wien im Schnitt <strong>6–10 % über dem liegen, was Käufer tatsächlich zahlen</strong>.</p>
+        <p>Das Ergebnis: Eigentümer, die zu hoch einsteigen, verlieren Zeit. Jene, die sich auf eine Maklereinschätzung verlassen, die ein Mandat sichern soll, riskieren, unter Wert zu verkaufen. Und wer ohne Grundlage verhandelt, hat keine Chance zu wissen, wann ein Angebot gut ist.</p>
+        <p>immowertwien macht dieselben Datenquellen zugänglich, die Institutionen nutzen – bezirksspezifisch, sofort, kostenlos.</p>
       </div>
-      <div class="mission-divider"></div>
-      <div class="mission-stat">
-        <div class="ms-val">15–30%</div>
-        <div class="ms-lbl">überschätzen Eigentümer ihren Immobilienwert im Schnitt</div>
-      </div>
-      <div class="mission-divider"></div>
-      <div class="mission-stat">
-        <div class="ms-val">€ 0</div>
-        <div class="ms-lbl">Kosten für Eigentümer – Tool, Bericht, Experten-Call</div>
-      </div>
-    </div>
-    <div class="mission-text">
-      <h2>Woher <span class="hl">immowertwien</span> kommt</h2>
-      <p>Der Wiener Immobilienmarkt ist ungewöhnlich undurchsichtig. Tatsächlich erzielte Kaufpreise sind in Österreich nicht öffentlich einsehbar. Makler haben ein Interesse an einem bestimmten Preis. Online-Tools zeigen Angebotspreise – die in Wien im Schnitt 6–10&nbsp;% über dem liegen, was wirklich bezahlt wird.</p>
-      <p>Wer seine Wohnung verkauft, steht damit vor einer strukturellen Informationsasymmetrie. Die eine Seite – Makler, Investoren, Institutionen – hat die Daten. Die andere Seite – Eigentümer – muss raten oder vertrauen.</p>
-      <p>immowertwien entstand aus der Überzeugung, dass das nicht sein muss. Auf Basis öffentlicher Marktdaten, bezirksspezifisch, in unter 1 Minute. Kein Verkaufsinteresse. Keine versteckten Kosten. Keine Verpflichtung.</p>
-    </div>
-  </div>
-
-  <!-- BELIEFS -->
-  <div class="values-section reveal">
-    <div class="section-label">Was wir glauben</div>
-    <h2 class="section-h2">Drei Grundsätze, die alles bestimmen</h2>
-    <div class="values-grid" style="grid-template-columns:repeat(3,1fr)">
-      <div class="value-card">
-        <div class="val-icon"><i data-lucide="eye" class="lc"></i></div>
-        <div class="val-title">Transparenz ist das Produkt</div>
-        <div class="val-text">Wir geben dir Daten, die sonst nur Institutionen zugänglich sind. Das ist kein Marketingversprechen – es ist der einzige Grund, warum dieses Tool existiert.</div>
-      </div>
-      <div class="value-card">
-        <div class="val-icon"><i data-lucide="scale" class="lc"></i></div>
-        <div class="val-title">Entscheidungen brauchen eine Basis</div>
-        <div class="val-text">Ein Eigentümer, der seinen Marktwert kennt, setzt einen realistischen Preis, vermeidet Zeitverluste durch falsche Angebote und weiß, wann er nachgeben kann – und wann nicht.</div>
-      </div>
-      <div class="value-card">
-        <div class="val-icon"><i data-lucide="handshake" class="lc"></i></div>
-        <div class="val-title">Wir verdienen nur, wenn du erfolgreich bist</div>
-        <div class="val-text">Das Tool, der Bericht, der Experten-Call – alles kostenlos für dich. Wir werden ausschließlich bei erfolgreichem Abschluss mit einem unserer Partnerexperten vergütet.</div>
+      <div class="insight-box">
+        <div class="ib-item">
+          <div class="ib-val">IMMOunited</div>
+          <div class="ib-lbl">Transaktionsdatenbank – für Institutionen. Nicht für Eigentümer.</div>
+        </div>
+        <div class="ib-div"></div>
+        <div class="ib-item">
+          <div class="ib-val">OeNB</div>
+          <div class="ib-lbl">Grundstückspreisspiegel – öffentlich, aber schwer interpretierbar ohne Kontext.</div>
+        </div>
+        <div class="ib-div"></div>
+        <div class="ib-item">
+          <div class="ib-val">immowertwien</div>
+          <div class="ib-lbl">Kombiniert beides – bezirksspezifisch, direkt verwendbar, ohne Registrierung.</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- OUR MODEL -->
-  <div class="process-section reveal">
-    <div class="section-label">Unser Modell</div>
-    <h2 class="section-h2">Transparent über das, womit wir Geld verdienen</h2>
-    <div class="process-grid">
-      <div class="process-card">
-        <div class="process-num">01</div>
-        <div>
-          <div class="process-title">Für Eigentümer: kostenlos</div>
-          <div class="process-text">Das Bewertungstool, der persönliche Marktbericht und der Experten-Call kosten dich nichts. Keine versteckten Gebühren, kein Mehrfachverkauf deiner Kontaktdaten an konkurrierende Makler.</div>
-        </div>
+  <!-- APPROACH -->
+  <div class="approach-section reveal">
+    <div class="section-tag">Wie wir denken</div>
+    <h2>Zwei Grundsätze, die alles bestimmen</h2>
+    <div class="approach-grid">
+      <div class="ap-card">
+        <div class="ap-num">01</div>
+        <div class="ap-title">Unabhängigkeit ist keine Option – sie ist der Kern</div>
+        <div class="ap-text">Ein Tool, das von Maklerprovisionen abhängt, hat kein Interesse an einer präzisen Bewertung – sondern an einer, die ein Gespräch auslöst. Unser Bewertungsmodell hat kein Mandat zu vergeben und kein Interesse an einem bestimmten Preis. Die Zahlen sind das Produkt, nicht das Mittel zum Zweck.</div>
       </div>
-      <div class="process-card">
-        <div class="process-num">02</div>
-        <div>
-          <div class="process-title">Für Partnerexperten: Erfolgsprovision</div>
-          <div class="process-text">Wir arbeiten mit ausgewählten, lokal erfahrenen Maklern zusammen. Diese zahlen uns ausschließlich dann eine Provision, wenn der Verkauf erfolgreich abgeschlossen wird.</div>
-        </div>
+      <div class="ap-card">
+        <div class="ap-num">02</div>
+        <div class="ap-title">Daten vor Einschätzung</div>
+        <div class="ap-text">Immobilienbewertungen in Österreich basieren oft auf Vergleichsobjekten aus dem Gedächtnis und Bauchgefühl. Wir kombinieren Angebotspreise mit der tatsächlichen Transaktionsquote aus dem OeNB-Grundstückspreisspiegel – bezirksspezifisch, nicht pauschal. Das ist kein Ersatz für eine Vor-Ort-Bewertung. Es ist eine informierte Grundlage davor.</div>
       </div>
-      <div class="process-card">
-        <div class="process-num">03</div>
-        <div>
-          <div class="process-title">Dein Entscheidungsrecht bleibt bei dir</div>
-          <div class="process-text">Nach dem Bericht und dem optionalen Experten-Call entscheidest du – ohne Frist, ohne Druck, ohne Vertrag. Unser Interesse ist eine fundierte Entscheidung, nicht eine erzwungene.</div>
-        </div>
+    </div>
+  </div>
+
+  <!-- MODEL -->
+  <div class="model-section reveal">
+    <div class="section-tag">Geschäftsmodell</div>
+    <h2>Wie wir Geld verdienen</h2>
+    <p class="lead">Wir sind transparent darüber, weil es relevant ist: Unser Modell bestimmt, ob unsere Einschätzungen neutral sein können – oder nicht.</p>
+    <div class="model-row">
+      <div class="model-item">
+        <div class="mi-label">Für Eigentümer</div>
+        <div class="mi-text">Das Tool, der Bericht und der Experten-Call sind kostenlos. Keine versteckten Gebühren, kein Mehrfachverkauf der Kontaktdaten an konkurrierende Makler.</div>
+      </div>
+      <div class="model-item">
+        <div class="mi-label">Für Partnerexperten</div>
+        <div class="mi-text">Wir arbeiten mit geprüften, lokalen Maklern zusammen. Diese zahlen uns eine Provision – ausschließlich bei erfolgreichem Abschluss.</div>
+      </div>
+      <div class="model-item">
+        <div class="mi-label">Was das bedeutet</div>
+        <div class="mi-text">Unser Interesse ist eine erfolgreiche Entscheidung für dich. Nicht eine erzwungene. Du entscheidest nach dem Bericht und dem optionalen Call – ohne Frist, ohne Vertrag.</div>
       </div>
     </div>
   </div>
 
   <!-- DATA SOURCES -->
-  <div class="values-section reveal">
-    <div class="section-label">Datenquellen</div>
-    <h2 class="section-h2">Woher kommen unsere Daten?</h2>
+  <div class="sources-section reveal">
+    <div class="section-tag">Datenquellen</div>
+    <h2>Woher unsere Daten kommen</h2>
+    <p class="lead">Alle Preisdaten basieren auf öffentlich zugänglichen oder aggregierten Quellen. Keine internen Schätzungen.</p>
     <div class="sources-grid">
-      <div class="source-card">
-        <div class="source-icon"><i data-lucide="landmark" class="lc"></i></div>
+      <div class="src-card">
+        <div class="src-icon"><i data-lucide="landmark" class="lc"></i></div>
         <div>
-          <div class="source-title">OeNB Immobilienpreisindex</div>
-          <div class="source-text">Offizielle Preisentwicklung der Österreichischen Nationalbank – quartalsweise aktualisiert.</div>
+          <div class="src-title">OeNB Immobilienpreisindex</div>
+          <div class="src-text">Offizielle Preisentwicklung der Österreichischen Nationalbank – quartalsweise aktualisiert. Basis für die Transaktionspreisquote.</div>
         </div>
       </div>
-      <div class="source-card">
-        <div class="source-icon"><i data-lucide="trending-up" class="lc"></i></div>
+      <div class="src-card">
+        <div class="src-icon"><i data-lucide="home" class="lc"></i></div>
         <div>
-          <div class="source-title">Statistik Austria</div>
-          <div class="source-text">Wohnungsbestand und demografische Entwicklung pro Bezirk.</div>
+          <div class="src-title">Angebotspreise (immopreise.at)</div>
+          <div class="src-text">Aktuelle Inserate nach Bezirk, Objekttyp und Größe. Werden mit der Transaktionsquote gewichtet.</div>
         </div>
       </div>
-      <div class="source-card">
-        <div class="source-icon"><i data-lucide="home" class="lc"></i></div>
+      <div class="src-card">
+        <div class="src-icon"><i data-lucide="trending-up" class="lc"></i></div>
         <div>
-          <div class="source-title">Angebotspreise (immopreise.at)</div>
-          <div class="source-text">Aktuelle Inserate und Angebotspreise nach Bezirk, Objekttyp und Größe.</div>
+          <div class="src-title">Statistik Austria</div>
+          <div class="src-text">Wohnungsbestand und demografische Entwicklung pro Bezirk als Kontext für Nachfragedynamik.</div>
         </div>
       </div>
-      <div class="source-card">
-        <div class="source-icon"><i data-lucide="trending-down" class="lc"></i></div>
+      <div class="src-card">
+        <div class="src-icon"><i data-lucide="percent" class="lc"></i></div>
         <div>
-          <div class="source-title">EZB Zinsentwicklung</div>
-          <div class="source-text">Leitzins und Kreditkonditionen als makroökonomischer Kontext für den Timing-Score.</div>
+          <div class="src-title">EZB Zinsentwicklung</div>
+          <div class="src-text">Leitzins und Kreditkonditionen als makroökonomischer Kontext für Timing-Empfehlungen.</div>
         </div>
       </div>
     </div>
-    <p style="font-size:.82rem;color:var(--g400);line-height:1.7;">immowertwien ist kein Gutachten und kein Ersatz für eine professionelle Vor-Ort-Bewertung. Wir sind eine Orientierungshilfe – der erste, informierte Schritt vor dem Gespräch mit einem Experten.</p>
+    <p class="src-note">immowertwien ist kein Gutachten und kein Ersatz für eine professionelle Vor-Ort-Bewertung. Wir liefern die informierte Grundlage vor dem Gespräch mit einem Experten. Stand: Q1 2026.</p>
   </div>
 
   <!-- FAQ -->
   <div class="faq-section reveal">
-    <div class="section-label">Häufige Fragen</div>
-    <h2 class="section-h2">Über immowertwien</h2>
-
-    <div class="faq-item">
-      <button class="faq-btn" onclick="toggleFaq(this)">
-        Was ist immowertwien und wie funktioniert die Plattform?
-        <span class="faq-arrow">▼</span>
-      </button>
-      <div class="faq-body">
-        <p>immowertwien ist eine kostenlose Immobilienbewertungsplattform, spezialisiert auf alle 23 Wiener Bezirke. Eigentümer beantworten einige kurze Fragen zu ihrer Immobilie und erhalten sofort eine Ersteinschätzung des Marktwerts – basierend auf öffentlichen Marktdaten. Auf Wunsch vermitteln wir einen lokalen Partnerexperten für ein kostenloses, unverbindliches Gespräch – mit ausdrücklicher Einwilligung des Nutzers.</p>
-      </div>
-    </div>
-
+    <div class="section-tag">Fragen</div>
+    <h2>Über immowertwien</h2>
     <div class="faq-item">
       <button class="faq-btn" onclick="toggleFaq(this)">
         Ist immowertwien ein Makler?
         <span class="faq-arrow">▼</span>
       </button>
       <div class="faq-body">
-        <p>Nein. immowertwien ist kein Makler. Wir versorgen dich mit den richtigen Marktdaten für deine Immobilie – bezirksspezifisch, datenbasiert und kostenlos. Auf Wunsch verbinden wir dich anschließend mit einem geprüften Immobilienexperten in Wien, der dich persönlich begleitet.</p>
+        <p>Nein. immowertwien ist kein Makler und kein Bewertungsinstitut. Wir sind eine Informationsplattform. Wir vermitteln auf Wunsch Kontakt zu einem geprüften lokalen Experten – das ist freiwillig und mit ausdrücklicher Einwilligung.</p>
       </div>
     </div>
-
     <div class="faq-item">
       <button class="faq-btn" onclick="toggleFaq(this)">
         Wie werden meine Daten verwendet?
         <span class="faq-arrow">▼</span>
       </button>
       <div class="faq-body">
-        <p>Deine Daten werden ausschließlich für die Bewertung und – wenn du das möchtest – für die Vermittlung an einen einzelnen, vertraglich gebundenen Partnerexperten verwendet. Es gibt keinen Mehrfachverkauf an konkurrierende Makler. Alle Daten werden DSGVO-konform nach österreichischem Recht verarbeitet.</p>
+        <p>Deine Immobiliendaten werden ausschließlich für die Bewertung verwendet. Kontaktdaten werden – nur mit deiner Einwilligung – an einen einzelnen, vertraglich gebundenen Partnerexperten weitergegeben. Kein Mehrfachverkauf an konkurrierende Makler. Alles DSGVO-konform nach österreichischem Recht.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-btn" onclick="toggleFaq(this)">
+        Wie präzise ist die Sofortbewertung?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-body">
+        <p>Die Sofortbewertung gibt eine fundierte Erstorientierung mit einer Bandbreite von ca. ±10–15 %. Sie basiert auf Angebotspreisen (immopreise.at) und der OeNB-Transaktionsquote. Was sie nicht erfassen kann: Mikrolage, Grundriss, Zustand im Detail. Das liefert der optionale Experten-Call.</p>
       </div>
     </div>
   </div>
 
   <!-- CTA -->
   <div class="cta-section reveal">
-    <h2>Erfahre, was deine Immobilie wert ist.</h2>
-    <p>Kostenlos. Unverbindlich. In unter 1 Minute.</p>
-    <a href="index.html#tool" class="cta-btn">Jetzt kostenlos bewerten →</a>
+    <div class="cta-inner">
+      <h2>Erfahre, was deine Immobilie wirklich wert ist.</h2>
+      <a href="/#tool-section" class="cta-btn">Jetzt kostenlos bewerten →</a>
+    </div>
   </div>
-
 </div>
 
 <footer>
@@ -323,11 +330,10 @@ function toggleFaq(btn) {
   document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
-
 const ro = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('vis');ro.unobserve(e.target);} });
-},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 </script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script>lucide.createIcons();</script>
