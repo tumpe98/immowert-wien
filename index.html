@@ -1373,6 +1373,12 @@
   const SUPABASE_URL='https://gxpzbhwgnsczikggdqvz.supabase.co';
   const SUPABASE_KEY='sb_publishable_Ef3Rz4GQgYTyMoEBJ-hNLA_gv3KVySw';
 
+  function calcValue(bez,flaeche){
+    if(!bez||!flaeche)return{};
+    const eff=Math.round((0.55*bez.p+0.45*bez.p*bez.sR)*flaeche);
+    return{valueMin:Math.round(eff*0.92),valueMax:Math.round(eff*1.08)};
+  }
+
   async function submitLead(){
     const name=document.getElementById('lfName').value.trim();
     const email=document.getElementById('lfEmail').value.trim();
@@ -1387,13 +1393,13 @@
     if(!consent){errEl.textContent='Bitte stimme der Datenschutzerklärung zu.';errEl.style.display='block';return;}
     btn.disabled=true;btn.textContent='Wird gesendet…';
     const bez=bezirke.find(b=>b.num===S.bezirk);
+    const{valueMin,valueMax}=calcValue(bez,S.flaeche);
     try{
-      const r=await fetch(`${SUPABASE_URL}/rest/v1/leads`,{
+      const r=await fetch('/api/notify',{
         method:'POST',
-        headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Prefer':'return=minimal'},
+        headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
           name,email,phone,
-          type:'wohnung',
           bezirk:bez?bez.name:(S.bezirk||null),
           flaeche:S.flaeche||null,
           zimmer:S.zimmer||null,
@@ -1401,12 +1407,12 @@
           condition:S.zustand||null,
           aussenflaeche:S.balkon==='ja'?'balkon':'keine',
           address:S.address||null,
-          nutzungsart:null,
-          ubahn:null,nahversorgung:null
+          valueMin,valueMax,
+          source:'tool'
         })
       });
       if(r.ok){S.cur=8;render();document.getElementById('tool-section').scrollIntoView({behavior:'smooth',block:'start'});}
-      else{const msg=await r.text().catch(()=>'');console.error('Supabase error:',r.status,msg);throw new Error(msg);}
+      else{const msg=await r.text().catch(()=>'');console.error('API error:',r.status,msg);throw new Error(msg);}
     }catch(e){
       btn.disabled=false;btn.textContent='Bericht kostenlos erhalten';
       errEl.textContent='Etwas ist schiefgelaufen. Bitte versuche es erneut.';errEl.style.display='block';
@@ -1423,9 +1429,36 @@
     </div>`;
   }
 
-  /* ── MODAL STUBS ── */
-  function openModal(){}
-  function closeModal(){}
+  /* ── MODAL ── */
+  function openModal(){document.getElementById('overlay').classList.add('on');}
+  function closeModal(){document.getElementById('overlay').classList.remove('on');}
+
+  async function submitModal(){
+    const name=document.getElementById('mName').value.trim();
+    const email=document.getElementById('mEmail').value.trim();
+    const phone=document.getElementById('mPhone').value.trim();
+    const consent=document.getElementById('mConsent').checked;
+    if(!name||!email){alert('Bitte Name und E-Mail angeben.');return;}
+    if(!consent){alert('Bitte stimme der Datenweitergabe zu.');return;}
+    const btn=document.querySelector('.m-submit');
+    btn.disabled=true;btn.textContent='Wird gesendet…';
+    try{
+      await fetch('/api/notify',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name,email,phone,source:'modal'})
+      });
+      document.getElementById('modalContent').innerHTML=`
+        <div style="text-align:center;padding:20px 0">
+          <div style="font-size:3rem;margin-bottom:12px">✓</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:8px">Danke, ${name.split(' ')[0]}!</div>
+          <div style="font-size:.9rem;color:#6b7280;line-height:1.6">Ein Experte meldet sich innerhalb von 24 Stunden bei dir.</div>
+        </div>`;
+    }catch(e){
+      btn.disabled=false;btn.textContent='Kostenlos den maximalen Preis anfragen →';
+      alert('Etwas ist schiefgelaufen. Bitte versuche es erneut.');
+    }
+  }
 
   /* ── UTILS ── */
   function scrollToTool(){document.getElementById('tool-section').scrollIntoView({behavior:'smooth',block:'start'});}
